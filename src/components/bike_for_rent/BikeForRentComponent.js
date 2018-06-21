@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import styles from "./BikeForRentComponentStyle";
-import SelectField from "material-ui/SelectField";
-import MenuItem from "material-ui/MenuItem";
-import TextField from "material-ui/TextField";
 import Bike from "./BikeComponent";
+import BikeSearchComponent from "./BikeSearchComponent";
 import _ from "lodash";
 
 class BikeForRentComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: 1,
-
             bikeData: [
                 { image: "images/bike.png" },
                 { image: "images/bike.png" },
@@ -26,8 +22,6 @@ class BikeForRentComponent extends Component {
         };
     }
 
-    handleChange = (event, index, value) => this.setState({value});
-
     _renderBike = (bike) => {
         let renderBike = [];
         
@@ -41,31 +35,7 @@ class BikeForRentComponent extends Component {
     render() {
         return (
             <div style={styles.wrapp}>
-                <div className="row" style={styles.mb20}>
-                    <div className="col-sm-3">
-                        <SelectField
-                            floatingLabelText="Location"
-                            value={this.state.value}
-                            onChange={this.handleChange}
-                        >
-                            <MenuItem value={1} primaryText="Singapore" />
-                            <MenuItem value={2} primaryText="United States" />
-                            <MenuItem value={3} primaryText="Viet Nam" />
-                        </SelectField>
-                    </div>
-                    <div className="col-sm-9">
-                        <div style={styles.map}>
-                            <TextField
-                                floatingLabelText="Search"
-                                fullWidth
-                            />
-                            <div style={styles.divIcon}>
-                                <i className="fa fa-map-o" style={styles.icon} />
-                                <i className="fa fa-map-marker" style={styles.icon} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <BikeSearchComponent />
                 <div className="row">
                     {this._renderBike(this.state.bikeData)}
                 </div>
