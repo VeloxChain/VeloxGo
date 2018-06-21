@@ -3,81 +3,19 @@ const Styles = {
         margin: "10px 5px"
     },
 
-    wrappLeft: {
-        paddingLeft: "10px"
-    },
-
-    tabs: {
-        marginTop: "30px",
-    },
-    
-    tabItemContainerStyle: {
-        backgroundColor: "#00d679"
-    },
-
-    tab: {
-        textTransform: "initial",
-        color: "#000"
-    },
-
-    location: {
+    block: {
         background: "#fff",
-        padding: "10px 20px 20px"
-    },
-
-    wrappRight: {
-        display: "flex",
-        backgroundColor: "#fff",
         border: "1px solid #00d679",
-        marginTop: "30px",
+        marginBottom: "20px",
         borderRadius: "5px"
     },
 
-    boxLeft: {
-        width: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRight: "1px solid #00d679",
-        padding: "10px"
+    action: {
+        borderTop: "1px solid rgb(218, 218, 218)",
+        padding: "20px 0px"
     },
 
-    boxRight: {
-        width: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-    },
-
-    bike: {
-        width: "100%"
-    },
-
-    buttonTransfer: {
-        background: "#fff",
-        border: "1px solid #00d679",
-        borderRadius: "5px",
-        padding: "7px 20px",
-        marginTop: "20px",
-        textTransform: "uppercase",
-        letterSpacing: "2px",
-        display: "block",
-        minWidth: "128px"
-    },
-
-    buttonDelete: {
-        background: "#fff",
-        border: "1px solid red",
-        borderRadius: "5px",
-        padding: "7px 20px",
-        marginTop: "20px",
-        textTransform: "uppercase",
-        letterSpacing: "2px",
-        display: "block",
-        minWidth: "128px"
-    },
-
-    buttonSave: {
+    button: {
         background: "#fff",
         border: "1px solid #00d679",
         borderRadius: "5px",
@@ -85,13 +23,34 @@ const Styles = {
         marginTop: "20px",
         textTransform: "uppercase",
         letterSpacing: "2px",
-        display: "block"
+        display: "block",
+        margin: "0 auto",
     },
 
-    toggle: {
-        marginBottom: 16,
-        marginTop: "20px"
+    bike: {
+        width: "100%",
+        padding: "20px"
     },
+
+    mb20: {
+        marginBottom: "20px"
+    },
+
+    map: {
+        position: "relative"
+    },
+
+    divIcon: {
+        position: "absolute",
+        bottom: "20px",
+        right: "0"
+    },
+
+    icon: {
+        fontSize: "18px",
+        marginLeft: "10px",
+        cursor: "pointer"
+    }
 };
   
 export default Styles;
