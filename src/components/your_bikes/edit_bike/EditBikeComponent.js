@@ -17,9 +17,7 @@ class EditBikeComponent extends Component {
                         </div>
                     </div>
                     <div className="col-sm-5">
-                        <div style={styles.wrappRight}>
-                            <TransferBike {...this.props} />
-                        </div>
+                        <TransferBike {...this.props} />
                     </div>
                 </div>
             </div>

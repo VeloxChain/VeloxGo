@@ -4,7 +4,7 @@ import styles from "./EditBikeComponentStyle";
 class TransferBike extends Component {
     render() {
         return (
-            <div>
+            <div style={styles.wrappRight}>
                 <div style={styles.boxLeft}>
                     <img src="images/bike.png" alt="Bikecoin" style={styles.bike} />
                 </div>
