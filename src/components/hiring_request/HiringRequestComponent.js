@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import styles from "./HiringRequestComponentStyle";
-import Bike from "./BikeComponent";
+import styles from "../bike_for_rent/BikeForRentComponentStyle";
+import Bike from "../bike_for_rent/BikeComponent";
 import BikeSearchComponent from "../bike_for_rent/BikeSearchComponent";
 import _ from "lodash";
 
@@ -26,7 +26,7 @@ class HiringRequestComponent extends Component {
         let renderBike = [];
         
         _.forEach(bike, (value, index) => {
-            renderBike.push(<Bike bike={value} key={index} />);
+            renderBike.push(<Bike bike={value} key={index} text="Approve" />);
         });
 
         return renderBike;

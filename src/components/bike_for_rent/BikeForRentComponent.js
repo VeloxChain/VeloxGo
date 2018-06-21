@@ -26,7 +26,7 @@ class BikeForRentComponent extends Component {
         let renderBike = [];
         
         _.forEach(bike, (value, index) => {
-            renderBike.push(<Bike bike={value} key={index} />);
+            renderBike.push(<Bike bike={value} key={index} text="Rent" />);
         });
 
         return renderBike;
