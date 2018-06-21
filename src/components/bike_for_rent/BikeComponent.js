@@ -9,7 +9,7 @@ class BikeComponent extends Component {
                 <div style={styles.block}>
                     <img src={this.props.bike.image} alt="Bikecoin" style={styles.bike} />
                     <div style={styles.action}>
-                        <button style={styles.button}>Rent</button>
+                        <button style={styles.button}>{this.props.text}</button>
                     </div>
                 </div>
             </div>
