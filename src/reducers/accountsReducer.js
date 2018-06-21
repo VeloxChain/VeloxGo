@@ -14,6 +14,9 @@ const accounts = (state=initState, action) => {
     case REHYDRATE: {
         if (action.payload.accounts) {
             var loadedAccounts = action.payload.accounts.accounts;
+            if (_.isEmpty(loadedAccounts)) {
+                return state;
+            }
             var acc = new Account(
                 loadedAccounts.address,
                 loadedAccounts.key,

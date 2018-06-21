@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import Web3 from "web3";
-// import {addEthereumKey, useMetamask } from "../../../actions/appAction";
-import {
-    MODAL_CREATE_ACCOUNT_NEXT_ID
-} from "../constants";
+import { addAccount } from "../../../actions/accountActions";
+import { useMetamask } from "../../../actions/appAction"; //addEthereumKey
+// import { MODAL_CREATE_ACCOUNT_BIKECOIN } from "../constants";
 // import _ from "lodash";
 import RaisedButton from "material-ui/RaisedButton";
-// import { addUserProfile, addVerifyUserProfile } from "../../../actions/userProfileActions";
+import { addUserProfile } from "../../../actions/userProfileActions"; //addVerifyUserProfile
 // import constants from "../../../services/constants";
 class UnlockMetaMask extends Component {
     constructor(props){
@@ -33,13 +32,20 @@ class UnlockMetaMask extends Component {
         }
     }
     useMetamaskAccount = () => {
+        this.props.dispatch(addAccount(this.state.account, "", "User", ""));
+        this.props.dispatch(useMetamask(true));
+        let userProfile = {
+            userProfileAddress: "",
+        };
+        this.props.dispatch(addUserProfile(userProfile));
+        this.props.closeModal();
+        // this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
         // let accountAddress = this.state.account;
         // addEthereumKey(this.props.dispatch, {address: accountAddress, key: "meta-mask", account_name: "Metamask"});
         // let props = this.props
         // let self = this
         // console.log("accountAddress", accountAddress);
         // this.props.ethereum.getUserProfileFromNetwork(accountAddress, (userProfileAddress,userName,email) => {
-        //     this.props.dispatch(useMetamask(true));
         //     console.log(userProfileAddress, userProfileAddress);
         //     if (userProfileAddress !== constants.EMPTY_ADDRESS && userProfileAddress !== null) {
         //         let userProfile = {
@@ -71,7 +77,7 @@ class UnlockMetaMask extends Component {
         //             props.closeModal();
         //             props.openComfirm();
         //         } else {
-        this.props.setType(MODAL_CREATE_ACCOUNT_NEXT_ID);
+        //             this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
         //         }
         //     }
         // });

@@ -174,6 +174,24 @@ class CreateAccount extends Component {
         images = images[0];
         this.setState({ preview: images.preview });
     }
+    _renderPassphrase = () => {
+        const { accounts } = this.props;
+        if (accounts.accounts.key === "" || accounts.accounts.keystring === "") {
+            return undefined;
+        }
+        return (
+            <TextField
+                floatingLabelText="Passpharse"
+                fullWidth={true}
+                type="password"
+                disabled={this.state.disabled}
+                value={this.state.passpharse}
+                errorText={ this.state.errors ? this.state.errors.passpharse : null }
+                onKeyPress={(e) => this.handleKeyPress(e)}
+                onChange={(e) => this.setState({passpharse: e.target.value})}
+            />
+        );
+    }
     render() {
         return (
             <div className="mh250 pd10 relative">
@@ -234,26 +252,7 @@ class CreateAccount extends Component {
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({lastname: e.target.value})}
                     /><br />
-                    {
-                        this.props.metamask ?
-                            (
-                                undefined
-                            )
-                            :
-                            (
-                                <TextField
-                                    floatingLabelText="Passpharse"
-                                    fullWidth={true}
-                                    type="password"
-                                    disabled={this.state.disabled}
-                                    value={this.state.passpharse}
-                                    errorText={ this.state.errors ? this.state.errors.passpharse : null }
-                                    onKeyPress={(e) => this.handleKeyPress(e)}
-                                    onChange={(e) => this.setState({passpharse: e.target.value})}
-                                />
-                            )
-                    }
-
+                    {this._renderPassphrase()}
                     <div className="flexible-end mg30-0">
                         <RaisedButton
                             label={this.state.labelButton}

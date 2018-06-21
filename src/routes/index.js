@@ -5,11 +5,7 @@ import RootContainer from "../containers/RootContainer";
 import {connect} from "react-redux";
 import EthereumService from "../services/ethereum";
 import ServerService from "../services/server";
-import {
-    MODAL_OWNER_LOGIN,
-    MODAL_METAMASK,
-    MODAL_CREATE_ACCOUNT
-} from "../components/modal/constants";
+import { MODAL_OWNER_LOGIN } from "../components/modal/constants";
 import _ from "lodash";
 import YourBikesComponent from "../components/your_bikes/YourBikeComponent";
 import BikeForRentComponent from "../components/bike_for_rent/BikeForRentComponent";
@@ -31,15 +27,6 @@ class root extends React.Component {
         });
     }
     setType = (type) => {
-        if (type === MODAL_METAMASK) {
-            this.setState({
-                metamask: true
-            });
-        } else if (type === MODAL_CREATE_ACCOUNT) {
-            this.setState({
-                metamask: false
-            });
-        }
         this.setState({
             type: type,
             isOpen: true

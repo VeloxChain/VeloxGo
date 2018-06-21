@@ -62,6 +62,8 @@ const AppReducer = (state = initialState, action) => {
                 isOpen: false,
             }
         };
+    case "RESET":
+        return initialState;
     default:
         return state;
     }

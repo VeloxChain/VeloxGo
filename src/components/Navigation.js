@@ -23,6 +23,13 @@ class Navigation extends Component{
         }
         return account.name;
     }
+    _renderEditProfile = () => {
+        // if (_.isEmpty(this.props.userProfile.data)) {
+        //     return (
+        //         <MenuItem primaryText="Create Profile" onClick={this.props.openModal}/>
+        //     );
+        // }
+    }
 
     renderLogged() {
         if (!_.isEmpty(this.props.accounts) || !_.isEmpty(this.props.userProfile.data)) {
@@ -40,6 +47,7 @@ class Navigation extends Component{
                     </IconButton>
 
                 } >
+                    {this._renderEditProfile()}
                     <MenuItem primaryText="Log out" onClick={this.handleLogout}/>
                 </IconMenu>
             );

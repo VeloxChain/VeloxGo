@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-import {
-    MODAL_CREATE_ACCOUNT_NEXT_ID,
-    MODAL_INSUFFICIENT_FUNDS
-} from "../constants";
+// import {
+//     MODAL_CREATE_ACCOUNT_BIKECOIN,
+//     MODAL_INSUFFICIENT_FUNDS
+// } from "../constants";
 import Dropzone from "react-dropzone";
 
 import { specifyName, specifyDesc, throwError, uploadKey } from "../../../actions/importKeystoreActions"; //emptyForm
 import { addAccount } from "../../../actions/accountActions";
+import { useMetamask } from "../../../actions/appAction";
 import { verifyAccount, verifyKey, anyErrors } from "../../../utils/validators";
 import { addressFromKey } from "../../../utils/keys";
 // import constants from "../../../services/constants";
-// import { addUserProfile } from "../../../actions/userProfileActions";
+import { addUserProfile } from "../../../actions/userProfileActions";
 import _ from "lodash";
 
 class ImportAccount extends Component {
@@ -60,8 +61,16 @@ class ImportAccount extends Component {
         } else {
             let props = this.props;
             let self = this;
-            props.ethereum.getBalance(props.keystore.address, self.getBalance);
+            props.dispatch(useMetamask(false));
             props.dispatch(addAccount(props.keystore.address, props.keystore.keystring, self.state.accountName, props.keystore.desc));
+            let userProfile = {
+                userProfileAddress: "",
+            };
+            this.props.dispatch(addUserProfile(userProfile));
+            props.closeModal();
+            // props.ethereum.getBalance(props.keystore.address, self.getBalance);
+
+
         // this.props.ethereum.getUserProfileFromNetwork(this.props.address, (userProfileAddress,userName,email) => {
         //     console.log("userProfileAddress",userProfileAddress)
         //     if (userProfileAddress !== constants.EMPTY_ADDRESS && userProfileAddress !== null) {
@@ -93,17 +102,18 @@ class ImportAccount extends Component {
         }
     }
     getBalance = (balance) => {
-        if (balance > 0) {
-            if (_.isFunction(this.props.openComfirm)) {
-                this.props.closeModal();
-                this.props.openComfirm();
-            } else {
-                this.props.setType(MODAL_CREATE_ACCOUNT_NEXT_ID);
-            }
-
-        } else {
-            this.props.setType(MODAL_INSUFFICIENT_FUNDS);
-        }
+        this.props.closeModal(balance);
+        // if (balance > 0) {
+        //     if (_.isFunction(this.props.openComfirm)) {
+        //         this.props.closeModal();
+        //         this.props.openComfirm();
+        //     } else {
+        //         this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
+        //     }
+        //
+        // } else {
+        //     this.props.setType(MODAL_INSUFFICIENT_FUNDS);
+        // }
     }
     onDrop = (files) => {
         var file = files[0];

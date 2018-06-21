@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
-import {
-    MODAL_INSUFFICIENT_FUNDS
-} from "../constants";
+// import {
+//     MODAL_INSUFFICIENT_FUNDS
+// } from "../constants";
 import {addEthereumKey, useMetamask} from "../../../actions/appAction";
 import { addressFromKey } from "../../../utils/keys";
 import { emptyForm } from "../../../actions/createKeyStoreActions";
 import { verifyPassphrase, anyErrors } from "../../../utils/validators";
 import { createAccount } from "../../../actions/accountActions";
+import { addUserProfile } from "../../../actions/userProfileActions";
 class NewAccount extends Component {
     constructor(props) {
         super(props);
@@ -75,7 +76,12 @@ class NewAccount extends Component {
         }
     }
     nextStep = () => {
-        this.props.setType(MODAL_INSUFFICIENT_FUNDS);
+        let userProfile = {
+            userProfileAddress: "",
+        };
+        this.props.dispatch(addUserProfile(userProfile));
+        // this.props.setType(MODAL_INSUFFICIENT_FUNDS);
+        this.props.closeModal();
     }
 
     downloadKeyStore = () => {

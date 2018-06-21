@@ -2,7 +2,7 @@ import USER_PROFILE from "../constants/userProfile";
 import ACC_ACTION from "../constants/accActions";
 // import { METAMASK } from "../components/Modal/constants";
 const initState = {
-    data: {}
+    data: { }
 };
 
 const userProfileReducer = (state = initState, action) => {

@@ -6,7 +6,7 @@ import {
     EXISTING,
     METAMASK,
     IMPORT_ACCOUNT,
-    CREATE_ACCOUNT_NEXT_ID,
+    CREATE_ACCOUNT_BIKECOIN,
     VERIFY,
     SHARE_DATA,
     INSUFFICIENT_FUNDS,
@@ -14,7 +14,7 @@ import {
     MODAL_REGISTER_BIKE,
     REGISTER_BIKE,
     MODAL_CREATE_ACCOUNT,
-    MODAL_CREATE_ACCOUNT_NEXT_ID,
+    MODAL_CREATE_ACCOUNT_BIKECOIN,
     MODAL_EXISTING,
     MODAL_METAMASK,
     MODAL_IMPORT_ACCOUNT,
@@ -46,7 +46,7 @@ class ModalCustom extends Component {
             return ( <ImportAccount {...this.props} /> );
         case MODAL_METAMASK:
             return ( <UnlockMetaMask {...this.props} /> );
-        case MODAL_CREATE_ACCOUNT_NEXT_ID:
+        case MODAL_CREATE_ACCOUNT_BIKECOIN:
             return ( <CreateAccount {...this.props} /> );
         case MODAL_SHARE_DATA:
             return ( <ShareData {...this.props}/> );
@@ -72,8 +72,8 @@ class ModalCustom extends Component {
             return IMPORT_ACCOUNT;
         case MODAL_METAMASK:
             return METAMASK;
-        case MODAL_CREATE_ACCOUNT_NEXT_ID:
-            return CREATE_ACCOUNT_NEXT_ID;
+        case MODAL_CREATE_ACCOUNT_BIKECOIN:
+            return CREATE_ACCOUNT_BIKECOIN;
         case MODAL_SHARE_DATA:
             return SHARE_DATA;
         case MODAL_CONFIRM_TRANSACTION:

@@ -8,6 +8,8 @@ import IPSFTest from "../services/ipfs";
 import { addNewToast } from "../actions/appAction";
 import {
     MODAL_OWNER_LOGIN,
+    MODAL_CREATE_ACCOUNT_BIKECOIN,
+    MODAL_INSUFFICIENT_FUNDS
 } from "../components/modal/constants";
 import { logout } from "../actions/accountActions";
 
@@ -28,6 +30,18 @@ class RootContainer extends React.Component {
     handleLogin = () => {
         this.props.setType(MODAL_OWNER_LOGIN);
     }
+    openModal = () => {
+        this.props.ethereum.getBalance(this.props.accounts.accounts.address, this.getBalance);
+    }
+
+    getBalance = (balance) => {
+        if (balance > 0) {
+            this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
+        } else {
+            this.props.setType(MODAL_INSUFFICIENT_FUNDS);
+        }
+    }
+
 
     UNSAFE_componentWillReceiveProps(props){
         if(!_.isUndefined(props.toast)) {
@@ -50,7 +64,12 @@ class RootContainer extends React.Component {
                 <ToastContainer />
                 <div className="right-col">
                     <div className="row">
-                        <Navigation userProfile={this.props.userProfile} handleLogout={this.handleLogout} accounts={this.props.accounts.accounts} handleLogin={this.handleLogin}/>
+                        <Navigation
+                            userProfile={this.props.userProfile}
+                            handleLogout={this.handleLogout}
+                            accounts={this.props.accounts.accounts}
+                            handleLogin={this.handleLogin}
+                            openModal={this.openModal} />
                     </div>
                     {
                         this.props.children
