@@ -1,41 +1,76 @@
 import IPFS from "ipfs";
 import series from "async/series";
+import _ from "lodash";
+
+const node = new IPFS({
+    repo: "QmNLiRSpcxTvaQKh53paJixMEs7FKMxTbGLNq7vzt8noos"
+});
 
 let IPSFTest = {};
 
-IPSFTest.test = () => {
-        const node = new IPFS({repo: 'QmNLiRSpcxTvaQKh53paJixMEs7FKMxTbGLNq7vzt8noos' });
-        let fileMultihash;
+IPSFTest.test = async () => {
+    let resultCheckNodeReady = await IPSFTest.checkNodeReady();
+    if(resultCheckNodeReady != "OK") {
+        return;
+    }
 
-        series([
-            (cb) => node.on("ready", cb),
-            (cb) => node.version((err, version) => {
+    let resultPutDataToIPFS = await IPSFTest.putDataToIPFS("VuongDaiCaLA");
+
+    if(!_.isEmpty(resultPutDataToIPFS.err)) {
+        return;
+    }
+
+    let resultGetDataFromIPFS = await IPSFTest.getDataFromIPFS(resultPutDataToIPFS);
+
+    console.log(resultGetDataFromIPFS);
+};
+
+IPSFTest.putDataToIPFS = (data) => {
+    return new Promise( (resolve, reject) => {
+        node.dag.put(data, { format: "dag-cbor", hashAlg: "sha2-256" }, (err, cid) => {
+            if (err) {
+                reject({err: err});
+            }
+            console.log(cid.toBaseEncodedString());
+            resolve(cid.toBaseEncodedString());
+        });
+    });
+};
+
+IPSFTest.getDataFromIPFS = (hash) => {
+    return new Promise( (resolve, reject) => {
+        node.dag.get(hash, (err, result) => {
+            if (err) {
+                reject({err: err});
+            }
+            resolve(JSON.stringify(result.value));
+        });
+    });
+};
+
+IPSFTest.checkNodeReady = () => {
+    return new Promise( (resolve, reject) => {
+        node.once("ready",  () => {resolve("OK");});
+    });
+};
+
+IPSFTest.registerdBike = (bikeData) => {
+    node.once("ready",  () => {
+        node.dag.put(bikeData, { format: "dag-cbor", hashAlg: "sha2-256" }, (err, cid) => {
+            if (err) {
+                throw err;
+            }
+            console.log(cid.toBaseEncodedString());
+      
+            node.dag.get(cid.toBaseEncodedString(), (err, result) => {
                 if (err) {
-                    return cb(err);
+                    throw err;
                 }
-                console.log("Version:", version.version);
-                cb();
-            }),
-            (cb) => node.files.add({
-                path: "hello.txt",
-                content: Buffer.from("Hello World2222101")
-            }, (err, filesAdded) => {
-                if (err) {
-                    return cb(err);
-                }
+  
+                console.log(JSON.stringify(result.value));
+            });
+        });
+    });
+};
 
-                console.log("\nAdded file:", filesAdded[0].path, filesAdded[0].hash);
-                fileMultihash = filesAdded[0].hash;
-                cb();
-            }),
-            (cb) => node.files.cat(fileMultihash, (err, data) => {
-                if (err) {
-                    return cb(err);
-                }
-
-                console.log("\nFile content:");
-            })
-        ]);
-}
-
-export default IPSFTest
+export default IPSFTest;
