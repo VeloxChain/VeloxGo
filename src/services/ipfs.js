@@ -19,7 +19,7 @@ SERVICE_IPFS.putDataToIPFS = (data) => {
     return new Promise( (resolve, reject) => {
         node.dag.put(data, { format: "dag-cbor", hashAlg: "sha2-256" }, (err, cid) => {
             if (err) {
-                reject({err: err});
+                return reject({err: err});
             }
             resolve(cid.toBaseEncodedString());
         });
@@ -30,7 +30,7 @@ SERVICE_IPFS.getDataFromIPFS = (hash) => {
     return new Promise( (resolve, reject) => {
         node.dag.get(hash, (err, result) => {
             if (err) {
-                reject({err: err});
+                return reject({err: err});
             }
             resolve(JSON.stringify(result.value));
         });
@@ -42,6 +42,17 @@ SERVICE_IPFS.checkNodeReady = () => {
         node.once("ready",  () => {resolve("OK");});
     });
 };
+
+// SERVICE_IPFS.putFileToIPFS = (buf) => {
+//     return new Promise( (resolve, reject) => {
+//         ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
+//             if(err) {
+//                 return reject({ err: err})
+//             }
+//             return resolve(result[0].hash);
+//         })
+//     });
+// };
 
 // SERVICE_IPFS.registerdBike = (bikeData) => {
 //     node.once("ready",  () => {
