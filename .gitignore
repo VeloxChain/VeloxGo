@@ -4,4 +4,4 @@ server/node_modules/
 package-lock.json
 yarn.lock
 server/yarn.lock
-server/upload
+server/upload/files/**
