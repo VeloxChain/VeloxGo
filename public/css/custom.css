@@ -812,7 +812,7 @@ a {
 .wrapp {
     display: flex;
     align-items: center;
-    min-height: 410px;
+    min-height: 440px;
 }
 
 .step-label {

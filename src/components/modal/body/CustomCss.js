@@ -51,6 +51,19 @@ const Styles = {
         fontSize: "16px",
         fontWeight: "700",
         marginBottom: "10px"
+    },
+
+    dropzone: {
+        width: "150px",
+        height: "150px",
+        border: "2px dashed #41f589",
+        borderRadius: "50%",
+        overflow: "hidden",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "0px auto",
+        cursor: "pointer"
     }
 };
 
