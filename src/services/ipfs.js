@@ -29,7 +29,7 @@ IPSFTest.putDataToIPFS = (data) => {
     return new Promise( (resolve, reject) => {
         node.dag.put(data, { format: "dag-cbor", hashAlg: "sha2-256" }, (err, cid) => {
             if (err) {
-                reject({err: err});
+                return reject({err: err});
             }
             console.log(cid.toBaseEncodedString());
             resolve(cid.toBaseEncodedString());
@@ -37,11 +37,22 @@ IPSFTest.putDataToIPFS = (data) => {
     });
 };
 
+IPSFTest.putFileToIPFS = (buf) => {
+    return new Promise( (resolve, reject) => {
+        ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
+            if(err) {
+                return reject({ err: err})
+            }
+            return resolve(result[0].hash);
+        })
+    });
+};
+
 IPSFTest.getDataFromIPFS = (hash) => {
     return new Promise( (resolve, reject) => {
         node.dag.get(hash, (err, result) => {
             if (err) {
-                reject({err: err});
+                return reject({err: err});
             }
             resolve(JSON.stringify(result.value));
         });
