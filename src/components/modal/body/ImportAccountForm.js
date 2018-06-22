@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-// import {
-//     MODAL_CREATE_ACCOUNT_BIKECOIN,
-//     MODAL_INSUFFICIENT_FUNDS
-// } from "../constants";
+import {
+    MODAL_CREATE_ACCOUNT_BIKECOIN,
+    // MODAL_INSUFFICIENT_FUNDS
+} from "../constants";
 import Dropzone from "react-dropzone";
 
 import { specifyName, specifyDesc, throwError, uploadKey } from "../../../actions/importKeystoreActions"; //emptyForm
 import { addAccount } from "../../../actions/accountActions";
-import { useMetamask } from "../../../actions/appAction";
 import { verifyAccount, verifyKey, anyErrors } from "../../../utils/validators";
 import { addressFromKey } from "../../../utils/keys";
 // import constants from "../../../services/constants";
 import { addUserProfile } from "../../../actions/userProfileActions";
+import SERVICE_IPFS from "../../../services/ipfs";
 import _ from "lodash";
 
 class ImportAccount extends Component {
@@ -47,7 +47,7 @@ class ImportAccount extends Component {
         }
     }
 
-    importAccount = (event) => {
+    importAccount = async (event) => {
         event.preventDefault();
         if (this.props.keystore.keystring === "" || this.state.accountName === "") {
             return;
@@ -59,61 +59,23 @@ class ImportAccount extends Component {
         if (anyErrors(errors)) {
             this.props.dispatch(throwError("Cannot import invalid keystore file"));
         } else {
-            let props = this.props;
-            let self = this;
-            props.dispatch(useMetamask(false));
-            props.dispatch(addAccount(props.keystore.address, props.keystore.keystring, self.state.accountName, props.keystore.desc));
-            let userProfile = {
-                userProfileAddress: "",
-            };
-            this.props.dispatch(addUserProfile(userProfile));
-            props.closeModal();
-            // props.ethereum.getBalance(props.keystore.address, self.getBalance);
-
-
-        // this.props.ethereum.getUserProfileFromNetwork(this.props.address, (userProfileAddress,userName,email) => {
-        //     console.log("userProfileAddress",userProfileAddress)
-        //     if (userProfileAddress !== constants.EMPTY_ADDRESS && userProfileAddress !== null) {
-        //         props.dispatch(addAccount(
-        //         props.address, keystring,
-        //         props.name, props.desc))
-        //         let userProfile = {
-        //             userProfileAddress: userProfileAddress,
-        //             userName: userName,
-        //             email: email,
-        //             accountAddress: props.address,
-        //             isMetamask: false,
-        //             hasToUnlockPrimary: true,
-        //             ethereum: props.ethereum
-        //         }
-        //         props.dispatch(addUserProfile(userProfile));
-        //         if (_.isFunction(this.props.openComfirm)) {
-        //             props.closeModal();
-        //             this.props.openComfirm();
-        //         }
-        //     } else {
-        //         props.dispatch(addAccount(
-        //         props.address, keystring,
-        //         props.name, props.desc))
-        //
-        //         props.ethereum.getBalance(props.address, self.getBalance);
-        //     }
-        // })
+            let { keystore } = this.props;
+            this.props.dispatch(addAccount(keystore.address, keystore.keystring, this.state.accountName, keystore.desc));
+            let hashData = localStorage.getItem("hash");
+            if (_.isUndefined(hashData)){
+                this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
+                return;
+            }
+            try {
+                var retreiveUserProfile = await SERVICE_IPFS.getDataFromIPFS(hashData);
+                retreiveUserProfile = JSON.parse(retreiveUserProfile);
+                retreiveUserProfile["accountAddress"] = this.state.account;
+                this.props.dispatch(addUserProfile(retreiveUserProfile));
+                this.props.closeModal();
+            } catch (e) {
+                this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
+            }
         }
-    }
-    getBalance = (balance) => {
-        this.props.closeModal(balance);
-        // if (balance > 0) {
-        //     if (_.isFunction(this.props.openComfirm)) {
-        //         this.props.closeModal();
-        //         this.props.openComfirm();
-        //     } else {
-        //         this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
-        //     }
-        //
-        // } else {
-        //     this.props.setType(MODAL_INSUFFICIENT_FUNDS);
-        // }
     }
     onDrop = (files) => {
         var file = files[0];

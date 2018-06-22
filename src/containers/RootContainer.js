@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import _ from "lodash";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import IPSFTest from "../services/ipfs";
+import SERVICE_IPFS from "../services/ipfs";
 import { addNewToast } from "../actions/appAction";
 import {
     MODAL_OWNER_LOGIN,
@@ -16,7 +16,7 @@ import { logout } from "../actions/accountActions";
 class RootContainer extends React.Component {
     constructor(props) {
         super(props);
-        IPSFTest.test();
+        SERVICE_IPFS.init();
     }
 
     componentDidMount() {

@@ -17,18 +17,21 @@ class Navigation extends Component{
         }
     }
     _renderUserName = () => {
-        let account = this.props.accounts;
+        let {account, userProfile } = this.props;
+        if (!_.isEmpty(userProfile.data)) {
+            return userProfile.data.firstname + " " + userProfile.data.lastname;
+        }
         if (_.isEmpty(account)) {
             return "";
         }
         return account.name;
     }
     _renderEditProfile = () => {
-        // if (_.isEmpty(this.props.userProfile.data)) {
-        //     return (
-        //         <MenuItem primaryText="Create Profile" onClick={this.props.openModal}/>
-        //     );
-        // }
+        if (_.isEmpty(this.props.userProfile.data)) {
+            return (
+                <MenuItem primaryText="Create Profile" onClick={this.props.openModal}/>
+            );
+        }
     }
 
     renderLogged() {

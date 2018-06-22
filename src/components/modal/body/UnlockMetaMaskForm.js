@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import Web3 from "web3";
 import { addAccount } from "../../../actions/accountActions";
-import { useMetamask } from "../../../actions/appAction"; //addEthereumKey
-// import { MODAL_CREATE_ACCOUNT_BIKECOIN } from "../constants";
-// import _ from "lodash";
+import { MODAL_CREATE_ACCOUNT_BIKECOIN } from "../constants";
+import _ from "lodash";
 import RaisedButton from "material-ui/RaisedButton";
-import { addUserProfile } from "../../../actions/userProfileActions"; //addVerifyUserProfile
+import { addUserProfile } from "../../../actions/userProfileActions";
 // import constants from "../../../services/constants";
+import SERVICE_IPFS from "../../../services/ipfs";
 class UnlockMetaMask extends Component {
     constructor(props){
         super(props);
@@ -31,57 +31,23 @@ class UnlockMetaMask extends Component {
             alert("No web3? You should consider trying MetaMask!");
         }
     }
-    useMetamaskAccount = () => {
+    useMetamaskAccount = async () => {
         this.props.dispatch(addAccount(this.state.account, "", "User", ""));
-        this.props.dispatch(useMetamask(true));
-        let userProfile = {
-            userProfileAddress: "",
-        };
-        this.props.dispatch(addUserProfile(userProfile));
-        this.props.closeModal();
-        // this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
-        // let accountAddress = this.state.account;
-        // addEthereumKey(this.props.dispatch, {address: accountAddress, key: "meta-mask", account_name: "Metamask"});
-        // let props = this.props
-        // let self = this
-        // console.log("accountAddress", accountAddress);
-        // this.props.ethereum.getUserProfileFromNetwork(accountAddress, (userProfileAddress,userName,email) => {
-        //     console.log(userProfileAddress, userProfileAddress);
-        //     if (userProfileAddress !== constants.EMPTY_ADDRESS && userProfileAddress !== null) {
-        //         let userProfile = {
-        //             userProfileAddress: userProfileAddress,
-        //             userName: userName,
-        //             email: email,
-        //             accountAddress: accountAddress,
-        //             isMetamask: true,
-        //             hasToUnlockPrimary: false,
-        //             ethereum: props.ethereum
-        //         }
-        //         props.dispatch(addUserProfile(userProfile));
-        //         if (_.isFunction(props.openComfirm)) {
-        //             props.closeModal();
-        //             props.openComfirm();
-        //         }
-        //     } else {
-        //         let userProfile = {
-        //             userProfileAddress: "",
-        //             userName: "",
-        //             email: "",
-        //             accountAddress: accountAddress,
-        //             isMetamask: true,
-        //             hasToUnlockPrimary: false,
-        //             ethereum: props.ethereum
-        //         }
-        //         props.dispatch(addVerifyUserProfile(userProfile));
-        //         if (_.isFunction(props.openComfirm)) {
-        //             props.closeModal();
-        //             props.openComfirm();
-        //         } else {
-        //             this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
-        //         }
-        //     }
-        // });
+        let hashData = localStorage.getItem("hash");
+        if (_.isUndefined(hashData)){
+            this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
+            return;
+        }
+        try {
+            var retreiveUserProfile = await SERVICE_IPFS.getDataFromIPFS(hashData);
+            retreiveUserProfile = JSON.parse(retreiveUserProfile);
+            retreiveUserProfile["accountAddress"] = this.state.account;
+            this.props.dispatch(addUserProfile(retreiveUserProfile));
+            this.props.closeModal();
 
+        } catch (e) {
+            this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
+        }
     }
     render() {
         return (

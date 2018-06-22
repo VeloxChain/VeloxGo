@@ -4,26 +4,27 @@ import RaisedButton from "material-ui/RaisedButton";
 import Web3 from "web3";
 import  {verifyEmail, verifyNumber } from "../../../utils/validators";
 import { addUserProfile } from "../../../actions/userProfileActions";
-import { useMetamask } from "../../../actions/appAction";
+// import { useMetamask } from "../../../actions/appAction";
 import Dropzone from "react-dropzone";
 import _ from "lodash";
+import SERVICE_IPFS from "../../../services/ipfs";
 class CreateAccount extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            accountAddress: this.props.userProfile.data.accountAddress,
             passpharse: "",
-            firstname: "",
-            lastname: "",
+            firstname: "vuong",
+            lastname: "pham",
             avatar: "",
-            email: "",
+            email: "vuongd36@gmail.com",
             gasLimit: 4712388,
             gasPrice: 50,
             disabled:false,
             submitted:false,
             labelButton: "CREATE BIKECOIN ACCOUNT",
+            fileData: "",
+            preview: "",
             errors : {
-                accountAddress: "",
                 passpharse: "",
                 firstname: "",
                 lastname: "",
@@ -42,7 +43,7 @@ class CreateAccount extends Component {
 
     isValidData = () => {
         var errors = this.state.errors;
-        return (errors.accountAddress === "" && errors.passpharse === "" && errors.avatar === "" && errors.firstname === "" && errors.lastname === "" && errors.email === "" && errors.gasPrice === "" && errors.gasLimit === "");
+        return (errors.passpharse === "" && errors.avatar === "" && errors.firstname === "" && errors.lastname === "" && errors.email === "" && errors.gasPrice === "" && errors.gasLimit === "");
     }
     validate = () => {
         let state = this.state;
@@ -64,12 +65,6 @@ class CreateAccount extends Component {
             state = { ...state, errors:  { ...state.errors, gasPrice : ""}};
         }
 
-        if (this.state.accountAddress === "") {
-            state = { ...state, errors:  { ...state.errors, accountAddress : "Account name is empty"}};
-        } else {
-            state = { ...state, errors:  { ...state.errors, accountAddress : ""}};
-        }
-
         if (this.state.firstname === "") {
             state = { ...state, errors:  { ...state.errors, firstname : "First name is empty"}};
         } else {
@@ -80,70 +75,42 @@ class CreateAccount extends Component {
         } else {
             state = { ...state, errors:  { ...state.errors, lastname : ""}};
         }
-
-        if (this.state.passpharse === "" && this.props.metamask === false) {
+        let accounts = this.props.accounts.account;
+        if (this.state.passpharse === "" && (!_.isEmpty(accounts) && (accounts.key !== "" || accounts.keystring !== ""))) {
             state = { ...state, errors:  { ...state.errors, passpharse : "Passpharse is invalid"}};
         } else {
             state = { ...state, errors:  { ...state.errors, passpharse : ""}};
         }
         this.setState(state);
     }
-    createProfile = () => {
+    createProfile = async () => {
         if (this.state.submitted) {
             return;
         }
-        this.validate();
         if (this.isValidData()){
-            // let isMetamask = true;
-            // this.submitTransaction();
-            // let address = this.getAccountAddress();
-            // let self = this;
-            // this.props.api.retreiveAccount(address,, this.state.email).then((data)=>{
-            //     var keyString = "";
-            //     if (!self.props.metamask) {
-            //         isMetamask = false;
-            //         keyString = this.props.accounts.accounts[address].key;
-            //     }
-            //     self.setState({
-            //         isMetamask:isMetamask,
-            //         accountAddress:address,
-            //         publicKey: data.publicKey,
-            //         privateKey: data.privateKey
-            //     });
-            //     try {
-            //         self.props.ethereum.deployUserProfile(
-            //             address,
-            //             self.state.firstname,
-            //             self.state.lastname,
-            //             self.state.passpharse,
-            //             self.state.email,
-            //             data.publicKey,
-            //             self.state.gasLimit,
-            //             self.state.gasPrice*100000000,
-            //             isMetamask,
-            //             self.rejectTransaction,
-            //             self.submitTransaction,
-            //             self.addUserProfile,
-            //             self.getContractAddress,
-            //             keyString
-            //         );
-            //     } catch (e) {
-            //         var state = self.state;
-            //         state = { ...state, errors:  { ...state.errors, passpharse : "Passpharse is invalid"}};
-            //         self.setState(state);
-            //     }
-            // });
+            var state = this.state;
+            let props = this.props;
+            let userInfo = {
+                email: this.state.email,
+                lastname: this.state.lastname,
+                firstname: this.state.firstname,
+                avatar: this.state.avatar
+            };
+            if (state.preview !== "") {
+                let imageUrl = await props.api.upload({fileData: state.fileData, fileName: state.avatar});
+                userInfo["avatar"] = imageUrl.url;
+            }
+            let hashData = await SERVICE_IPFS.putDataToIPFS(userInfo);
+            localStorage.setItem("hash", hashData);
+            userInfo["accountAddress"] = this.getAccountAddress();
+            this.props.dispatch(addUserProfile(userInfo));
+            this.props.closeModal();
         }
     }
     getContractAddress = (userProfileAddress) => {
         this.setState({
             userProfileAddress:userProfileAddress
         });
-    }
-    addUserProfile = () => {
-        this.props.dispatch(addUserProfile(this.state));
-        this.props.dispatch(useMetamask(this.state.isMetamask));
-        this.props.closeModal();
     }
     rejectTransaction = () => {
         this.setState({submitted: false, labelButton: "CREATE NEXTID ACCOUNT"});
@@ -153,7 +120,8 @@ class CreateAccount extends Component {
     }
     getAccountAddress = () => {
         let address = "";
-        if (this.props.metamask) {
+        let accounts = this.props.accounts.accounts;
+        if (_.isEmpty(accounts) || accounts.key === "" || accounts.keystring === "") {
             var web3js = null;
             if (typeof window.web3 !== "undefined") {
                 web3js = new Web3(window.web3.currentProvider);
@@ -163,7 +131,7 @@ class CreateAccount extends Component {
                 return;
             }
         } else {
-            address = this.props.accounts.address;
+            address = accounts.address;
         }
         return address;
     }
@@ -172,11 +140,24 @@ class CreateAccount extends Component {
             return;
         }
         images = images[0];
-        this.setState({ preview: images.preview });
+        var fileReader = new FileReader();
+        fileReader.onload = (event) => {
+            var fileData = event.target.result;
+            this.setState({
+                fileData: new Buffer(fileData).toString("base64"),
+                avatar: images.name,
+                preview: images.preview
+            });
+        };
+        try {
+            fileReader.readAsArrayBuffer(images);
+        } catch (e) {
+            //
+        }
     }
     _renderPassphrase = () => {
         const { accounts } = this.props;
-        if (accounts.accounts.key === "" || accounts.accounts.keystring === "") {
+        if (_.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "") {
             return undefined;
         }
         return (

@@ -17,6 +17,7 @@ const Styles = {
 
     avatar: {
         width: "100px",
+        height: "100px",
         borderRadius: "50%"
     },
 
@@ -48,5 +49,5 @@ const Styles = {
         letterSpacing: "2px"
     }
 };
-  
+
 export default Styles;

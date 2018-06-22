@@ -10,7 +10,7 @@ class YourAccountComponent extends Component {
             <div style={styles.wrapp}>
                 <div className="row">
                     <div className="col-sm-4">
-                        <YourAccountInfo />
+                        <YourAccountInfo {...this.props}/>
                     </div>
                     <div className="col-sm-6">
                         <YourAccountForm {...this.props}/>

@@ -13,7 +13,7 @@ export default class ServerService {
         });
     }
 
-    // downloadFacetFile(fileUrl, facetKey, owner) {
-    //     return this.request("/api/facet/download",{fileUrl: fileUrl, facetKey: facetKey, owner: owner});
-    // }
+    upload(params){
+        return this.request("/api/accounts/upload",params);
+    }
 }
