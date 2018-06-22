@@ -44,6 +44,13 @@ const Styles = {
 
     mt20: {
         marginTop: "20px"
+    },
+
+    upload: {
+        color: "rgba(0, 0, 0, 0.3)",
+        fontSize: "16px",
+        fontWeight: "700",
+        marginBottom: "10px"
     }
 };
 
