@@ -64,7 +64,21 @@ const Styles = {
         alignItems: "center",
         margin: "0px auto",
         cursor: "pointer"
-    }
+    },
+
+    sumaryOfBike: {
+        minHeight: "440px"
+    },
+
+    button: {
+        background: "#fff",
+        border: "1px solid #00d679",
+        borderRadius: "5px",
+        padding: "7px 20px",
+        marginTop: "20px",
+        textTransform: "uppercase",
+        letterSpacing: "1px",
+    },
 };
 
 export default Styles;

@@ -8,7 +8,7 @@ import ServerService from "../services/server";
 import { MODAL_OWNER_LOGIN } from "../components/modal/constants";
 import _ from "lodash";
 import YourBikesComponent from "../components/your_bikes/YourBikeComponent";
-import BikeForRentComponent from "../components/bike_for_rent/BikeForRentComponent";
+import HiringRequestComponent from "../components/hiring_request/HiringRequestComponent";
 import YourAccountComponent from "../components/your_account/YourAccountComponent";
 
 class root extends React.Component {
@@ -17,7 +17,8 @@ class root extends React.Component {
         this.state = {
             type:MODAL_OWNER_LOGIN,
             isOpen: false,
-            metamask: false
+            metamask: false,
+            externalData: null
         };
     }
     closeModal = () => {
@@ -25,10 +26,11 @@ class root extends React.Component {
             isOpen: false
         });
     }
-    setType = (type) => {
+    setType = (type, externalData = null) => {
         this.setState({
             type: type,
-            isOpen: true
+            isOpen: true,
+            externalData: externalData
         });
         return true;
     }
@@ -39,7 +41,7 @@ class root extends React.Component {
         return (
             <Switch>
                 <Route exact path="/your_bikes" render={() => <YourBikesComponent {...this.props} setType={this.setType} />} />
-                <Route exact path="/bike_for_rent" render={() => <BikeForRentComponent {...this.props} setType={this.setType} />} />
+                <Route exact path="/hiring_request" render={() => <HiringRequestComponent {...this.props} setType={this.setType} />} />
                 <Route exact path="/your_account" render={() => <YourAccountComponent {...this.props} setType={this.setType} />} />
             </Switch>
         );
@@ -63,6 +65,8 @@ class root extends React.Component {
                     ethereum={this.props.ethereum}
                     dispatch={this.props.dispatch}
                     keystore={this.props.keystore}
+                    externalData={this.state.externalData}
+                    
                 />
             </RootContainer>
         );

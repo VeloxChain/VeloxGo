@@ -10,6 +10,7 @@ export const UPDATE_USER_PROFILE = "Update User Profile";
 export const INSUFFICIENT_FUNDS = "Insufficient funds";
 export const CONFIRM_TRANSACTION = "Confirm Transaction";
 export const REGISTER_BIKE = "Register Bike";
+export const SUMARY_OF_BIKE = "Sumary Of Bike";
 
 /// type
 export const MODAL_OWNER_LOGIN = 1;
@@ -24,3 +25,4 @@ export const MODAL_UPDATE_USER_PROFILE = 9;
 export const MODAL_INSUFFICIENT_FUNDS = 10;
 export const MODAL_CONFIRM_TRANSACTION = 13;
 export const MODAL_REGISTER_BIKE = 20;
+export const MODAL_SUMARY_OF_BIKE = 23;
