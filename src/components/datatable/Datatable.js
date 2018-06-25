@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import styles from "./DatatableStyle";
+import Toggle from "material-ui/Toggle";
 
 class Datatable extends Component {
 
@@ -23,12 +24,23 @@ class Datatable extends Component {
     _renderField = (data) => {
         var fields = [];
         _.forEach(this.props.params, (value, key) => {
-            let rowData;
+            let rowData = (data[value.value]);
+            
             if (value.value === "action") {
                 rowData = (this._renderAction(data));
-            } else {
-                rowData = (data[value.value]);
             }
+
+            if (value.value === "forRent") {
+                rowData = (
+                    <Toggle
+                        labelPosition="right"
+                        defaultToggled={data[value.value]}
+                        thumbSwitchedStyle={styles.thumbSwitchedStyle}
+                        trackSwitchedStyle={styles.trackSwitchedStyle}
+                    />
+                );
+            }
+
             fields.push(<td key={key}>{rowData}</td>);
         });
 
