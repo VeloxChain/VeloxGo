@@ -12,15 +12,16 @@ class YourBikesComponent extends Component {
                 {title: "MANUFACTURER", value: "manufaturer"},
                 {title: "YEAR", value: "year"},
                 {title: "STATUS", value: "status"},
-                {title: "ACTION", value: "action"},
+                {title: "FORRENT", value: "forRent"},
+                {title: "ACTION", value: "action"}
             ],
             body: [
-                {snNumber: "2018-BKC-ZbX75728iFp5", manufaturer: "Volata Cycles", year: 2018, status: "ACTIVE"},
-                {snNumber: "2018-BKC-2pG28Xu5hWn2", manufaturer: "Volata Cycles", year: 2018, status: "INACTIVE"},
-                {snNumber: "2018-BKC-NdR77Bh6qB99", manufaturer: "Volata Cycles", year: 2018, status: "ACTIVE"},
-                {snNumber: "2018-BKC-YyS27Yk6h2j3", manufaturer: "Volata Cycles", year: 2018, status: "INACTIVE"},
-                {snNumber: "2018-BKC-EkU28Xr9c9v3", manufaturer: "Volata Cycles", year: 2018, status: "ACTIVE"},
-                {snNumber: "2018-BKC-G4U52Nc6w6m9", manufaturer: "Volata Cycles", year: 2018, status: "INACTIVE"},
+                {snNumber: "2018-BKC-ZbX75728iFp5", manufaturer: "Volata Cycles", year: 2018, status: "ACTIVE", forRent: true},
+                {snNumber: "2018-BKC-2pG28Xu5hWn2", manufaturer: "Volata Cycles", year: 2018, status: "INACTIVE", forRent: false},
+                {snNumber: "2018-BKC-NdR77Bh6qB99", manufaturer: "Volata Cycles", year: 2018, status: "ACTIVE", forRent: false},
+                {snNumber: "2018-BKC-YyS27Yk6h2j3", manufaturer: "Volata Cycles", year: 2018, status: "INACTIVE", forRent: true},
+                {snNumber: "2018-BKC-EkU28Xr9c9v3", manufaturer: "Volata Cycles", year: 2018, status: "ACTIVE", forRent: true},
+                {snNumber: "2018-BKC-G4U52Nc6w6m9", manufaturer: "Volata Cycles", year: 2018, status: "INACTIVE", forRent: false},
             ],
             actions: [
                 {name: "Edit", handle: this.editRow}
