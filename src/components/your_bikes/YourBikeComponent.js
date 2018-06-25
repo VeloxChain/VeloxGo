@@ -9,25 +9,18 @@ class YourBikesComponent extends Component {
         this.state = {
             params : [
                 {title: "BIKE(jSerial number)", value: "snNumber"},
-                {title: "MANUFACTURER", value: "manufaturer"},
+                {title: "MANUFACTURER", value: "manufacturer"},
                 {title: "YEAR", value: "year"},
                 {title: "STATUS", value: "status"},
                 {title: "FORRENT", value: "forRent"},
                 {title: "ACTION", value: "action"}
             ],
-            body: [
-                {snNumber: "2018-BKC-ZbX75728iFp5", manufaturer: "Volata Cycles", year: 2018, status: "ACTIVE", forRent: true},
-                {snNumber: "2018-BKC-2pG28Xu5hWn2", manufaturer: "Volata Cycles", year: 2018, status: "INACTIVE", forRent: false},
-                {snNumber: "2018-BKC-NdR77Bh6qB99", manufaturer: "Volata Cycles", year: 2018, status: "ACTIVE", forRent: false},
-                {snNumber: "2018-BKC-YyS27Yk6h2j3", manufaturer: "Volata Cycles", year: 2018, status: "INACTIVE", forRent: true},
-                {snNumber: "2018-BKC-EkU28Xr9c9v3", manufaturer: "Volata Cycles", year: 2018, status: "ACTIVE", forRent: true},
-                {snNumber: "2018-BKC-G4U52Nc6w6m9", manufaturer: "Volata Cycles", year: 2018, status: "INACTIVE", forRent: false},
-            ],
             actions: [
                 {name: "Edit", handle: this.editRow}
             ],
             isEdit: false,
-            rowEdit: {}
+            rowEdit: {},
+            rowIndex: ""
         };
     }
 
@@ -38,15 +31,16 @@ class YourBikesComponent extends Component {
             };
         });
     }
-    editRow = (row) => {
+    editRow = (row, index) => {
         this.setState({
-            rowEdit: row
+            rowEdit: row,
+            rowIndex: index,
         }, () => this.switchState());
     }
     _renderView = () => {
         if (this.state.isEdit) {
             return (
-                <EditBikeComponent {...this.props} switchState={this.switchState} data={this.state.rowEdit} />
+                <EditBikeComponent {...this.props} switchState={this.switchState} bikeInfo={this.state.rowEdit} index={this.state.rowIndex} />
             );
         }
         return (
@@ -54,7 +48,7 @@ class YourBikesComponent extends Component {
                 <div className="text-right">
                     <button style={styles.button} onClick={() => this.props.setType(MODAL_REGISTER_BIKE)}>New Bike</button>
                 </div>
-                <Datatable params={this.state.params} body={this.state.body} editRow={this.editRow} actions={this.state.actions} />
+                <Datatable params={this.state.params} body={this.props.bikes} editRow={this.editRow} actions={this.state.actions} />
             </div>
         );
     }

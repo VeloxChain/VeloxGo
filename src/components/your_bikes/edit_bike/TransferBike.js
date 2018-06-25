@@ -6,7 +6,7 @@ class TransferBike extends Component {
         return (
             <div style={styles.wrappRight}>
                 <div style={styles.boxLeft}>
-                    <img src="images/bike.png" alt="Bikecoin" style={styles.bike} />
+                    <img src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.avatar.hash } alt="Bikecoin" style={styles.bike} />
                 </div>
                 <div style={styles.boxRight}>
                     <div>

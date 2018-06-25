@@ -8,7 +8,7 @@ class YourAccountInfo extends Component {
         return (
             <div style={styles.wrappLeft}>
                 <div style={styles.wrappTop}>
-                    <img src={userProfile.data.avatar} style={styles.avatar} alt="Bikecoin" />
+                    <img src={"https://gateway.ipfs.io/ipfs/" + userProfile.data.avatar} style={styles.avatar} alt="Bikecoin" />
                     <h4 style={styles.name}>{userProfile.data.firstname + " " + userProfile.data.lastname}</h4>
                 </div>
                 <div style={styles.wrappBottom}>

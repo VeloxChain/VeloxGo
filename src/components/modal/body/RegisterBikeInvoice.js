@@ -16,8 +16,11 @@ class RegisterBikeInvoice extends Component {
                             </div>
                             <TextField
                                 floatingLabelText="Enter your passport wallet"
+                                type="password"
                                 fullWidth
                                 style={styles.mb20}
+                                value={this.props.info.passphrase}
+                                onChange={(e) => this.props.handleChangeState({passphrase: e.target.value})}
                             />
                         </div>
                     </div>

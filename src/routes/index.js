@@ -67,12 +67,13 @@ class root extends React.Component {
                     AppReducer={this.props.AppReducer}
                     global={this.props.global}
                     contacts={this.props.contacts}
+                    bikes={this.props.bikes}
                     api={this.props.api}
                     ethereum={this.props.ethereum}
                     dispatch={this.props.dispatch}
                     keystore={this.props.keystore}
                     externalData={this.state.externalData}
-                    
+
                 />
             </RootContainer>
         );
@@ -85,6 +86,7 @@ const mapStateToProps = state => ({
     global: state.global,
     contacts: state.contacts,
     keystore: state.importKeystore,
+    bikes: state.bikes,
     api: new ServerService(),
     ethereum: new EthereumService(state),
 });

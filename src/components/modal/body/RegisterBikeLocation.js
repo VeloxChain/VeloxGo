@@ -12,6 +12,8 @@ class RegisterBikeLocation extends Component {
                             <TextField
                                 floatingLabelText="Enter your bike location"
                                 fullWidth
+                                value={this.props.info.location}
+                                onChange={(e) => this.props.handleChangeState({location: e.target.value})}
                             />
                             <iframe
                                 title={"googlemaps"}

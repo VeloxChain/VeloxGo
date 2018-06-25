@@ -89,7 +89,6 @@ class CreateAccount extends Component {
         }
         if (this.isValidData()){
             var state = this.state;
-            let props = this.props;
             let userInfo = {
                 email: this.state.email,
                 lastname: this.state.lastname,
@@ -97,12 +96,10 @@ class CreateAccount extends Component {
                 avatar: this.state.avatar
             };
             if (state.preview !== "") {
-                // let imageUrl = await props.api.upload({fileData: state.fileData, fileName: state.avatar});
-                // userInfo["avatar"] = imageUrl.url;
                 let resultPutFileToIPFS = await SERVICE_IPFS.putFileToIPFS(state.fileData);
                 userInfo["avatar"] = resultPutFileToIPFS;
             }
-    
+
             let hashData = await SERVICE_IPFS.putDataToIPFS(userInfo);
             localStorage.setItem("hash", hashData);
             userInfo["accountAddress"] = this.getAccountAddress();

@@ -13,21 +13,21 @@ class Datatable extends Component {
         return heading;
     }
 
-    _renderAction = (row) => {
+    _renderAction = (row, rowIndex) => {
         var actions = [];
         _.forEach(this.props.actions, (action, keyAction) => {
-            actions.push(<a key={keyAction} onClick={() => action.handle(row)}>{action.name}</a>);
+            actions.push(<a key={keyAction} onClick={() => action.handle(row, rowIndex)}>{action.name}</a>);
         });
         return actions;
     }
 
-    _renderField = (data) => {
+    _renderField = (data, rowIndex) => {
         var fields = [];
         _.forEach(this.props.params, (value, key) => {
             let rowData = (data[value.value]);
-            
+
             if (value.value === "action") {
-                rowData = (this._renderAction(data));
+                rowData = (this._renderAction(data, rowIndex));
             }
 
             if (value.value === "forRent") {
@@ -50,7 +50,7 @@ class Datatable extends Component {
     _renderBody = () => {
         var body = [];
         _.forEach(this.props.body, (data, index) => {
-            body.push(<tr key={index}>{this._renderField(data)}</tr>);
+            body.push(<tr key={index}>{this._renderField(data, index)}</tr>);
         });
         return body;
     }

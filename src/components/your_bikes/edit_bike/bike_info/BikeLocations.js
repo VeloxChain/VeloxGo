@@ -6,14 +6,13 @@ class BikeLocation extends Component {
         return (
             <div style={styles.location}>
                 <div className="row">
-                    <div className="col-sm-8">
+                    <div className="col-sm-12">
                         <TextField
                             floatingLabelText="Address"
                             fullWidth
+                            value={this.props.bikeInfo.location}
+                            onChange={(e) => this.props.handleChangeState({location: e.target.value})}
                         />
-                    </div>
-                    <div className="col-sm-4">
-                        <button style={styles.buttonSave}>Save</button>
                     </div>
                 </div>
                 <iframe
