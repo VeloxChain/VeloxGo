@@ -10,7 +10,7 @@ const Styles = {
     tabs: {
         marginTop: "30px",
     },
-    
+
     tabItemContainerStyle: {
         backgroundColor: "#00d679"
     },
@@ -85,13 +85,30 @@ const Styles = {
         marginTop: "20px",
         textTransform: "uppercase",
         letterSpacing: "2px",
-        display: "block"
+        display: "block",
+        float: "right"
     },
-
+    rowButton: {
+        float: "left",
+        clear: "both",
+        width: "100%"
+    },
+    buttonBack: {
+        background: "#fff",
+        border: "1px solid #00d679",
+        borderRadius: "5px",
+        padding: "7px 20px",
+        marginTop: "20px",
+        textTransform: "uppercase",
+        letterSpacing: "2px",
+        display: "block",
+        minWidth: "128px",
+        float: "left"
+    },
     toggle: {
         marginBottom: 16,
         marginTop: "20px"
     },
 };
-  
+
 export default Styles;

@@ -27,16 +27,16 @@ class BikeInfo extends Component {
                 tabItemContainerStyle={styles.tabItemContainerStyle}
                 style={styles.tabs}>
                 <Tab label="Location" value={0} style={styles.tab}>
-                    <BikeLocations />
+                    <BikeLocations {...this.props} />
                 </Tab>
                 <Tab label="Bike specifications" value={1} style={styles.tab}>
-                    <BikeSpecifications />
+                    <BikeSpecifications {...this.props} />
                 </Tab>
                 <Tab label="Owner history" value={2} style={styles.tab}>
-                    <OwnerHistory />
+                    <OwnerHistory {...this.props} />
                 </Tab>
                 <Tab label="Riding perfomance" value={3} style={styles.tab}>
-                    <RidingPerfomance />
+                    <RidingPerfomance {...this.props} />
                 </Tab>
             </Tabs>
         );

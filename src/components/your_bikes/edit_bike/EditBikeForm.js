@@ -1,32 +1,31 @@
 import React, { Component } from "react";
 import TextField from "material-ui/TextField";
 class EditBikeForm extends Component {
-    constructor(props) {
-        super(props);
-        this.state = this.props.data;
-    }
     render() {
         return (
             <div>
                 <TextField
                     floatingLabelText="Owner"
                     fullWidth
-                    value={this.props.accounts.accounts.address}
+                    value={this.props.bikeInfo.owner}
+
                 />
                 <TextField
                     floatingLabelText="Manufacturer"
                     fullWidth
-                    value={this.state.manufaturer}
+                    value={this.props.bikeInfo.manufacturer}
+                    onChange={(e) => this.props.handleChangeState({manufacturer: e.target.value})}
                 />
                 <TextField
                     floatingLabelText="Bike Serial"
                     fullWidth
-                    value={this.state.snNumber}
+                    value={this.props.bikeInfo.snNumber}
+                    onChange={(e) => this.props.handleChangeState({snNumber: e.target.value})}
                 />
                 <TextField
                     floatingLabelText="Bike Wallet Address"
                     fullWidth
-                    value={"0x0000000000000000000000000"}
+                    value={this.props.bikeInfo.bikeAddress}
                 />
             </div>
         );

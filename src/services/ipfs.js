@@ -1,6 +1,6 @@
 // import IPFS from "ipfs";
 
-var IPFS = require('ipfs-api')
+var IPFS = require("ipfs-api");
 
 // import series from "async/series";
 // import _ from "lodash";
@@ -14,7 +14,7 @@ var IPFS = require('ipfs-api')
 //     port: 5001,
 //     protocol: 'http',
 //     headers: {
-//         authorization: 'Bearer ' + 
+//         authorization: 'Bearer ' +
 //     }
 // })
 

@@ -10,23 +10,94 @@ import RegisterBikeInformation from "./RegisterBikeInformation";
 import RegisterBikeLocation from "./RegisterBikeLocation";
 import RegisterBikeInvoice from "./RegisterBikeInvoice";
 import RegisterBikeSuccess from "./RegisterBikeSuccess";
-
+import SERVICE_IPFS from "../../../services/ipfs";
+import { createBike } from "../../../actions/bikeActions";
 class RegisterBike extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            stepIndex: 0
+            stepIndex: 0,
+            stepOne: {
+                imageData: "",
+                imageName: "",
+                invoiceData: "",
+                invoiceName: "",
+                imagePreview: "",
+                manufacturer: "Volata Cycles",
+                owner: this.props.accounts.accounts.address || this.props.accounts.address,
+                snNumber: ""
+            },
+            stepTwo: {
+                location: ""
+            },
+            stepThree: {
+                passphrase: ""
+            }
         };
     }
 
     handleNext = () => {
         const {stepIndex} = this.state;
-        if (stepIndex <= 2) {
+        if (stepIndex < 2) {
             this.setState({
                 stepIndex: stepIndex + 1,
             });
+            return;
         }
+        if (stepIndex === 2) {
+            this.registerBike();
+            return;
+        }
+        this.props.closeModal();
     };
+
+    registerBike = async () => {
+        const { stepOne, stepTwo } = this.state;
+        let [hashImage, hashInvoice] = [ await SERVICE_IPFS.putFileToIPFS(stepOne.imageData), await SERVICE_IPFS.putFileToIPFS(stepOne.invoiceData)];
+        let bike = {
+            avatar: {
+                name: stepOne.imageName,
+                hash: hashImage
+            },
+            invoice: {
+                name: stepOne.invoiceName,
+                hash: hashInvoice
+            },
+            snNumber: stepOne.snNumber ,
+            manufacturer: stepOne.manufacturer,
+            owner: stepOne.owner,
+            year: 2018,
+            location: stepTwo.location,
+            status: "ACTIVE",
+            forRent: false,
+            bikeAddress: "0x0000000000000000000000000000000000000000"
+        };
+        // let hashBike = await SERVICE_IPFS.putDataToIPFS(bike);
+        await this.props.dispatch(createBike(bike));
+        this.setState((prevState) => {
+            return { stepIndex: prevState+1 };
+        });
+    }
+
+    handleChangeState = (data) => {
+        const {stepIndex, stepOne, stepTwo, stepThree} = this.state;
+        let dataChanges;
+        if (stepIndex === 0) {
+            dataChanges = Object.assign(stepOne, data);
+            this.setState({ stepOne: dataChanges });
+            return;
+        }
+        if (stepIndex === 1) {
+            dataChanges = Object.assign(stepTwo, data);
+            this.setState({ stepTwo: dataChanges });
+            return;
+        }
+        if (stepIndex === 2) {
+            dataChanges = Object.assign(stepThree, data);
+            this.setState({ stepThree: dataChanges });
+            return;
+        }
+    }
 
     handlePrev = () => {
         const {stepIndex} = this.state;
@@ -39,15 +110,15 @@ class RegisterBike extends Component {
         switch (stepIndex) {
         case 0:
             return (
-                <RegisterBikeInformation />
+                <RegisterBikeInformation {...this.props} handleChangeState={this.handleChangeState} info={this.state.stepOne} />
             );
         case 1:
             return (
-                <RegisterBikeLocation />
+                <RegisterBikeLocation {...this.props} handleChangeState={this.handleChangeState} info={this.state.stepTwo} />
             );
         case 2:
             return (
-                <RegisterBikeInvoice />
+                <RegisterBikeInvoice {...this.props} handleChangeState={this.handleChangeState} info={this.state.stepThree} />
             );
         default:
             return (

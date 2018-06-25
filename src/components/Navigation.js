@@ -37,19 +37,21 @@ class Navigation extends Component{
     renderLogged() {
         if (!_.isEmpty(this.props.accounts) || !_.isEmpty(this.props.userProfile.data)) {
             return (
-                <IconMenu iconButtonElement={
-                    <IconButton style={{width: "auto"}}>
-                        <a className="pointer size20 welcome-user-block">
-                            <div className="div-welCome">
-                                <p className="p-userName">
-                                    {this._renderUserName()}
-                                </p>
-                                <i className="fa fa-caret-down" />
-                            </div>
-                        </a>
-                    </IconButton>
-
-                } >
+                <IconMenu
+                    iconButtonElement={
+                        <IconButton style={{width: "auto"}}>
+                            <a className="pointer size20 welcome-user-block">
+                                <div className="div-welCome">
+                                    <p className="p-userName">
+                                        {this._renderUserName()}
+                                    </p>
+                                    <i className="fa fa-caret-down" />
+                                </div>
+                            </a>
+                        </IconButton>}
+                    targetOrigin={{horizontal: "right", vertical: "top"}}
+                    anchorOrigin={{horizontal: "right", vertical: "top"}}
+                >
                     {this._renderEditProfile()}
                     <MenuItem primaryText="Log out" onClick={this.handleLogout}/>
                 </IconMenu>

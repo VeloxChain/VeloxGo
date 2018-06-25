@@ -9,6 +9,7 @@ import connection from "./connectionReducer";
 import importKeystore from "./importKeystoreReducer";
 import txs from "./txsReducer";
 import userProfile from "./userProfileReducer";
+import bikes from "./bikesReducer";
 
 
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     importKeystore,
     createKeyStore,
     userProfile,
+    bikes,
     router: routerReducer,
 });
 
