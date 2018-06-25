@@ -5,7 +5,8 @@ import ACC_ACTION from "../constants/accActions";
 import _ from "lodash";
 const initState = {
     accounts: {},
-    newAccountAdding: false
+    newAccountAdding: false,
+    isLogout: false
 };
 
 const accounts = (state=initState, action) => {
@@ -15,7 +16,10 @@ const accounts = (state=initState, action) => {
         if (action.payload.accounts) {
             var loadedAccounts = action.payload.accounts.accounts;
             if (_.isEmpty(loadedAccounts)) {
-                return state;
+                return {
+                    ...state,
+                    isLogout: true
+                };
             }
             var acc = new Account(
                 loadedAccounts.address,
@@ -44,10 +48,14 @@ const accounts = (state=initState, action) => {
             });
             acc.tokens = newTokens;
             var accounts = acc;
-            var newState = {...state, accounts: accounts, deleteAccount : action.payload.accounts?action.payload.accounts.deleteAccount:""};
+            var newState = {...state, accounts: accounts, deleteAccount : action.payload.accounts?action.payload.accounts.deleteAccount:"", isLogout:false};
             return newState;
         }
-        return state;
+
+        return {
+            ...state,
+            isLogout: true
+        };
     }
     case ACC_ACTION.JOINING_NEXTID_WALLET: {
         newAccounts = {...state.accounts};
@@ -101,14 +109,14 @@ const accounts = (state=initState, action) => {
         return {...state, newAccountCreating: false, accounts: newAddedAcc};
     }
     case ACC_ACTION.NEW_ACCOUNT_CREATED_PENDING: {
-        return {...state, newAccountCreating: true};
+        return {...state, newAccountCreating: true, isLogout: false};
     }
     case ACC_ACTION.NEW_ACCOUNT_ADDED_FULFILLED: {
         newAddedAcc = action.payload;
         return {...state, newAccountAdding: false, accounts: newAddedAcc};
     }
     case ACC_ACTION.NEW_ACCOUNT_ADDED_PENDING: {
-        return {...state, newAccountAdding: true, ...action.payload};
+        return {...state, newAccountAdding: true, ...action.payload, isLogout: false};
     }
     case ACC_ACTION.MODIFY_ACCOUNT:{
         newAccounts = {...state.accounts};
@@ -135,10 +143,11 @@ const accounts = (state=initState, action) => {
         }
         return {...state, accounts: newAccounts};
     }
-    case ACC_ACTION.LOG_OUT:
+    case "RESET":
         return {
             ...state,
-            accounts: {}
+            accounts: {},
+            isLogout: true
         };
     default:
         return state;

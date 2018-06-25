@@ -1,6 +1,6 @@
 const Styles = {
     wrapp: {
-        margin: "30px 5px"
+        margin: "50px 5px"
     },
 
     wrappLeft: {

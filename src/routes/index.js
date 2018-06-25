@@ -44,6 +44,12 @@ class root extends React.Component {
             </Switch>
         );
     }
+    componentWillReceiveProps(nextProps) {
+        const { accounts } = nextProps;
+        if (accounts.isLogout) {
+            this.setType(MODAL_OWNER_LOGIN);
+        }
+    }
     render() {
         return (
             <RootContainer {...this.props} setType={this.setType}>
