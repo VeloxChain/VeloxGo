@@ -3,6 +3,7 @@ import styles from "./HiringRequestComponentStyle";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import TextField from "material-ui/TextField";
+import BikeFilterComponent from "./BikeFilterComponent";
 
 class BikeSearchComponent extends Component {
     constructor(props) {
@@ -32,15 +33,14 @@ class BikeSearchComponent extends Component {
                     </SelectField>
                 </div>
                 <div className="col-sm-9">
-                    <div style={styles.map}>
-                        <TextField
-                            floatingLabelText="Search"
-                            fullWidth
-                        />
-                        <div style={styles.divIcon}>
-                            <i className="fa fa-map-o" style={styles.icon} />
-                            <i className="fa fa-map-marker" style={styles.icon} />
+                    <div style={styles.filter}>
+                        <div style={styles.search}>
+                            <TextField
+                                floatingLabelText="Search"
+                                fullWidth
+                            />
                         </div>
+                        <BikeFilterComponent onChangeFilter={this.props.onChangeFilter}/>
                     </div>
                 </div>
             </div>

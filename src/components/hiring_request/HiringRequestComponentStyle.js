@@ -36,24 +36,41 @@ const Styles = {
         marginBottom: "20px"
     },
 
-    map: {
+    filter: {
         position: "relative"
     },
 
-    divIcon: {
+    maps: {
         position: "absolute",
-        bottom: "20px",
-        right: "0"
+        bottom: "10px",
+        right: 0
+    },
+
+    iconFilter: {
+        fontSize: "18px",
+        marginRight: "15px",
+        cursor: "pointer",
+        color: "#00d679"
     },
 
     icon: {
         fontSize: "18px",
-        marginLeft: "10px",
-        cursor: "pointer"
+        marginRight: "15px",
+        cursor: "pointer",
     },
 
     selectedMenuItemStyle: {
         color: "#00d679"
+    },
+
+    iframe: {
+        border: "none",
+        width: "100%",
+        height: "calc(100vh - 195px)"
+    },
+
+    search: {
+        marginRight: "80px",
     }
 };
   
