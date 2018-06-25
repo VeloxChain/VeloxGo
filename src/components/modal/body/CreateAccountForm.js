@@ -97,9 +97,12 @@ class CreateAccount extends Component {
                 avatar: this.state.avatar
             };
             if (state.preview !== "") {
-                let imageUrl = await props.api.upload({fileData: state.fileData, fileName: state.avatar});
-                userInfo["avatar"] = imageUrl.url;
+                // let imageUrl = await props.api.upload({fileData: state.fileData, fileName: state.avatar});
+                // userInfo["avatar"] = imageUrl.url;
+                let resultPutFileToIPFS = await SERVICE_IPFS.putFileToIPFS(state.fileData);
+                userInfo["avatar"] = resultPutFileToIPFS;
             }
+    
             let hashData = await SERVICE_IPFS.putDataToIPFS(userInfo);
             localStorage.setItem("hash", hashData);
             userInfo["accountAddress"] = this.getAccountAddress();
@@ -144,7 +147,8 @@ class CreateAccount extends Component {
         fileReader.onload = (event) => {
             var fileData = event.target.result;
             this.setState({
-                fileData: new Buffer(fileData).toString("base64"),
+                // fileData: new Buffer(fileData).toString("base64"),
+                fileData: new Buffer(fileData),
                 avatar: images.name,
                 preview: images.preview
             });

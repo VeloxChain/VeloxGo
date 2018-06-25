@@ -1,23 +1,37 @@
-import IPFS from "ipfs";
+// import IPFS from "ipfs";
+
+var IPFS = require('ipfs-api')
+
 // import series from "async/series";
 // import _ from "lodash";
 
-const node = new IPFS({
-    repo: "QmNLiRSpcxTvaQKh53paJixMEs7FKMxTbGLNq7vzt8noos"
-});
+// const node = new IPFS({
+//     repo: "QmNLiRSpcxTvaQKh53paJixMEs7FKMxTbGLNq7vzt8noos"
+// });
+
+// var ipfs = IPFS({
+//     host: 'localhost',
+//     port: 5001,
+//     protocol: 'http',
+//     headers: {
+//         authorization: 'Bearer ' + 
+//     }
+// })
+
+var ipfs = IPFS();
 
 let SERVICE_IPFS = {};
 
 SERVICE_IPFS.init = async () => {
-    let resultCheckNodeReady = await SERVICE_IPFS.checkNodeReady();
-    if(resultCheckNodeReady !== "OK") {
-        throw "IPSF is not loaded!";
-    }
+    // let resultCheckNodeReady = await SERVICE_IPFS.checkNodeReady();
+    // if(resultCheckNodeReady !== "OK") {
+    //     throw "IPSF is not loaded!";
+    // }
 };
 
 SERVICE_IPFS.putDataToIPFS = (data) => {
     return new Promise( (resolve, reject) => {
-        node.dag.put(data, { format: "dag-cbor", hashAlg: "sha2-256" }, (err, cid) => {
+        ipfs.dag.put(data, { format: "dag-cbor", hashAlg: "sha2-256" }, (err, cid) => {
             if (err) {
                 return reject({err: err});
             }
@@ -28,7 +42,7 @@ SERVICE_IPFS.putDataToIPFS = (data) => {
 
 SERVICE_IPFS.getDataFromIPFS = (hash) => {
     return new Promise( (resolve, reject) => {
-        node.dag.get(hash, (err, result) => {
+        ipfs.dag.get(hash, (err, result) => {
             if (err) {
                 return reject({err: err});
             }
@@ -39,13 +53,13 @@ SERVICE_IPFS.getDataFromIPFS = (hash) => {
 
 SERVICE_IPFS.checkNodeReady = () => {
     return new Promise( (resolve) => {
-        node.once("ready",  () => {resolve("OK");});
+        ipfs.once("ready",  () => {resolve("OK");});
     });
 };
 
 SERVICE_IPFS.putFileToIPFS = (buf) => {
     return new Promise( (resolve, reject) => {
-        node.files.add(buf, (err, result) => { // Upload buffer to IPFS
+        ipfs.files.add(buf, (err, result) => { // Upload buffer to IPFS
             if(err) {
                 return reject({ err: err});
             }
@@ -56,7 +70,7 @@ SERVICE_IPFS.putFileToIPFS = (buf) => {
 
 SERVICE_IPFS.getFileFromIPFS = (hash) => {
     return new Promise( (resolve, reject) => {
-        node.files.cat(hash, (err, data) => { // Upload buffer to IPFS
+        ipfs.files.cat(hash, (err, data) => { // Upload buffer to IPFS
             if(err) {
                 return reject({ err: err});
             }

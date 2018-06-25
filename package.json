@@ -13,6 +13,7 @@
     "google-maps-react": "^1.1.0",
     "history": "^4.7.2",
     "ipfs": "^0.29.3",
+    "ipfs-api": "^22.1.0",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.20.0",
