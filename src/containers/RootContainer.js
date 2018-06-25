@@ -43,7 +43,7 @@ class RootContainer extends React.Component {
     }
 
 
-    UNSAFE_componentWillReceiveProps(props){
+    componentWillReceiveProps(props){
         if(!_.isUndefined(props.toast)) {
             if(props.toast.message !== "") {
                 toast(

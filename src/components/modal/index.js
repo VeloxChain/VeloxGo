@@ -13,6 +13,8 @@ import {
     // UNLOCK_ACCOUNT,
     MODAL_REGISTER_BIKE,
     REGISTER_BIKE,
+    MODAL_SUMARY_OF_BIKE,
+    SUMARY_OF_BIKE,
     MODAL_CREATE_ACCOUNT,
     MODAL_CREATE_ACCOUNT_BIKECOIN,
     MODAL_EXISTING,
@@ -35,6 +37,7 @@ import Verify from "./body/VerifyForm";
 import NotEnoughEth from "./body/NotEnoughEthForm";
 import ConfirmTransaction from "./body/ConfirmTransactionForm";
 import RegisterBike from "./body/RegisterBikeForm";
+import SumaryOfBike from "./body/SumaryOfBikeForm";
 class ModalCustom extends Component {
     _renderBodyModal = () => {
         switch (this.props.type) {
@@ -56,6 +59,8 @@ class ModalCustom extends Component {
             return ( <NotEnoughEth {...this.props} /> );
         case MODAL_REGISTER_BIKE:
             return ( <RegisterBike {...this.props} /> );
+        case MODAL_SUMARY_OF_BIKE:
+            return ( <SumaryOfBike {...this.props} /> );
         case MODAL_CONFIRM_TRANSACTION:
             return ( <ConfirmTransaction {...this.props} /> );
         default:
@@ -84,6 +89,8 @@ class ModalCustom extends Component {
             return INSUFFICIENT_FUNDS;
         case MODAL_REGISTER_BIKE:
             return REGISTER_BIKE;
+        case MODAL_SUMARY_OF_BIKE:
+            return SUMARY_OF_BIKE;
         default:
             return OWNER_LOGIN;
         }

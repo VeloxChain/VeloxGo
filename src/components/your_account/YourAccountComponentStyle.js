@@ -1,6 +1,6 @@
 const Styles = {
     wrapp: {
-        margin: "30px 5px"
+        margin: "50px 5px"
     },
 
     wrappLeft: {
@@ -18,7 +18,8 @@ const Styles = {
     avatar: {
         width: "100px",
         height: "100px",
-        borderRadius: "50%"
+        borderRadius: "50%",
+        objectFit: "cover"
     },
 
     title: {
@@ -47,6 +48,9 @@ const Styles = {
         marginTop: "20px",
         textTransform: "uppercase",
         letterSpacing: "2px"
+    },
+    ethAddress: {
+        fontStyle: "italic"
     }
 };
 

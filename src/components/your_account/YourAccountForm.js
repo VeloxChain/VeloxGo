@@ -10,11 +10,11 @@ class YourAccountForm extends Component {
     render() {
         return (
             <div>
-                <h3 style={styles.title}>User profile address: </h3>
+                <h3 style={styles.title}>ETH Address: <span style={styles.ethAddress}>{this.props.accounts.accounts.address}</span></h3>
                 <TextField
-                    floatingLabelText="ETH Address"
+                    floatingLabelText="User Profile Address"
                     fullWidth
-                    value={this.props.accounts.accounts.address}
+                    value="0x0000000000000000000000000000000000000000"
                 />
                 <TextField
                     floatingLabelText="Email"

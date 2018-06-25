@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./BikeForRentComponentStyle";
+import styles from "./HiringRequestComponentStyle";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
 import TextField from "material-ui/TextField";
@@ -23,10 +23,12 @@ class BikeSearchComponent extends Component {
                         value={this.state.value}
                         onChange={this.handleChange}
                         fullWidth
+                        selectedMenuItemStyle={styles.selectedMenuItemStyle}
                     >
-                        <MenuItem value={1} primaryText="Singapore" />
-                        <MenuItem value={2} primaryText="United States" />
-                        <MenuItem value={3} primaryText="Viet Nam" />
+                        <MenuItem value={0} primaryText="San Francisco" />
+                        <MenuItem value={1} primaryText="Delaware" />
+                        <MenuItem value={2} primaryText="Milano (Italy)" />
+                        <MenuItem value={3} primaryText="Singapore" />
                     </SelectField>
                 </div>
                 <div className="col-sm-9">

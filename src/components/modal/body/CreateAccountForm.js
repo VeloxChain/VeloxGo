@@ -13,10 +13,10 @@ class CreateAccount extends Component {
         super(props);
         this.state = {
             passpharse: "",
-            firstname: "vuong",
-            lastname: "pham",
+            firstname: "",
+            lastname: "",
             avatar: "",
-            email: "vuongd36@gmail.com",
+            email: "",
             gasLimit: 4712388,
             gasPrice: 50,
             disabled:false,
