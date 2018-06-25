@@ -11,9 +11,9 @@ class SideBar extends Component{
                             <img src="images/XMLID_3.png" className="mgr-15" alt="Bikecoin" />
                             <span>YOUR BIKES</span>
                         </NavLink>
-                        <NavLink to="/bike_for_rent">
+                        <NavLink to="/hiring_request">
                             <img src="images/XMLID_1.png" className="mgr-15" alt="Bikecoin" />
-                            <span>BIKE FOR RENT</span>
+                            <span>RENT BIKE</span>
                         </NavLink>
                         <NavLink to="/your_account">
                             <img src="images/XMLID_2.png" className="mgr-15" alt="Bikecoin" />

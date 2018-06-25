@@ -19,10 +19,10 @@ const Styles = {
         background: "#fff",
         border: "1px solid #00d679",
         borderRadius: "5px",
-        padding: "7px 30px",
+        padding: "7px 20px",
         marginTop: "20px",
         textTransform: "uppercase",
-        letterSpacing: "2px",
+        letterSpacing: "1px",
         display: "block",
         margin: "0 auto",
     },
@@ -50,6 +50,10 @@ const Styles = {
         fontSize: "18px",
         marginLeft: "10px",
         cursor: "pointer"
+    },
+
+    selectedMenuItemStyle: {
+        color: "#00d679"
     }
 };
   
