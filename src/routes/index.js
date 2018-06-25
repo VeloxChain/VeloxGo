@@ -9,7 +9,6 @@ import { MODAL_OWNER_LOGIN } from "../components/modal/constants";
 import _ from "lodash";
 import YourBikesComponent from "../components/your_bikes/YourBikeComponent";
 import BikeForRentComponent from "../components/bike_for_rent/BikeForRentComponent";
-import HiringRequestComponent from "../components/hiring_request/HiringRequestComponent";
 import YourAccountComponent from "../components/your_account/YourAccountComponent";
 
 class root extends React.Component {
@@ -41,7 +40,6 @@ class root extends React.Component {
             <Switch>
                 <Route exact path="/your_bikes" render={() => <YourBikesComponent {...this.props} setType={this.setType} />} />
                 <Route exact path="/bike_for_rent" render={() => <BikeForRentComponent {...this.props} setType={this.setType} />} />
-                <Route exact path="/hiring_request" render={() => <HiringRequestComponent {...this.props} setType={this.setType} />} />
                 <Route exact path="/your_account" render={() => <YourAccountComponent {...this.props} setType={this.setType} />} />
             </Switch>
         );
