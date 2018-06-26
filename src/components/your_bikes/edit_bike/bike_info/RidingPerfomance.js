@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import styles from "../EditBikeComponentStyle";
-import {List, ListItem} from 'material-ui/List';
-
 class RidingPerfomance extends Component {
     constructor(props) {
         super(props);
@@ -64,144 +62,97 @@ class RidingPerfomance extends Component {
     }
 
     render() {
-        const { data, type } = this.state;
         return (
-            <div>
-                <div style={styles.action}>
-                    <div className="btn-group" role="group" aria-label="...">
-                        <button
-                            type="button"
-                            className="btn btn-default"
-                            style={type == "today" ? styles.butonRidingActive : styles.butonRiding}
-                            onClick={() => this.onClick("today")}
-                        >
-                            Today
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-default"
-                            style={type == "week" ? styles.butonRidingActive : styles.butonRiding}
-                            onClick={() => this.onClick("week")}
-                        >
-                            Week
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-default"
-                            style={type == "month" ? styles.butonRidingActive : styles.butonRiding}
-                            onClick={() => this.onClick("month")}
-                        >
-                            Month
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-default"
-                            style={type == "year" ? styles.butonRidingActive : styles.butonRiding}
-                            onClick={() => this.onClick("year")}
-                        >
-                            Year
-                        </button>
-                        <button
-                            type="button"
-                            className="btn btn-default"
-                            style={type == "all" ? styles.butonRidingActive : styles.butonRiding}
-                            onClick={() => this.onClick("all")}
-                        >
-                            All time
-                        </button>
+            <div style={styles.wrapRiding}>
+                <div style={styles.containerRiding}>
+                    <div style={styles.blockTitle}>
+                        <h3 style={styles.marginZero}>TODAY</h3>
                     </div>
-                </div>
-                <div className="row">
-                    <div className="col-sm-3">
-                        <div style={styles.block}>
-                            <p>
-                                <span style={styles.count}>{data[type].distance}</span>
-                                <span style={styles.unit}> mi</span>
-                            </p>
-                            <p style={styles.text}>Distance</p>
+                    <div style={styles.containerBlock}>
+                        <div style={styles.flexible}>
+                            <div style={styles.block}>
+                                <p style={styles.marginZero}>
+                                    <span style={styles.count}>243</span>
+                                    <span style={styles.unit}> mi</span>
+                                </p>
+                                <p style={styles.text}>Distance</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-sm-3">
-                        <div style={styles.block}>
-                            <p>
-                                <span style={styles.count}>{data[type].time.hour}</span>
-                                <span style={styles.unit}> h</span>
-                                <span style={styles.count}> {data[type].time.minute}</span>
-                                <span style={styles.unit}> m</span>
-                            </p>
-                            <p style={styles.text}>Time</p>
+                        <div style={styles.flexible}>
+                            <div style={styles.block}>
+                                <p style={styles.marginZero}>
+                                    <span style={styles.count}>243</span>
+                                    <span style={styles.unit}> h</span>
+                                    <span style={styles.count}>12</span>
+                                    <span style={styles.unit}> m</span>
+                                </p>
+                                <p style={styles.text}>Time</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-sm-3">
-                        <div style={styles.block}>
-                            <p>
-                                <span style={styles.count}>{data[type].elev_gain}</span>
-                                <span style={styles.unit}> ft</span>
-                            </p>
-                            <p style={styles.text}>Elev gain</p>
+                        <div style={styles.flexible}>
+                            <div style={styles.block}>
+                                <p style={styles.marginZero}>
+                                    <span style={styles.count}>302</span>
+                                    <span style={styles.unit}> ft</span>
+                                </p>
+                                <p style={styles.text}>Elev gain</p>
+                            </div>
                         </div>
-                    </div>
-                    <div className="col-sm-3">
-                        <div style={styles.block}>
-                            <p>
-                                <span style={styles.count}>{data[type].energy}</span>
-                                <span style={styles.unit}> Cal</span>
-                            </p>
-                            <p style={styles.text}>Energy</p>
+                        <div style={styles.flexible}>
+                            <div style={styles.block}>
+                                <p style={styles.marginZero}>
+                                    <span style={styles.count}>1.250</span>
+                                    <span style={styles.unit}> Cal</span>
+                                </p>
+                                <p style={styles.text}>Energy</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <List style={styles.list}>
-                    <ListItem
-                        primaryText="San Francisco - Sausalito"
-                        style={styles.listItem}
-                        secondaryText={
-                            <p>10.00 mi 56 sec 10.70 mph</p>
-                        }
-                        secondaryTextLines={1}
-                        rightIcon={<img src="images/graph.png" style={styles.icon} />}
-                    />
-                    <ListItem
-                        primaryText="San Francisco - Sausalito"
-                        style={styles.listItem}
-                        secondaryText={
-                            <p>10.00 mi 56 sec 10.70 mph</p>
-                        }
-                        secondaryTextLines={1}
-                        rightIcon={<img src="images/graph2.png" style={styles.icon} />}
-                    />
-                    <ListItem
-                        primaryText="San Francisco - Sausalito"
-                        style={styles.listItem}
-                        secondaryText={
-                            <p>10.00 mi 56 sec 10.70 mph</p>
-                        }
-                        secondaryTextLines={1}
-                        rightIcon={<img src="images/graph2.png" style={styles.icon} />}
-                    />
-                    <ListItem
-                        primaryText="San Francisco - Sausalito"
-                        style={styles.listItem}
-                        secondaryText={
-                            <p>10.00 mi 56 sec 10.70 mph</p>
-                        }
-                        secondaryTextLines={1}
-                        rightIcon={<img src="images/graph.png" style={styles.icon} />}
-                    />
-                    <ListItem
-                        primaryText="San Francisco - Sausalito"
-                        style={styles.listItem}
-                        secondaryText={
-                            <p>10.00 mi 56 sec 10.70 mph</p>
-                        }
-                        secondaryTextLines={1}
-                        rightIcon={<img src="images/graph.png" style={styles.icon} />}
-                    />
-                </List>
 
             </div>
         );
     }
 }
 export default RidingPerfomance;
+
+// <div className="row">
+//     <div className="col-sm-3">
+//         <div style={styles.block}>
+//          <p>
+//     <span style={styles.count}>{data[type].distance}</span>
+//     <span style={styles.unit}> mi</span>
+// </p>
+// <p style={styles.text}>Distance</p>
+//         </div>
+//     </div>
+//     <div className="col-sm-3">
+//         <div style={styles.block}>
+//             <p>
+//                 <span style={styles.count}>{data[type].time.hour}</span>
+//                 <span style={styles.unit}> h</span>
+//                 <span style={styles.count}> {data[type].time.minute}</span>
+//                 <span style={styles.unit}> m</span>
+//             </p>
+//             <p style={styles.text}>Time</p>
+//         </div>
+//     </div>
+//     <div className="col-sm-3">
+//         <div style={styles.block}>
+//             <p>
+//                 <span style={styles.count}>{data[type].elev_gain}</span>
+//                 <span style={styles.unit}> ft</span>
+//             </p>
+//             <p style={styles.text}>Elev gain</p>
+//         </div>
+//     </div>
+//     <div className="col-sm-3">
+//         <div style={styles.block}>
+//             <p>
+//                 <span style={styles.count}>{data[type].energy}</span>
+//                 <span style={styles.unit}> Cal</span>
+//             </p>
+//             <p style={styles.text}>Energy</p>
+//         </div>
+//     </div>
+// </div>

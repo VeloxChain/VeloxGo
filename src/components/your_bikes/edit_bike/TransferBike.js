@@ -17,6 +17,21 @@ class TransferBike extends Component {
                             labelPosition="right"
                             defaultToggled={this.props.bikeInfo.isLocked}
                             onToggle={(e, isInputChecked) => this.props.handleChangeState({isLocked: isInputChecked})}
+                            thumbSwitchedStyle={styles.thumbSwitchedStyle}
+                            trackSwitchedStyle={styles.trackSwitchedStyle}
+                            trackStyle={styles.track}
+                            thumbStyle={styles.thumb}
+                            style={styles.toggle}
+                        />
+                        <Toggle
+                            label="LOST BIKE"
+                            labelPosition="right"
+                            defaultToggled={this.props.bikeInfo.isLost}
+                            onToggle={(e, isInputChecked) => this.props.handleChangeState({isLost: isInputChecked})}
+                            thumbSwitchedStyle={styles.thumbSwitchedStyle}
+                            trackSwitchedStyle={styles.trackSwitchedStyle}
+                            trackStyle={styles.track}
+                            thumbStyle={styles.thumb}
                             style={styles.toggle}
                         />
                     </div>

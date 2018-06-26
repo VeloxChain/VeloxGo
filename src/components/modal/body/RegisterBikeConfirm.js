@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TextField from "material-ui/TextField";
 import styles from "./CustomCss";
 
-class RegisterBikeInvoice extends Component {
+class RegisterBikeConfirm extends Component {
 
     render() {
         return (
@@ -30,4 +30,4 @@ class RegisterBikeInvoice extends Component {
     }
 }
 
-export default RegisterBikeInvoice;
+export default RegisterBikeConfirm;

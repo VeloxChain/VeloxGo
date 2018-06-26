@@ -8,7 +8,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import styles from "./CustomCss";
 import RegisterBikeInformation from "./RegisterBikeInformation";
 import RegisterBikeLocation from "./RegisterBikeLocation";
-import RegisterBikeInvoice from "./RegisterBikeInvoice";
+import RegisterBikeConfirm from "./RegisterBikeConfirm";
 import RegisterBikeSuccess from "./RegisterBikeSuccess";
 import SERVICE_IPFS from "../../../services/ipfs";
 import { createBike } from "../../../actions/bikeActions";
@@ -98,7 +98,8 @@ class RegisterBike extends Component {
             status: "ACTIVE",
             forRent: false,
             bikeAddress: "0x0000000000000000000000000000000000000000",
-            isLocked: false
+            isLocked: false,
+            isLost: false
         };
         let hashBike = await SERVICE_IPFS.putDataToIPFS(bike);
         await this.props.dispatch(createBike(bike, hashBike));
@@ -144,7 +145,7 @@ class RegisterBike extends Component {
             );
         case 2:
             return (
-                <RegisterBikeInvoice {...this.props} handleChangeState={this.handleChangeState} info={this.state.stepThree} />
+                <RegisterBikeConfirm {...this.props} handleChangeState={this.handleChangeState} info={this.state.stepThree} />
             );
         default:
             return (
@@ -172,7 +173,7 @@ class RegisterBike extends Component {
                     </Step>
                     <Step>
                         <StepLabel style={styles.stepLabel} className="step-label" iconContainerStyle={{display: "block"}}>
-                            <span className="text-step">Invoice</span>
+                            <span className="text-step">Confirm</span>
                         </StepLabel>
                     </Step>
                 </Stepper>

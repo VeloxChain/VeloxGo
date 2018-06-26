@@ -44,6 +44,8 @@ class YourBikesComponent extends Component {
                 onToggle={(e, isInputChecked) => this.changeBikeInfo(isInputChecked, row, index)}
                 thumbSwitchedStyle={styles.thumbSwitchedStyle}
                 trackSwitchedStyle={styles.trackSwitchedStyle}
+                trackStyle={styles.track}
+                thumbStyle={styles.thumb}
             />
         );
     }
