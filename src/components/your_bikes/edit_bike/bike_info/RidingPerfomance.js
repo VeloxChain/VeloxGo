@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styles from "../EditBikeComponentStyle";
+import {List, ListItem} from 'material-ui/List';
 
 class RidingPerfomance extends Component {
     constructor(props) {
@@ -150,6 +151,55 @@ class RidingPerfomance extends Component {
                         </div>
                     </div>
                 </div>
+                
+                <List style={styles.list}>
+                    <ListItem
+                        primaryText="San Francisco - Sausalito"
+                        style={styles.listItem}
+                        secondaryText={
+                            <p>10.00 mi 56 sec 10.70 mph</p>
+                        }
+                        secondaryTextLines={1}
+                        rightIcon={<img src="images/graph.png" style={styles.icon} />}
+                    />
+                    <ListItem
+                        primaryText="San Francisco - Sausalito"
+                        style={styles.listItem}
+                        secondaryText={
+                            <p>10.00 mi 56 sec 10.70 mph</p>
+                        }
+                        secondaryTextLines={1}
+                        rightIcon={<img src="images/graph2.png" style={styles.icon} />}
+                    />
+                    <ListItem
+                        primaryText="San Francisco - Sausalito"
+                        style={styles.listItem}
+                        secondaryText={
+                            <p>10.00 mi 56 sec 10.70 mph</p>
+                        }
+                        secondaryTextLines={1}
+                        rightIcon={<img src="images/graph2.png" style={styles.icon} />}
+                    />
+                    <ListItem
+                        primaryText="San Francisco - Sausalito"
+                        style={styles.listItem}
+                        secondaryText={
+                            <p>10.00 mi 56 sec 10.70 mph</p>
+                        }
+                        secondaryTextLines={1}
+                        rightIcon={<img src="images/graph.png" style={styles.icon} />}
+                    />
+                    <ListItem
+                        primaryText="San Francisco - Sausalito"
+                        style={styles.listItem}
+                        secondaryText={
+                            <p>10.00 mi 56 sec 10.70 mph</p>
+                        }
+                        secondaryTextLines={1}
+                        rightIcon={<img src="images/graph.png" style={styles.icon} />}
+                    />
+                </List>
+
             </div>
         );
     }

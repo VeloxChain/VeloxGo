@@ -145,6 +145,23 @@ const Styles = {
         padding: "10px 20px",
         background: "rgb(0, 214, 121)",
         color: "#fff"
+    },
+
+    list: {
+        padding: "0px",
+        margin: "20px 0px 10px",
+        background: "#fff",
+        borderRadius: "5px",
+        border: "1px solid rgb(0, 214, 121)"
+    },
+
+    icon: {
+        width: "auto",
+        height: "auto"
+    },
+
+    listItem: {
+        color: "rgb(0, 214, 121)"
     }
 };
 
