@@ -1,22 +1,25 @@
 import USER_PROFILE from "../constants/userProfile";
 
-export function addUserProfile(userProfile) {
+export function addUserProfile(userProfile, hash) {
     return {
         type: USER_PROFILE.CREATE,
-        payload: userProfile
+        payload: userProfile,
+        hash: hash
     };
 }
 export function addVerifyUserProfile(userProfile) {
     return {
         type: USER_PROFILE.VERIFY_CREATE,
         payload: userProfile
+
     };
 }
 
-export function updateUserProfile(userProfile) {
+export function updateUserProfile(userProfile, hash) {
     return {
         type: USER_PROFILE.UPDATE,
-        payload: userProfile
+        payload: userProfile,
+        hash: hash
     };
 }
 

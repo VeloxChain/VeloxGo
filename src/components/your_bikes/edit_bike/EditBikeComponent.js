@@ -3,8 +3,9 @@ import styles from "./EditBikeComponentStyle";
 import EditBikeForm from "./EditBikeForm";
 import TransferBike from "./TransferBike";
 import BikeInfo from "./bike_info/BikeInfo";
-import { updateBike } from "../../../actions/bikeActions";
+import { updateBike, destroyBike } from "../../../actions/bikeActions";
 import { toast } from "react-toastify";
+import SERVICE_IPFS from "../../../services/ipfs";
 class EditBikeComponent extends Component {
     constructor(props) {
         super(props);
@@ -18,9 +19,14 @@ class EditBikeComponent extends Component {
         this.setState({ bikeInfo: dataChanges });
         return;
     }
-    changeBikeInfo = () => {
-        this.props.dispatch(updateBike(this.props.index, this.state.bikeInfo));
+    changeBikeInfo = async () => {
+        let bikeHash = SERVICE_IPFS.putDataToIPFS(this.state.bikeInfo);
+        this.props.dispatch(updateBike(this.props.index, this.state.bikeInfo, bikeHash));
         toast.success("Saved!");
+    }
+    deytroyBike = () => {
+        this.props.dispatch(destroyBike(this.props.index));
+        this.props.switchState();
     }
     render() {
         return (
@@ -36,7 +42,7 @@ class EditBikeComponent extends Component {
                         </div>
                     </div>
                     <div className="col-sm-5">
-                        <TransferBike {...this.props} />
+                        <TransferBike {...this.props} handleChangeState={this.handleChangeState} deytroyBike={this.deytroyBike} />
                     </div>
                     <div className="col-sm-12">
                         <BikeInfo bikeInfo={this.state.bikeInfo} handleChangeState={this.handleChangeState} />

@@ -12,6 +12,7 @@ import RegisterBikeInvoice from "./RegisterBikeInvoice";
 import RegisterBikeSuccess from "./RegisterBikeSuccess";
 import SERVICE_IPFS from "../../../services/ipfs";
 import { createBike } from "../../../actions/bikeActions";
+import { toast } from "react-toastify";
 class RegisterBike extends Component {
     constructor(props) {
         super(props);
@@ -36,8 +37,33 @@ class RegisterBike extends Component {
         };
     }
 
-    handleNext = () => {
+    validate = () => {
+        const {stepIndex, stepOne, stepTwo, stepThree} = this.state;
+        if (stepIndex === 0) {
+            if (stepOne.imageData === "" || stepOne.invoiceData === "" || stepOne.snNumber === "" || stepOne.manufacturer === "") {
+                return false;
+            }
+        }
+        if (stepIndex === 1) {
+            if (stepTwo.location === "") {
+                return false;
+            }
+        }
+        if (stepIndex === 2) {
+            if (stepThree.passphrase === "") {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    handleNext = async () => {
         const {stepIndex} = this.state;
+        let isValidate = await this.validate();
+        if (!isValidate) {
+            toast.error("Invalid! Please fill out the form.");
+            return;
+        }
         if (stepIndex < 2) {
             this.setState({
                 stepIndex: stepIndex + 1,
@@ -49,6 +75,7 @@ class RegisterBike extends Component {
             return;
         }
         this.props.closeModal();
+
     };
 
     registerBike = async () => {
@@ -70,13 +97,12 @@ class RegisterBike extends Component {
             location: stepTwo.location,
             status: "ACTIVE",
             forRent: false,
-            bikeAddress: "0x0000000000000000000000000000000000000000"
+            bikeAddress: "0x0000000000000000000000000000000000000000",
+            isLocked: false
         };
-        // let hashBike = await SERVICE_IPFS.putDataToIPFS(bike);
-        await this.props.dispatch(createBike(bike));
-        this.setState((prevState) => {
-            return { stepIndex: prevState+1 };
-        });
+        let hashBike = await SERVICE_IPFS.putDataToIPFS(bike);
+        await this.props.dispatch(createBike(bike, hashBike));
+        this.setState({stepIndex: 3});
     }
 
     handleChangeState = (data) => {

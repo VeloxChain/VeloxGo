@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import styles from "./YourAccountComponentStyle";
 import TextField from "material-ui/TextField";
-
+import { updateUserProfile } from "../../actions/userProfileActions";
+import { toast } from "react-toastify";
+import SERVICE_IPFS from "../../services/ipfs";
 class YourAccountForm extends Component {
     constructor(props) {
         super(props);
         this.state = this.props.userProfile.data;
+    }
+    saveInformation = async () => {
+        let profileHash = await SERVICE_IPFS.putDataToIPFS(this.state);
+        await this.props.dispatch(updateUserProfile(this.state, profileHash));
+        await localStorage.setItem("hash", profileHash);
+        toast.success("Saved!");
     }
     render() {
         return (
@@ -36,7 +44,7 @@ class YourAccountForm extends Component {
                 />
 
                 <div className="text-right">
-                    <button style={styles.button}>update</button>
+                    <button style={styles.button} onClick={this.saveInformation}>update</button>
                 </div>
             </div>
         );

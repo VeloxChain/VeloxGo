@@ -12,7 +12,14 @@ const Styles = {
         marginBottom: "20px",
         textTransform: "uppercase",
         letterSpacing: "2px"
+    },
+    thumbSwitchedStyle: {
+        backgroundColor: "#fff"
+    },
+
+    trackSwitchedStyle: {
+        backgroundColor: "#00d679"
     }
 };
-  
+
 export default Styles;
