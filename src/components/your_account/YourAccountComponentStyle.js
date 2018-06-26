@@ -5,19 +5,21 @@ const Styles = {
 
     wrappLeft: {
         border: "1px solid #00d679",
-        textAlign: "center",
         background: "#fff",
-        borderRadius: "5px"
+        borderRadius: "5px",
+        float: "left",
+        width: "100%"
     },
 
     wrappTop: {
         padding: "20px",
-        borderBottom: "1px solid #00d679"
+        float: "left",
+        width: "100%"
     },
 
     avatar: {
-        width: "100px",
-        height: "100px",
+        width: "110px",
+        height: "110px",
         borderRadius: "50%",
         objectFit: "cover"
     },
@@ -27,15 +29,15 @@ const Styles = {
     },
 
     name: {
-        marginTop: "20px",
-        marginBottom: "0px"
+        marginTop: "0px",
+        letterSpacing: "2px"
     },
 
     wrappBottom: {
         padding: "20px"
     },
 
-    blance: {
+    text: {
         textTransform: "uppercase",
         letterSpacing: "2px"
     },
@@ -46,6 +48,14 @@ const Styles = {
         borderRadius: "5px",
         padding: "7px 30px",
         marginTop: "20px",
+        textTransform: "uppercase",
+        letterSpacing: "2px"
+    },
+    buttonCollect: {
+        background: "#fff",
+        border: "1px solid #00d679",
+        borderRadius: "5px",
+        padding: "7px 15px",
         textTransform: "uppercase",
         letterSpacing: "2px"
     },

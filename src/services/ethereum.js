@@ -64,7 +64,7 @@ export default class EthereumService {
         });
     }
 
-    getNextIdCoinBalance(address, callback) {
+    getBikeCoinBalance(address, callback) {
         callback(0);
     }
 

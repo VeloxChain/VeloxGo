@@ -9,7 +9,7 @@ class YourAccountComponent extends Component {
         return (
             <div style={styles.wrapp}>
                 <div className="row">
-                    <div className="col-sm-4">
+                    <div className="col-sm-4" style={{minWidth:400}}>
                         <YourAccountInfo {...this.props}/>
                     </div>
                     <div className="col-sm-6">
