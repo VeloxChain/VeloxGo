@@ -33,11 +33,13 @@ class EditBikeComponent extends Component {
                     <div className="col-sm-7">
                         <div style={styles.wrappLeft}>
                             <EditBikeForm bikeInfo={this.state.bikeInfo} handleChangeState={this.handleChangeState} />
-                            <BikeInfo bikeInfo={this.state.bikeInfo} handleChangeState={this.handleChangeState} />
                         </div>
                     </div>
                     <div className="col-sm-5">
                         <TransferBike {...this.props} />
+                    </div>
+                    <div className="col-sm-12">
+                        <BikeInfo bikeInfo={this.state.bikeInfo} handleChangeState={this.handleChangeState} />
                     </div>
                 </div>
             </div>

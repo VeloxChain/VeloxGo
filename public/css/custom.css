@@ -948,3 +948,7 @@ input#file:focus {
 .table>thead>tr>th {
     padding: 12px 10px;
 }
+
+.btn-group .btn:focus {
+    outline: none;
+}

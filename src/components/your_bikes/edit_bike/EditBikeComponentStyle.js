@@ -109,6 +109,43 @@ const Styles = {
         marginBottom: 16,
         marginTop: "20px"
     },
+
+    block: {
+        background: "#fff",
+        padding: "10px",
+        borderRadius: "5px",
+        border: "1px solid rgb(0, 214, 121)"
+    },
+
+    count: {
+        fontSize: "30px",
+        color: "#000"
+    },
+
+    unit: {
+        fontSize: "20px",
+    },
+
+    text: {
+        fontSize: "22px",
+    },
+
+    action: {
+        margin: "30px auto",
+        textAlign: "center",
+    },
+
+    butonRiding: {
+        minWidth: "100px",
+        padding: "10px 20px"
+    },
+
+    butonRidingActive: {
+        minWidth: "100px",
+        padding: "10px 20px",
+        background: "rgb(0, 214, 121)",
+        color: "#fff"
+    }
 };
 
 export default Styles;
