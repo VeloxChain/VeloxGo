@@ -11,10 +11,12 @@ class TransferBike extends Component {
                 <div style={styles.boxRight}>
                     <div>
                         <button style={styles.buttonTransfer}>Transfer</button>
-                        <button style={styles.buttonDelete}>Delete</button>
+                        <button style={styles.buttonDelete} onClick={this.props.deytroyBike}>Destroy</button>
                         <Toggle
                             label="UNLOCKED"
                             labelPosition="right"
+                            defaultToggled={this.props.bikeInfo.isLocked}
+                            onToggle={(e, isInputChecked) => this.props.handleChangeState({isLocked: isInputChecked})}
                             style={styles.toggle}
                         />
                     </div>

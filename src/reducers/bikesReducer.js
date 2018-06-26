@@ -11,8 +11,12 @@ const bikesReducer = (state = initState, action) => {
         return newState;
     case BIKES.UPDATE:
         newState = state;
-        newState[action.payload.index] = action.payload.data;
+        newState[action.index] = action.payload;
         return newState;
+    case BIKES.DESTROY:
+        newState = state;
+        newState.splice(action.index, 1);
+        return state;
     case ACC_ACTION.LOG_OUT:
         return initState;
     default:

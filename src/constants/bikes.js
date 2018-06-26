@@ -1,6 +1,7 @@
 let target = {
     CREATE: "BIKES.CREATE",
     UPDATE: "BIKES.UPDATE",
+    DESTROY: "BIKES.DESTROY",
 };
 let handler = {
     get: (target, key) => {
