@@ -3,6 +3,7 @@ import styles from "./HiringRequestComponentStyle";
 import Bike from "./BikeComponent";
 import BikeSearchComponent from "./BikeSearchComponent";
 import _ from "lodash";
+import MapHiringComponent from "../map_hiring/MapHiringComponent";
 
 class HiringRequestComponent extends Component {
     constructor(props) {
@@ -42,11 +43,13 @@ class HiringRequestComponent extends Component {
 
     _renderBikeMaps = () => {
         return (
-            <div className="col-sm-12">
-                <iframe
-                    title="Maps"
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d26081603.294420462!2d-113.6067555!3d37.06250000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1529918312939"
-                    style={styles.iframe}
+            <div style={{backgroundColor: "white", padding: "10px"}}>
+                <MapHiringComponent
+                    isMarkerShown
+                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1FyS1yEgh8Vo0nSrkks_CZevhzowYzps&v=3.exp&libraries=geometry,drawing,places"
+                    loadingElement={<div style={{ height: "100%" }} />}
+                    containerElement={<div style={{ height: "calc(100vh - 195px)" }} />}
+                    mapElement={<div style={{ height: "100%" }} />}
                 />
             </div>
         );
