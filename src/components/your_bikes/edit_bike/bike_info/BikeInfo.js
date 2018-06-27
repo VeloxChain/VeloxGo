@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import BikeLocations from "./BikeLocations";
 import BikeSpecifications from "./BikeSpecifications";
 import OwnerHistory from "./OwnerHistory";
-import RidingPerfomance from "./RidingPerfomance";
+import RidingPerfomance from "./riding_perfomance/RidingPerfomance";
 import {Tabs, Tab} from "material-ui/Tabs";
 import styles from "../EditBikeComponentStyle";
 class BikeInfo extends Component {

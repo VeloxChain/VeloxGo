@@ -82,44 +82,36 @@ const Styles = {
         border: "1px solid #00d679",
         borderRadius: "5px",
         padding: "7px 30px",
-        marginTop: "20px",
         textTransform: "uppercase",
         letterSpacing: "2px",
-        display: "block",
-        float: "right"
     },
     rowButton: {
-        float: "left",
-        clear: "both",
-        width: "100%"
+        marginTop: "20px",
     },
     buttonBack: {
         background: "#fff",
         border: "1px solid #00d679",
         borderRadius: "5px",
         padding: "7px 20px",
-        marginTop: "20px",
         textTransform: "uppercase",
         letterSpacing: "2px",
-        display: "block",
-        minWidth: "128px",
-        float: "left"
     },
     toggle: {
         marginBottom: 16,
         marginTop: "20px"
     },
     count: {
-        fontSize: "30px",
+        fontSize: "20px",
         color: "#000"
     },
 
     unit: {
-        fontSize: "20px",
+        fontSize: "14px",
     },
 
     text: {
         fontSize: "15px",
+        marginBottom: "5px"
     },
 
     action: {
@@ -127,16 +119,27 @@ const Styles = {
         textAlign: "center",
     },
 
+    group: {
+        width: "100%",
+        textAlign: "center",
+        background: "#e6e6e6",
+        margin: "0px auto 20px"
+    },
+
     butonRiding: {
-        minWidth: "100px",
-        padding: "10px 20px"
+        minWidth: "15%",
+        padding: "10px 20px",
+        background: "#e6e6e6",
+        color: "rgba(51,51,51,.5)",
+        border: "none"
     },
 
     butonRidingActive: {
-        minWidth: "100px",
+        minWidth: "15%",
         padding: "10px 20px",
-        background: "rgb(0, 214, 121)",
-        color: "#fff"
+        background: "#e6e6e6",
+        color: "#000",
+        border: "none"
     },
 
     list: {
@@ -155,12 +158,15 @@ const Styles = {
     listItem: {
         color: "rgb(0, 214, 121)"
     },
+    
     thumbSwitchedStyle: {
         backgroundColor: "#fff"
     },
+
     trackSwitchedStyle: {
         backgroundColor: "#00d679",
     },
+
     track: {
         height:22,
         marginLeft:-3,
@@ -169,16 +175,6 @@ const Styles = {
     thumb: {
         top:5
     },
-    wrapRiding: {backgroundColor: "#FFF", padding:10, float: "left", width:"100%"},
-    containerRiding: {float:"left", width: "100%"},
-    blockTitle: {minWidth:50, float: "left", display: "flex", alignItems:"center", height:110},
-    containerBlock: {float:"left", height: "110px", display: "flex", alignItems:"center", justifyContent: "space-around", width: "calc(100% - 80px)"},
-    marginZero: {margin:0},
-    blockDistance: {
-        // transform: "skew(150deg)",
-        background: "#00d679",
-    },
-    flexible: {display: "flex", justifyContent: "center", alignItems: "center",height: "100%"},
 
     wrappStatus: {
         margin: "20px 0px"
@@ -188,6 +184,71 @@ const Styles = {
         maxWidth: "36px",
         margin: "0px 10px",
         cursor: "pointer"
+    },
+
+    block: {
+        padding: "10px",
+        borderRadius: "5px",
+        border: "1px solid rgb(173, 173, 173)",
+        textAlign: "center"
+    },
+
+    buttonActionTrophies: {
+        background: "#fff",
+        border: "1px solid #00d679",
+        borderRadius: "5px",
+        padding: "7px 30px",
+        margin: "0px 5px",
+        textTransform: "uppercase",
+        letterSpacing: "2px",
+        color: "#f5a623",
+        minWidth: "211px"
+    },
+
+    buttonActionLeaderboard: {
+        background: "#fff",
+        border: "1px solid #00d679",
+        borderRadius: "5px",
+        padding: "7px 30px",
+        margin: "0px 5px",
+        textTransform: "uppercase",
+        letterSpacing: "2px",
+        color: "#ef00f4",
+        minWidth: "211px"
+    },
+
+    actionRiding: {
+        marginTop: "20px",
+        textAlign: "center"
+    },
+
+    iconButton: {
+        height: "20px",
+        marginRight: "10px"
+    },
+
+    iconTrophie: {
+        height: "30px",
+        marginBottom: "10px"
+    },
+
+    butonLeaderBoard: {
+        background: "#fff",
+        padding: "7px 40px",
+        color: "#000",
+        border: "1px solid #000"
+    },
+
+    butonLeaderBoardActive: {
+        background: "#000",
+        padding: "7px 40px",
+        color: "rgb(0, 214, 121)",
+        border: "1px solid #000"
+    },
+
+    listItemLeaderBoard: {
+        borderBottom: "1px solid gainsboro",
+        textAlign: "left"
     }
 };
 

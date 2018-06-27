@@ -32,9 +32,14 @@ class EditBikeComponent extends Component {
     render() {
         return (
             <div style={styles.wrapp}>
-                <div style={styles.rowButton}>
-                    <button style={styles.buttonBack} onClick={this.props.switchState}> <i className="fa fa-chevron-left"></i> GO BACK</button>
-                    <button style={styles.buttonSave} onClick={this.changeBikeInfo}>Save</button>
+                <div className="row" style={styles.rowButton}>
+                    <div className="col-sm-6">
+                        <button style={styles.buttonBack} onClick={this.props.switchState}> <i className="fa fa-chevron-left"></i> GO BACK</button>
+                    </div>
+                    <div className="col-sm-6 text-right">
+                        <button style={styles.buttonSave} onClick={this.changeBikeInfo}>Save</button>
+                    </div>
+                    
                 </div>
                 <div className="row">
                     <div className="col-sm-7">
