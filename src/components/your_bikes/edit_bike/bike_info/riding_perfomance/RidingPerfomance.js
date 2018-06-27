@@ -30,7 +30,7 @@ class RidingPerfomance extends Component {
     _renderContent = () => {
         if (this.state.show === "riding") {
             return (
-                <div>
+                <div style={styles.pdContent}>
                     <RidingPerfomanceBlock type={this.state.type} />
                     <RidingPerfomanceAction onClickChangeShow={this.onClickChangeShow} />
                 </div>
@@ -39,7 +39,7 @@ class RidingPerfomance extends Component {
 
         if (this.state.show === "trophies") {
             return (
-                <div>
+                <div style={styles.pdContent}>
                     <button style={styles.buttonBack} onClick={() => this.onClickChangeShow("riding")}>
                         <i className="fa fa-chevron-left"></i>
                         <span> BACK</span>
@@ -51,7 +51,7 @@ class RidingPerfomance extends Component {
 
         if (this.state.show === "leaderboard") {
             return (
-                <div>
+                <div style={styles.pdContent}>
                     <button style={styles.buttonBack} onClick={() => this.onClickChangeShow("riding")}>
                         <i className="fa fa-chevron-left"></i>
                         <span> BACK</span>
@@ -64,7 +64,7 @@ class RidingPerfomance extends Component {
 
     render() {
         return (
-            <div>
+            <div style={styles.content}>
                 <RidingPerfomanceTabs type={this.state.type} onClickChangeType={this.onClickChangeType} />
 
                 {this._renderContent()}

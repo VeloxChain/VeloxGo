@@ -175,7 +175,13 @@ const Styles = {
     thumb: {
         top:5
     },
-
+    content: {
+        background: "#fff",
+        paddingBottom: "20px"
+    },
+    pdContent: {
+        padding: "0px 10px"
+    },
     wrappStatus: {
         margin: "20px 0px"
     },
