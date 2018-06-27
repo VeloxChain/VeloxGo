@@ -28,7 +28,7 @@ class RegisterBike extends Component {
                 snNumber: ""
             },
             stepTwo: {
-                address: {
+                location: {
                     name: null,
                     long: null,
                     lat: null,
@@ -52,7 +52,7 @@ class RegisterBike extends Component {
             }
         }
         if (stepIndex === 1) {
-            if (stepTwo.address.name === null || stepTwo.address.long === null || stepTwo.address.lat === null) {
+            if (stepTwo.location.name === null || stepTwo.location.long === null || stepTwo.location.lat === null) {
                 return false;
             }
         }
@@ -89,7 +89,7 @@ class RegisterBike extends Component {
         const { stepOne, stepTwo } = this.state;
         await this.props.dispatch(uploadNewBikeToIPFS({
             bikeInfo: stepOne,
-            location: stepTwo.address
+            location: stepTwo.location
         }));
         this.setState({stepIndex: 3});
     }

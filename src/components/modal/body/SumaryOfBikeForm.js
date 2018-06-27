@@ -25,12 +25,12 @@ class SumaryOfBike extends Component {
                     />
                     <TextField
                         floatingLabelText="Address"
-                        value={this.props.externalData.address}
+                        value={this.props.externalData.location.name}
                         fullWidth
                     />
                     <TextField
-                        floatingLabelText="Price"
-                        value={this.props.externalData.price}
+                        floatingLabelText="Price (BKC)"
+                        value={200}
                         fullWidth
                     />
                 </div>
