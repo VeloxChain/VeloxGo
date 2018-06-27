@@ -12,7 +12,7 @@ const Item = ({item}) => {
                 <p>{item.totalTime}</p>
             }
             secondaryTextLines={1}
-            rightIcon={<img src="images/graph.png" style={styles.icon} />}
+            rightIcon={<img src="images/graph.png" style={styles.icon} alt="Bikecoin" />}
         />
     );
 };

@@ -58,11 +58,11 @@ const Styles = {
         border: "1px solid #00d679",
         borderRadius: "5px",
         padding: "7px 20px",
-        marginTop: "20px",
+        margin: "20px auto 0",
         textTransform: "uppercase",
         letterSpacing: "2px",
         display: "block",
-        minWidth: "128px"
+        minWidth: "140px"
     },
 
     buttonDelete: {
@@ -70,11 +70,11 @@ const Styles = {
         border: "1px solid red",
         borderRadius: "5px",
         padding: "7px 20px",
-        marginTop: "20px",
+        margin: "20px auto 0",
         textTransform: "uppercase",
         letterSpacing: "2px",
         display: "block",
-        minWidth: "128px"
+        minWidth: "140px"
     },
 
     buttonSave: {
@@ -178,7 +178,17 @@ const Styles = {
         // transform: "skew(150deg)",
         background: "#00d679",
     },
-    flexible: {display: "flex", justifyContent: "center", alignItems: "center",height: "100%"}
+    flexible: {display: "flex", justifyContent: "center", alignItems: "center",height: "100%"},
+
+    wrappStatus: {
+        margin: "20px 0px"
+    },
+
+    iconStatus: {
+        maxWidth: "36px",
+        margin: "0px 10px",
+        cursor: "pointer"
+    }
 };
 
 export default Styles;
