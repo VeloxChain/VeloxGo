@@ -4,9 +4,7 @@ import EditBikeForm from "./EditBikeForm";
 import TransferBike from "./TransferBike";
 import BikeActivities from "./BikeActivities";
 import BikeInfo from "./bike_info/BikeInfo";
-import { updateBike, destroyBike } from "../../../actions/bikeActions";
-import { toast } from "react-toastify";
-import SERVICE_IPFS from "../../../services/ipfs";
+import { uploadModifiedBikeToIPFS, destroyBike } from "../../../actions/bikeActions";
 class EditBikeComponent extends Component {
     constructor(props) {
         super(props);
@@ -21,9 +19,7 @@ class EditBikeComponent extends Component {
         return;
     }
     changeBikeInfo = async () => {
-        let bikeHash = SERVICE_IPFS.putDataToIPFS(this.state.bikeInfo);
-        this.props.dispatch(updateBike(this.props.index, this.state.bikeInfo, bikeHash));
-        toast.success("Saved!");
+        await this.props.dispatch(uploadModifiedBikeToIPFS(this.state.bikeInfo, this.props.index));
     }
     deytroyBike = () => {
         this.props.dispatch(destroyBike(this.props.index));

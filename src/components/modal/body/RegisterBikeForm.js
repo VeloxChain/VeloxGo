@@ -10,8 +10,7 @@ import RegisterBikeInformation from "./RegisterBikeInformation";
 import RegisterBikeLocation from "./RegisterBikeLocation";
 import RegisterBikeConfirm from "./RegisterBikeConfirm";
 import RegisterBikeSuccess from "./RegisterBikeSuccess";
-import SERVICE_IPFS from "../../../services/ipfs";
-import { createBike } from "../../../actions/bikeActions";
+import { uploadNewBikeToIPFS } from "../../../actions/bikeActions";
 import { toast } from "react-toastify";
 class RegisterBike extends Component {
     constructor(props) {
@@ -88,30 +87,10 @@ class RegisterBike extends Component {
 
     registerBike = async () => {
         const { stepOne, stepTwo } = this.state;
-        let [hashImage, hashInvoice] = [ await SERVICE_IPFS.putFileToIPFS(stepOne.imageData), await SERVICE_IPFS.putFileToIPFS(stepOne.invoiceData)];
-
-        let bike = {
-            avatar: {
-                name: stepOne.imageName,
-                hash: hashImage
-            },
-            invoice: {
-                name: stepOne.invoiceName,
-                hash: hashInvoice
-            },
-            snNumber: stepOne.snNumber ,
-            manufacturer: stepOne.manufacturer,
-            owner: stepOne.owner,
-            year: 2018,
-            location: stepTwo.location,
-            status: "ACTIVE",
-            forRent: false,
-            bikeAddress: "0x0000000000000000000000000000000000000000",
-            isLocked: false,
-            isLost: false
-        };
-        let hashBike = await SERVICE_IPFS.putDataToIPFS(bike);
-        await this.props.dispatch(createBike(bike, hashBike));
+        await this.props.dispatch(uploadNewBikeToIPFS({
+            bikeInfo: stepOne,
+            location: stepTwo.address
+        }));
         this.setState({stepIndex: 3});
     }
 

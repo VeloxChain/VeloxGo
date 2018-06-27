@@ -1,10 +1,9 @@
 import BIKES from "../constants/bikes";
 
-export function createBike(payload, hashBike) {
+export function createBike(payload) {
     return {
         type: BIKES.CREATE,
-        payload: payload,
-        hash: hashBike
+        payload
     };
 }
 export function updateBike(index, data, bikeHash) {
@@ -20,5 +19,17 @@ export function destroyBike(index, bikeHash) {
         type: BIKES.DESTROY,
         index: index,
         hash: bikeHash
+    };
+}
+export function uploadNewBikeToIPFS(bike) {
+    return {
+        type: BIKES.UPLOAD_TO_IPFS,
+        payload: bike
+    };
+}
+export function uploadModifiedBikeToIPFS(bikeInfo, index) {
+    return {
+        type: BIKES.UPLOAD_MODIFIED_TO_IPFS,
+        payload: {bikeInfo: bikeInfo, index: index}
     };
 }
