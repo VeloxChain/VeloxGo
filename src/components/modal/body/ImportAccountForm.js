@@ -70,7 +70,7 @@ class ImportAccount extends Component {
                 var retreiveUserProfile = await SERVICE_IPFS.getDataFromIPFS(hashData);
                 retreiveUserProfile = JSON.parse(retreiveUserProfile);
                 retreiveUserProfile["accountAddress"] = this.state.account;
-                this.props.dispatch(addUserProfile(retreiveUserProfile));
+                this.props.dispatch(addUserProfile({userProfile: retreiveUserProfile}));
                 this.props.closeModal();
             } catch (e) {
                 this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);

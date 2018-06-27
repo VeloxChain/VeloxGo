@@ -4,12 +4,12 @@ import {
     MODAL_METAMASK,
     MODAL_IMPORT_ACCOUNT
 } from "../constants";
-class Existing extends Component {    
+class Existing extends Component {
     render() {
         return (
             <div className="mh250 pd10">
                 <div className="intro-popup-top">
-                    <h4 className="text-center">Ehereum network: <b>Rinkeby</b></h4>
+                    <h4 className="text-center">Ehereum network: <b>{this.props.global.nodeName}</b></h4>
                     <h4 className="text-center">You have to login by an ethereum account</h4>
                 </div>
 

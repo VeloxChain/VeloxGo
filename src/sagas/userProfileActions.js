@@ -18,12 +18,12 @@ function* uploadProfileToIPFS(action) {
     if (isNewProfile) {
         yield put({
             type: USER_PROFILE.FINISH_UPLOAD_NEW_PROFILE,
-            payload: {userInfo: userInfo,hash: hashData}
+            payload: {userInfo: userInfo,hashData: hashData}
         });
     } else {
         yield put({
             type: USER_PROFILE.FINISH_UPLOAD_MODIFIED_PROFILE,
-            payload: {userInfo: userInfo,hash: hashData}
+            payload: {userInfo: userInfo,hashData: hashData}
         });
     }
 

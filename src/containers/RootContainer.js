@@ -31,7 +31,8 @@ class RootContainer extends React.Component {
         this.props.setType(MODAL_OWNER_LOGIN);
     }
     openModal = () => {
-        this.props.ethereum.getBalance(this.props.accounts.accounts.address, this.getBalance);
+        this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
+        // this.props.ethereum.getBalance(this.props.accounts.accounts.address, this.getBalance);
     }
 
     getBalance = (balance) => {

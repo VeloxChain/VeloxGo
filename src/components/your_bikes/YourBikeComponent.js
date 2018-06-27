@@ -4,8 +4,7 @@ import Datatable from "../datatable/Datatable";
 import styles from "./YourBikesComponentStyle";
 import EditBikeComponent from "./edit_bike/EditBikeComponent";
 import Toggle from "material-ui/Toggle";
-import { updateBike } from "../../actions/bikeActions";
-import SERVICE_IPFS from "../../services/ipfs";
+import { uploadModifiedBikeToIPFS } from "../../actions/bikeActions";
 class YourBikesComponent extends Component {
     constructor(props) {
         super(props);
@@ -32,8 +31,7 @@ class YourBikesComponent extends Component {
 
     changeBikeInfo = async (isInputChecked, rowEdit,rowIndex) => {
         let dataChanges = Object.assign(rowEdit, {forRent: isInputChecked});
-        let bikeHash = await SERVICE_IPFS.putDataToIPFS(dataChanges);
-        this.props.dispatch(updateBike(rowIndex, dataChanges, bikeHash));
+        await this.props.dispatch(uploadModifiedBikeToIPFS(dataChanges, rowIndex));
     }
 
     _renderToggle = (value, row, index) => {

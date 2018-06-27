@@ -7,11 +7,11 @@ const bikesReducer = (state = initState, action) => {
     switch (action.type) {
     case BIKES.CREATE:
         newState = state;
-        newState.push(action.payload);
+        newState.push(action.payload.bikeInfo);
         return newState;
     case BIKES.UPDATE:
         newState = state;
-        newState[action.index] = action.payload;
+        newState[action.payload.index] = action.payload.bikeInfo;
         return newState;
     case BIKES.DESTROY:
         newState = state;
