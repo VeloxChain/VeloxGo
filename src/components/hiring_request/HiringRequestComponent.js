@@ -34,6 +34,7 @@ class HiringRequestComponent extends Component {
         return (
             <div style={{backgroundColor: "white", padding: "10px"}}>
                 <MapHiringComponent
+                    bikes={this.props.bikes}
                     isMarkerShown
                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1FyS1yEgh8Vo0nSrkks_CZevhzowYzps&v=3.exp&libraries=geometry,drawing,places"
                     loadingElement={<div style={{ height: "100%" }} />}
