@@ -1,5 +1,5 @@
 {
-  "name": "nextId_backend",
+  "name": "BIKECOIN_backend",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -12,7 +12,10 @@
     "mysql2": "^1.4.2",
     "node-rsa": "^0.4.2",
     "node-uuid": "^1.4.8",
-    "sequelize": "^4.15.0"
+    "sequelize": "^4.15.0",
+    "eth-hd-wallet": "^0.3.0",
+    "web3": "^0.19.1",
+    "ethereumjs-tx": "^1.3.3",
   },
   "scripts": {
     "start": "node index.js"
