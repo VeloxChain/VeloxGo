@@ -39,7 +39,7 @@ const MapHiringComponent = compose(
         defaultOptions={{ styles: mapStyle }}
     >
         {
-            props.bikes.map(bike => 
+            props.bikes.data.map(bike => 
             (
                 <Marker
                     position={{ lat: bike.location.lat, lng: bike.location.long }}
