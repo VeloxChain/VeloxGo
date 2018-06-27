@@ -9,16 +9,13 @@ var IPFS = require("ipfs-api");
 //     repo: "QmNLiRSpcxTvaQKh53paJixMEs7FKMxTbGLNq7vzt8noos"
 // });
 
-// var ipfs = IPFS({
-//     host: 'localhost',
-//     port: 5001,
-//     protocol: 'http',
-//     headers: {
-//         authorization: 'Bearer ' +
-//     }
-// })
+var ipfs = IPFS({
+    host: "ec2-34-217-177-160.us-west-2.compute.amazonaws.com",
+    port: 5001,
+    protocol: "http"
+});
 
-var ipfs = IPFS();
+// var ipfs = IPFS();
 
 let SERVICE_IPFS = {};
 

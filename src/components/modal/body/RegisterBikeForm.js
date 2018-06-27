@@ -81,6 +81,7 @@ class RegisterBike extends Component {
     registerBike = async () => {
         const { stepOne, stepTwo } = this.state;
         let [hashImage, hashInvoice] = [ await SERVICE_IPFS.putFileToIPFS(stepOne.imageData), await SERVICE_IPFS.putFileToIPFS(stepOne.invoiceData)];
+
         let bike = {
             avatar: {
                 name: stepOne.imageName,
