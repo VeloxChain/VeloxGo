@@ -5,18 +5,24 @@ const initState = {
 };
 
 const bikesReducer = (state = initState, action) => {
-    var newState;
+    var newState, bikeInfo;
     switch (action.type) {
     case BIKES.CREATE:
         newState = state.data;
-        newState.push(action.payload.bikeInfo);
+        bikeInfo = action.payload.bikeInfo;
+        bikeInfo["hash"] = action.payload.hashData;
+        bikeInfo["prevHash"] = "";
+        newState.push(bikeInfo);
         return {
             ...state,
             data: newState
         };
     case BIKES.UPDATE:
         newState = state.data;
-        newState[action.payload.index] = action.payload.bikeInfo;
+        bikeInfo = action.payload.bikeInfo;
+        bikeInfo["prevHash"] = bikeInfo.hash;
+        bikeInfo["hash"] = action.payload.hashData;
+        newState[action.payload.index] = bikeInfo;
         return {
             ...state,
             data: newState

@@ -38,6 +38,7 @@ class Datatable extends Component {
             }
 
             fields.push(<td key={key}>{rowData}</td>);
+
         });
 
         return fields;
