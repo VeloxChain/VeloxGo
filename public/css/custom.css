@@ -129,7 +129,6 @@ a {
     transition: ease-in-out 0.5s;
     z-index: 2;
     position: absolute;
-    height: 100%;
 }
 .w100p {
     width: 100% !important;

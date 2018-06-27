@@ -74,7 +74,7 @@ class YourBikesComponent extends Component {
                 </div>
                 <Datatable
                     params={this.state.params}
-                    body={this.props.bikes}
+                    body={this.props.bikes.data}
                     editRow={this.editRow}
                     actions={this.state.actions}
                     toggle={this.state.toggle}
