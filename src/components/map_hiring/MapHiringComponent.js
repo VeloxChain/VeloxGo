@@ -9,6 +9,7 @@ import {
 import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 import BikeHiringInfo from "../bike_hiring_info/BikeHiringInfo";
 import appConfig from "../../config/app.json";
+import mapStyle from "../../config/mapStyle.json";
 
 const MapHiringComponent = compose(
     withProps({
@@ -35,18 +36,25 @@ const MapHiringComponent = compose(
         defaultZoom={5}
         defaultCenter={props.center}
         onClick={props.onClose}
+        defaultOptions={{ styles: mapStyle }}
     >
-        <Marker
-            position={{ lat: 22.6273, lng: 120.3014 }}
-            onClick={props.onToggleOpen}
-        >
-            {props.isOpen && <InfoBox
-                onCloseClick={props.onToggleOpen}
-                options={{ closeBoxURL: "", enableEventPropagation: false }}
-            >
-                <BikeHiringInfo externalData={{}}/>
-            </InfoBox>}
-        </Marker>
+        {
+            props.bikes.data.map(bike => 
+            (
+                <Marker
+                    position={{ lat: bike.location.lat, lng: bike.location.long }}
+                    onClick={props.onToggleOpen}
+                >
+                {props.isOpen && <InfoBox
+                    onCloseClick={props.onToggleOpen}
+                    options={{ closeBoxURL: "", enableEventPropagation: false }}
+                >
+                    <BikeHiringInfo externalData={{}}/>
+                </InfoBox>
+                }
+                </Marker>
+            ))
+        }
     </GoogleMap>
 );
 
