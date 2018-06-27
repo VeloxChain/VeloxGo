@@ -65,7 +65,7 @@ const MapRegisterBike = compose(
                     const nextCenter = _.get(nextMarkers, "0.position", this.state.center);
 
                     this.props.handleChangeState({
-                        address: {
+                        location: {
                             name: places[0].formatted_address,
                             country: {
                                 name: countryName,
