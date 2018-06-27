@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "../../EditBikeComponentStyle";
-import Avatar from 'material-ui/Avatar';
-import {List, ListItem} from 'material-ui/List';
+import Avatar from "material-ui/Avatar";
+import {List, ListItem} from "material-ui/List";
 import _ from "lodash";
 
 const Item = ({item}) => {
@@ -25,7 +25,7 @@ class RidingPerfomanceLeaderBoard extends Component {
                 {avatar: "images/avatar.png", name: "Bui Thien Ai"},
                 {avatar: "images/avatar.png", name: "Bui Thien Ai"}
             ]
-        }
+        };
     }
 
     onChangeType = (value) => {

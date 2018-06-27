@@ -91,7 +91,7 @@ const MapEditBike = compose(
     <GoogleMap
         ref={props.onMapMounted}
         defaultZoom={15}
-        center={props.center}
+        defaultCenter={{lat: props.bikeInfo.location.lat, lng: props.bikeInfo.location.long}}
         onBoundsChanged={props.onBoundsChanged}
     >
         <SearchBox
@@ -102,6 +102,7 @@ const MapEditBike = compose(
         >
             <input
                 type="text"
+                value={props.bikeInfo.location.name}
                 placeholder="Customized your placeholder"
                 style={{
                     boxSizing: "border-box",
@@ -118,9 +119,13 @@ const MapEditBike = compose(
                 }}
             />
         </SearchBox>
-        {props.markers.map((marker, index) =>
-            <Marker key={index} position={marker.position} />
-        )}
+        {
+            props.markers.length != 0 ?
+                props.markers.map((marker, index) =>
+                    <Marker key={index} position={marker.position} />
+                ) :
+                <Marker position={{lat: props.bikeInfo.location.lat, lng: props.bikeInfo.location.long}} />
+        }
     </GoogleMap>
 );
 
