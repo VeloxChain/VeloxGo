@@ -29,7 +29,15 @@ class RegisterBike extends Component {
                 snNumber: ""
             },
             stepTwo: {
-                location: ""
+                address: {
+                    name: null,
+                    long: null,
+                    lat: null,
+                    country: {
+                        name: null,
+                        code: null,
+                    }
+                },
             },
             stepThree: {
                 passphrase: ""
@@ -45,7 +53,7 @@ class RegisterBike extends Component {
             }
         }
         if (stepIndex === 1) {
-            if (stepTwo.location === "") {
+            if (stepTwo.address.name === null || stepTwo.address.long === null || stepTwo.address.lat === null) {
                 return false;
             }
         }
