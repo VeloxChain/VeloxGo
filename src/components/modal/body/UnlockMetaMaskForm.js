@@ -15,7 +15,6 @@ class UnlockMetaMask extends Component {
         };
     }
     componentDidMount(){
-        window.addEventListener("load", this.detectMetamask);
         this.detectMetamask();
     }
     detectMetamask = () => {
@@ -41,7 +40,7 @@ class UnlockMetaMask extends Component {
             var retreiveUserProfile = await SERVICE_IPFS.getDataFromIPFS(hashData);
             retreiveUserProfile = JSON.parse(retreiveUserProfile);
             retreiveUserProfile["accountAddress"] = this.state.account;
-            this.props.dispatch(addUserProfile(retreiveUserProfile));
+            this.props.dispatch(addUserProfile({userProfile: retreiveUserProfile}));
             this.props.dispatch(addAccount(this.state.account, "", retreiveUserProfile.firstname + " " + retreiveUserProfile.lastname, ""));
             this.props.closeModal();
 
