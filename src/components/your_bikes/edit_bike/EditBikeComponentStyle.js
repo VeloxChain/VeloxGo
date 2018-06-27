@@ -58,11 +58,11 @@ const Styles = {
         border: "1px solid #00d679",
         borderRadius: "5px",
         padding: "7px 20px",
-        marginTop: "20px",
+        margin: "20px auto 0",
         textTransform: "uppercase",
         letterSpacing: "2px",
         display: "block",
-        minWidth: "128px"
+        minWidth: "140px"
     },
 
     buttonDelete: {
@@ -70,11 +70,11 @@ const Styles = {
         border: "1px solid red",
         borderRadius: "5px",
         padding: "7px 20px",
-        marginTop: "20px",
+        margin: "20px auto 0",
         textTransform: "uppercase",
         letterSpacing: "2px",
         display: "block",
-        minWidth: "128px"
+        minWidth: "140px"
     },
 
     buttonSave: {
@@ -109,14 +109,6 @@ const Styles = {
         marginBottom: 16,
         marginTop: "20px"
     },
-
-    block: {
-        background: "#fff",
-        padding: "10px",
-        borderRadius: "5px",
-        border: "1px solid rgb(0, 214, 121)"
-    },
-
     count: {
         fontSize: "30px",
         color: "#000"
@@ -127,7 +119,7 @@ const Styles = {
     },
 
     text: {
-        fontSize: "22px",
+        fontSize: "15px",
     },
 
     action: {
@@ -145,6 +137,57 @@ const Styles = {
         padding: "10px 20px",
         background: "rgb(0, 214, 121)",
         color: "#fff"
+    },
+
+    list: {
+        padding: "0px",
+        margin: "20px 0px 10px",
+        background: "#fff",
+        borderRadius: "5px",
+        border: "1px solid rgb(0, 214, 121)"
+    },
+
+    icon: {
+        width: "auto",
+        height: "auto"
+    },
+
+    listItem: {
+        color: "rgb(0, 214, 121)"
+    },
+    thumbSwitchedStyle: {
+        backgroundColor: "#fff"
+    },
+    trackSwitchedStyle: {
+        backgroundColor: "#00d679",
+    },
+    track: {
+        height:22,
+        marginLeft:-3,
+        width: 39
+    },
+    thumb: {
+        top:5
+    },
+    wrapRiding: {backgroundColor: "#FFF", padding:10, float: "left", width:"100%"},
+    containerRiding: {float:"left", width: "100%"},
+    blockTitle: {minWidth:50, float: "left", display: "flex", alignItems:"center", height:110},
+    containerBlock: {float:"left", height: "110px", display: "flex", alignItems:"center", justifyContent: "space-around", width: "calc(100% - 80px)"},
+    marginZero: {margin:0},
+    blockDistance: {
+        // transform: "skew(150deg)",
+        background: "#00d679",
+    },
+    flexible: {display: "flex", justifyContent: "center", alignItems: "center",height: "100%"},
+
+    wrappStatus: {
+        margin: "20px 0px"
+    },
+
+    iconStatus: {
+        maxWidth: "36px",
+        margin: "0px 10px",
+        cursor: "pointer"
     }
 };
 

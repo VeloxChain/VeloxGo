@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./EditBikeComponentStyle";
 import EditBikeForm from "./EditBikeForm";
 import TransferBike from "./TransferBike";
+import BikeActivities from "./BikeActivities";
 import BikeInfo from "./bike_info/BikeInfo";
 import { updateBike, destroyBike } from "../../../actions/bikeActions";
 import { toast } from "react-toastify";
@@ -44,8 +45,11 @@ class EditBikeComponent extends Component {
                     <div className="col-sm-5">
                         <TransferBike {...this.props} handleChangeState={this.handleChangeState} deytroyBike={this.deytroyBike} />
                     </div>
-                    <div className="col-sm-12">
+                    <div className="col-lg-8">
                         <BikeInfo bikeInfo={this.state.bikeInfo} handleChangeState={this.handleChangeState} />
+                    </div>
+                    <div className="col-lg-4" style={{marginTop:10}}>
+                        <BikeActivities {...this.props} />
                     </div>
                 </div>
             </div>

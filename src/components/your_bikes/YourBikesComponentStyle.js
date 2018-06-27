@@ -18,7 +18,15 @@ const Styles = {
     },
 
     trackSwitchedStyle: {
-        backgroundColor: "#00d679"
+        backgroundColor: "#00d679",
+    },
+    track: {
+        height:22,
+        marginLeft:-3,
+        width: 39
+    },
+    thumb: {
+        top:5
     }
 };
 

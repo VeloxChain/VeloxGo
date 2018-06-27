@@ -32,7 +32,6 @@ class YourBikesComponent extends Component {
 
     changeBikeInfo = async (isInputChecked, rowEdit,rowIndex) => {
         let dataChanges = Object.assign(rowEdit, {forRent: isInputChecked});
-        await this.setState({ rowEdit: dataChanges });
         let bikeHash = await SERVICE_IPFS.putDataToIPFS(dataChanges);
         this.props.dispatch(updateBike(rowIndex, dataChanges, bikeHash));
     }
@@ -45,6 +44,8 @@ class YourBikesComponent extends Component {
                 onToggle={(e, isInputChecked) => this.changeBikeInfo(isInputChecked, row, index)}
                 thumbSwitchedStyle={styles.thumbSwitchedStyle}
                 trackSwitchedStyle={styles.trackSwitchedStyle}
+                trackStyle={styles.track}
+                thumbStyle={styles.thumb}
             />
         );
     }
