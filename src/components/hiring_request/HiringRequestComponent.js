@@ -9,17 +9,6 @@ class HiringRequestComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bikeData: [
-                { image: "images/bike.png", price: 23030, address: "Nguyen Huu Dat", owner: "Eric Bui", manufacturer: "Volata Cycles", snNumber: "2018-BKC-ZbX75728iFp5" },
-                { image: "images/bike.png", price: 534030, address: "Nguyen Huu Dat", owner: "Vuong Pham", manufacturer: "Volata Cycles", snNumber: "2018-BKC-ZbX75728iFp5" },
-                { image: "images/bike.png", price: 15430, address: "Nguyen Huu Dat", owner: "Lay Vo", manufacturer: "Volata Cycles", snNumber: "2018-BKC-ZbX75728iFp5" },
-                { image: "images/bike.png", price: 2430, address: "Nguyen Huu Dat", owner: "Tony Tuan", manufacturer: "Volata Cycles", snNumber: "2018-BKC-ZbX75728iFp5" },
-                { image: "images/bike.png", price: 6030, address: "Nguyen Huu Dat", owner: "Tomy Ai", manufacturer: "Volata Cycles", snNumber: "2018-BKC-ZbX75728iFp5" },
-                { image: "images/bike.png", price: 12540, address: "Nguyen Huu Dat", owner: "Tomy Ai", manufacturer: "Volata Cycles", snNumber: "2018-BKC-ZbX75728iFp5" },
-                { image: "images/bike.png", price: 15640, address: "Nguyen Huu Dat", owner: "Tomy Ai", manufacturer: "Volata Cycles", snNumber: "2018-BKC-ZbX75728iFp5" },
-                { image: "images/bike.png", price: 17550, address: "Nguyen Huu Dat", owner: "Tomy Ai", manufacturer: "Volata Cycles", snNumber: "2018-BKC-ZbX75728iFp5" },
-            ],
-
             isRenderFilter: true
         };
     }
@@ -31,10 +20,10 @@ class HiringRequestComponent extends Component {
         });
     }
 
-    _renderBike = (bike) => {
+    _renderBike = () => {
         let renderBike = [];
-        
-        _.forEach(bike, (value, index) => {
+
+        _.forEach(this.props.bikes, (value, index) => {
             renderBike.push(<Bike bike={value} key={index} {...this.props} />);
         });
 
@@ -57,7 +46,7 @@ class HiringRequestComponent extends Component {
 
     _renderContent = () => {
         if (this.state.isRenderFilter) {
-            return this._renderBike(this.state.bikeData);
+            return this._renderBike();
         }
 
         return this._renderBikeMaps();
