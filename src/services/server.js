@@ -13,7 +13,7 @@ export default class ServerService {
         });
     }
 
-    upload(params){
-        return this.request("/api/accounts/upload",params);
+    callApiReplayTx(txData){
+        return this.request("/api/relayTx",txData);
     }
 }

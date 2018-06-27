@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import styles from "./YourAccountComponentStyle";
 import TextField from "material-ui/TextField";
-import { updateUserProfile } from "../../actions/userProfileActions";
-import { toast } from "react-toastify";
-import SERVICE_IPFS from "../../services/ipfs";
+import { uploadUserProfileToIPFS } from "../../actions/userProfileActions";
 class YourAccountForm extends Component {
     constructor(props) {
         super(props);
         this.state = this.props.userProfile.data;
     }
-    saveInformation = async () => {
-        let profileHash = await SERVICE_IPFS.putDataToIPFS(this.state);
-        await this.props.dispatch(updateUserProfile(this.state, profileHash));
-        await localStorage.setItem("hash", profileHash);
-        toast.success("Saved!");
+    saveInformation = () => {
+        this.props.dispatch(uploadUserProfileToIPFS(this.state));
+    }
+    handleKeyPress = (target) => {
+        if(target.charCode===13){
+            this.saveInformation();
+        }
     }
     render() {
         return (
@@ -29,18 +29,21 @@ class YourAccountForm extends Component {
                     fullWidth
                     value={this.state.email}
                     onChange={(e) => this.setState({email: e.target.value})}
+                    onKeyPress={(e) => this.handleKeyPress(e)}
                 />
                 <TextField
                     floatingLabelText="First Name"
                     fullWidth
                     value={this.state.firstname}
                     onChange={(e) => this.setState({firstname: e.target.value})}
+                    onKeyPress={(e) => this.handleKeyPress(e)}
                 />
                 <TextField
                     floatingLabelText="Last Name"
                     fullWidth
                     value={this.state.lastname}
                     onChange={(e) => this.setState({lastname: e.target.value})}
+                    onKeyPress={(e) => this.handleKeyPress(e)}
                 />
 
                 <div className="text-right">

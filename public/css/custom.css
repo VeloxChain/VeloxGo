@@ -898,3 +898,7 @@ input#file:focus {
 .btn-group .btn:focus {
     outline: none;
 }
+
+.infoBox {
+    overflow: visible !important
+}

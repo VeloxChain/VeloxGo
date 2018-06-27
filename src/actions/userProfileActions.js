@@ -1,25 +1,16 @@
 import USER_PROFILE from "../constants/userProfile";
 
-export function addUserProfile(userProfile, hash) {
+export function addUserProfile(payload) {
     return {
         type: USER_PROFILE.CREATE,
-        payload: userProfile,
-        hash: hash
-    };
-}
-export function addVerifyUserProfile(userProfile) {
-    return {
-        type: USER_PROFILE.VERIFY_CREATE,
-        payload: userProfile
-
+        payload
     };
 }
 
-export function updateUserProfile(userProfile, hash) {
+export function updateUserProfile(payload) {
     return {
         type: USER_PROFILE.UPDATE,
-        payload: userProfile,
-        hash: hash
+        payload
     };
 }
 
@@ -29,21 +20,21 @@ export function addKeysToUserProfile(userProfile) {
         payload: userProfile
     };
 }
-
-export function deployPrimaryDataOnUserProfile() {
+export function uploadUserProfileToIPFS(userProfile) {
     return {
-        type: USER_PROFILE.DEPLOYING_PRIMARY_PENDING,
-        payload: {
-            deployingPrimary: true
-        }
+        type: USER_PROFILE.UPLOAD_PROFILE_TO_IPFS,
+        payload: userProfile
     };
 }
-
-export function deployPrimaryDataOnUserProfileCompleted() {
+export function finishUploadNewProfileToIPFS(payload) {
     return {
-        type: USER_PROFILE.DEPLOYING_PRIMARY_FINISHED,
-        payload: {
-            deployingPrimary: false
-        }
+        type: USER_PROFILE.FINISH_UPLOAD_NEW_PROFILE,
+        payload
+    };
+}
+export function finishUploadModifiedProfileToIPFS(payload) {
+    return {
+        type: USER_PROFILE.FINISH_UPLOAD_MODIFIED_PROFILE,
+        payload
     };
 }

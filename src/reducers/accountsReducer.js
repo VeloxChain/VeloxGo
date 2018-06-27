@@ -3,6 +3,7 @@ import Token from "../services/token";
 import {REHYDRATE} from "redux-persist/constants";
 import ACC_ACTION from "../constants/accActions";
 import IMPORT_KEY from "../constants/importKeyStoreActions";
+import USER_PROFILE from "../constants/userProfile";
 import _ from "lodash";
 const initState = {
     accounts: {},
@@ -145,6 +146,12 @@ const accounts = (state=initState, action) => {
         return {...state, accounts: newAccounts};
     }
     case IMPORT_KEY.ACCOUNT_KEY_UPLOADED: {
+        return {
+            ...state,
+            isLogout: false
+        };
+    }
+    case USER_PROFILE.FINISH_UPLOAD_NEW_PROFILE: {
         return {
             ...state,
             isLogout: false
