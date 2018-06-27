@@ -53,6 +53,7 @@ class root extends React.Component {
         }
     }
     render() {
+        console.log(this.props);
         return (
             <RootContainer {...this.props} setType={this.setType}>
                 {this._renderHomePage()}

@@ -14,15 +14,14 @@ import { sealTxByKeystore } from "../utils/sealer";
 export default class EthereumService {
     constructor() {
         if (typeof Web3 !== "undefined") {
-            this.rpc = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/faF0xSQUt0ezsDFYglOe"));
+            this.rpc = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/faF0xSQUt0ezsDFYglOe"));
         } else {
             console.error("No Web3 detected"); // eslint-disable-line
         }
         this.erc20Contract = this.rpc.eth.contract(constants.ERC20);
         this.networkAddress = constants.NETWORK_ADDRESS;
-        this.networkContract = this.rpc.eth.contract(constants.NEXTID_NETWORK).at(this.networkAddress);
-        this.userProfileContract = this.rpc.eth.contract(constants.NEXTID_USER_PROFILE);
-        this.facetContract = this.rpc.eth.contract(constants.NEXTID_FACET);
+        this.networkContract = this.rpc.eth.contract(constants.BIKECOIN_NETWORK_ABI).at(this.networkAddress);
+        // this.userProfileContract = this.rpc.eth.contract(constants.BIKECOIN_USER_PROFILE_ABI).at(constants.TX_RELAY_ADDRESS);
         this.intervalID = null;
     }
 

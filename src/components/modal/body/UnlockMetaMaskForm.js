@@ -32,7 +32,6 @@ class UnlockMetaMask extends Component {
         }
     }
     useMetamaskAccount = async () => {
-        this.props.dispatch(addAccount(this.state.account, "", "User", ""));
         let hashData = localStorage.getItem("hash");
         if (_.isUndefined(hashData)){
             this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
@@ -43,6 +42,7 @@ class UnlockMetaMask extends Component {
             retreiveUserProfile = JSON.parse(retreiveUserProfile);
             retreiveUserProfile["accountAddress"] = this.state.account;
             this.props.dispatch(addUserProfile(retreiveUserProfile));
+            this.props.dispatch(addAccount(this.state.account, "", retreiveUserProfile.firstname + " " + retreiveUserProfile.lastname, ""));
             this.props.closeModal();
 
         } catch (e) {

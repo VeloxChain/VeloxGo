@@ -3,11 +3,10 @@ import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 import Web3 from "web3";
 import  {verifyEmail, verifyNumber } from "../../../utils/validators";
-import { addUserProfile } from "../../../actions/userProfileActions";
+import { uploadUserProfileToIPFS } from "../../../actions/userProfileActions";
 // import { useMetamask } from "../../../actions/appAction";
 import Dropzone from "react-dropzone";
 import _ from "lodash";
-import SERVICE_IPFS from "../../../services/ipfs";
 class CreateAccount extends Component {
     constructor(props) {
         super(props);
@@ -90,20 +89,14 @@ class CreateAccount extends Component {
         if (this.isValidData()){
             var state = this.state;
             let userInfo = {
-                email: this.state.email,
-                lastname: this.state.lastname,
-                firstname: this.state.firstname,
-                avatar: this.state.avatar
+                email: state.email,
+                lastname: state.lastname,
+                firstname: state.firstname,
+                avatarData: state.fileData,
+                avatar: state.avatar,
+                accountAddress:this.getAccountAddress()
             };
-            if (state.preview !== "") {
-                let resultPutFileToIPFS = await SERVICE_IPFS.putFileToIPFS(state.fileData);
-                userInfo["avatar"] = resultPutFileToIPFS;
-            }
-
-            let hashData = await SERVICE_IPFS.putDataToIPFS(userInfo);
-            localStorage.setItem("hash", hashData);
-            userInfo["accountAddress"] = this.getAccountAddress();
-            this.props.dispatch(addUserProfile(userInfo));
+            await this.props.dispatch(uploadUserProfileToIPFS(userInfo));
             this.props.closeModal();
         }
     }
@@ -174,6 +167,16 @@ class CreateAccount extends Component {
             />
         );
     }
+    _renderPreview = () => {
+        if (this.state.preview) {
+            return (
+                <img src={ this.state.preview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="" />
+            );
+        }
+        return (
+            <i className="fa fa-camera icon-camera"></i>
+        );
+    }
     render() {
         return (
             <div className="mh250 pd10 relative">
@@ -187,17 +190,8 @@ class CreateAccount extends Component {
                         : undefined
                 }
                 <div className="form-modal">
-                    <Dropzone onDrop={this.onDrop} className="avatarDrop" multiple={false} activeClassName="onDrop">
-                        {
-                            this.state.preview ?
-                                (
-                                    <img src={ this.state.preview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="" />
-                                )
-                                :
-                                (
-                                    <i className="fa fa-camera icon-camera"></i>
-                                )
-                        }
+                    <Dropzone onDrop={this.onDrop} className="avatarDrop" multiple={false} activeClassName="onDrop" accept=".jpeg,.jpg,.png">
+                        {this._renderPreview()}
                     </Dropzone>
 
                     <TextField
