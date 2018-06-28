@@ -17,14 +17,14 @@ class Navigation extends Component{
         }
     }
     _renderUserName = () => {
-        let {account, userProfile } = this.props;
+        let {accounts, userProfile } = this.props;
         if (!_.isEmpty(userProfile.data)) {
             return userProfile.data.firstname + " " + userProfile.data.lastname;
         }
-        if (_.isEmpty(account)) {
+        if (_.isEmpty(accounts)) {
             return "";
         }
-        return account.name;
+        return accounts.name;
     }
     _renderEditProfile = () => {
         if (_.isEmpty(this.props.userProfile.data)) {

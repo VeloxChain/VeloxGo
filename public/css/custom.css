@@ -4,7 +4,7 @@
     font-family: "Lato-Regular";
     src: url(../fonts/Lato-Regular.ttf);
 }
-  
+
 * {
     font-family: "Lato-Regular";
 }
@@ -644,10 +644,10 @@ a {
 }
 .absolute-fancy-loading {
     position: absolute;
-    width: 98%;
-    height: 95%;
+    width: 100%;
+    height: 100%;
     background-color: rgba(255, 255, 255, 0.68);
-    z-index: 2;
+    z-index: 100;
 }
 .pd-5-50 {
     padding: 5px 50px;

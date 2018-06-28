@@ -17,7 +17,7 @@ const initialState = {
             account_name: "dump"
         }
     ],
-    isMetamask: false,
+    isLoading: false,
     toast: {
         id: "",
         message: "",
@@ -64,6 +64,16 @@ const AppReducer = (state = initialState, action) => {
         };
     case "RESET":
         return initialState;
+    case "APP_LOADING_START":
+        return {
+            ...state,
+            isLoading: true,
+        };
+    case "APP_LOADING_END":
+        return {
+            ...state,
+            isLoading: false,
+        };
     default:
         return state;
     }

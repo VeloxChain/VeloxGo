@@ -44,6 +44,7 @@
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
     "sequelize-cli": "^3.0.0",
+    "solidity-sha3": "^0.4.1",
     "web3": "^0.19.1"
   },
   "scripts": {

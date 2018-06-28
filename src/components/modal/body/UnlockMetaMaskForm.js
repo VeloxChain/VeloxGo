@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import Web3 from "web3";
-import { addAccount } from "../../../actions/accountActions";
 import { MODAL_CREATE_ACCOUNT_BIKECOIN } from "../constants";
-import _ from "lodash";
 import RaisedButton from "material-ui/RaisedButton";
-import { addUserProfile } from "../../../actions/userProfileActions";
+// import { addUserProfile } from "../../../actions/userProfileActions";
+import { retrieveUserProfile } from "../../../actions/userProfileActions";
 // import constants from "../../../services/constants";
-import SERVICE_IPFS from "../../../services/ipfs";
+// import SERVICE_IPFS from "../../../services/ipfs";
 class UnlockMetaMask extends Component {
     constructor(props){
         super(props);
@@ -31,22 +30,23 @@ class UnlockMetaMask extends Component {
         }
     }
     useMetamaskAccount = async () => {
-        let hashData = localStorage.getItem("hash");
-        if (_.isUndefined(hashData)){
+        let userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(this.state.account);
+        if (userProfileAddress === "0x0000000000000000000000000000000000000000") {
             this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
             return;
         }
-        try {
-            var retreiveUserProfile = await SERVICE_IPFS.getDataFromIPFS(hashData);
-            retreiveUserProfile = JSON.parse(retreiveUserProfile);
-            retreiveUserProfile["accountAddress"] = this.state.account;
-            this.props.dispatch(addUserProfile({userProfile: retreiveUserProfile}));
-            this.props.dispatch(addAccount(this.state.account, "", retreiveUserProfile.firstname + " " + retreiveUserProfile.lastname, ""));
-            this.props.closeModal();
-
-        } catch (e) {
-            this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
-        }
+        let userInfo = {
+            address: this.state.account,
+            keystring: "",
+            accountName: "",
+            desc: ""
+        };
+        this.props.dispatch(retrieveUserProfile({
+            userProfileAddress: userProfileAddress,
+            userInfo: userInfo,
+            ethereum: this.props.ethereum
+        }));
+        this.props.closeModal();
     }
     render() {
         return (

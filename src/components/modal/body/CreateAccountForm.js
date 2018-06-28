@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
-import Web3 from "web3";
 import  {verifyEmail, verifyNumber } from "../../../utils/validators";
 import { uploadUserProfileToIPFS } from "../../../actions/userProfileActions";
 // import { useMetamask } from "../../../actions/appAction";
@@ -94,7 +93,10 @@ class CreateAccount extends Component {
                 firstname: state.firstname,
                 avatarData: state.fileData,
                 avatar: state.avatar,
-                accountAddress:this.getAccountAddress()
+                accountAddress:this.props.getAccountAddress(),
+                ethereum: this.props.ethereum,
+                keyStore: this.props.accounts.accounts.key,
+                passphrase: state.passpharse
             };
             await this.props.dispatch(uploadUserProfileToIPFS(userInfo));
             this.props.closeModal();
@@ -110,23 +112,6 @@ class CreateAccount extends Component {
     }
     submitTransaction = () => {
         this.setState({submitted: true, labelButton: "PENDING..."});
-    }
-    getAccountAddress = () => {
-        let address = "";
-        let accounts = this.props.accounts.accounts;
-        if (_.isEmpty(accounts) || accounts.key === "" || accounts.keystring === "") {
-            var web3js = null;
-            if (typeof window.web3 !== "undefined") {
-                web3js = new Web3(window.web3.currentProvider);
-                address = web3js.eth.accounts[0];
-            } else {
-                alert("No web3? You should consider trying MetaMask!");
-                return;
-            }
-        } else {
-            address = accounts.address;
-        }
-        return address;
     }
     onDrop = (images) => {
         if (_.isEmpty(images)) {
@@ -151,7 +136,7 @@ class CreateAccount extends Component {
     }
     _renderPassphrase = () => {
         const { accounts } = this.props;
-        if (_.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "") {
+        if (_.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key) || _.isUndefined(accounts.accounts.keystring)) {
             return undefined;
         }
         return (
@@ -198,7 +183,7 @@ class CreateAccount extends Component {
                         floatingLabelText="Account address"
                         fullWidth={true}
                         disabled={this.state.disabled}
-                        value={this.getAccountAddress()}
+                        value={this.props.getAccountAddress()}
                     /><br />
                     <TextField
                         floatingLabelText="Email"

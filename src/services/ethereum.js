@@ -19,9 +19,10 @@ export default class EthereumService {
             console.error("No Web3 detected"); // eslint-disable-line
         }
         this.erc20Contract = this.rpc.eth.contract(constants.ERC20);
-        this.networkAddress = constants.NETWORK_ADDRESS;
-        this.networkContract = this.rpc.eth.contract(constants.BIKECOIN_NETWORK_ABI).at(this.networkAddress);
-        // this.userProfileContract = this.rpc.eth.contract(constants.BIKECOIN_USER_PROFILE_ABI).at(constants.TX_RELAY_ADDRESS);
+        this.networkAdress  = this.rpc.eth.contract(constants.BIKECOIN_NETWORK_ABI).at(constants.BIKECOIN_NETWORK_ADDRESS);
+        this.relayTxContract = this.rpc.eth.contract(constants.TX_RELAY_ABI).at(constants.TX_RELAY_ADDRESS);
+        this.userProfileContract = this.rpc.eth.contract(constants.BIKECOIN_USER_PROFILE_ABI);
+        this.ownerShipContract = this.rpc.eth.contract(constants.BIKECOIN_OWNER_SHIP_PROTOCOL_ABI).at(constants.BIKECOIN_OWNER_SHIP_ADDRESS);
         this.intervalID = null;
     }
 
@@ -50,7 +51,6 @@ export default class EthereumService {
             }
         });
     }
-
     getBalance(address, callback) {
         this.rpc.eth.getBalance(address, (error, balance) => {
             if (error != null) {
@@ -165,14 +165,14 @@ export default class EthereumService {
         return newAddress.toV3(passphrase, { kdf: "pbkdf2", c: 10240 });
     }
 
-    syncTx(txHash, callBack) {
+    syncTx = (txHash, callback) => {
         let self = this;
         this.rpc.eth.getTransactionReceipt(txHash, (error, txData) => {
             if (txData != null) {
-                callBack(true, txData);
+                callback(txData);
             } else {
                 setTimeout(() => {
-                    self.syncTx(txHash, callBack);
+                    self.syncTx(txHash, callback);
                 }, 1000);
             }
         });

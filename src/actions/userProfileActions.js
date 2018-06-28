@@ -38,3 +38,9 @@ export function finishUploadModifiedProfileToIPFS(payload) {
         payload
     };
 }
+export function retrieveUserProfile(payload) {
+    return {
+        type: USER_PROFILE.RETRIEVE_PROFILE,
+        payload: payload
+    };
+}

@@ -10,13 +10,6 @@ function* updateTx(action) {
 
     const {tx, ethereum} = action.payload;
     const newTx = yield call(tx.sync, ethereum, tx);
-
-    // if (newTx.type=="revoke facet" && !_.isEmpty(newTx.hash) && newTx.status === 'mined') {
-    //   let data = newTx.data
-    //   let paramsRevoke = data.extraData;
-    //   yield put(revokeShare(data.facetIndex, paramsRevoke))
-    // }
-
     yield put(updateTxComplete(newTx));
 }
 

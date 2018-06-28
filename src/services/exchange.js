@@ -3,13 +3,14 @@
 // import store from "../store";
 // import { doTransaction, doApprovalTransaction } from "../actions/exchangeFormActions";
 import constants from "../services/constants";
+import _ from "lodash";
+import { unlock } from "../utils/keys";
 // import Rate from "./rate";
 import CryptoJS from "crypto-js";
 import coder from "web3/lib/solidity/coder";
 const leftPad = require("left-pad");
 const solsha3 = require("solidity-sha3").default;
 var utils = require("ethereumjs-util");
-import { unlock } from "../utils/keys";
 
 //Left packs a (hex) string. Should probably use leftpad
 function pad(n) {
@@ -32,7 +33,7 @@ function encodeFunctionTxData(functionName, types, args) {
     return dataHex;
 }
 
-function signPayload(signingAddr, txRelay, whitelistOwner, destinationAddress, functionName, functionTypes, functionParams, privKey) {
+function signPayload(signingAddr, txRelay, whitelistOwner, destinationAddress, functionName, functionTypes, functionParams, privKey, isMetamask, callBack) {
     if (functionTypes.length !== functionParams.length) {
         return; //should throw error
     }
@@ -52,36 +53,79 @@ function signPayload(signingAddr, txRelay, whitelistOwner, destinationAddress, f
     //Tight packing, as Solidity sha3 does
     hashInput = "0x1900" + txRelay.address.slice(2) + whitelistOwner.slice(2) + pad(nonce.toString("16")).slice(2)
     + destinationAddress.slice(2) + data.slice(2);
-    console.log(hashInput); //eslint-disable-line
+    // console.log(hashInput); //eslint-disable-line
     hash = solsha3(hashInput);
-    sig = utils.ecsign(new Buffer(utils.stripHexPrefix(hash), "hex"), privKey);
-    // sig = lightwallet.signing.signMsgHash(lw, keyFromPw, hash, signingAddr)
-    retVal.r = "0x" + sig.r.toString("hex");
-    retVal.s = "0x" + sig.s.toString("hex");
-    retVal.v = sig.v;  //Q: Why is this not converted to hex?
-    retVal.data = data;
-    retVal.hash = hash;
-    retVal.nonce = nonce;
-    retVal.dest = destinationAddress;
-    return retVal;
+    let hexHashInput = new Buffer(utils.stripHexPrefix(hash), "hex");
+    if (isMetamask) {
+        window.web3.eth.sign(signingAddr, hash,(e,r)=> {
+            if (e == undefined) {
+                sig = utils.fromRpcSig(r);
+                retVal.r = "0x" + sig.r.toString("hex");
+                retVal.s = "0x" + sig.s.toString("hex");
+                retVal.v = sig.v;
+                retVal.data = data;
+                retVal.hash = hash;
+                retVal.nonce = nonce;
+                retVal.dest = destinationAddress;
+                callBack(retVal);
+            }
+        });
+    } else {
+        sig = utils.ecsign(hexHashInput, privKey);
+        retVal.r = "0x" + sig.r.toString("hex");
+        retVal.s = "0x" + sig.s.toString("hex");
+        retVal.v = sig.v;
+        retVal.data = data;
+        retVal.hash = hash;
+        retVal.nonce = nonce;
+        retVal.dest = destinationAddress;
+        callBack(retVal);
+    }
 }
 
-export const createNewUserProfile = async (address, ethereum, keyStore, password, isMetaMask) => {
+export const createNewUserProfile = async (address, ipfsHash ,ethereum, keyStore, password) => {
+    console.log(address, ipfsHash); //eslint-disable-line
+    let isMetamask = _.isUndefined(password) || password === "";
+    let zeroAddress = "0x0000000000000000000000000000000000000000";
+    let types = ["address", "string"];
+    let params = [address, ipfsHash];
+    let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
+    let txRelay = ethereum.relayTxContract;
     var privKey = "";
-    if (isMetaMask) {
+    if (!isMetamask) {
         privKey = unlock(keyStore, password, true);
     }
-    let zeroAddress = "0x0000000000000000000000000000000000000000";
-    let types = ["address"];
-    let params = [address];
-    let networkAddress = constants.NETWORK_ADDRESS;
-    let txRelay = ethereum.relayTxContract;
-    let p = await signPayload(address, txRelay, zeroAddress, networkAddress, "createUserProfile", types, params,privKey);
-    callApiReplayTx(p);
+    return new Promise( (resolve) => {
+        signPayload(address, txRelay, zeroAddress, destinationAddress, "createUserProfile", types, params,privKey, isMetamask, (res) => {
+            resolve(callApiReplayTx(res));
+        });
+    });
 };
+export const updateUserProfile = async (address, profileAddress, ipfsHash ,ethereum, keyStore, password) => {
+    console.log(address, profileAddress, ipfsHash); //eslint-disable-line
+    let isMetamask = _.isUndefined(password) || password === "";
+    let updateUserProfileData = encodeFunctionTxData("setIPFSHash", ["string"], [ipfsHash]);
+    let zeroAddress = "0x0000000000000000000000000000000000000000";
+    let types = ["address", "address", "address", "uint256", "bytes", "bytes32"];
+    let params = [address,profileAddress , constants.BIKECOIN_NETWORK_ADDRESS, 0, updateUserProfileData, "0x0"];
+    let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
+    let txRelay = ethereum.relayTxContract;
+    var privKey = "";
+    if (!isMetamask) {
+        privKey = unlock(keyStore, password, true);
+    }
+    return new Promise( (resolve) => {
+        signPayload(address, txRelay, zeroAddress, destinationAddress, "forwardTo", types, params,privKey, isMetamask, (res) => {
+            resolve(callApiReplayTx(res));
+        });
+    });
+
+};
+
+
 const callApiReplayTx = (txData) => {
     console.log("TX Data", txData); // eslint-disable-line
-    fetch("/api/relayTx", {
+    return fetch("/api/relayTx", {
         method: "POST",
         body: JSON.stringify(txData),
         headers: {
@@ -91,11 +135,5 @@ const callApiReplayTx = (txData) => {
     }).then(
         (response) => {
             return response.json();
-        })
-        .then((responseJson) => {
-            console.log('responseJson----->' , responseJson); // eslint-disable-line
-        })
-        .catch((error) => {
-            console.log('error: ', error); // eslint-disable-line
         });
 };

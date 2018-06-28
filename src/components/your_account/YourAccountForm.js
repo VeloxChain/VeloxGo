@@ -2,18 +2,37 @@ import React, { Component } from "react";
 import styles from "./YourAccountComponentStyle";
 import TextField from "material-ui/TextField";
 import { uploadUserProfileToIPFS } from "../../actions/userProfileActions";
+import { MODAL_CONFIRM_TRANSACTION } from "../modal/constants";
 class YourAccountForm extends Component {
     constructor(props) {
         super(props);
         this.state = this.props.userProfile.data;
     }
     saveInformation = () => {
-        this.props.dispatch(uploadUserProfileToIPFS(this.state));
+        var state = this.state;
+        let userInfo = {
+            email: state.email,
+            lastname: state.lastname,
+            firstname: state.firstname,
+            avatar: state.avatar,
+            accountAddress:this.props.getAccountAddress(),
+            ethereum: this.props.ethereum,
+            keyStore: this.props.accounts.accounts.key,
+        };
+        if (this.props.metamask) {
+            this.props.dispatch(uploadUserProfileToIPFS(userInfo));
+        } else {
+            this.props.setType(MODAL_CONFIRM_TRANSACTION, {type: "updateUserProfile", data: userInfo, handle: uploadUserProfileToIPFS});
+        }
+
     }
     handleKeyPress = (target) => {
         if(target.charCode===13){
             this.saveInformation();
         }
+    }
+    getUserProfileAddress = () => {
+        return this.props.ethereum.networkAdress.getUserProfile(this.props.getAccountAddress());
     }
     render() {
         return (
@@ -22,7 +41,7 @@ class YourAccountForm extends Component {
                 <TextField
                     floatingLabelText="User Profile Address"
                     fullWidth
-                    value="0x0000000000000000000000000000000000000000"
+                    value={this.getUserProfileAddress()}
                 />
                 <TextField
                     floatingLabelText="Email"

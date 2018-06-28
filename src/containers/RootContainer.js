@@ -44,7 +44,7 @@ class RootContainer extends React.Component {
     }
 
 
-    componentWillReceiveProps(props){
+    scomponentWillReceiveProps(props){
         if(!_.isUndefined(props.toast)) {
             if(props.toast.message !== "") {
                 toast(
@@ -57,10 +57,19 @@ class RootContainer extends React.Component {
             }
         }
     }
-
+    _renderLoading = () => {
+        if (this.props.AppReducer.isLoading) {
+            return (
+                <div className="absolute-fancy-loading flexible">
+                    <img id="loader" src="images/loading.png"/>
+                </div>
+            );
+        }
+    }
     render() {
         return (
             <div className="main_container">
+                {this._renderLoading()}
                 <Header hidden={_.isEmpty(this.props.userProfile.data)}/>
                 <ToastContainer />
                 <div className="right-col">

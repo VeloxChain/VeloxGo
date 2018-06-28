@@ -10,7 +10,7 @@ import _ from "lodash";
 import YourBikesComponent from "../components/your_bikes/YourBikeComponent";
 import HiringRequestComponent from "../components/hiring_request/HiringRequestComponent";
 import YourAccountComponent from "../components/your_account/YourAccountComponent";
-
+import Web3 from "web3";
 class root extends React.Component {
     constructor(props) {
         super(props);
@@ -40,19 +40,43 @@ class root extends React.Component {
         }
         return (
             <Switch>
-                <Route exact path="/your_bikes" render={() => <YourBikesComponent {...this.props} setType={this.setType} />} />
-                <Route exact path="/hiring_request" render={() => <HiringRequestComponent {...this.props} setType={this.setType} />} />
-                <Route exact path="/your_account" render={() => <YourAccountComponent {...this.props} setType={this.setType} />} />
+                <Route exact path="/your_bikes" render={() => <YourBikesComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
+                <Route exact path="/hiring_request" render={() => <HiringRequestComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
+                <Route exact path="/your_account" render={() => <YourAccountComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
             </Switch>
         );
     }
-    componentWillReceiveProps(nextProps) {
+    c2omponentWillReceiveProps(nextProps) {
         const { accounts } = nextProps;
         if (accounts.isLogout) {
             this.setType(MODAL_OWNER_LOGIN);
         }
     }
+    getAccountAddress = () => {
+        let address = "";
+        let accounts = this.props.accounts.accounts;
+        if (_.isEmpty(accounts) || accounts.key === "" || accounts.keystring === "") {
+            var web3js = null;
+            if (typeof window.web3 !== "undefined") {
+                web3js = new Web3(window.web3.currentProvider);
+                address = web3js.eth.accounts[0];
+            } else {
+                alert("No web3? You should consider trying MetaMask!");
+                return;
+            }
+        } else {
+            address = accounts.address;
+        }
+        return address;
+    }
+    isMetamask = () => {
+        const { accounts } = this.props;
+        let isMetaMask = _.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key);
+        console.log(isMetaMask,"metamask");
+        return isMetaMask;
+    }
     render() {
+        console.log(this.props);
         return (
             <RootContainer {...this.props} setType={this.setType}>
                 {this._renderHomePage()}
@@ -73,6 +97,7 @@ class root extends React.Component {
                     dispatch={this.props.dispatch}
                     keystore={this.props.keystore}
                     externalData={this.state.externalData}
+                    getAccountAddress={this.getAccountAddress}
 
                 />
             </RootContainer>

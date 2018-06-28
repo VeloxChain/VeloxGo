@@ -8,12 +8,10 @@ import {
 import Dropzone from "react-dropzone";
 
 import { specifyName, specifyDesc, throwError, uploadKey } from "../../../actions/importKeystoreActions"; //emptyForm
-import { addAccount } from "../../../actions/accountActions";
 import { verifyAccount, verifyKey, anyErrors } from "../../../utils/validators";
 import { addressFromKey } from "../../../utils/keys";
 // import constants from "../../../services/constants";
-import { addUserProfile } from "../../../actions/userProfileActions";
-import SERVICE_IPFS from "../../../services/ipfs";
+import { retrieveUserProfile } from "../../../actions/userProfileActions";
 import _ from "lodash";
 
 class ImportAccount extends Component {
@@ -60,21 +58,23 @@ class ImportAccount extends Component {
             this.props.dispatch(throwError("Cannot import invalid keystore file"));
         } else {
             let { keystore } = this.props;
-            this.props.dispatch(addAccount(keystore.address, keystore.keystring, this.state.accountName, keystore.desc));
-            let hashData = localStorage.getItem("hash");
-            if (_.isUndefined(hashData)){
+            let userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(keystore.address);
+            if (userProfileAddress === "0x0000000000000000000000000000000000000000") {
                 this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
                 return;
             }
-            try {
-                var retreiveUserProfile = await SERVICE_IPFS.getDataFromIPFS(hashData);
-                retreiveUserProfile = JSON.parse(retreiveUserProfile);
-                retreiveUserProfile["accountAddress"] = this.state.account;
-                this.props.dispatch(addUserProfile({userProfile: retreiveUserProfile}));
-                this.props.closeModal();
-            } catch (e) {
-                this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
-            }
+            let userInfo = {
+                address: keystore.address,
+                keystring: keystore.keystring,
+                accountName: this.state.accountName,
+                desc: keystore.desc
+            };
+            this.props.dispatch(retrieveUserProfile({
+                userProfileAddress: userProfileAddress,
+                userInfo: userInfo,
+                ethereum: this.props.ethereum
+            }));
+            this.props.closeModal();
         }
     }
     onDrop = (files) => {

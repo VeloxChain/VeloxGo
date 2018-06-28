@@ -12,7 +12,7 @@ class ConfirmTransaction extends Component {
         super(props);
         this.state = {
             accountAddress: "",
-            passpharse: "",
+            passphrase: "",
             gasLimit: 4712388,
             gasPrice: 50,
             disabled: false,
@@ -33,164 +33,28 @@ class ConfirmTransaction extends Component {
         }
     }
 
-    isValidData = () => {
-        var errors = this.state.errors;
-        return (errors.accountAddress === "" && errors.passpharse === "" && errors.userName === "" && errors.email === "" && errors.gasPrice === "" && errors.gasLimit === "");
-    }
-    validate = () => {
-        let state = this.state;
-
-        if (verifyNumber(this.state.gasLimit) != null) {
-            state = { ...state, errors: { ...state.errors, gasLimit: "invalid Gas Limit" } };
-        } else {
-            state = { ...state, errors: { ...state.errors, gasLimit: "" } };
-        }
-
-        if (verifyNumber(this.state.gasPrice) != null) {
-            state = { ...state, errors: { ...state.errors, gasPrice: "invalid Gas Price" } };
-        } else {
-            state = { ...state, errors: { ...state.errors, gasPrice: "" } };
-        }
-
-        if (this.state.accountAddress === "") {
-            state = { ...state, errors: { ...state.errors, accountAddress: "Account name is empty" } };
-        } else {
-            state = { ...state, errors: { ...state.errors, accountAddress: "" } };
-        }
-
-        if (this.state.passpharse === "" && this.props.metamask === false) {
-            state = { ...state, errors: { ...state.errors, passpharse: "Passpharse is invalid" } };
-        } else {
-            state = { ...state, errors: { ...state.errors, passpharse: "" } };
-        }
-        this.setState(state);
-    }
     _onDeploy = () => {
-        if (this.state.submitted) {
-            return;
+        const { type, data, handle } = this.props.externalData;
+        if (type === "updateUserProfile") {
+            data.passphrase = this.state.passphrase;
+            this.props.dispatch(handle(data));
         }
-        this.validate();
-        // if (this.isValidData()) {
-        //     let isMetamask = true;
-        //     let address = this.getAccountAddress();
-        //     let self = this;
-        // }
-        try{
-            this.setState({
-                submitted: true
-            });
-        }
-        catch (ex) {
-            //
-        }
-
-        // let params = this.props.params;
-        // let props = this.props;
-        // var keyStore = "";
-        // let state = this.state;
-        // state.gasPrice = state.gasPrice*1000000000;
-        // let self = this;
-        // if (this.props.accounts.accounts[params.userProfile.accountAddress]) {
-        //     keyStore = this.props.accounts.accounts[params.userProfile.accountAddress].key;
-        // } else {
-        //     if (params.address2) {
-        //         keyStore = this.props.accounts.accounts[params.address2].key;
-        //     }
-        // }
-        // if (params.txType === constants.TX_TYPE_VERIFY_FACET){
-        //     props.ethereum.getNonce(params.userProfile.accountAddress || params.address2, (nonce) => {
-        //
-        //         try{
-        //             verifyFacet(
-        //                 params.address,
-        //                 params.facetAddress,
-        //                 params.userProfile.accountAddress || params.address2,
-        //                 params.userProfile.isMetamask || params.isMetamask,
-        //                 state.gasLimit,
-        //                 state.gasPrice, state.passpharse,
-        //                 keyStore, props.ethereum,nonce,
-        //                 params.fromEmail,
-        //                 params.statusVerify,
-        //                 params.inNetwork
-        //             ).then((hash) => {
-        //                 const tx = new Tx(
-        //                     hash, params.userProfile.accountAddress || params.address2, state.gasLimit, state.gasPrice,
-        //                     nonce, "pending", "verify facet", {
-        //                     facetAddress: params.facetAddress,
-        //                     account: params.userProfile.accountAddress || params.address2,
-        //                     isMetamask: params.userProfile.isMetamask || params.isMetamask,
-        //                     gas: state.gasLimit,
-        //                     gasPrice: state.gasPrice,
-        //                     facetField: params.facetField,
-        //                     address: params.address,
-        //                     publicKey: params.userProfile.publicKey || null,
-        //                     facetKey: params.facetKey,
-        //                     fromEmail: params.fromEmail,
-        //                     toEmail: params.toEmail,
-        //                     clientURL: constants.REMOTE_API_HOST,
-        //                     nonce: nonce+1,
-        //                 }, "", params.userProfile.isMetamask || params.isMetamask)
-        //                 props.dispatch(addTx(tx))
-        //                 params.callback();
-        //                 props.closeModal()
-        //             })
-        //         }
-        //         catch(exception){
-        //             console.log(exception)
-        //             state = { ...state, errors: { ...state.errors, passpharse: "Passpharse is invalid" } };
-        //             self.setState(state)
-        //         }
-        //     })
-        //     props.closeModal();
-        // }
-
-    }
-    getContractAddress = (userProfileAddress) => {
-        this.setState({
-            userProfileAddress: userProfileAddress
-        });
-    }
-    addUserProfile = () => {
         this.props.closeModal();
-    }
-    rejectTransaction = () => {
-        this.setState({ submitted: false, labelButton: "CREATE BIKECOIN ACCOUNT" });
-    }
-    submitTransaction = () => {
-        this.setState({ submitted: true, labelButton: "PENDING..." });
-    }
-    getAccountAddress = () => {
-        return this.props.params.userProfile.accountAddress || this.props.params.address2;
     }
 
     render() {
         return (
             <div className="mh250 pd10 relative">
-                {
-                    this.state.submitted ?
-                        (
-                            <div className="absolute-fancy-loading flexible">
-                                <div className="loader-medium" />
-                            </div>
-                        )
-                        : undefined
-                }
                 <div className="form-modal">
-                    <TextField
-                        floatingLabelText="Account address"
-                        fullWidth={true}
-                        disabled={this.state.disabled}
-                        value={this.getAccountAddress()}
-                    /><br />
                     <TextField
                         floatingLabelText="Passpharse"
                         fullWidth={true}
                         type="password"
                         disabled={this.state.disabled}
-                        value={this.state.passpharse}
-                        errorText={this.state.errors.passpharse}
+                        value={this.state.passphrase}
+                        errorText={this.state.errors.passphrase}
                         onKeyPress={(e) => this.handleKeyPress(e)}
-                        onChange={(e) => this.setState({ passpharse: e.target.value })}
+                        onChange={(e) => this.setState({ passphrase: e.target.value })}
                     />
                     <div className="flexible-end mg30-0">
                         <RaisedButton
