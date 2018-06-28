@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import {
     MODAL_CREATE_ACCOUNT_BIKECOIN,
@@ -15,6 +14,7 @@ import { addressFromKey } from "../../../utils/keys";
 import { addUserProfile } from "../../../actions/userProfileActions";
 import SERVICE_IPFS from "../../../services/ipfs";
 import _ from "lodash";
+import styles from "./CustomCss";
 
 class ImportAccount extends Component {
     constructor(props) {
@@ -134,12 +134,12 @@ class ImportAccount extends Component {
                         onChange={(e) => this.setState({ accountName: e.target.value })}
                     /><br />
                     <div className="flexible-end mg30-0">
-                        <RaisedButton
-                            label="IMPORT ACCOUNT"
-                            labelColor="#fff"
-                            backgroundColor="#5c57a3"
+                        <button
                             onClick={this.importAccount}
-                        />
+                            style={styles.buttonBack}
+                        >
+                            IMPORT ACCOUNT
+                        </button>
                     </div>
                 </div>
 

@@ -30,7 +30,10 @@ class EditBikeComponent extends Component {
             <div style={styles.wrapp}>
                 <div className="row" style={styles.rowButton}>
                     <div className="col-sm-6">
-                        <button style={styles.buttonBack} onClick={this.props.switchState}> <i className="fa fa-chevron-left"></i> GO BACK</button>
+                        <button style={styles.buttonBack} onClick={this.props.switchState}>
+                            <i className="fa fa-chevron-left" style={styles.iconBack} />
+                            <span> GO BACK</span>
+                        </button>
                     </div>
                     <div className="col-sm-6 text-right">
                         <button style={styles.buttonSave} onClick={this.changeBikeInfo}>Save</button>
@@ -46,10 +49,10 @@ class EditBikeComponent extends Component {
                     <div className="col-sm-5">
                         <TransferBike {...this.props} handleChangeState={this.handleChangeState} deytroyBike={this.deytroyBike} />
                     </div>
-                    <div className="col-lg-8">
+                    <div className="col-lg-7">
                         <BikeInfo bikeInfo={this.state.bikeInfo} handleChangeState={this.handleChangeState} />
                     </div>
-                    <div className="col-lg-4" style={{marginTop:10}}>
+                    <div className="col-lg-5" style={{marginTop:10}}>
                         <BikeActivities {...this.props} />
                     </div>
                 </div>

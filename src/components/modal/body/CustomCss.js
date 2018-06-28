@@ -95,6 +95,17 @@ const Styles = {
         width: "100%",
         border: "1px solid #ababab",
         borderRadius: "4px"
+    },
+
+    buttonBack: {
+        background: "#fff",
+        border: "1px solid rgb(0, 214, 121)",
+        color: "rgb(0, 214, 121)",
+        borderRadius: "5px",
+        padding: "7px 30px",
+        marginBottom: "20px",
+        textTransform: "uppercase",
+        letterSpacing: "2px"
     }
 };
 

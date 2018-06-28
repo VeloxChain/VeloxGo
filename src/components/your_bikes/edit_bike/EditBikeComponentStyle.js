@@ -17,7 +17,11 @@ const Styles = {
 
     tab: {
         textTransform: "initial",
-        color: "#000"
+        color: "#000",
+        fontSize: "16px"
+    },
+    iconBack: {
+        color: "#00d679"
     },
 
     location: {
@@ -28,9 +32,8 @@ const Styles = {
     wrappRight: {
         display: "flex",
         backgroundColor: "#fff",
-        border: "1px solid #00d679",
+        boxShadow: "rgba(255, 255, 255, 0.5) 0px 1px 1px, rgba(0, 0, 0, 0.12) 0px 1px 4px",
         marginTop: "30px",
-        borderRadius: "5px"
     },
 
     boxLeft: {
@@ -38,8 +41,7 @@ const Styles = {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        borderRight: "1px solid #00d679",
-        padding: "10px"
+        borderRight: "1px solid rgb(195, 197, 196)",
     },
 
     boxRight: {
@@ -62,7 +64,7 @@ const Styles = {
         textTransform: "uppercase",
         letterSpacing: "2px",
         display: "block",
-        minWidth: "140px"
+        minWidth: "168px"
     },
 
     buttonDelete: {
@@ -74,7 +76,7 @@ const Styles = {
         textTransform: "uppercase",
         letterSpacing: "2px",
         display: "block",
-        minWidth: "140px"
+        minWidth: "168px"
     },
 
     buttonSave: {
@@ -89,8 +91,8 @@ const Styles = {
         marginTop: "20px",
     },
     buttonBack: {
-        background: "#fff",
-        border: "1px solid #00d679",
+        background: "transparent",
+        border: "none",
         borderRadius: "5px",
         padding: "7px 20px",
         textTransform: "uppercase",
@@ -104,7 +106,10 @@ const Styles = {
         fontSize: "20px",
         color: "#000"
     },
-
+    countLeaderBoard: {
+        fontSize: "30px",
+        color: "#000"
+    },
     unit: {
         fontSize: "14px",
     },
@@ -146,8 +151,7 @@ const Styles = {
         padding: "0px",
         margin: "20px 0px 10px",
         background: "#fff",
-        borderRadius: "5px",
-        border: "1px solid rgb(0, 214, 121)"
+        boxShadow: "rgba(255, 255, 255, 0.5) 0px 1px 1px, rgba(0, 0, 0, 0.12) 0px 1px 4px"
     },
 
     icon: {
@@ -183,7 +187,10 @@ const Styles = {
         padding: "0px 10px"
     },
     wrappStatus: {
-        margin: "20px 0px"
+        margin: "20px 0px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
     },
 
     iconStatus: {
@@ -195,13 +202,13 @@ const Styles = {
     block: {
         padding: "10px",
         borderRadius: "5px",
-        border: "1px solid rgb(173, 173, 173)",
+        border: "1px solid rgb(226, 226, 226)",
         textAlign: "center"
     },
 
     buttonActionTrophies: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid rgba(245, 166, 35, .5)",
         borderRadius: "5px",
         padding: "7px 30px",
         margin: "0px 5px",
@@ -213,7 +220,7 @@ const Styles = {
 
     buttonActionLeaderboard: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid rgba(239, 0, 244, .4)",
         borderRadius: "5px",
         padding: "7px 30px",
         margin: "0px 5px",
@@ -240,16 +247,16 @@ const Styles = {
 
     butonLeaderBoard: {
         background: "#fff",
-        padding: "7px 40px",
+        padding: "5px 40px",
         color: "#000",
         border: "1px solid #000"
     },
 
     butonLeaderBoardActive: {
-        background: "#000",
-        padding: "7px 40px",
+        background: "#2a2a2a",
+        padding: "5px 40px",
         color: "rgb(0, 214, 121)",
-        border: "1px solid #000"
+        border: "1px solid #2a2a2a"
     },
 
     listItemLeaderBoard: {

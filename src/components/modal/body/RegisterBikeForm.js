@@ -4,7 +4,6 @@ import {
     Stepper,
     StepLabel,
 } from "material-ui/Stepper";
-import RaisedButton from "material-ui/RaisedButton";
 import styles from "./CustomCss";
 import RegisterBikeInformation from "./RegisterBikeInformation";
 import RegisterBikeLocation from "./RegisterBikeLocation";
@@ -169,21 +168,21 @@ class RegisterBike extends Component {
                     <div>{this.getStepContent(stepIndex)}</div>
                     <div className="row" style={{marginTop: 12}}>
                         <div className="col-sm-6">
-                            <RaisedButton
-                                label="Back"
-                                primary={true}
+                            <button
                                 disabled={stepIndex === 0}
                                 onClick={this.handlePrev}
-                                style={styles.mb20}
-                            />
+                                style={styles.buttonBack}
+                            >
+                                Back
+                            </button>
                         </div>
                         <div className="col-sm-6 text-right">
-                            <RaisedButton
-                                label={stepIndex > 2 ? "Finish" : "Next"}
-                                primary={true}
+                            <button
                                 onClick={this.handleNext}
-                                style={styles.mb20}
-                            />
+                                style={styles.buttonBack}
+                            >
+                                {stepIndex > 2 ? "Finish" : "Next"}
+                            </button>
                         </div>
                     </div>
                 </div>

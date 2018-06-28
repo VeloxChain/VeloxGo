@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
 import Web3 from "web3";
 import  {verifyEmail, verifyNumber } from "../../../utils/validators";
 import { uploadUserProfileToIPFS } from "../../../actions/userProfileActions";
 // import { useMetamask } from "../../../actions/appAction";
 import Dropzone from "react-dropzone";
 import _ from "lodash";
+import styles from "./CustomCss";
+
 class CreateAccount extends Component {
     constructor(props) {
         super(props);
@@ -230,13 +231,13 @@ class CreateAccount extends Component {
                     /><br />
                     {this._renderPassphrase()}
                     <div className="flexible-end mg30-0">
-                        <RaisedButton
-                            label={this.state.labelButton}
-                            labelColor="#fff"
+                        <button
                             disabled={this.state.disabled}
-                            backgroundColor="#5c57a3"
                             onClick={this.createProfile}
-                        />
+                            style={styles.buttonBack}
+                        >
+                            {this.state.labelButton}
+                        </button>
                     </div>
                 </div>
 

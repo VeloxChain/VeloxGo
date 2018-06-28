@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
 import { MODAL_CREATE_ACCOUNT_BIKECOIN } from "../constants";
 import {addEthereumKey, useMetamask} from "../../../actions/appAction";
 import { addressFromKey } from "../../../utils/keys";
 import { emptyForm } from "../../../actions/createKeyStoreActions";
 import { verifyPassphrase, anyErrors } from "../../../utils/validators";
 import { createAccount } from "../../../actions/accountActions";
+import styles from "./CustomCss";
+
 class NewAccount extends Component {
     constructor(props) {
         super(props);
@@ -143,12 +144,12 @@ class NewAccount extends Component {
                         {
                             !this.state.loading ?
                                 (
-                                    <RaisedButton
-                                        label={this.state.step === 1 ? "CREATE AN ACCOUNT" : "NEXT"}
-                                        labelColor="#fff"
-                                        backgroundColor="#5c57a3"
+                                    <button
                                         onClick={(e) => this.state.step === 1 ? this.createAccount(e) : this.nextStep(e)}
-                                    />
+                                        style={styles.buttonBack}
+                                    >
+                                        {this.state.step === 1 ? "CREATE AN ACCOUNT" : "NEXT"}
+                                    </button>
                                 )
                                 :
                                 (
