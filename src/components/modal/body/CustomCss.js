@@ -3,6 +3,10 @@ const Styles = {
         marginBottom: "20px"
     },
 
+    mb80: {
+        marginBottom: "80px"
+    },
+
     stepLabel: {
         height: "auto",
         display: "block"
@@ -56,7 +60,7 @@ const Styles = {
     dropzone: {
         width: "150px",
         height: "150px",
-        border: "2px dashed rgb(173, 173, 173)",
+        border: "1px dashed rgb(173, 173, 173)",
         borderRadius: "50%",
         overflow: "hidden",
         display: "flex",
