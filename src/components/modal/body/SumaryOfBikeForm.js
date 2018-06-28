@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import TextField from "material-ui/TextField";
 import styles from "./CustomCss";
 
 class SumaryOfBike extends Component {
@@ -7,32 +6,28 @@ class SumaryOfBike extends Component {
     render() {
         return (
             <div style={styles.sumaryOfBike}>
-                <div className="col-sm-8 col-sm-offset-2">
-                    <TextField
-                        floatingLabelText="Manufacturer"
-                        value={this.props.externalData.manufacturer}
-                        fullWidth
+                <div className="col-sm-4">
+                    <img
+                        src={"https://gateway.ipfs.io/ipfs/" + this.props.externalData.avatar}
+                        style={styles.image}
+                        alt="Bikecoin"
                     />
-                    <TextField
-                        floatingLabelText="Owner"
-                        value={this.props.externalData.owner}
-                        fullWidth
-                    />
-                    <TextField
-                        floatingLabelText="Bike serial"
-                        value={this.props.externalData.snNumber}
-                        fullWidth
-                    />
-                    <TextField
-                        floatingLabelText="Address"
-                        value={this.props.externalData.location.name}
-                        fullWidth
-                    />
-                    <TextField
-                        floatingLabelText="Price (BKC)"
-                        value={200}
-                        fullWidth
-                    />
+                </div>
+                <div className="col-sm-8">
+                    <p style={styles.title}>Manufacturer</p>
+                    <h4 style={styles.text}>{this.props.externalData.manufacturer}</h4>
+
+                    <p style={styles.title}>Owner</p>
+                    <h4 style={styles.text}>{this.props.externalData.owner}</h4>
+
+                    <p style={styles.title}>Bike serial</p>
+                    <h4 style={styles.text}>{this.props.externalData.snNumber}</h4>
+
+                    <p style={styles.title}>Address</p>
+                    <h4 style={styles.text}>{this.props.externalData.location.name}</h4>
+
+                    <p style={styles.title}>Price (BKC)</p>
+                    <h4 style={styles.text}>{200}</h4>
                 </div>
                 <div className="text-center">
                     <button style={styles.button}>send hire request</button>

@@ -6,7 +6,7 @@ class BikeHiringInfo extends Component {
         return (
             <div className="row" style={styles.sumaryOfBike}>
                 <div style={styles.bodyContent}>
-                    <img style={styles.bikeImage} src="images/bike.png" />
+                    <img style={styles.bikeImage} src="images/bike.png" alt="Bikecoin" />
                     <div style={styles.line} ></div>
                     <div>
                         <p>Manufacturer: eowiroiwer</p>

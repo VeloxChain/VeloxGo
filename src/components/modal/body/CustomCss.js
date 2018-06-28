@@ -67,7 +67,8 @@ const Styles = {
     },
 
     sumaryOfBike: {
-        minHeight: "440px"
+        minHeight: "440px",
+        paddingTop: "30px"
     },
 
     button: {
@@ -79,6 +80,23 @@ const Styles = {
         textTransform: "uppercase",
         letterSpacing: "1px",
     },
+
+    title: {
+        fontWeight: "bold",
+        color: "rgba(0, 0, 0, 0.3)",
+        marginBottom: "5px"
+    },
+
+    text: {
+        marginTop: "0",
+        marginBottom: "20px"
+    },
+
+    image: {
+        width: "100%",
+        border: "1px solid #ababab",
+        borderRadius: "4px"
+    }
 };
 
 export default Styles;
