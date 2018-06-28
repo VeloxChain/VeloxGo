@@ -38,8 +38,8 @@ class ImageCroper extends Component {
         let imageObj = new Image(),
             canvas   = document.createElement("canvas"),
             ctx      = canvas.getContext("2d"),
-            xStart   = 0,
-            yStart   = 0,
+            xStart   = this.state.crop.x,
+            yStart   = this.state.crop.y,
             aspectRadio,
             newWidth,
             newHeight;
@@ -51,18 +51,12 @@ class ImageCroper extends Component {
         aspectRadio = imageObj.width / imageObj.height;
         newHeight   = height,
         newWidth    = aspectRadio * height;
-        xStart      = -(newWidth - width) / 2;
         
-        ctx.drawImage(imageObj, xStart, yStart, newWidth, newHeight);
-  
+        ctx.drawImage(imageObj, xStart, yStart, newWidth, newHeight, 0, 0, newWidth, newHeight);
+
         let newSrc = canvas.toDataURL();
         
-
-        this.props.handleChangeState({
-            // imageData: new Buffer(fileData),
-            // imageName: file.name,
-            imagePreview: newSrc
-        });
+        this.props.handleCropImage(newSrc);
     }
   
 

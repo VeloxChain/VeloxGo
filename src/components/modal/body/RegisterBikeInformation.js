@@ -75,6 +75,24 @@ class RegisterBikeInformation extends Component {
         return <i className="fa fa-camera icon-camera"></i>;
     }
 
+    base64ToArrayBuffer = (base64) => {
+        var binary_string =  window.atob(base64);
+        var len = binary_string.length;
+        var bytes = new Uint8Array( len );
+        for (var i = 0; i < len; i++)        {
+            bytes[i] = binary_string.charCodeAt(i);
+        }
+        return bytes.buffer;
+    }
+
+    handleCropImage = (newSrc) => {
+        this.props.handleChangeState({
+            imageData: new Buffer(newSrc.replace(/^data:image\/(png|gif|jpeg|jpg);base64,/,""), "base64"),
+            // imageName: file.name,
+            imagePreview: newSrc
+        });
+    }
+
     render() {
         return (
             <div className="wrapp">
@@ -86,7 +104,7 @@ class RegisterBikeInformation extends Component {
                     autoScrollBodyContent={true}
                     repositionOnUpdate={true}
                 >
-                    <ImageCroper handleChangeState={this.props.handleChangeState} imagePreview={this.state.imagePreview} onHandleCloseCropImage={this.onHandleCloseCropImage}/>
+                    <ImageCroper handleCropImage={this.handleCropImage} handleChangeState={this.props.handleChangeState} imagePreview={this.state.imagePreview} onHandleCloseCropImage={this.onHandleCloseCropImage}/>
                 </Dialog>
 
                 <div className="w100p">
