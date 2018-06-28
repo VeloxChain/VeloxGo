@@ -4,6 +4,11 @@
     font-family: "Lato-Regular";
     src: url(../fonts/Lato-Regular.ttf);
 }
+
+@font-face{
+    font-family: "Lato-Light";
+    src: url(../fonts/Lato-Light.ttf);
+}
   
 * {
     font-family: "Lato-Regular";
@@ -589,12 +594,14 @@ a {
     overflow: auto;
 }
 .maskButton {
-    padding: 10px;
-    background-color: #5b57a3;
-    color: #fff;
-    border-radius: 3px;
-    font-weight: normal;
+    background: rgb(255, 255, 255);
+    border: 1px solid rgb(0, 214, 121);
+    color: rgb(0, 214, 121);
+    border-radius: 5px;
+    padding: 7px 30px;
+    margin-bottom: 20px;
     text-transform: uppercase;
+    letter-spacing: 2px;
     cursor: pointer;
 }
 .custom-button {
@@ -677,7 +684,7 @@ a {
 .avatarDrop {
     width: 150px;
     height: 150px;
-    border: 2px dashed #41f589;
+    border: 2px dashed rgb(173, 173, 173);
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -889,6 +896,11 @@ input#file:focus {
 .table>thead>tr>td,
 .table>thead>tr>th {
     padding: 12px 10px;
+    letter-spacing: 2px;
+}
+
+.table>thead>tr>th {
+    font-family: "Lato-Light";
 }
 
 .btn-group .btn:focus {

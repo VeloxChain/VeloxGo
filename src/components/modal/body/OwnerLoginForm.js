@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import RaisedButton from "material-ui/RaisedButton";
+import styles from "./CustomCss";
+
 import {
     MODAL_CREATE_ACCOUNT,
     MODAL_EXISTING,
@@ -14,18 +15,18 @@ class OwnerLogin extends Component {
                 </div>
 
                 <div className="flexible-evenly">
-                    <RaisedButton
-                        label="NEW ACCOUNT"
-                        labelColor="#fff"
-                        backgroundColor="#5c57a3"
+                    <button
                         onClick={() => this.props.setType(MODAL_CREATE_ACCOUNT)}
-                    />
-                    <RaisedButton
-                        label="EXISTING ACCOUNT"
-                        labelColor="#fff"
-                        backgroundColor="#5c57a3"
+                        style={styles.buttonBack}
+                    >
+                        NEW ACCOUNT
+                    </button>
+                    <button
                         onClick={() => this.props.setType(MODAL_EXISTING)}
-                    />
+                        style={styles.buttonBack}
+                    >
+                        NEW ACCOUNT
+                    </button>
                 </div>
             </div>
         );

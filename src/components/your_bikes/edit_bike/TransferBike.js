@@ -38,12 +38,14 @@ class TransferBike extends Component {
                                 onClick={() => this.props.handleChangeState({isHonk: !this.props.bikeInfo.isHonk})}
                                 alt="Bikecoin"
                             />
-                            <img
-                                src={this.props.bikeInfo.isLock ? lockedOn : lockedOff}
-                                style={styles.iconStatus}
-                                onClick={() => this.props.handleChangeState({isLock: !this.props.bikeInfo.isLock})}
-                                alt="Bikecoin"
-                            />
+                            <div style={{ minHeight: "43px" }}>
+                                <img
+                                    src={this.props.bikeInfo.isLock ? lockedOn : lockedOff}
+                                    style={styles.iconStatus}
+                                    onClick={() => this.props.handleChangeState({isLock: !this.props.bikeInfo.isLock})}
+                                    alt="Bikecoin"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
