@@ -14,19 +14,26 @@ class ImageCroper extends Component {
                 y: 10,
                 width: 10,
                 height: 7,
-                aspect: 10 / 7
+                aspect: 10 / 7,
+                naturalWidth: 0,
+                naturalHeight: 0,
             },
         };
     }
 
     onHandleChangeCrop = crop => {
-        this.setState({ crop });
+        this.setState({
+            crop: {
+                ...this.state.crop,
+                ...crop 
+            }
+        });
     }
 
-    snapshotResize () {
+    snapshotResize = () => {
         let srcData = this.props.imagePreview;
-        let width = this.state.crop.width;
-        let height = this.state.crop.height;
+        let width = this.state.crop.width * this.state.crop.naturalWidth /100;
+        let height = this.state.crop.height * this.state.crop.naturalHeight /100;
 
         let imageObj = new Image(),
             canvas   = document.createElement("canvas"),
@@ -41,24 +48,15 @@ class ImageCroper extends Component {
         canvas.width  = width;
         canvas.height = height;
   
-        aspectRadio = imageObj.height / imageObj.width;
-  
-        if(imageObj.height < imageObj.width) {
-            //horizontal
-            aspectRadio = imageObj.width / imageObj.height;
-            newHeight   = height,
-            newWidth    = aspectRadio * height;
-            xStart      = -(newWidth - width) / 2;
-        } else {
-            //vertical
-            newWidth  = width,
-            newHeight = aspectRadio * width;
-            yStart    = -(newHeight - height) / 2;
-        }
-  
+        aspectRadio = imageObj.width / imageObj.height;
+        newHeight   = height,
+        newWidth    = aspectRadio * height;
+        xStart      = -(newWidth - width) / 2;
+        
         ctx.drawImage(imageObj, xStart, yStart, newWidth, newHeight);
   
-        let newSrc = canvas.toDataURL("image/jpeg", 0.75);
+        let newSrc = canvas.toDataURL();
+        
 
         this.props.handleChangeState({
             // imageData: new Buffer(fileData),
@@ -69,20 +67,24 @@ class ImageCroper extends Component {
   
 
     onImageLoaded = (image) => {
-        this.setState({
-            crop: makeAspectCrop({
+        let newCrop = makeAspectCrop(
+            {
                 x: 0,
                 y: 0,
                 aspect: 10 / 7,
                 width: 20,
-            }, image.width / image.height),
+            },
+            image.width / image.height
+        );
+
+        newCrop["naturalWidth"] = image.naturalWidth;
+        newCrop["naturalHeight"] = image.naturalHeight;
+    
+        this.setState({
+            crop: newCrop,
         });
 
         setTimeout(() => { window.dispatchEvent(new Event("resize")); }, 0);
-    }
-
-    onCropComplete = () => {
-        let newSRC = this.snapshotResize(this.props.imagePreview, this.state.crop.width, this.state.crop.height);
     }
 
     render(){
@@ -93,7 +95,6 @@ class ImageCroper extends Component {
                         src={this.props.imagePreview}
                         crop={this.state.crop}
                         onImageLoaded={this.onImageLoaded}
-                        onComplete={this.onCropComplete}
                         onChange={this.onHandleChangeCrop}
                     />
                 </div>
@@ -103,7 +104,7 @@ class ImageCroper extends Component {
                         style={{marginLeft: "10px"}}
                         secondary={true} 
                         onClick={ () => {
-                            this.props.onHandleCloseCropImage();
+                            this.snapshotResize();
                             this.props.onHandleCloseCropImage();
                         }}
                     />
