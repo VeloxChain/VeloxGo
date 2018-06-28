@@ -9,9 +9,20 @@ class HiringRequestComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isRenderFilter: true,
-            bikeHashSelected: ""
+            bikeHashSelected: "",
+            isRenderMap: false,
+            mapDefaultLocation: {
+                index: 'sg',
+                long: 103.819836,
+                lat: 1.352083
+            }
         };
+    }
+
+    handleChangeMapDefaultLocation = (mapDefaultLocation) => {
+        this.setState({
+            mapDefaultLocation: mapDefaultLocation
+        })
     }
 
     handleSelectBike = (bikeHashSelected) => {
@@ -20,9 +31,9 @@ class HiringRequestComponent extends Component {
         });
     }
 
-    onChangeFilter = (value) => {
+    onHandleSwitchView = (value) => {
         this.setState({
-            isRenderFilter: value
+            isRenderMap: value
         });
     }
 
@@ -40,6 +51,7 @@ class HiringRequestComponent extends Component {
         return (
             <div style={{backgroundColor: "white", padding: "10px"}}>
                 <MapHiringComponent
+                    mapDefaultLocation={this.state.mapDefaultLocation}
                     bikeHashSelected = {this.state.bikeHashSelected}
                     handleSelectBike= {this.handleSelectBike}
                     bikes={this.props.bikes}
@@ -54,19 +66,21 @@ class HiringRequestComponent extends Component {
     }
 
     _renderContent = () => {
-        if (this.state.isRenderFilter) {
-            return this._renderBike();
+        if (this.state.isRenderMap) {
+            return this._renderBikeMaps();
+        
         }
-
-        return this._renderBikeMaps();
+        return this._renderBike();
     }
 
     render() {
         return (
             <div style={styles.wrapp}>
                 <BikeSearchComponent
-                    isRenderFilter={this.state.isRenderFilter}
-                    onChangeFilter={this.onChangeFilter}
+                    onHandleSwitchView={this.onHandleSwitchView}
+                    mapDefaultLocation={this.state.mapDefaultLocation}
+                    handleChangeMapDefaultLocation={this.handleChangeMapDefaultLocation}
+                    isRenderMap={this.state.isRenderMap}
                 />
                 <div className="row">
                     {this._renderContent()}

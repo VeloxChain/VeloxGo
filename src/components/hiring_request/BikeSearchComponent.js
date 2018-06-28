@@ -8,28 +8,61 @@ import BikeFilterComponent from "./BikeFilterComponent";
 class BikeSearchComponent extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            value: 1
-        };
+            mapLocation: {
+                sg: {
+                    long: 103.819836,
+                    lat: 1.352083
+                },
+                del: {
+                    long: -83.06797,
+                    lat: 40.29867
+                },
+                mil: {
+                    long: 9.191383,
+                    lat: 45.464211
+                },
+                san: {
+                    long: 103.819836,
+                    lat: 1.352083
+                },
+            }
+        }
     }
 
-    handleChange = (event, index, value) => this.setState({value});
+    handleChange = (event, index, value) => {
+        this.props.handleChangeMapDefaultLocation({...this.state.mapLocation[value], index: value, })
+    };
 
     render() {
+        console.log(this.props.mapDefaultLocation);
         return (
             <div className="row" style={styles.mb20}>
                 <div className="col-sm-3">
                     <SelectField
                         floatingLabelText="Location"
-                        value={this.state.value}
+                        value={this.props.mapDefaultLocation.index}
                         onChange={this.handleChange}
                         fullWidth
                         selectedMenuItemStyle={styles.selectedMenuItemStyle}
                     >
-                        <MenuItem value={0} primaryText="San Francisco" />
-                        <MenuItem value={1} primaryText="Delaware" />
-                        <MenuItem value={2} primaryText="Milano (Italy)" />
-                        <MenuItem value={3} primaryText="Singapore" />
+                        <MenuItem 
+                            value={'sg'}
+                            primaryText="Singapore" 
+                        />
+                        <MenuItem 
+                            value={'del'}
+                            primaryText="Delaware" 
+                        />
+                        <MenuItem 
+                            value={'mil'}
+                            primaryText="Milano (Italy)" 
+                        />
+                        <MenuItem 
+                            value={'san'}
+                            primaryText="San Francisco" 
+                        />
                     </SelectField>
                 </div>
                 <div className="col-sm-9">
@@ -40,7 +73,7 @@ class BikeSearchComponent extends Component {
                                 fullWidth
                             />
                         </div>
-                        <BikeFilterComponent onChangeFilter={this.props.onChangeFilter}/>
+                        <BikeFilterComponent isRenderMap={this.props.isRenderMap} onHandleSwitchView={this.props.onHandleSwitchView}/>
                     </div>
                 </div>
             </div>

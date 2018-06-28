@@ -42,6 +42,7 @@ const MapHiringComponent = compose(
             props.bikes.data.map(bike => 
                 (
                     <Marker
+                        key={bike.hash}
                         position={{ lat: bike.location.lat, lng: bike.location.long }}
                         onClick={() => props.handleSelectBike(bike.hash)}
                     >
