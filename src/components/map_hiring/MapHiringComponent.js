@@ -35,25 +35,25 @@ const MapHiringComponent = compose(
     <GoogleMap
         defaultZoom={5}
         defaultCenter={props.center}
-        onClick={props.onClose}
+        onClick={() => props.handleSelectBike("")}
         defaultOptions={{ styles: mapStyle }}
     >
         {
             props.bikes.data.map(bike => 
-            (
-                <Marker
-                    position={{ lat: bike.location.lat, lng: bike.location.long }}
-                    onClick={props.onToggleOpen}
-                >
-                {props.isOpen && <InfoBox
-                    onCloseClick={props.onToggleOpen}
-                    options={{ closeBoxURL: "", enableEventPropagation: false }}
-                >
-                    <BikeHiringInfo externalData={{}}/>
-                </InfoBox>
-                }
-                </Marker>
-            ))
+                (
+                    <Marker
+                        position={{ lat: bike.location.lat, lng: bike.location.long }}
+                        onClick={() => props.handleSelectBike(bike.hash)}
+                    >
+                        {bike.hash == props.bikeHashSelected && <InfoBox
+                            onCloseClick={props.onToggleOpen}
+                            options={{ closeBoxURL: "", enableEventPropagation: false }}
+                        >
+                            <BikeHiringInfo externalData={{}}/>
+                        </InfoBox>
+                        }
+                    </Marker>
+                ))
         }
     </GoogleMap>
 );

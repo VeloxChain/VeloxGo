@@ -9,12 +9,18 @@ class HiringRequestComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isRenderFilter: true
+            isRenderFilter: true,
+            bikeHashSelected: ""
         };
     }
 
-    onChangeFilter = (value) => {
+    handleSelectBike = (bikeHashSelected) => {
+        this.setState({
+            bikeHashSelected: bikeHashSelected
+        });
+    }
 
+    onChangeFilter = (value) => {
         this.setState({
             isRenderFilter: value
         });
@@ -34,6 +40,8 @@ class HiringRequestComponent extends Component {
         return (
             <div style={{backgroundColor: "white", padding: "10px"}}>
                 <MapHiringComponent
+                    bikeHashSelected = {this.state.bikeHashSelected}
+                    handleSelectBike= {this.handleSelectBike}
                     bikes={this.props.bikes}
                     isMarkerShown
                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1FyS1yEgh8Vo0nSrkks_CZevhzowYzps&v=3.exp&libraries=geometry,drawing,places"
