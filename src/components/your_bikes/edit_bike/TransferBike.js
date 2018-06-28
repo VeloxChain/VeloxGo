@@ -14,7 +14,7 @@ class TransferBike extends Component {
             <div style={styles.wrappRight}>
                 <div style={styles.boxLeft}>
                     <img
-                        src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.avatar.hash }
+                        src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.avatar }
                         alt="Bikecoin"
                         style={styles.bike}
                     />
