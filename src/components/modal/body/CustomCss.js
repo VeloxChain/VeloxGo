@@ -54,10 +54,9 @@ const Styles = {
     },
 
     dropzone: {
-        width: "150px",
-        height: "150px",
+        width: "200px",
+        height: "140px",
         border: "2px dashed #41f589",
-        borderRadius: "50%",
         overflow: "hidden",
         display: "flex",
         justifyContent: "center",
