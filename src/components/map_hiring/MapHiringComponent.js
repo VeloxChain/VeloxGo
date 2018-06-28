@@ -32,30 +32,39 @@ const MapHiringComponent = compose(
     withScriptjs,
     withGoogleMap
 )(props =>
-    <GoogleMap
-        defaultZoom={5}
-        defaultCenter={props.center}
-        onClick={() => props.handleSelectBike("")}
-        defaultOptions={{ styles: mapStyle }}
-    >
-        {
-            props.bikes.data.map(bike => 
-                (
-                    <Marker
-                        position={{ lat: bike.location.lat, lng: bike.location.long }}
-                        onClick={() => props.handleSelectBike(bike.hash)}
-                    >
-                        {bike.hash == props.bikeHashSelected && <InfoBox
-                            onCloseClick={props.onToggleOpen}
-                            options={{ closeBoxURL: "", enableEventPropagation: false }}
-                        >
-                            <BikeHiringInfo externalData={{}}/>
-                        </InfoBox>
-                        }
-                    </Marker>
-                ))
-        }
-    </GoogleMap>
+    {
+        console.log('props.mapDefaultLocation', props.mapDefaultLocation);
+        return(
+            <GoogleMap
+                defaultZoom={13}
+                center={{
+                    lng: props.mapDefaultLocation.long,
+                    lat: props.mapDefaultLocation.lat
+                }}
+                onClick={() => props.handleSelectBike("")}
+                defaultOptions={{ styles: mapStyle }}
+            >
+                {
+                    props.bikes.data.map(bike => 
+                        (
+                            <Marker
+                                key={bike.hash}
+                                position={{ lat: bike.location.lat, lng: bike.location.long }}
+                                onClick={() => props.handleSelectBike(bike.hash)}
+                            >
+                                {bike.hash == props.bikeHashSelected && <InfoBox
+                                    onCloseClick={props.onToggleOpen}
+                                    options={{ closeBoxURL: "", enableEventPropagation: false }}
+                                >
+                                    <BikeHiringInfo externalData={{}}/>
+                                </InfoBox>
+                                }
+                            </Marker>
+                        ))
+                }
+            </GoogleMap>
+        )
+    }
 );
 
 export default MapHiringComponent;

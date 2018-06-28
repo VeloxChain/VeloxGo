@@ -4,17 +4,10 @@ import styles from "./HiringRequestComponentStyle";
 class BikeFilterComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isFilter: true
-        };
     }
 
     onChangeFilter = (value) => {
-        this.props.onChangeFilter(value);
-
-        this.setState({
-            isFilter: value
-        });
+        this.props.onHandleSwitchView(value);
     }
 
     render() {
@@ -22,13 +15,13 @@ class BikeFilterComponent extends Component {
             <div style={styles.maps}>
                 <i
                     className="fa fa-list"
-                    style={this.state.isFilter ? styles.iconFilter : styles.icon}
-                    onClick={() => this.onChangeFilter(true)}    
+                    style={!this.props.isRenderMap ? styles.iconFilter : styles.icon}
+                    onClick={() => this.onChangeFilter(false)}    
                 />
                 <i
                     className="fa fa-map-marker"
-                    style={!this.state.isFilter ? styles.iconFilter : styles.icon}
-                    onClick={() => this.onChangeFilter(false)}    
+                    style={this.props.isRenderMap ? styles.iconFilter : styles.icon}
+                    onClick={() => this.onChangeFilter(true)}    
                 />
             </div>
         );
