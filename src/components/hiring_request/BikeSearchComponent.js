@@ -24,8 +24,8 @@ class BikeSearchComponent extends Component {
                     lat: 45.464211
                 },
                 san: {
-                    long: 103.819836,
-                    lat: 1.352083
+                    long: -122.431297,
+                    lat: 37.773972
                 },
             }
         }
@@ -36,7 +36,6 @@ class BikeSearchComponent extends Component {
     };
 
     render() {
-        console.log(this.props.mapDefaultLocation);
         return (
             <div className="row" style={styles.mb20}>
                 <div className="col-sm-3">
