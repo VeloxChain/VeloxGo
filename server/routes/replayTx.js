@@ -6,7 +6,7 @@ const TXRELAYABI = require("./TXRELAYABI.json");
 const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/faF0xSQUt0ezsDFYglOe"));
 
 let TXRELAY = web3.eth.contract(TXRELAYABI);
-let TXRELAYAddress = "0x54ebe12b2c249c77eecd0e6a61713a42c45eeb88";
+let TXRELAYAddress = "0x0c19e7ab42566e79ddd51604471eda6aca8ab59e";
 
 const hdWallet = EthHdWallet.fromMnemonic("frost mimic deer annual build develop discover split rose gather ahead gloom");
 hdWallet.generateAddresses(1);

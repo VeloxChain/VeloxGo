@@ -51,6 +51,7 @@ class Navigation extends Component{
                         </IconButton>}
                     targetOrigin={{horizontal: "right", vertical: "top"}}
                     anchorOrigin={{horizontal: "right", vertical: "top"}}
+                    style={{marginRight: "-20px"}}
                 >
                     {this._renderEditProfile()}
                     <MenuItem primaryText="Log out" onClick={this.handleLogout}/>
@@ -59,13 +60,17 @@ class Navigation extends Component{
         }
 
         return (
-            <IconMenu iconButtonElement={
-                <IconButton>
-                    <a className="pointer size20">
-                        <i className="fa fa-user" />
-                    </a>
-                </IconButton>
-            }>
+            <IconMenu
+                iconButtonElement={
+                    <IconButton>
+                        <a className="pointer size20">
+                            <i className="fa fa-user" />
+                        </a>
+                    </IconButton>
+                    
+                }
+                style={{marginRight: "-20px"}}
+            >
 
                 <MenuItem primaryText="Log in" onClick={this.handleLogin}/>
             </IconMenu>
@@ -75,22 +80,21 @@ class Navigation extends Component{
     render() {
         return (
             <div className="col-xs-12 relative bg-header">
-                <nav className="nav underline-none w100p h70 flexible">
-                    <div className="pull-left">
+                <nav className="row nav underline-none w100p h70 flexible">
+                    <div className="col-sm-4">
                         <a className="pointer size20 toggleMenu">
-                            <img src="images/Menu-Green.png" alt="Bikecoin"/>
+                            <img src="images/Menu-Green.png" alt="Bikecoin" />
                         </a>
                     </div>
-                    <div className="margin-auto">
-                        <img src="images/logo_bikecoin.png" alt="Bikecoin"/>
+                    <div className="col-sm-4 text-center">
+                        <img src="images/logo_bikecoin.png" alt="Bikecoin" className="logo-bikecoin" />
                     </div>
-                    <div className="pull-right">
+                    <div className="col-sm-4 text-right">
                         {
                             this.renderLogged()
                         }
                     </div>
                 </nav>
-
             </div>
         );
     }

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import {
     MODAL_CREATE_ACCOUNT_BIKECOIN,
@@ -13,6 +12,7 @@ import { addressFromKey } from "../../../utils/keys";
 // import constants from "../../../services/constants";
 import { retrieveUserProfile } from "../../../actions/userProfileActions";
 import _ from "lodash";
+import styles from "./CustomCss";
 
 class ImportAccount extends Component {
     constructor(props) {
@@ -107,13 +107,13 @@ class ImportAccount extends Component {
                     <Dropzone onDrop={this.onDrop.bind(this)} className="dragDrop-container flexible" multiple={false} activeClassName="onDrop">
                         <div className="text-center">
                             <a className="font60 default-cursor">
-                                <i className="fa fa-hdd-o" aria-hidden="true"></i>
+                                <img src="images/upload.png" />
                             </a>
                             {
                                 this.state.fileName === "" ?
                                     (
                                         <div>
-                                            <p className="bold"> Drop file here to import</p>
+                                            <p className="drop"> Drop file here to import</p>
                                             <p>or</p>
                                         </div>
                                     )
@@ -134,12 +134,12 @@ class ImportAccount extends Component {
                         onChange={(e) => this.setState({ accountName: e.target.value })}
                     /><br />
                     <div className="flexible-end mg30-0">
-                        <RaisedButton
-                            label="IMPORT ACCOUNT"
-                            labelColor="#fff"
-                            backgroundColor="#5c57a3"
+                        <button
                             onClick={this.importAccount}
-                        />
+                            style={styles.buttonBack}
+                        >
+                            IMPORT ACCOUNT
+                        </button>
                     </div>
                 </div>
 

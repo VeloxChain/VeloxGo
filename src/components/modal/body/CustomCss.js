@@ -3,6 +3,10 @@ const Styles = {
         marginBottom: "20px"
     },
 
+    mb80: {
+        marginBottom: "80px"
+    },
+
     stepLabel: {
         height: "auto",
         display: "block"
@@ -54,10 +58,9 @@ const Styles = {
     },
 
     dropzone: {
-        width: "150px",
-        height: "150px",
-        border: "2px dashed #41f589",
-        borderRadius: "50%",
+        width: "200px",
+        height: "140px",
+        border: "1px dashed rgb(173, 173, 173)",
         overflow: "hidden",
         display: "flex",
         justifyContent: "center",
@@ -67,7 +70,8 @@ const Styles = {
     },
 
     sumaryOfBike: {
-        minHeight: "440px"
+        minHeight: "440px",
+        paddingTop: "30px"
     },
 
     button: {
@@ -79,6 +83,34 @@ const Styles = {
         textTransform: "uppercase",
         letterSpacing: "1px",
     },
+
+    title: {
+        fontWeight: "bold",
+        color: "rgba(0, 0, 0, 0.3)",
+        marginBottom: "5px"
+    },
+
+    text: {
+        marginTop: "0",
+        marginBottom: "20px"
+    },
+
+    image: {
+        width: "100%",
+        border: "1px solid #ababab",
+        borderRadius: "4px"
+    },
+
+    buttonBack: {
+        background: "#fff",
+        border: "1px solid rgb(0, 214, 121)",
+        color: "rgb(0, 214, 121)",
+        borderRadius: "5px",
+        padding: "7px 30px",
+        marginBottom: "20px",
+        textTransform: "uppercase",
+        letterSpacing: "2px"
+    }
 };
 
 export default Styles;

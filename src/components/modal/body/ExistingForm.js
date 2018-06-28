@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import RaisedButton from "material-ui/RaisedButton";
 import {
     MODAL_METAMASK,
     MODAL_IMPORT_ACCOUNT
 } from "../constants";
+import styles from "./CustomCss";
+
 class Existing extends Component {
     render() {
         return (
@@ -14,18 +15,19 @@ class Existing extends Component {
                 </div>
 
                 <div className="flexible-evenly">
-                    <RaisedButton
-                        label="IMPORT ACCOUNT"
-                        labelColor="#fff"
-                        backgroundColor="#5c57a3"
+                    <button
                         onClick={() => this.props.setType(MODAL_IMPORT_ACCOUNT)}
-                    />
-                    <RaisedButton
-                        label="UNLOCK METAMASK"
-                        labelColor="#fff"
-                        backgroundColor="#5c57a3"
+                        style={styles.buttonBack}
+                    >
+                        IMPORT ACCOUNT
+                    </button>
+
+                    <button
                         onClick={() => this.props.setType(MODAL_METAMASK)}
-                    />
+                        style={styles.buttonBack}
+                    >
+                        UNLOCK METAMASK
+                    </button>
                 </div>
             </div>
         );

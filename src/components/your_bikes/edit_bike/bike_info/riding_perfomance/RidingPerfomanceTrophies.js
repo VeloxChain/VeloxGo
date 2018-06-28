@@ -62,7 +62,7 @@ class RidingPerfomanceTrophies extends Component {
                     <div style={styles.block}>
                         <img src="images/distanceAchievement.png" style={styles.iconTrophie} alt="Bikecoin" />
                         <p>
-                            <span style={styles.count}>99</span>
+                            <span style={styles.countLeaderBoard}>99</span>
                             <span style={styles.unit}> mi</span>
                         </p>
                         <p style={styles.text}>Achievement title</p>
@@ -72,7 +72,7 @@ class RidingPerfomanceTrophies extends Component {
                     <div style={styles.block}>
                         <img src="images/elevationAchievement.png" style={styles.iconTrophie} alt="Bikecoin" />
                         <p>
-                            <span style={styles.count}>99</span>
+                            <span style={styles.countLeaderBoard}>99</span>
                             <span style={styles.unit}> mi</span>
                         </p>
                         <p style={styles.text}>Achievement title</p>
@@ -82,7 +82,7 @@ class RidingPerfomanceTrophies extends Component {
                     <div style={styles.block}>
                         <img src="images/energyAchievement.png" style={styles.iconTrophie} alt="Bikecoin" />
                         <p>
-                            <span style={styles.count}>99</span>
+                            <span style={styles.countLeaderBoard}>99</span>
                             <span style={styles.unit}> mi</span>
                         </p>
                         <p style={styles.text}>Achievement title</p>
