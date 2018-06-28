@@ -28,11 +28,11 @@ class BikeSearchComponent extends Component {
                     lat: 37.773972
                 },
             }
-        }
+        };
     }
 
     handleChange = (event, index, value) => {
-        this.props.handleChangeMapDefaultLocation({...this.state.mapLocation[value], index: value, })
+        this.props.handleChangeMapDefaultLocation({...this.state.mapLocation[value], index: value, });
     };
 
     render() {
@@ -47,19 +47,19 @@ class BikeSearchComponent extends Component {
                         selectedMenuItemStyle={styles.selectedMenuItemStyle}
                     >
                         <MenuItem 
-                            value={'sg'}
+                            value={"sg"}
                             primaryText="Singapore" 
                         />
                         <MenuItem 
-                            value={'del'}
+                            value={"del"}
                             primaryText="Delaware" 
                         />
                         <MenuItem 
-                            value={'mil'}
+                            value={"mil"}
                             primaryText="Milano (Italy)" 
                         />
                         <MenuItem 
-                            value={'san'}
+                            value={"san"}
                             primaryText="San Francisco" 
                         />
                     </SelectField>

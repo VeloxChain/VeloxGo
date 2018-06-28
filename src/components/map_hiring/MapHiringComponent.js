@@ -10,6 +10,7 @@ import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 import BikeHiringInfo from "../bike_hiring_info/BikeHiringInfo";
 import appConfig from "../../config/app.json";
 import mapStyle from "../../config/mapStyle.json";
+import MapBikeIcon from "../../assets/images/map_bike_icon.png";
 
 const MapHiringComponent = compose(
     withProps({
@@ -32,39 +33,39 @@ const MapHiringComponent = compose(
     withScriptjs,
     withGoogleMap
 )(props =>
-    {
-        console.log('props.mapDefaultLocation', props.mapDefaultLocation);
-        return(
-            <GoogleMap
-                defaultZoom={13}
-                center={{
-                    lng: props.mapDefaultLocation.long,
-                    lat: props.mapDefaultLocation.lat
-                }}
-                onClick={() => props.handleSelectBike("")}
-                defaultOptions={{ styles: mapStyle }}
-            >
-                {
-                    props.bikes.data.map(bike => 
-                        (
-                            <Marker
-                                key={bike.hash}
-                                position={{ lat: bike.location.lat, lng: bike.location.long }}
-                                onClick={() => props.handleSelectBike(bike.hash)}
+{
+    return(
+        <GoogleMap
+            defaultZoom={13}
+            center={{
+                lng: props.mapDefaultLocation.long,
+                lat: props.mapDefaultLocation.lat
+            }}
+            onClick={() => props.handleSelectBike("")}
+            defaultOptions={{ styles: mapStyle }}
+        >
+            {
+                props.bikes.data.map(bike => 
+                    (
+                        <Marker
+                            key={bike.hash}
+                            position={{ lat: bike.location.lat, lng: bike.location.long }}
+                            onClick={() => props.handleSelectBike(bike.hash)}
+                            icon={MapBikeIcon}
+                        >
+                            {bike.hash == props.bikeHashSelected && <InfoBox
+                                onCloseClick={props.onToggleOpen}
+                                options={{ closeBoxURL: "", enableEventPropagation: false }}
                             >
-                                {bike.hash == props.bikeHashSelected && <InfoBox
-                                    onCloseClick={props.onToggleOpen}
-                                    options={{ closeBoxURL: "", enableEventPropagation: false }}
-                                >
-                                    <BikeHiringInfo externalData={{}}/>
-                                </InfoBox>
-                                }
-                            </Marker>
-                        ))
-                }
-            </GoogleMap>
-        )
-    }
+                                <BikeHiringInfo externalData={{}}/>
+                            </InfoBox>
+                            }
+                        </Marker>
+                    ))
+            }
+        </GoogleMap>
+    );
+}
 );
 
 export default MapHiringComponent;

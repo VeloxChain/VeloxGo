@@ -3,8 +3,32 @@ import TextField from "material-ui/TextField";
 import styles from "./CustomCss";
 import Dropzone from "react-dropzone";
 import _ from "lodash";
+import { Dialog } from "material-ui";
+import ImageCroper from "../../image_croper/ImageCroper";
+
 
 class RegisterBikeInformation extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isOpenCropImage: false,
+            imagePreview: null
+        };
+    }
+
+    onHandleOpenCropImage = () => {
+        this.setState({
+            isOpenCropImage: true
+        });
+    }
+
+    onHandleCloseCropImage = () => {
+        this.setState({
+            isOpenCropImage: false
+        });
+    }
+
     onDrop = (images) => {
         if (_.isEmpty(images)) {
             return;
@@ -23,6 +47,14 @@ class RegisterBikeInformation extends Component {
                     imageName: file.name,
                     imagePreview: file.preview
                 });
+
+                this.setState({
+                    imagePreview: file.preview
+                });
+
+                // setTimeout(()=> this.onHandleOpenCropImage(), 3000)
+
+                this.onHandleOpenCropImage();
                 return;
             }
             this.props.handleChangeState({
@@ -46,6 +78,17 @@ class RegisterBikeInformation extends Component {
     render() {
         return (
             <div className="wrapp">
+                <Dialog
+                    title="Select an area on image"
+                    modal={false}
+                    onRequestClose={this.onHandleCloseCropImage}
+                    open={this.state.isOpenCropImage}
+                    autoScrollBodyContent={true}
+                    repositionOnUpdate={true}
+                >
+                    <ImageCroper handleChangeState={this.props.handleChangeState} imagePreview={this.state.imagePreview} onHandleCloseCropImage={this.onHandleCloseCropImage}/>
+                </Dialog>
+
                 <div className="w100p">
                     <Dropzone onDrop={this.onDrop} style={styles.dropzone} multiple={false} activeClassName="onDrop" accept=".jpeg,.jpg,.png">
                         { this._renderPreview() }

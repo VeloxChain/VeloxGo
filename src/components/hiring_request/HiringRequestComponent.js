@@ -12,7 +12,7 @@ class HiringRequestComponent extends Component {
             bikeHashSelected: "",
             isRenderMap: false,
             mapDefaultLocation: {
-                index: 'sg',
+                index: "sg",
                 long: 103.819836,
                 lat: 1.352083
             }
@@ -22,7 +22,7 @@ class HiringRequestComponent extends Component {
     handleChangeMapDefaultLocation = (mapDefaultLocation) => {
         this.setState({
             mapDefaultLocation: mapDefaultLocation
-        })
+        });
     }
 
     handleSelectBike = (bikeHashSelected) => {
