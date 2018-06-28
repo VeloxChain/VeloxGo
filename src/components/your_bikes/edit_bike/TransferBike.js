@@ -9,31 +9,12 @@ const honk = "images/honk.png";
 const honkOn = "images/honkGreen.png";
 
 class TransferBike extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLock: false,
-            isHonk: false,
-            isFlash: false
-        };
-    }
-
-    onChangeStatus = (text, value) => {
-        let newData = [];
-        newData[text] = value;
-        
-        this.setState({
-            ...this.state,
-            ...newData
-        });
-    }
-
     render() {
         return (
             <div style={styles.wrappRight}>
                 <div style={styles.boxLeft}>
                     <img
-                        src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.avatar.hash }
+                        src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.avatar }
                         alt="Bikecoin"
                         style={styles.bike}
                     />
@@ -43,24 +24,24 @@ class TransferBike extends Component {
                         <button style={styles.buttonTransfer}>Transfer</button>
                         <button style={styles.buttonDelete} onClick={this.props.deytroyBike}>Destroy</button>
                         <button style={styles.buttonTransfer}>Lost mode</button>
-                        
+
                         <div style={styles.wrappStatus}>
                             <img
-                                src={this.state.isFlash ? flashOn : flashOff}
+                                src={this.props.bikeInfo.isFlash ? flashOn : flashOff}
                                 style={styles.iconStatus}
-                                onClick={() => this.onChangeStatus("isFlash", !this.state.isFlash)}
+                                onClick={() => this.props.handleChangeState({isFlash: !this.props.bikeInfo.isFlash})}
                                 alt="Bikecoin"
                             />
                             <img
-                                src={this.state.isHonk ? honkOn : honk}
+                                src={this.props.bikeInfo.isHonk ? honkOn : honk}
                                 style={styles.iconStatus}
-                                onClick={() => this.onChangeStatus("isHonk", !this.state.isHonk)}
+                                onClick={() => this.props.handleChangeState({isHonk: !this.props.bikeInfo.isHonk})}
                                 alt="Bikecoin"
                             />
                             <img
-                                src={this.state.isLock ? lockedOn : lockedOff}
+                                src={this.props.bikeInfo.isLock ? lockedOn : lockedOff}
                                 style={styles.iconStatus}
-                                onClick={() => this.onChangeStatus("isLock", !this.state.isLock)}
+                                onClick={() => this.props.handleChangeState({isLock: !this.props.bikeInfo.isLock})}
                                 alt="Bikecoin"
                             />
                         </div>
