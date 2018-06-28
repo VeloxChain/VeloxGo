@@ -113,7 +113,7 @@ class ModalCustom extends Component {
                                 className="pull-right color-text pd10 size20 closeModal"
                                 onClick={this.props.closeModal}
                             >
-                                <i className="fa fa-times"></i>
+                                <img src="images/close.png" alt="Bikecoin" style={customStyles.close} />
                             </a>
                         </div>
                         {this._renderBodyModal()}
@@ -145,6 +145,9 @@ const customStyles = {
         "right"       : "auto",
         "bottom"      : "auto",
 
+    },
+    close: {
+        width: "15px"
     }
 };
 
