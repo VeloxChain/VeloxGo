@@ -4,7 +4,7 @@ import Datatable from "../datatable/Datatable";
 import styles from "./YourBikesComponentStyle";
 import EditBikeComponent from "./edit_bike/EditBikeComponent";
 import Toggle from "material-ui/Toggle";
-import { uploadModifiedBikeToIPFS } from "../../actions/bikeActions";
+// import { uploadModifiedBikeToIPFS } from "../../actions/bikeActions";
 class YourBikesComponent extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +18,7 @@ class YourBikesComponent extends Component {
                 {title: "ACTION", value: "action"}
             ],
             actions: [
-                {name: "Edit", handle: this.editRow}
+                {name: "View", handle: this.editRow}
             ],
             toggle: {
                 "forrent":  this._renderToggle
@@ -29,17 +29,17 @@ class YourBikesComponent extends Component {
         };
     }
 
-    changeBikeInfo = async (isInputChecked, rowEdit,rowIndex) => {
-        let dataChanges = Object.assign(rowEdit, {forRent: isInputChecked});
-        await this.props.dispatch(uploadModifiedBikeToIPFS(dataChanges, rowIndex));
-    }
+    // changeBikeInfo = async (isInputChecked, rowEdit,rowIndex) => {
+    //     // let dataChanges = Object.assign(rowEdit, {forRent: isInputChecked});
+    //     // await this.props.dispatch(uploadModifiedBikeToIPFS(dataChanges, rowIndex));
+    //     // onToggle={(e, isInputChecked) => this.changeBikeInfo(isInputChecked, row, index)}
+    // } row, index
 
-    _renderToggle = (value, row, index) => {
+    _renderToggle = (value) => {
         return (
             <Toggle
                 labelPosition="right"
                 defaultToggled={value}
-                onToggle={(e, isInputChecked) => this.changeBikeInfo(isInputChecked, row, index)}
                 thumbSwitchedStyle={styles.thumbSwitchedStyle}
                 trackSwitchedStyle={styles.trackSwitchedStyle}
                 trackStyle={styles.track}

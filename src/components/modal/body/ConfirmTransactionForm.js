@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 // import { unlock } from "../../../utils/keys";
-import { verifyNumber } from "../../../utils/validators";
+// import { verifyNumber } from "../../../utils/validators";
 // import Web3 from "web3";
 // import { addTx } from "../../../actions/txActions";
 // import Tx from "../../../services/tx";

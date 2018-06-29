@@ -91,12 +91,13 @@ const Styles = {
         marginTop: "20px",
     },
     buttonBack: {
-        background: "transparent",
-        border: "none",
+        background: "#fff",
+        border: "1px solid #00d679",
         borderRadius: "5px",
-        padding: "7px 20px",
+        padding: "7px 30px",
         textTransform: "uppercase",
         letterSpacing: "2px",
+        marginBottom:20,
     },
     toggle: {
         marginBottom: 16,
@@ -162,7 +163,7 @@ const Styles = {
     listItem: {
         color: "rgb(0, 214, 121)"
     },
-    
+
     thumbSwitchedStyle: {
         backgroundColor: "#fff"
     },

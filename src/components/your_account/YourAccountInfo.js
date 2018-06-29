@@ -3,25 +3,6 @@ import styles from "./YourAccountComponentStyle";
 
 class YourAccountInfo extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            bkc: 0,
-            eth: 0
-        };
-    }
-    _renderETHBalance = (balance,) => {
-        this.setState({eth: balance});
-    }
-    _renderBKCBalance = (balance,) => {
-        this.setState({bkc: balance});
-    }
-    componentDidMount() {
-        const { userProfile } = this.props;
-        this.props.ethereum.getBalance(userProfile.data.accountAddress, this._renderETHBalance);
-        this.props.ethereum.getBikeCoinBalance(userProfile.data.accountAddress, this._renderBKCBalance);
-    }
-
     render() {
         let { userProfile } = this.props;
         return (
@@ -33,9 +14,9 @@ class YourAccountInfo extends Component {
                     <div style={{float:"left"}}>
                         <h4 style={styles.name}>{userProfile.data.firstname + " " + userProfile.data.lastname}</h4>
                         <p style={styles.text}>
-                            BKC: {this.state.bkc}
+                            BKC: {this.props.info.bkc}
                             <br />
-                            ETH: {this.state.eth}
+                            ETH: {this.props.info.eth}
                         </p>
                         <button style={styles.buttonCollect}>collect 200 bkc</button>
                     </div>
