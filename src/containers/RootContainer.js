@@ -60,7 +60,7 @@ class RootContainer extends React.Component {
     _renderTxHash = (AppReducer) => {
         if (AppReducer.txHash) {
             return (
-                <a href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash} style={{fontSize:20}} target="_blank">{AppReducer.txHash}</a>
+                <a href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash} style={{fontSize:20}} target="_blank">{"Tx: " + AppReducer.txHash}</a>
             );
         }
     }
