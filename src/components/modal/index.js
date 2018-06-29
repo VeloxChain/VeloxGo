@@ -36,7 +36,7 @@ import ShareData from "./body/ShareDataForm";
 import Verify from "./body/VerifyForm";
 import NotEnoughEth from "./body/NotEnoughEthForm";
 import ConfirmTransaction from "./body/ConfirmTransactionForm";
-import RegisterBike from "./body/RegisterBikeForm";
+import RegisterBike from "./body/RegisterBike/RegisterBikeForm";
 import SumaryOfBike from "./body/SumaryOfBikeForm";
 class ModalCustom extends Component {
     _renderBodyModal = () => {

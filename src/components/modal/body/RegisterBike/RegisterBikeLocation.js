@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MapRegisterBike from "../../map_register_bike/MapRegisterBike";
+import MapRegisterBike from "../../../map_register_bike/MapRegisterBike";
 
 class RegisterBikeLocation extends Component {
     render() {

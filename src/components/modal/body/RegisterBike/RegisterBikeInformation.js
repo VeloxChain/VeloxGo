@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import TextField from "material-ui/TextField";
-import styles from "./CustomCss";
+import styles from "../CustomCss";
 import Dropzone from "react-dropzone";
 import _ from "lodash";
 import { Dialog } from "material-ui";
-import ImageCroper from "../../image_croper/ImageCroper";
+import ImageCroper from "../../../image_croper/ImageCroper";
 
 
 class RegisterBikeInformation extends Component {

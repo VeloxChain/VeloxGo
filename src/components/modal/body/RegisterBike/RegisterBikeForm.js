@@ -4,12 +4,12 @@ import {
     Stepper,
     StepLabel,
 } from "material-ui/Stepper";
-import styles from "./CustomCss";
+import styles from "../CustomCss";
 import RegisterBikeInformation from "./RegisterBikeInformation";
 import RegisterBikeLocation from "./RegisterBikeLocation";
 import RegisterBikeConfirm from "./RegisterBikeConfirm";
 import RegisterBikeSuccess from "./RegisterBikeSuccess";
-import { uploadNewBikeToIPFS } from "../../../actions/bikeActions";
+import { uploadNewBikeToIPFS } from "../../../../actions/bikeActions";
 import { toast } from "react-toastify";
 class RegisterBike extends Component {
     constructor(props) {
