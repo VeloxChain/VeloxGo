@@ -55,7 +55,7 @@ class RegisterBike extends Component {
                 return false;
             }
         }
-        if (stepIndex === 2) {
+        if (stepIndex === 2 && !this.props.isMetamask) {
             if (stepThree.passphrase === "") {
                 return false;
             }
@@ -71,6 +71,10 @@ class RegisterBike extends Component {
             return;
         }
         if (stepIndex < 2) {
+            if (stepIndex === 1) {
+                this.registerBike();
+                return;
+            }
             this.setState({
                 stepIndex: stepIndex + 1,
             });
@@ -83,14 +87,20 @@ class RegisterBike extends Component {
         this.props.closeModal();
 
     };
-
+    _callBack = () => {
+        this.setState({stepIndex: 3});
+    }
     registerBike = async () => {
-        const { stepOne, stepTwo } = this.state;
+        const { stepOne, stepTwo, stepThree } = this.state;
         await this.props.dispatch(uploadNewBikeToIPFS({
             bikeInfo: stepOne,
-            location: stepTwo.location
+            location: stepTwo.location,
+            callBack: this._callBack,
+            keyStore: this.props.accounts.accounts.key,
+            passphrase: stepThree.passphrase,
+            ethereum: this.props.ethereum
         }));
-        this.setState({stepIndex: 3});
+
     }
 
     handleChangeState = (data) => {
