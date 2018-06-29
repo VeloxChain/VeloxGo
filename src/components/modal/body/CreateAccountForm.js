@@ -138,7 +138,7 @@ class CreateAccount extends Component {
     }
     _renderPassphrase = () => {
         const { accounts } = this.props;
-        if (_.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key) || _.isUndefined(accounts.accounts.keystring)) {
+        if (_.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key)) {
             return undefined;
         }
         return (

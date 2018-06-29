@@ -25,7 +25,7 @@ class OwnerLogin extends Component {
                         onClick={() => this.props.setType(MODAL_EXISTING)}
                         style={styles.buttonBack}
                     >
-                        NEW ACCOUNT
+                        EXISTING ACCOUNT
                     </button>
                 </div>
             </div>
