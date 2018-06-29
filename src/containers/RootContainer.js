@@ -57,11 +57,24 @@ class RootContainer extends React.Component {
             }
         }
     }
+    _renderTxHash = (AppReducer) => {
+        if (AppReducer.txHash) {
+            return (
+                <a href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash} style={{fontSize:20}} target="_blank">{AppReducer.txHash}</a>
+            );
+        }
+    }
     _renderLoading = () => {
-        if (this.props.AppReducer.isLoading) {
+        const { AppReducer } = this.props;
+        if (AppReducer.isLoading) {
             return (
                 <div className="absolute-fancy-loading flexible">
-                    <img id="loader" src="images/loading.png"/>
+                    <div style={{marginTop: -150}}>
+                        <img id="loader" src="images/loading.png" style={{margin: "auto"}}/>
+                        <br/>
+                        {this._renderTxHash(AppReducer)}
+                    </div>
+
                 </div>
             );
         }

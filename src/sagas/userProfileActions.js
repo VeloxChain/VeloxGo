@@ -41,6 +41,7 @@ function* uploadProfileToIPFS(action) {
 function* finishUploadNewProfileToIPFS(action) {
     const { payload } = action;
     let tx = yield call(createNewUserProfile, payload.userInfo.accountAddress, payload.hashData, payload.ethereum, payload.keyStore, payload.passphrase);
+    yield put({type: "APP_LOADING_START", payload: tx.tx});
     var res = null;
     while (res === null) {
         yield delay(2000);
@@ -72,6 +73,7 @@ function* finishUploadModifiedProfileToIPFS(action) {
     const { payload } = action;
     let userProfileAddress = yield call(payload.ethereum.networkAdress.getUserProfile, payload.userInfo.accountAddress);
     let tx = yield call(updateUserProfile, payload.userInfo.accountAddress, userProfileAddress, payload.hashData, payload.ethereum, payload.keyStore, payload.passphrase);
+    yield put({type: "APP_LOADING_START", payload: tx.tx});
     var res = null;
     while (res === null) {
         yield delay(2000);

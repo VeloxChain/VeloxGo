@@ -26,7 +26,8 @@ const initialState = {
             autoClose: "2000"
         },
         isOpen: false,
-    }
+    },
+    txHash: ""
 };
 
 const AppReducer = (state = initialState, action) => {
@@ -68,11 +69,13 @@ const AppReducer = (state = initialState, action) => {
         return {
             ...state,
             isLoading: true,
+            txHash: action.payload
         };
     case "APP_LOADING_END":
         return {
             ...state,
             isLoading: false,
+            txHash: ""
         };
     default:
         return state;

@@ -72,7 +72,6 @@ class root extends React.Component {
     isMetamask = () => {
         const { accounts } = this.props;
         let isMetaMask = _.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key);
-        console.log(isMetaMask,"metamask");
         return isMetaMask;
     }
     render() {
