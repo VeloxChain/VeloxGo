@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import TextField from "material-ui/TextField";
-// import RaisedButton from "material-ui/RaisedButton";
-import  {verifyEmail, verifyNumber } from "../../../utils/validators";
+import  {verifyEmail } from "../../../utils/validators";
 import { uploadUserProfileToIPFS } from "../../../actions/userProfileActions";
-// import { useMetamask } from "../../../actions/appAction";
 import Dropzone from "react-dropzone";
 import _ from "lodash";
 import styles from "./CustomCss";
-
+import { toast } from "react-toastify";
 class CreateAccount extends Component {
     constructor(props) {
         super(props);
@@ -17,22 +15,11 @@ class CreateAccount extends Component {
             lastname: "",
             avatar: "",
             email: "",
-            gasLimit: 4712388,
-            gasPrice: 50,
             disabled:false,
             submitted:false,
             labelButton: "CREATE BIKECOIN ACCOUNT",
             fileData: "",
             preview: "",
-            errors : {
-                passpharse: "",
-                firstname: "",
-                lastname: "",
-                avatar: "",
-                email: "",
-                gasLimit: "",
-                gasPrice: ""
-            }
         };
     }
     handleKeyPress = (target) => {
@@ -41,68 +28,48 @@ class CreateAccount extends Component {
         }
     }
 
-    isValidData = () => {
-        var errors = this.state.errors;
-        return (errors.passpharse === "" && errors.avatar === "" && errors.firstname === "" && errors.lastname === "" && errors.email === "" && errors.gasPrice === "" && errors.gasLimit === "");
-    }
-    validate = () => {
-        let state = this.state;
-        if (!verifyEmail(this.state.email)) {
-            state = { ...state, errors:  { ...state.errors, email : "invalid email"}};
-        } else {
-            state = { ...state, errors:  { ...state.errors, email : ""}};
+    validate = async () => {
+        let isValidEmail = await verifyEmail(this.state.email);
+        if (!isValidEmail) {
+            return false;
         }
-
-        if (verifyNumber(this.state.gasLimit) != null) {
-            state = { ...state, errors:  { ...state.errors, gasLimit : "invalid Gas Limit"}};
-        } else {
-            state = { ...state, errors:  { ...state.errors, gasLimit : ""}};
-        }
-
-        if (verifyNumber(this.state.gasPrice) != null) {
-            state = { ...state, errors:  { ...state.errors, gasPrice : "invalid Gas Price"}};
-        } else {
-            state = { ...state, errors:  { ...state.errors, gasPrice : ""}};
-        }
-
         if (this.state.firstname === "") {
-            state = { ...state, errors:  { ...state.errors, firstname : "First name is empty"}};
-        } else {
-            state = { ...state, errors:  { ...state.errors, firstname : ""}};
+            return false;
         }
         if (this.state.lastname === "") {
-            state = { ...state, errors:  { ...state.errors, lastname : "Last name is empty"}};
-        } else {
-            state = { ...state, errors:  { ...state.errors, lastname : ""}};
+            return false;
         }
-        let accounts = this.props.accounts.account;
-        if (this.state.passpharse === "" && (!_.isEmpty(accounts) && (accounts.key !== "" || accounts.keystring !== ""))) {
-            state = { ...state, errors:  { ...state.errors, passpharse : "Passpharse is invalid"}};
-        } else {
-            state = { ...state, errors:  { ...state.errors, passpharse : ""}};
+        if (this.state.passpharse === "" && this.isMetamask() === false) {
+            return false;
         }
-        this.setState(state);
+        if (this.state.fileData === "") {
+            return false;
+        }
+        return true;
     }
     createProfile = async () => {
         if (this.state.submitted) {
             return;
         }
-        if (this.isValidData()){
-            var state = this.state;
-            let userInfo = {
-                email: state.email,
-                lastname: state.lastname,
-                firstname: state.firstname,
-                avatarData: state.fileData,
-                avatar: state.avatar,
-                accountAddress:this.props.getAccountAddress(),
-                ethereum: this.props.ethereum,
-                keyStore: this.props.accounts.accounts.key,
-                passphrase: state.passpharse
-            };
-            await this.props.dispatch(uploadUserProfileToIPFS(userInfo));
-            this.props.closeModal();
+        let isValidData = await this.validate();
+        if (!isValidData) {
+            toast.error("Invalid Form");
+            return;
         }
+        var state = this.state;
+        let userInfo = {
+            email: state.email,
+            lastname: state.lastname,
+            firstname: state.firstname,
+            avatarData: state.fileData,
+            avatar: state.avatar,
+            accountAddress:this.props.getAccountAddress(),
+            ethereum: this.props.ethereum,
+            keyStore: this.props.accounts.accounts.key,
+            passphrase: state.passpharse
+        };
+        await this.props.dispatch(uploadUserProfileToIPFS(userInfo));
+        this.props.closeModal();
     }
     getContractAddress = (userProfileAddress) => {
         this.setState({
@@ -136,9 +103,12 @@ class CreateAccount extends Component {
             //
         }
     }
-    _renderPassphrase = () => {
+    isMetamask =  () => {
         const { accounts } = this.props;
-        if (_.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key)) {
+        return (_.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key));
+    }
+    _renderPassphrase = () => {
+        if (this.isMetamask()) {
             return undefined;
         }
         return (
