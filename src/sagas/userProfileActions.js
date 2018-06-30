@@ -41,6 +41,10 @@ function* uploadProfileToIPFS(action) {
 function* finishUploadNewProfileToIPFS(action) {
     const { payload } = action;
     let tx = yield call(createNewUserProfile, payload.userInfo.accountAddress, payload.hashData, payload.ethereum, payload.keyStore, payload.passphrase);
+    if (tx === false) {
+        yield put({type: "APP_LOADING_END"});
+        return;
+    }
     yield put({type: "APP_LOADING_START", payload: tx.tx});
     var res = null;
     while (res === null) {
@@ -50,7 +54,11 @@ function* finishUploadNewProfileToIPFS(action) {
         });
         console.log("syncing..."); //eslint-disable-line
     }
-
+    if (res.status === "0x0") {
+        yield put({type: "APP_LOADING_END"});
+        toast.error("Transaction failed!.");
+        return;
+    }
     yield put({
         type:ACC_ACTION.NEW_ACCOUNT_ADDED_PENDING,
         payload: {
@@ -73,6 +81,10 @@ function* finishUploadModifiedProfileToIPFS(action) {
     const { payload } = action;
     let userProfileAddress = yield call(payload.ethereum.networkAdress.getUserProfile, payload.userInfo.accountAddress);
     let tx = yield call(updateUserProfile, payload.userInfo.accountAddress, userProfileAddress, payload.hashData, payload.ethereum, payload.keyStore, payload.passphrase);
+    if (tx === false) {
+        yield put({type: "APP_LOADING_END"});
+        return;
+    }
     yield put({type: "APP_LOADING_START", payload: tx.tx});
     var res = null;
     while (res === null) {
@@ -82,7 +94,11 @@ function* finishUploadModifiedProfileToIPFS(action) {
         });
         console.log("syncing..."); //eslint-disable-line
     }
-    console.log(res); //eslint-disable-line
+    if (res.status === "0x0") {
+        yield put({type: "APP_LOADING_END"});
+        toast.error("Transaction failed!.");
+        return;
+    }
     yield put({
         type: USER_PROFILE.UPDATE,
         payload: {userProfile:payload.userInfo,hash: payload.hashData}

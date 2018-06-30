@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
-// import { unlock } from "../../../utils/keys";
-import { verifyNumber } from "../../../utils/validators";
-// import Web3 from "web3";
-// import { addTx } from "../../../actions/txActions";
-// import Tx from "../../../services/tx";
-// import { deployPrimaryDataOnUserProfile } from "../../../actions/userProfileActions";
+import styles from "./CustomCss";
 class ConfirmTransaction extends Component {
     constructor(props) {
         super(props);
@@ -57,13 +51,9 @@ class ConfirmTransaction extends Component {
                         onChange={(e) => this.setState({ passphrase: e.target.value })}
                     />
                     <div className="flexible-end mg30-0">
-                        <RaisedButton
-                            label={this.state.labelButton}
-                            labelColor="#fff"
-                            disabled={this.state.disabled}
-                            backgroundColor="#5c57a3"
-                            onClick={this._onDeploy}
-                        />
+                        <button onClick={this._onDeploy} style={styles.buttonBack}>
+                            {this.state.labelButton}
+                        </button>
                     </div>
                 </div>
 

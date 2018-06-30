@@ -1,11 +1,6 @@
-// import { sealTxByKeystore } from "../utils/sealer";
-// import { verifyNonce } from "../utils/validators";
-// import store from "../store";
-// import { doTransaction, doApprovalTransaction } from "../actions/exchangeFormActions";
 import constants from "../services/constants";
 import _ from "lodash";
 import { unlock } from "../utils/keys";
-// import Rate from "./rate";
 import CryptoJS from "crypto-js";
 import coder from "web3/lib/solidity/coder";
 const leftPad = require("left-pad");
@@ -34,6 +29,7 @@ function encodeFunctionTxData(functionName, types, args) {
 }
 
 function signPayload(signingAddr, txRelay, whitelistOwner, destinationAddress, functionName, functionTypes, functionParams, privKey, isMetamask, callBack) {
+
     if (functionTypes.length !== functionParams.length) {
         return; //should throw error
     }
@@ -68,6 +64,8 @@ function signPayload(signingAddr, txRelay, whitelistOwner, destinationAddress, f
                 retVal.nonce = nonce;
                 retVal.dest = destinationAddress;
                 callBack(retVal);
+            } else {
+                callBack(false);
             }
         });
     } else {
@@ -97,6 +95,10 @@ export const createNewUserProfile = async (address, ipfsHash ,ethereum, keyStore
     }
     return new Promise( (resolve) => {
         signPayload(address, txRelay, zeroAddress, destinationAddress, "createUserProfile", types, params,privKey, isMetamask, (res) => {
+            if (res === false) {
+                resolve(res);
+                return;
+            }
             resolve(callApiReplayTx(res));
         });
     });
@@ -104,10 +106,34 @@ export const createNewUserProfile = async (address, ipfsHash ,ethereum, keyStore
 export const updateUserProfile = async (address, profileAddress, ipfsHash ,ethereum, keyStore, password) => {
     console.log(address, profileAddress, ipfsHash); //eslint-disable-line
     let isMetamask = _.isUndefined(password) || password === "";
-    let updateUserProfileData = encodeFunctionTxData("setIPFSHash", ["string"], [ipfsHash]);
     let zeroAddress = "0x0000000000000000000000000000000000000000";
-    let types = ["address", "address", "address", "uint256", "bytes", "bytes32"];
-    let params = [address,profileAddress , constants.BIKECOIN_NETWORK_ADDRESS, 0, updateUserProfileData, "0x0"];
+    let types = ["address","address", "string"];
+    let params = [address, profileAddress, ipfsHash];
+    let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
+    let txRelay = ethereum.relayTxContract;
+    var privKey = "";
+    if (!isMetamask) {
+        privKey = unlock(keyStore, password, true);
+    }
+    return new Promise( (resolve) => {
+        signPayload(address, txRelay, zeroAddress, destinationAddress, "updateUserProfileMetaData", types, params,privKey, isMetamask, (res) => {
+            if (res === false) {
+                resolve(res);
+                return;
+            }
+            resolve(callApiReplayTx(res));
+        });
+    });
+};
+
+export const createNewBike = async (address, profileAddress, ipfsHash ,ethereum, keyStore, password) => {
+    console.log(address, profileAddress, ipfsHash); //eslint-disable-line
+    let isMetamask = _.isUndefined(password) || password === "";
+    let createNewBikeData = encodeFunctionTxData("create", ["string"], [ipfsHash]);
+    let zeroAddress = "0x0000000000000000000000000000000000000000";
+    let types = ["address", "address", "address", "uint256", "bytes"];
+    let value = 0;
+    let params = [address, profileAddress, constants.BIKECOIN_OWNER_SHIP_ADDRESS , value, createNewBikeData];
     let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
     let txRelay = ethereum.relayTxContract;
     var privKey = "";
@@ -116,10 +142,36 @@ export const updateUserProfile = async (address, profileAddress, ipfsHash ,ether
     }
     return new Promise( (resolve) => {
         signPayload(address, txRelay, zeroAddress, destinationAddress, "forwardTo", types, params,privKey, isMetamask, (res) => {
+            if (res === false) {
+                resolve(res);
+                return;
+            }
             resolve(callApiReplayTx(res));
         });
     });
-
+};
+export const updateBike = async (address, ipfsHash ,ethereum, keyStore, password) => {
+    console.log(address, ipfsHash); //eslint-disable-line
+    let isMetamask = _.isUndefined(password) || password === "";
+    let createNewBikeData = encodeFunctionTxData("create", ["string"], [ipfsHash]);
+    let zeroAddress = "0x0000000000000000000000000000000000000000";
+    let types = ["address", "address", "uint256", "bytes", "bytes32"];
+    let params = [address, constants.BIKECOIN_OWNER_SHIP_ADDRESS , 0, createNewBikeData, "0x0"];
+    let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
+    let txRelay = ethereum.relayTxContract;
+    var privKey = "";
+    if (!isMetamask) {
+        privKey = unlock(keyStore, password, true);
+    }
+    return new Promise( (resolve) => {
+        signPayload(address, txRelay, zeroAddress, destinationAddress, "forwardTo", types, params,privKey, isMetamask, (res) => {
+            if (res === false) {
+                resolve(res);
+                return;
+            }
+            resolve(callApiReplayTx(res));
+        });
+    });
 };
 
 
