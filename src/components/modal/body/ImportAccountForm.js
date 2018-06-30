@@ -5,7 +5,7 @@ import {
     // MODAL_INSUFFICIENT_FUNDS
 } from "../constants";
 import Dropzone from "react-dropzone";
-
+import { addAccount } from "../../../actions/accountActions";
 import { specifyName, specifyDesc, throwError, uploadKey } from "../../../actions/importKeystoreActions"; //emptyForm
 import { verifyAccount, verifyKey, anyErrors } from "../../../utils/validators";
 import { addressFromKey } from "../../../utils/keys";
@@ -60,6 +60,8 @@ class ImportAccount extends Component {
             let { keystore } = this.props;
             let userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(keystore.address);
             if (userProfileAddress === "0x0000000000000000000000000000000000000000") {
+                let { keystore } = this.props;
+                this.props.dispatch(addAccount(keystore.address, keystore.keystring, this.state.accountName, keystore.desc));
                 this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
                 return;
             }

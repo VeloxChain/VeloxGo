@@ -71,7 +71,7 @@ class RegisterBike extends Component {
             return;
         }
         if (stepIndex < 2) {
-            if (stepIndex === 1) {
+            if (stepIndex === 1 && this.props.isMetamask) {
                 this.registerBike();
                 return;
             }
@@ -154,7 +154,6 @@ class RegisterBike extends Component {
     render() {
         const {stepIndex} = this.state;
         const contentStyle = {margin: "0 16px"};
-
         return (
             <div>
                 <Stepper activeStep={stepIndex} style={styles.step}>

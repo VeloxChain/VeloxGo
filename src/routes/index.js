@@ -84,7 +84,7 @@ class root extends React.Component {
                     isOpen={this.state.isOpen}
                     closeModal={this.closeModal}
                     setType={this.setType}
-                    metamask={this.state.metamask}
+                    isMetamask={this.isMetamask()}
                     accounts={this.props.accounts}
                     userProfile={this.props.userProfile}
                     AppReducer={this.props.AppReducer}
