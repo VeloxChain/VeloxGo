@@ -922,7 +922,9 @@ input#file:focus {
 }
 
 .infoBox {
-    /* overflow: visible !important;
-    left: 204px;
-    top: -130px; */
+    background-color: white;
+    width: 300px;
+    padding: 10px;
+    border: 1px solid rgb(0, 214, 121);
+    box-shadow: rgb(178, 189, 181) 0px 0px 2px 1px;
 }

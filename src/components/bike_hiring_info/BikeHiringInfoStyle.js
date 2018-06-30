@@ -1,10 +1,10 @@
 const Styles = {
     sumaryOfBike: {
-        backgroundColor: "white",
-        width: "300px",
-        padding: "10px",
-        border: "1px solid rgb(0, 214, 121)",
-        boxShadow: "0px 0px 2px 1px rgba(178,189,181,1)"
+        // backgroundColor: "white",
+        // width: "300px",
+        // padding: "10px",
+        // border: "1px solid rgb(0, 214, 121)",
+        // boxShadow: "0px 0px 2px 1px rgba(178,189,181,1)"
     },
 
     bodyContent: {
@@ -38,6 +38,10 @@ const Styles = {
         whiteSpace: "nowrap", 
         overflow: "hidden",
         textOverflow: "ellipsis"
+    },
+
+    boxContent: {
+        width: "calc(100% - 120px)"
     }
 };
 

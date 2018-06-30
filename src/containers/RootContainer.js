@@ -70,7 +70,12 @@ class RootContainer extends React.Component {
             return (
                 <div className="absolute-fancy-loading flexible">
                     <div style={{marginTop: -150}}>
-                        <img id="loader" src="images/loading.png" style={{margin: "auto"}}/>
+                        <img
+                            id="loader"
+                            src="images/loading.png"
+                            style={{margin: "auto"}}
+                            alt="Bikecoin"
+                        />
                         <br/>
                         {this._renderTxHash(AppReducer)}
                     </div>

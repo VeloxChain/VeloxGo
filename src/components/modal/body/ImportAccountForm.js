@@ -107,7 +107,10 @@ class ImportAccount extends Component {
                     <Dropzone onDrop={this.onDrop.bind(this)} className="dragDrop-container flexible" multiple={false} activeClassName="onDrop">
                         <div className="text-center">
                             <a className="font60 default-cursor">
-                                <img src="images/upload.png" />
+                                <img
+                                    src="images/upload.png"
+                                    alt="Bikecoin"
+                                />
                             </a>
                             {
                                 this.state.fileName === "" ?
