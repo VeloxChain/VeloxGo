@@ -839,6 +839,11 @@ a {
     fill: rgb(65, 245, 136) !important;
 }
 
+.step-label svg text {
+    font-size: 10px;
+    fill: #000;
+}
+
 .text-step {
     font-size: 16px;
     margin-top: 10px;
@@ -917,5 +922,7 @@ input#file:focus {
 }
 
 .infoBox {
-    overflow: visible !important
+    /* overflow: visible !important;
+    left: 204px;
+    top: -130px; */
 }

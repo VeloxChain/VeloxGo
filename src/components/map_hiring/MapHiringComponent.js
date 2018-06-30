@@ -57,7 +57,7 @@ const MapHiringComponent = compose(
                                 onCloseClick={props.onToggleOpen}
                                 options={{ closeBoxURL: "", enableEventPropagation: false }}
                             >
-                                <BikeHiringInfo externalData={{}}/>
+                                <BikeHiringInfo externalData={bike}/>
                             </InfoBox>
                             }
                         </Marker>

@@ -33,6 +33,12 @@ const Styles = {
         textTransform: "uppercase",
         letterSpacing: "1px",
     },
+
+    text: {
+        whiteSpace: "nowrap", 
+        overflow: "hidden",
+        textOverflow: "ellipsis"
+    }
 };
 
 export default Styles;
