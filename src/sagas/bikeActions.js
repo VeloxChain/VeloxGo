@@ -1,8 +1,9 @@
-import { put, call, takeEvery} from "redux-saga/effects";
+import { put, call, takeEvery, all, fork, take} from "redux-saga/effects";
 import BIKES from "../constants/bikes";
 import { createNewBike, updateBike } from "../services/exchange";
 import { toast } from "react-toastify";
 import SERVICE_IPFS from "../services/ipfs";
+import _ from "lodash";
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 function* uploadNewBikeToIPFS(action) {
     yield put({type: "APP_LOADING_START"});
@@ -13,12 +14,11 @@ function* uploadNewBikeToIPFS(action) {
         invoice: hashInvoice,
         snNumber: bikeInfo.snNumber ,
         manufacturer: bikeInfo.manufacturer,
-        owner: bikeInfo.owner,
+        originalOwner: bikeInfo.owner,
         year: 2018,
         location: location,
         status: "ACTIVE",
         forRent: false,
-        bikeAddress: "0x0000000000000000000000000000000000000000",
         isLocked: false,
         isFlash: false,
         isHonk: false,
@@ -41,9 +41,11 @@ function* uploadNewBikeToIPFS(action) {
 
 function* finishUploadNewBikeToIPFS(action) {
     const { bikeInfo, hashData, callBack, ethereum, keyStore, passphrase } = action.payload;
-    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, bikeInfo.owner);
-    let tx = yield call(createNewBike, bikeInfo.owner, userProfileAddress, hashData, ethereum, keyStore, passphrase);
-    if (tx === false) {
+    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, bikeInfo.originalOwner);
+    let tx = yield call(createNewBike, bikeInfo.originalOwner, userProfileAddress, hashData, ethereum, keyStore, passphrase);
+    console.log(tx);
+    if (tx === false && _.isUndefined(tx.tx)) {
+        toast.error("Transaction failed!.");
         yield put({type: "APP_LOADING_END"});
         return;
     }
@@ -69,8 +71,7 @@ function* finishUploadNewBikeToIPFS(action) {
             hashData: hashData,
         }
     });
-
-
+    yield put({type: "APP_LOADING_END"});
 }
 
 function* uploadModifiedBikeToIPFS(action) {
@@ -119,10 +120,45 @@ function* finishUploadModifiedBikeToIPFS(action) {
     toast.success("Saved!");
 }
 
+function* loadBikeFromNetWork(){
+    const action = yield take(BIKES.INIT);
+    const { address, ethereum } = action.payload;
+    let ownerBikes = [];
+    let networkBikes = [];
+    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
+    let bikeTokens = yield call(ethereum.networkAdress.getBikeTokens);
+    let userBikeTokens = yield call(ethereum.userProfileContract.at(userProfileAddress).getBikeTokens);
+    userBikeTokens = JSON.parse("[" + userBikeTokens + "]");
+    bikeTokens = JSON.parse("[" + bikeTokens + "]");
+    let anotherBikes = _.difference(userBikeTokens, bikeTokens);
+    let ownerHashs = yield all(userBikeTokens.map((value) => {
+        return call(ethereum.ownerShipContract.tokenURI, value);
+    }));
+    let bikeOwnerDatas = yield all(ownerHashs.map((value) => {
+        return call(SERVICE_IPFS.getDataFromIPFS, value);
+    }));
+    let anotherHashs = yield all(anotherBikes.map((value) => {
+        return call(ethereum.ownerShipContract.tokenURI, value);
+    }));
+    let anotherBikesData = yield all(anotherHashs.map((value) => {
+        return call(SERVICE_IPFS.getDataFromIPFS, value);
+    }));
+    _.forEach(bikeOwnerDatas, (value) => {
+        value = JSON.parse(value);
+        ownerBikes.push(value);
+        networkBikes.push(value);
+    });
+    _.forEach(anotherBikesData, (value) => {
+        value = JSON.parse(value);
+        networkBikes.push(value);
+    });
+    yield put({type: BIKES.LOAD_BIKES, payload:ownerBikes, networkBikes: networkBikes});
+}
 
 export function* watchBikes() {
     yield takeEvery(BIKES.UPLOAD_TO_IPFS, uploadNewBikeToIPFS);
     yield takeEvery(BIKES.FINISH_UPLOAD_TO_IPFS, finishUploadNewBikeToIPFS);
     yield takeEvery(BIKES.UPLOAD_MODIFIED_TO_IPFS, uploadModifiedBikeToIPFS);
     yield takeEvery(BIKES.FINISH_UPLOAD_MODIFIED_TO_IPFS, finishUploadModifiedBikeToIPFS);
+    yield fork(loadBikeFromNetWork);
 }

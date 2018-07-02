@@ -4,7 +4,7 @@ import Datatable from "../datatable/Datatable";
 import styles from "./YourBikesComponentStyle";
 import EditBikeComponent from "./edit_bike/EditBikeComponent";
 import Toggle from "material-ui/Toggle";
-// import { uploadModifiedBikeToIPFS } from "../../actions/bikeActions";
+import { initBikes } from "../../actions/bikeActions";
 class YourBikesComponent extends Component {
     constructor(props) {
         super(props);
@@ -28,7 +28,10 @@ class YourBikesComponent extends Component {
             rowIndex: ""
         };
     }
-
+    componentDidMount() {
+        const { accounts } = this.props;
+        this.props.dispatch(initBikes({address: accounts.accounts.address, ethereum: this.props.ethereum }));
+    }
     // changeBikeInfo = async (isInputChecked, rowEdit,rowIndex) => {
     //     // let dataChanges = Object.assign(rowEdit, {forRent: isInputChecked});
     //     // await this.props.dispatch(uploadModifiedBikeToIPFS(dataChanges, rowIndex));

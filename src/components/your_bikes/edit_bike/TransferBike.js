@@ -21,7 +21,7 @@ class TransferBike extends Component {
                 </div>
                 <div style={styles.boxRight}>
                     <div>
-                        <button style={styles.buttonTransfer}>Transfer</button>
+                        <button style={styles.buttonTransfer} onClick={this.props.transferBike}>Transfer</button>
                         <button style={styles.buttonDelete} onClick={this.props.deytroyBike}>Destroy</button>
                         <button style={styles.buttonTransfer}>Lost mode</button>
 

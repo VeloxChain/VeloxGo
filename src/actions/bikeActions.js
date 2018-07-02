@@ -6,14 +6,6 @@ export function createBike(payload) {
         payload
     };
 }
-export function updateBike(index, data, bikeHash) {
-    return {
-        type: BIKES.UPDATE,
-        payload: data,
-        index: index,
-        hash: bikeHash
-    };
-}
 export function destroyBike(index, bikeHash) {
     return {
         type: BIKES.DESTROY,
@@ -31,5 +23,17 @@ export function uploadModifiedBikeToIPFS(bikeInfo, index) {
     return {
         type: BIKES.UPLOAD_MODIFIED_TO_IPFS,
         payload: {bikeInfo: bikeInfo, index: index}
+    };
+}
+export function transferBike(payload) {
+    return {
+        type: BIKES.TRANSFER,
+        payload
+    };
+}
+export function initBikes(payload) {
+    return {
+        type: BIKES.INIT,
+        payload
     };
 }

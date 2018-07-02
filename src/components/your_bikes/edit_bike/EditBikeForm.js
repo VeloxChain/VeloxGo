@@ -16,7 +16,7 @@ class EditBikeForm extends Component {
         return (
             <div>
                 <p style={styles.title}>Owner</p>
-                <h4 style={styles.text}>{this.props.bikeInfo.owner}</h4>
+                <h4 style={styles.text}>{this.props.accounts.accounts.address}</h4>
 
                 <p style={styles.title}>Manufacturer</p>
                 <h4 style={styles.text}>{this.props.bikeInfo.manufacturer}</h4>
@@ -24,8 +24,8 @@ class EditBikeForm extends Component {
                 <p style={styles.title}>Bike serial</p>
                 <h4 style={styles.text}>{this.props.bikeInfo.snNumber}</h4>
 
-                <p style={styles.title}>Address</p>
-                <h4 style={styles.text}>{this.props.bikeInfo.bikeAddress}</h4>
+                <p style={styles.title}>STATUS</p>
+                <h4 style={styles.text}>{this.props.bikeInfo.status}</h4>
 
                 <p style={styles.title}>Price (BKC)</p>
                 <h4 style={styles.text}>{200}</h4>

@@ -19,6 +19,9 @@ class EditBikeComponent extends Component {
     // changeBikeInfo = async () => {
     //     await this.props.dispatch(uploadModifiedBikeToIPFS(this.state.bikeInfo, this.props.index));
     // }
+    transferBike = () => {
+
+    }
     render() {
         return (
             <div style={styles.wrapp}>
@@ -33,11 +36,11 @@ class EditBikeComponent extends Component {
                 <div className="row">
                     <div className="col-sm-7">
                         <div style={styles.wrappLeft}>
-                            <EditBikeForm bikeInfo={this.props.bikeInfo} />
+                            <EditBikeForm bikeInfo={this.props.bikeInfo} accounts={this.props.accounts} />
                         </div>
                     </div>
                     <div className="col-sm-5">
-                        <TransferBike {...this.props} deytroyBike={this.deytroyBike} />
+                        <TransferBike {...this.props} deytroyBike={this.deytroyBike} transferBike={this.transferBike} />
                     </div>
                     <div className="col-lg-7">
                         <BikeInfo bikeInfo={this.props.bikeInfo} />

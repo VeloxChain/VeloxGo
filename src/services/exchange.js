@@ -129,11 +129,9 @@ export const updateUserProfile = async (address, profileAddress, ipfsHash ,ether
 export const createNewBike = async (address, profileAddress, ipfsHash ,ethereum, keyStore, password) => {
     console.log(address, profileAddress, ipfsHash); //eslint-disable-line
     let isMetamask = _.isUndefined(password) || password === "";
-    let createNewBikeData = encodeFunctionTxData("create", ["string"], [ipfsHash]);
     let zeroAddress = "0x0000000000000000000000000000000000000000";
-    let types = ["address", "address", "address", "uint256", "bytes"];
-    let value = 0;
-    let params = [address, profileAddress, constants.BIKECOIN_OWNER_SHIP_ADDRESS , value, createNewBikeData];
+    let types = ["address", "string","address", "address"];
+    let params = [address, ipfsHash, profileAddress, constants.BIKECOIN_OWNER_SHIP_ADDRESS];
     let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
     let txRelay = ethereum.relayTxContract;
     var privKey = "";
@@ -141,7 +139,7 @@ export const createNewBike = async (address, profileAddress, ipfsHash ,ethereum,
         privKey = unlock(keyStore, password, true);
     }
     return new Promise( (resolve) => {
-        signPayload(address, txRelay, zeroAddress, destinationAddress, "forwardTo", types, params,privKey, isMetamask, (res) => {
+        signPayload(address, txRelay, zeroAddress, destinationAddress, "addBikeToNetwork", types, params,privKey, isMetamask, (res) => {
             if (res === false) {
                 resolve(res);
                 return;
