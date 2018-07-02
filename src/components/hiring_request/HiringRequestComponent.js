@@ -40,7 +40,7 @@ class HiringRequestComponent extends Component {
     _renderBike = () => {
         let renderBike = [];
 
-        _.forEach(this.props.bikes.data, (value, index) => {
+        _.forEach(this.props.bikes.network, (value, index) => {
             renderBike.push(<Bike bike={value} key={index} {...this.props} />);
         });
 
