@@ -18,7 +18,10 @@ class YourAccountInfo extends Component {
                             <br />
                             ETH: {this.props.info.eth}
                         </p>
-                        <button style={styles.buttonCollect}>collect 200 bkc</button>
+                        <button style={styles.buttonCollect}>
+                            <span>collect 200 </span>
+                            <img src="images/icon.png" alt="Bikecoin" />
+                        </button>
                     </div>
                 </div>
             </div>
