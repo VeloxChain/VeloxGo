@@ -130,7 +130,7 @@ function* loadBikeFromNetWork(){
     let userBikeTokens = yield call(ethereum.userProfileContract.at(userProfileAddress).getBikeTokens);
     userBikeTokens = JSON.parse("[" + userBikeTokens + "]");
     bikeTokens = JSON.parse("[" + bikeTokens + "]");
-    let anotherBikes = _.difference(userBikeTokens, bikeTokens);
+    let anotherBikes = _.difference(bikeTokens, userBikeTokens);
     let ownerHashs = yield all(userBikeTokens.map((value) => {
         return call(ethereum.ownerShipContract.tokenURI, value);
     }));
