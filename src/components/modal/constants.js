@@ -11,6 +11,7 @@ export const INSUFFICIENT_FUNDS = "Insufficient funds";
 export const CONFIRM_TRANSACTION = "Confirm Transaction";
 export const REGISTER_BIKE = "Register Bike";
 export const SUMARY_OF_BIKE = "Sumary Of Bike";
+export const TRANSFER_BIKE = "Transfer Bike";
 
 /// type
 export const MODAL_OWNER_LOGIN = 1;
@@ -22,6 +23,7 @@ export const MODAL_IMPORT_ACCOUNT = 6;
 export const MODAL_SHARE_DATA = 7;
 export const MODAL_VERIFY = 8;
 export const MODAL_UPDATE_USER_PROFILE = 9;
+export const MODAL_TRANSFER_BIKE = 11;
 export const MODAL_INSUFFICIENT_FUNDS = 10;
 export const MODAL_CONFIRM_TRANSACTION = 13;
 export const MODAL_REGISTER_BIKE = 20;

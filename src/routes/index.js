@@ -46,7 +46,7 @@ class root extends React.Component {
             </Switch>
         );
     }
-    c2omponentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         const { accounts } = nextProps;
         if (accounts.isLogout) {
             this.setType(MODAL_OWNER_LOGIN);

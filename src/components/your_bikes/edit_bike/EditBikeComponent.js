@@ -3,8 +3,10 @@ import styles from "./EditBikeComponentStyle";
 import EditBikeForm from "./EditBikeForm";
 import TransferBike from "./TransferBike";
 import BikeInfo from "./bike_info/BikeInfo";
+import { MODAL_TRANSFER_BIKE } from "../../modal/constants";
 // import { destroyBike, uploadModifiedBikeToIPFS } from "../../../actions/bikeActions";
 class EditBikeComponent extends Component {
+
     // deytroyBike = () => {
     //     this.props.dispatch(destroyBike(this.props.index));
     //     this.props.switchState();
@@ -19,9 +21,12 @@ class EditBikeComponent extends Component {
     //     await this.props.dispatch(uploadModifiedBikeToIPFS(this.state.bikeInfo, this.props.index));
     // }
     transferBike = () => {
-
+        this.props.setType(MODAL_TRANSFER_BIKE, {
+            addressFrom: this.props.getAccountAddress(),
+            tokenId: this.props.bikeInfo.tokenId
+        });
     }
-    
+
     render() {
         return (
             <div style={styles.wrapp}>
