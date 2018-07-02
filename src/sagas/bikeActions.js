@@ -166,10 +166,46 @@ function* loadBikeFromNetWork(action){
     yield put({type: BIKES.LOAD_BIKES, payload:ownerBikes, networkBikes: networkBikes});
 }
 
+function* transferBike(action) {
+    const { bikeInfo, hashData, index, ethereum, keyStore, passphrase } = action.payload;
+    let tx = yield call(updateBike, bikeInfo.owner, hashData, ethereum, keyStore, passphrase);
+    if  (tx.error === true) {
+        toast.error(tx.msg);
+        yield put({type: "APP_LOADING_END"});
+        return;
+    }
+    if (tx === false || _.isUndefined(tx.tx)) {
+        toast.error("Transaction failed!.");
+        yield put({type: "APP_LOADING_END"});
+        return;
+    }
+    yield put({type: "APP_LOADING_START", payload: tx.tx});
+    var res = null;
+    while (res === null) {
+        yield delay(2000);
+        yield call(ethereum.rpc.eth.getTransactionReceipt, tx.tx, (error, txData) => {
+            res = txData;
+        });
+        console.log("syncing..."); //eslint-disable-line
+    }
+    if (res.status === "0x0") {
+        yield put({type: "APP_LOADING_END"});
+        toast.error("Transaction failed!.");
+        return;
+    }
+
+    yield put({
+        type: BIKES.UPDATE,
+        payload: {bikeInfo: bikeInfo, index: index, hashData: hashData}
+    });
+    yield put({type: "APP_LOADING_END"});
+    toast.success("Success!");
+}
 export function* watchBikes() {
     yield takeEvery(BIKES.UPLOAD_TO_IPFS, uploadNewBikeToIPFS);
     yield takeEvery(BIKES.FINISH_UPLOAD_TO_IPFS, finishUploadNewBikeToIPFS);
     yield takeEvery(BIKES.UPLOAD_MODIFIED_TO_IPFS, uploadModifiedBikeToIPFS);
     yield takeEvery(BIKES.FINISH_UPLOAD_MODIFIED_TO_IPFS, finishUploadModifiedBikeToIPFS);
     yield takeLatest(BIKES.INIT, loadBikeFromNetWork);
+    yield takeEvery(BIKES.TRANSFER, transferBike);
 }
