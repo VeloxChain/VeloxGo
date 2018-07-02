@@ -45,10 +45,10 @@ const MapHiringComponent = compose(
             defaultOptions={{ styles: mapStyle }}
         >
             {
-                props.bikes.data.map(bike => 
+                props.bikes.data.map((bike, index) => 
                     (
                         <Marker
-                            key={bike.hash}
+                            key={index}
                             position={{ lat: bike.location.lat, lng: bike.location.long }}
                             onClick={() => props.handleSelectBike(bike.hash)}
                             icon={MapBikeIcon}
