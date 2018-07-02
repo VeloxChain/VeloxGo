@@ -12,6 +12,7 @@ export const CONFIRM_TRANSACTION = "Confirm Transaction";
 export const REGISTER_BIKE = "Register Bike";
 export const SUMARY_OF_BIKE = "Sumary Of Bike";
 export const TRANSFER_BIKE = "Transfer Bike";
+export const ADD_OWNER = "Add Owner";
 
 /// type
 export const MODAL_OWNER_LOGIN = 1;
@@ -28,3 +29,4 @@ export const MODAL_INSUFFICIENT_FUNDS = 10;
 export const MODAL_CONFIRM_TRANSACTION = 13;
 export const MODAL_REGISTER_BIKE = 20;
 export const MODAL_SUMARY_OF_BIKE = 23;
+export const MODAL_ADD_OWNER = 33;

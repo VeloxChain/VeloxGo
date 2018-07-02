@@ -110,6 +110,11 @@ const Styles = {
         marginBottom: "20px",
         textTransform: "uppercase",
         letterSpacing: "2px"
+    },
+
+    actionAddOwner: {
+        textAlign: "center",
+        marginBottom: "30px"
     }
 };
 

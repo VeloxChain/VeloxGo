@@ -48,7 +48,7 @@ class EditBikeComponent extends Component {
                         <TransferBike {...this.props} deytroyBike={this.deytroyBike} transferBike={this.transferBike} />
                     </div>
                     <div className="col-lg-12">
-                        <BikeInfo bikeInfo={this.props.bikeInfo} />
+                        <BikeInfo bikeInfo={this.props.bikeInfo} {...this.props} />
                     </div>
                 </div>
             </div>

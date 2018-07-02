@@ -934,3 +934,7 @@ input#file:focus {
     font-family: "Lato-Light";
     border-top: 1px solid rgba(240, 240, 240, .6);
 }
+
+.wrappOwner {
+    min-height: 100px;
+}

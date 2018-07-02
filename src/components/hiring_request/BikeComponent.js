@@ -10,7 +10,7 @@ class BikeComponent extends Component {
                 <div style={styles.block}>
                     <img src={"https://gateway.ipfs.io/ipfs/" + this.props.bike.avatar} alt="Bikecoin" style={styles.bike} />
                     <div style={styles.action}>
-                        <button style={styles.button}  onClick={() => this.props.setType(MODAL_SUMARY_OF_BIKE, this.props.bike)}>sumary of bike</button>
+                        <button style={styles.button}  onClick={() => this.props.setType(MODAL_SUMARY_OF_BIKE, this.props.bike)}>bike detail</button>
                     </div>
                 </div>
             </div>
