@@ -1,4 +1,4 @@
-import { put, call, takeEvery, all, fork, take} from "redux-saga/effects";
+import { put, call, takeEvery, all, fork, take, takeLatest} from "redux-saga/effects";
 import BIKES from "../constants/bikes";
 import { createNewBike, updateBike } from "../services/exchange";
 import { toast } from "react-toastify";
@@ -44,7 +44,12 @@ function* finishUploadNewBikeToIPFS(action) {
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, bikeInfo.originalOwner);
     let tx = yield call(createNewBike, bikeInfo.originalOwner, userProfileAddress, hashData, ethereum, keyStore, passphrase);
     console.log(tx);
-    if (tx === false && _.isUndefined(tx.tx)) {
+    if  (tx.error) {
+        toast.error(tx.msg);
+        yield put({type: "APP_LOADING_END"});
+        return;
+    }
+    if (tx === false || _.isUndefined(tx.tx)) {
         toast.error("Transaction failed!.");
         yield put({type: "APP_LOADING_END"});
         return;
@@ -93,7 +98,13 @@ function* uploadModifiedBikeToIPFS(action) {
 function* finishUploadModifiedBikeToIPFS(action) {
     const { bikeInfo, hashData, index, ethereum, keyStore, passphrase } = action.payload;
     let tx = yield call(updateBike, bikeInfo.owner, hashData, ethereum, keyStore, passphrase);
-    if (tx === false) {
+    if  (tx.error) {
+        toast.error(tx.msg);
+        yield put({type: "APP_LOADING_END"});
+        return;
+    }
+    if (tx === false || _.isUndefined(tx.tx)) {
+        toast.error("Transaction failed!.");
         yield put({type: "APP_LOADING_END"});
         return;
     }
@@ -120,8 +131,8 @@ function* finishUploadModifiedBikeToIPFS(action) {
     toast.success("Saved!");
 }
 
-function* loadBikeFromNetWork(){
-    const action = yield take(BIKES.INIT);
+function* loadBikeFromNetWork(action){
+    // const action = yield take(BIKES.INIT);
     const { address, ethereum } = action.payload;
     let ownerBikes = [];
     let networkBikes = [];
@@ -160,5 +171,5 @@ export function* watchBikes() {
     yield takeEvery(BIKES.FINISH_UPLOAD_TO_IPFS, finishUploadNewBikeToIPFS);
     yield takeEvery(BIKES.UPLOAD_MODIFIED_TO_IPFS, uploadModifiedBikeToIPFS);
     yield takeEvery(BIKES.FINISH_UPLOAD_MODIFIED_TO_IPFS, finishUploadModifiedBikeToIPFS);
-    yield fork(loadBikeFromNetWork);
+    yield takeLatest(BIKES.INIT, loadBikeFromNetWork);
 }

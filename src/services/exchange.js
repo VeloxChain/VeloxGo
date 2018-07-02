@@ -91,7 +91,11 @@ export const createNewUserProfile = async (address, ipfsHash ,ethereum, keyStore
     let txRelay = ethereum.relayTxContract;
     var privKey = "";
     if (!isMetamask) {
-        privKey = unlock(keyStore, password, true);
+        try {
+            privKey = unlock(keyStore, password, true);
+        } catch (e) {
+            return {error: true, msg: "Wrong Passphrase!"};
+        }
     }
     return new Promise( (resolve) => {
         signPayload(address, txRelay, zeroAddress, destinationAddress, "createUserProfile", types, params,privKey, isMetamask, (res) => {
@@ -113,7 +117,11 @@ export const updateUserProfile = async (address, profileAddress, ipfsHash ,ether
     let txRelay = ethereum.relayTxContract;
     var privKey = "";
     if (!isMetamask) {
-        privKey = unlock(keyStore, password, true);
+        try {
+            privKey = unlock(keyStore, password, true);
+        } catch (e) {
+            return {error: true, msg: "Wrong Passphrase!"};
+        }
     }
     return new Promise( (resolve) => {
         signPayload(address, txRelay, zeroAddress, destinationAddress, "updateUserProfileMetaData", types, params,privKey, isMetamask, (res) => {
@@ -136,7 +144,11 @@ export const createNewBike = async (address, profileAddress, ipfsHash ,ethereum,
     let txRelay = ethereum.relayTxContract;
     var privKey = "";
     if (!isMetamask) {
-        privKey = unlock(keyStore, password, true);
+        try {
+            privKey = unlock(keyStore, password, true);
+        } catch (e) {
+            return {error: true, msg: "Wrong Passphrase!"};
+        }
     }
     return new Promise( (resolve) => {
         signPayload(address, txRelay, zeroAddress, destinationAddress, "addBikeToNetwork", types, params,privKey, isMetamask, (res) => {
@@ -159,7 +171,11 @@ export const updateBike = async (address, ipfsHash ,ethereum, keyStore, password
     let txRelay = ethereum.relayTxContract;
     var privKey = "";
     if (!isMetamask) {
-        privKey = unlock(keyStore, password, true);
+        try {
+            privKey = unlock(keyStore, password, true);
+        } catch (e) {
+            return {error: true, msg: "Wrong Passphrase!"};
+        }
     }
     return new Promise( (resolve) => {
         signPayload(address, txRelay, zeroAddress, destinationAddress, "forwardTo", types, params,privKey, isMetamask, (res) => {
