@@ -37,7 +37,7 @@ const MapHiringComponent = compose(
     return(
         <GoogleMap
             defaultZoom={13}
-            center={{
+            defaultCenter={{
                 lng: props.mapDefaultLocation.long,
                 lat: props.mapDefaultLocation.lat
             }}
@@ -45,15 +45,16 @@ const MapHiringComponent = compose(
             defaultOptions={{ styles: mapStyle }}
         >
             {
-                props.bikes.data.map((bike, index) => 
-                    (
+                props.bikes.network.map((bike, index) => {
+                    console.log(index, bike)
+                    return (
                         <Marker
                             key={index}
                             position={{ lat: bike.location.lat, lng: bike.location.long }}
-                            onClick={() => props.handleSelectBike(bike.hash)}
+                            onClick={() => props.handleSelectBike(bike.tokenId)}
                             icon={MapBikeIcon}
                         >
-                            {bike.hash == props.bikeHashSelected && <InfoBox
+                            {bike.tokenId == props.bikeHashSelected && <InfoBox
                                 onCloseClick={props.onToggleOpen}
                                 options={{ closeBoxURL: "", enableEventPropagation: false }}
                             >
@@ -61,7 +62,7 @@ const MapHiringComponent = compose(
                             </InfoBox>
                             }
                         </Marker>
-                    ))
+                    )})
             }
         </GoogleMap>
     );
