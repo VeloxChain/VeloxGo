@@ -4,11 +4,12 @@ const Styles = {
     },
 
     thead: {
-        background: "#cdcdcd"
+        background: "#2a2a2a"
     },
 
-    borderNone: {
-        border: "none"
+    th: {
+        border: "none",
+        color: "#fff"
     },
 
     tdColSpan: {

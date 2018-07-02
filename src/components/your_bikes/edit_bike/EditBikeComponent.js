@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "./EditBikeComponentStyle";
 import EditBikeForm from "./EditBikeForm";
 import TransferBike from "./TransferBike";
-import BikeActivities from "./BikeActivities";
 import BikeInfo from "./bike_info/BikeInfo";
 // import { destroyBike, uploadModifiedBikeToIPFS } from "../../../actions/bikeActions";
 class EditBikeComponent extends Component {
@@ -22,6 +21,7 @@ class EditBikeComponent extends Component {
     transferBike = () => {
 
     }
+    
     render() {
         return (
             <div style={styles.wrapp}>
@@ -42,11 +42,8 @@ class EditBikeComponent extends Component {
                     <div className="col-sm-5">
                         <TransferBike {...this.props} deytroyBike={this.deytroyBike} transferBike={this.transferBike} />
                     </div>
-                    <div className="col-lg-7">
+                    <div className="col-lg-12">
                         <BikeInfo bikeInfo={this.props.bikeInfo} />
-                    </div>
-                    <div className="col-lg-5" style={{marginTop:10}}>
-                        <BikeActivities {...this.props} />
                     </div>
                 </div>
             </div>

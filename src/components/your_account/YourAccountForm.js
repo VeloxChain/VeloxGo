@@ -7,7 +7,7 @@ class YourAccountForm extends Component {
         return (
             <div>
                 <h3 style={styles.title}>
-                    ETH Address: <a style={styles.ethAddress} href={"https://ropsten.etherscan.io/address/" + this.props.accounts.accounts.address} target="_blank">{this.props.accounts.accounts.address}</a>
+                    ETH Address: <a href={"https://ropsten.etherscan.io/address/" + this.props.accounts.accounts.address} target="_blank">{this.props.accounts.accounts.address}</a>
                 </h3>
                 <TextField
                     floatingLabelText="User Profile Address"

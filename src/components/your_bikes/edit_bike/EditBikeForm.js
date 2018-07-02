@@ -16,7 +16,11 @@ class EditBikeForm extends Component {
         return (
             <div>
                 <p style={styles.title}>Owner</p>
-                <h4 style={styles.text}>{this.props.accounts.accounts.address}</h4>
+                <h4 style={styles.text}>
+                    <a href={"https://ropsten.etherscan.io/address/" + this.props.accounts.accounts.address} target="_blank">
+                        {this.props.accounts.accounts.address}
+                    </a>
+                </h4>
 
                 <p style={styles.title}>Manufacturer</p>
                 <h4 style={styles.text}>{this.props.bikeInfo.manufacturer}</h4>

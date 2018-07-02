@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { RaisedButton } from "material-ui";
 import ReactCrop, { makeAspectCrop } from "react-image-crop";
 import styles from "./ImageCroperStyle";
 import "react-image-crop/dist/ReactCrop.css";
@@ -86,15 +85,19 @@ class ImageCroper extends Component {
                     />
                 </div>
                 <div className="row pull-right" style={styles.actionFooter}>
-                    <RaisedButton label="Cancel" onClick={this.props.onHandleCloseCropImage}/>
-                    <RaisedButton label="Apply"
-                        style={{marginLeft: "10px"}}
-                        secondary={true} 
+                    <button
+                        onClick={this.props.onHandleCloseCropImage}
+                        style={styles.button}
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        style={styles.button}
                         onClick={ () => {
                             this.snapshotResize();
                             this.props.onHandleCloseCropImage();
                         }}
-                    />
+                    >Apply</button>
                 </div>
             </div>
         );

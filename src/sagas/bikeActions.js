@@ -1,4 +1,4 @@
-import { put, call, takeEvery, all, fork, take, takeLatest} from "redux-saga/effects";
+import { put, call, takeEvery, all, takeLatest} from "redux-saga/effects";
 import BIKES from "../constants/bikes";
 import { createNewBike, updateBike } from "../services/exchange";
 import { toast } from "react-toastify";
@@ -36,14 +36,12 @@ function* uploadNewBikeToIPFS(action) {
             passphrase: passphrase
         }
     });
-
 }
 
 function* finishUploadNewBikeToIPFS(action) {
     const { bikeInfo, hashData, callBack, ethereum, keyStore, passphrase } = action.payload;
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, bikeInfo.originalOwner);
     let tx = yield call(createNewBike, bikeInfo.originalOwner, userProfileAddress, hashData, ethereum, keyStore, passphrase);
-    console.log(tx);
     if  (tx.error === true) {
         toast.error(tx.msg);
         yield put({type: "APP_LOADING_END"});

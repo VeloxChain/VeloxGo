@@ -12,13 +12,19 @@ const Styles = {
     },
 
     tabItemContainerStyle: {
-        backgroundColor: "#00d679"
+        backgroundColor: "rgba(0, 214, 121, .6)"
     },
 
     tab: {
-        textTransform: "initial",
-        color: "#000",
+        textTransform: "uppercase",
+        color: "rgba(0, 0, 0, .5)",
         fontSize: "16px"
+    },
+    tabActive: {
+        textTransform: "uppercase",
+        color: "#000",
+        fontSize: "16px",
+        background: "rgb(0, 214, 121)"
     },
     iconBack: {
         color: "#00d679"
@@ -87,8 +93,9 @@ const Styles = {
         textTransform: "uppercase",
         letterSpacing: "2px",
     },
-    rowButton: {
-        marginTop: "20px",
+    rowTrophies: {
+        background: "#fff",
+        padding: "20px 0px"
     },
     buttonBack: {
         background: "#fff",
@@ -104,8 +111,12 @@ const Styles = {
         marginTop: "20px"
     },
     count: {
-        fontSize: "20px",
+        fontSize: "30px",
+        letterSpacing: "1px",
         color: "#000"
+    },
+    rowButton: {
+        marginTop: "20px"
     },
     countLeaderBoard: {
         fontSize: "30px",
@@ -117,7 +128,8 @@ const Styles = {
 
     text: {
         fontSize: "15px",
-        marginBottom: "5px"
+        marginBottom: "5px",
+        letterSpacing: "1px"
     },
 
     action: {
@@ -128,22 +140,22 @@ const Styles = {
     group: {
         width: "100%",
         textAlign: "center",
-        background: "#e6e6e6",
+        background: "rgb(208, 208, 208)",
         margin: "0px auto 20px"
     },
 
     butonRiding: {
         minWidth: "15%",
         padding: "10px 20px",
-        background: "#e6e6e6",
-        color: "rgba(51,51,51,.5)",
+        background: "rgb(208, 208, 208)",
+        color: "rgba(42,42,42,.7)",
         border: "none"
     },
 
     butonRidingActive: {
         minWidth: "15%",
         padding: "10px 20px",
-        background: "#e6e6e6",
+        background: "rgb(208, 208, 208)",
         color: "#000",
         border: "none"
     },
@@ -182,7 +194,11 @@ const Styles = {
     },
     content: {
         background: "#fff",
-        paddingBottom: "20px"
+        paddingBottom: "20px",
+        backgroundImage: "url(images/volataBackground.png)",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
     },
     pdContent: {
         padding: "0px 10px"
@@ -202,17 +218,21 @@ const Styles = {
 
     block: {
         padding: "10px",
-        borderRadius: "5px",
-        border: "1px solid rgb(226, 226, 226)",
+        textAlign: "center",
+        borderRight: "1px solid rgba(42, 42, 42, .3)"
+    },
+
+    blockEnd: {
+        padding: "10px",
         textAlign: "center"
     },
 
     buttonActionTrophies: {
-        background: "#fff",
+        background: "rgba(255, 255, 255, .7)",
         border: "1px solid rgba(245, 166, 35, .5)",
         borderRadius: "5px",
         padding: "7px 30px",
-        margin: "0px 5px",
+        margin: "10px 5px",
         textTransform: "uppercase",
         letterSpacing: "2px",
         color: "#f5a623",
@@ -220,7 +240,7 @@ const Styles = {
     },
 
     buttonActionLeaderboard: {
-        background: "#fff",
+        background: "rgba(255, 255, 255, .7)",
         border: "1px solid rgba(239, 0, 244, .4)",
         borderRadius: "5px",
         padding: "7px 30px",

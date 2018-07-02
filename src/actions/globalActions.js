@@ -1,6 +1,6 @@
 import GLOBAL from "../constants/globalActions";
 
-export function updateBlock(ethereum, block) {
+export function updateBlock(ethereum) {
     return {
         type: GLOBAL.NEW_BLOCK_INCLUDED_PENDING,
         payload: ethereum

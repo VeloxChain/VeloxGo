@@ -13,7 +13,7 @@ const Styles = {
     },
 
     step: {
-        margin: "20px 0px"
+        margin: "30px 0px"
     },
 
     crop: {
