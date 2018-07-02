@@ -7,7 +7,7 @@ class Datatable extends Component {
     _renderHeader = () => {
         var heading = [];
         _.forEach(this.props.params, (data, key) => {
-            heading.push(<th key={key} style={styles.borderNone}>{data.title}</th>);
+            heading.push(<th key={key} style={styles.th}>{data.title}</th>);
         });
         return heading;
     }
@@ -78,11 +78,11 @@ class Datatable extends Component {
                 <tbody>
                     {this._renderBody()}
                 </tbody>
-                <tfoot>
+                {/* <tfoot>
                     <tr>
                         {this._renderTfoot()}
                     </tr>
-                </tfoot>
+                </tfoot> */}
             </table>
         );
     }

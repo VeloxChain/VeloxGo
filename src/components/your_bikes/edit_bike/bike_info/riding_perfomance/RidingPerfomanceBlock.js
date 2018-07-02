@@ -90,7 +90,7 @@ class RidingPerfomanceBlock extends Component {
                     </div>
                 </div>
                 <div className="col-sm-3">
-                    <div style={styles.block}>
+                    <div style={styles.blockEnd}>
                         <p>
                             <span style={styles.count}>{data[this.props.type].energy}</span>
                             <span style={styles.unit}> Cal</span>

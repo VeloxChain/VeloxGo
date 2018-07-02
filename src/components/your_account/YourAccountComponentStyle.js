@@ -1,6 +1,6 @@
 const Styles = {
     wrapp: {
-        margin: "50px 5px"
+        margin: "30px 5px"
     },
 
     wrappLeft: {
@@ -8,7 +8,8 @@ const Styles = {
         background: "#fff",
         borderRadius: "5px",
         float: "left",
-        width: "100%"
+        width: "100%",
+        marginBottom: "30px"
     },
 
     wrappTop: {
@@ -58,9 +59,6 @@ const Styles = {
         padding: "0px 5px 0px 15px",
         textTransform: "uppercase",
         letterSpacing: "2px"
-    },
-    ethAddress: {
-        fontStyle: "italic"
     }
 };
 

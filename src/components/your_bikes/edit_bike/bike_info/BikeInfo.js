@@ -26,16 +26,32 @@ class BikeInfo extends Component {
                 onChange={this.handleChange}
                 tabItemContainerStyle={styles.tabItemContainerStyle}
                 style={styles.tabs}>
-                <Tab label="Location" value={0} style={styles.tab}>
+                <Tab
+                    label="Location"
+                    value={0}
+                    style={this.state.tabIndex === 0 ? styles.tabActive : styles.tab}
+                >
                     <BikeLocations {...this.props} />
                 </Tab>
-                <Tab label="Bike specifications" value={1} style={styles.tab}>
+                <Tab
+                    label="Bike specifications"
+                    value={1}
+                    style={this.state.tabIndex === 1 ? styles.tabActive : styles.tab}
+                >
                     <BikeSpecifications {...this.props} />
                 </Tab>
-                <Tab label="Owner history" value={2} style={styles.tab}>
+                <Tab
+                    label="Owner history"
+                    value={2}
+                    style={this.state.tabIndex === 2 ? styles.tabActive : styles.tab}
+                >
                     <OwnerHistory {...this.props} />
                 </Tab>
-                <Tab label="Riding perfomance" value={3} style={styles.tab}>
+                <Tab
+                    label="Riding perfomance"
+                    value={3}
+                    style={this.state.tabIndex === 3 ? styles.tabActive : styles.tab}
+                >
                     <RidingPerfomance {...this.props} />
                 </Tab>
             </Tabs>

@@ -5,6 +5,7 @@ import RidingPerfomanceAction from "./RidingPerfomanceAction";
 import RidingPerfomanceTrophies from "./RidingPerfomanceTrophies";
 import styles from "../../EditBikeComponentStyle";
 import RidingPerfomanceLeaderBoard from "./RidingPerfomanceLeaderBoard";
+import BikeActivities from "../../BikeActivities";
 
 class RidingPerfomance extends Component {
     constructor(props) {
@@ -33,6 +34,7 @@ class RidingPerfomance extends Component {
                 <div style={styles.pdContent}>
                     <RidingPerfomanceBlock type={this.state.type} />
                     <RidingPerfomanceAction onClickChangeShow={this.onClickChangeShow} />
+                    <BikeActivities {...this.props} />
                 </div>
             );
         }
