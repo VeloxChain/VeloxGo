@@ -9,6 +9,14 @@ const honk = "images/honk.png";
 const honkOn = "images/honkGreen.png";
 
 class TransferBike extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isFlash: false,
+            isHonk: false,
+            isLock: false,
+        }
+    }
     render() {
         return (
             <div style={styles.wrappRight}>
@@ -27,19 +35,22 @@ class TransferBike extends Component {
 
                         <div style={styles.wrappStatus}>
                             <img
-                                src={this.props.bikeInfo.isFlash ? flashOn : flashOff}
+                                src={this.state.isFlash ? flashOn : flashOff}
                                 style={styles.iconStatus}
+                                onClick={() => this.setState({isFlash: !this.state.isFlash})}
                                 alt="Bikecoin"
                             />
                             <img
-                                src={this.props.bikeInfo.isHonk ? honkOn : honk}
+                                src={this.state.isHonk ? honkOn : honk}
                                 style={styles.iconStatus}
+                                onClick={() => this.setState({isHonk: !this.state.isHonk})}
                                 alt="Bikecoin"
                             />
                             <div style={{ minHeight: "43px" }}>
                                 <img
-                                    src={this.props.bikeInfo.isLock ? lockedOn : lockedOff}
+                                    src={this.state.isLock ? lockedOn : lockedOff}
                                     style={styles.iconStatus}
+                                    onClick={() => this.setState({isLock: !this.state.isLock})}
                                     alt="Bikecoin"
                                 />
                             </div>
