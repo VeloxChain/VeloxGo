@@ -927,3 +927,10 @@ input#file:focus {
     border: 1px solid rgb(0, 214, 121);
     box-shadow: rgb(178, 189, 181) 0px 0px 2px 1px;
 }
+
+.table-bike tr,
+.table-bike th,
+.table-bike td {
+    font-family: "Lato-Light";
+    border-top: 1px solid rgba(240, 240, 240, .6);
+}

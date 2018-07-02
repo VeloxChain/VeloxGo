@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import BikeLocations from "./BikeLocations";
-import BikeSpecifications from "./BikeSpecifications";
-import OwnerHistory from "./OwnerHistory";
+import OwnerHistory from "./owner_history/OwnerHistory";
 import RidingPerfomance from "./riding_perfomance/RidingPerfomance";
 import {Tabs, Tab} from "material-ui/Tabs";
 import styles from "../EditBikeComponentStyle";
+import BikeSpecifications from "./bike_specifications/BikeSpecifications";
 class BikeInfo extends Component {
 
     constructor(props) {

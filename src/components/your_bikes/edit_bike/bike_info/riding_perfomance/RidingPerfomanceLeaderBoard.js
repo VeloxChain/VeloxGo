@@ -20,10 +20,10 @@ class RidingPerfomanceLeaderBoard extends Component {
         this.state = {
             type: "1",
             data: [
-                {avatar: "images/avatar.png", name: "Bui Thien Ai"},
-                {avatar: "images/avatar.png", name: "Bui Thien Ai"},
-                {avatar: "images/avatar.png", name: "Bui Thien Ai"},
-                {avatar: "images/avatar.png", name: "Bui Thien Ai"}
+                {avatar: "images/avatar.png", name: "Eric Bui"},
+                {avatar: "images/avatar.png", name: "Tony Nguyen"},
+                {avatar: "images/avatar.png", name: "Vuong Pham"},
+                {avatar: "images/avatar.png", name: "Lay Vo"}
             ]
         };
     }
@@ -46,7 +46,7 @@ class RidingPerfomanceLeaderBoard extends Component {
 
     render() {
         return (
-            <div style={styles.rowButton} className="text-center">
+            <div style={styles.rowTrophies} className="text-center">
                 <div className="btn-group" role="group">
                     <button
                         type="button"
