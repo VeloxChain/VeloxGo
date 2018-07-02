@@ -35,7 +35,7 @@ class root extends React.Component {
         return true;
     }
     _renderHomePage = () => {
-        if (_.isEmpty(this.props.userProfile.data)) {
+        if (_.isEmpty(this.props.userProfile.data) || _.isEmpty(this.props.accounts.accounts)) {
             return (<div></div>);
         }
         return (
