@@ -48,9 +48,8 @@ class Components extends React.Component {
             if (key === 0) {
                 style = styles.bold;
             }
-
+            
             fields.push(<td key={key} style={style}>{rowData}</td>);
-
         });
 
         return fields;

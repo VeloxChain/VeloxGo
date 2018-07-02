@@ -1,10 +1,7 @@
 const Styles = {
     table: {
-        marginTop: "20px"
-    },
-    th: {
-        fontStyle: "italic"
-    },
+        marginTop: "30px"
+    }
 };
 
 export default Styles;
