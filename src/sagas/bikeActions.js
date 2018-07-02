@@ -168,8 +168,9 @@ function* loadBikeFromNetWork(action){
 
 function* transferBikeInNetwork(action) {
     yield put({type: "APP_LOADING_START"});
-    const { addressFrom, addressTo, tokenId, ethereum, keyStore, passphrase } = action.payload;
-    let tx = yield call(transferBike,addressFrom, addressTo, tokenId, ethereum, keyStore, passphrase);
+    const { address, addressTo, tokenId, ethereum, keyStore, passphrase } = action.payload;
+    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
+    let tx = yield call(transferBike, address, userProfileAddress, addressTo, tokenId, ethereum, keyStore, passphrase);
     if  (tx.error === true) {
         toast.error(tx.msg);
         yield put({type: "APP_LOADING_END"});

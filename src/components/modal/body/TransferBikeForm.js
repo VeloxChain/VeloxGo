@@ -33,9 +33,9 @@ class ConfirmTransaction extends Component {
             toast.error("Invalid Form");
             return;
         }
-        const { addressFrom, tokenId } = this.props.externalData;
+        const { address, tokenId } = this.props.externalData;
         let payload = {
-            addressFrom: addressFrom,
+            address: address,
             addressTo: this.state.addressTo,
             tokenId: tokenId,
             ethereum: this.props.ethereum,
@@ -64,7 +64,7 @@ class ConfirmTransaction extends Component {
             <div className="mh250 pd10 relative">
                 <div className="form-modal">
                     <TextField
-                        floatingLabelText="Account Address"
+                        floatingLabelText="Profile Address"
                         fullWidth={true}
                         value={this.state.addressTo}
                         onKeyPress={(e) => this.handleKeyPress(e)}
