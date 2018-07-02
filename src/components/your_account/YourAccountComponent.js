@@ -28,7 +28,6 @@ class YourAccountComponent extends Component {
             ethereum: this.props.ethereum,
             keyStore: this.props.accounts.accounts.key,
         };
-        console.log(data);
         if (this.props.metamask) {
             this.props.dispatch(uploadUserProfileToIPFS(data));
         } else {

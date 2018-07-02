@@ -46,7 +46,7 @@ class root extends React.Component {
             </Switch>
         );
     }
-    c2omponentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         const { accounts } = nextProps;
         if (accounts.isLogout) {
             this.setType(MODAL_OWNER_LOGIN);
@@ -75,7 +75,6 @@ class root extends React.Component {
         return isMetaMask;
     }
     render() {
-        console.log(this.props);
         return (
             <RootContainer {...this.props} setType={this.setType}>
                 {this._renderHomePage()}

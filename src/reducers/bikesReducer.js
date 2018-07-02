@@ -6,7 +6,7 @@ const initState = {
 };
 
 const bikesReducer = (state = initState, action) => {
-    var newState, bikeInfo;
+    var newState, bikeInfo, newNetwork;
     switch (action.type) {
     case BIKES.LOAD_BIKES :
         return {
@@ -16,12 +16,14 @@ const bikesReducer = (state = initState, action) => {
         };
     case BIKES.CREATE:
         newState = state.data;
+        newNetwork = state.network;
         bikeInfo = action.payload.bikeInfo;
-        bikeInfo["hash"] = action.payload.hashData;
         newState.push(bikeInfo);
+        newNetwork.push(bikeInfo);
         return {
             ...state,
-            data: newState
+            data: newState,
+            network: newNetwork
         };
     case BIKES.UPDATE:
         newState = state.data;

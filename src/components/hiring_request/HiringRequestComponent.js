@@ -10,7 +10,7 @@ class HiringRequestComponent extends Component {
         super(props);
         this.state = {
             bikeHashSelected: "",
-            isRenderMap: false,
+            isRenderMap: true,
             mapDefaultLocation: {
                 index: "sg",
                 long: 103.819836,
