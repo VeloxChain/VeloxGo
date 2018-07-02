@@ -55,7 +55,7 @@ const Styles = {
         background: "#fff",
         border: "1px solid #00d679",
         borderRadius: "5px",
-        padding: "7px 15px",
+        padding: "0px 5px 0px 15px",
         textTransform: "uppercase",
         letterSpacing: "2px"
     },
