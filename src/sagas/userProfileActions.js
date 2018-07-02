@@ -41,7 +41,7 @@ function* uploadProfileToIPFS(action) {
 function* finishUploadNewProfileToIPFS(action) {
     const { payload } = action;
     let tx = yield call(createNewUserProfile, payload.userInfo.accountAddress, payload.hashData, payload.ethereum, payload.keyStore, payload.passphrase);
-    if  (tx.error) {
+    if  (tx.error === true) {
         toast.error(tx.msg);
         yield put({type: "APP_LOADING_END"});
         return;
@@ -88,7 +88,7 @@ function* finishUploadModifiedProfileToIPFS(action) {
     const { payload } = action;
     let userProfileAddress = yield call(payload.ethereum.networkAdress.getUserProfile, payload.userInfo.accountAddress);
     let tx = yield call(updateUserProfile, payload.userInfo.accountAddress, userProfileAddress, payload.hashData, payload.ethereum, payload.keyStore, payload.passphrase);
-    if  (tx.error) {
+    if  (tx.error === true) {
         toast.error(tx.msg);
         yield put({type: "APP_LOADING_END"});
         return;

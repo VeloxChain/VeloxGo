@@ -44,7 +44,7 @@ function* finishUploadNewBikeToIPFS(action) {
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, bikeInfo.originalOwner);
     let tx = yield call(createNewBike, bikeInfo.originalOwner, userProfileAddress, hashData, ethereum, keyStore, passphrase);
     console.log(tx);
-    if  (tx.error) {
+    if  (tx.error === true) {
         toast.error(tx.msg);
         yield put({type: "APP_LOADING_END"});
         return;
@@ -98,7 +98,7 @@ function* uploadModifiedBikeToIPFS(action) {
 function* finishUploadModifiedBikeToIPFS(action) {
     const { bikeInfo, hashData, index, ethereum, keyStore, passphrase } = action.payload;
     let tx = yield call(updateBike, bikeInfo.owner, hashData, ethereum, keyStore, passphrase);
-    if  (tx.error) {
+    if  (tx.error === true) {
         toast.error(tx.msg);
         yield put({type: "APP_LOADING_END"});
         return;
