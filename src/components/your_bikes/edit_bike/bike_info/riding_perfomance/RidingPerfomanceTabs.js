@@ -39,7 +39,7 @@ class RidingPerfomanceTabs extends Component {
                     style={this.props.type === "all" ? styles.butonRidingActive : styles.butonRiding}
                     onClick={() => this.props.onClickChangeType("all")}
                 >
-                    All time
+                    All
                 </button>
             </div>
         );
