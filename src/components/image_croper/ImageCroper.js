@@ -13,7 +13,7 @@ class ImageCroper extends Component {
                 y: 10,
                 width: 10,
                 height: 7,
-                aspect: 10 / 7,
+                aspect: this.props.aspect,
                 naturalWidth: 0,
                 naturalHeight: 0,
             },
@@ -57,7 +57,7 @@ class ImageCroper extends Component {
             {
                 x: 0,
                 y: 0,
-                aspect: 10 / 7,
+                aspect: this.props.aspect,
                 width: 20,
             },
             image.width / image.height

@@ -70,7 +70,7 @@ class RegisterBikeInformation extends Component {
     }
     _renderPreview = () => {
         if (this.props.info.imagePreview) {
-            return <img src={ this.props.info.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="" />;
+            return <img src={ this.props.info.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="BikeCoin" />;
         }
         return <i className="fa fa-camera icon-camera"></i>;
     }
@@ -104,7 +104,13 @@ class RegisterBikeInformation extends Component {
                     autoScrollBodyContent={true}
                     repositionOnUpdate={true}
                 >
-                    <ImageCroper handleCropImage={this.handleCropImage} handleChangeState={this.props.handleChangeState} imagePreview={this.state.imagePreview} onHandleCloseCropImage={this.onHandleCloseCropImage}/>
+                    <ImageCroper
+                        handleCropImage={this.handleCropImage}
+                        handleChangeState={this.props.handleChangeState}
+                        imagePreview={this.state.imagePreview}
+                        onHandleCloseCropImage={this.onHandleCloseCropImage}
+                        aspect={10 / 7}
+                    />
                 </Dialog>
 
                 <div className="w100p">

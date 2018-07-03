@@ -1,6 +1,7 @@
 import React from 'react';
 import Datatable from '../../../../datatable/Datatable';
 import styles from './OwnerHistoryStyle';
+import { MODAL_ADD_OWNER } from '../../../../modal/constants';
 
 const dataHeading = [
     {value: "ex_owner_address", title: "Ex-Owner Address"},
@@ -23,7 +24,15 @@ class OwnerHistory extends React.Component {
     
     render() {
         return (
-            <div style={styles.table} className="table-bike">
+            <div className="table-bike">
+                <div style={styles.action}>
+                    <button
+                        style={styles.button}
+                        onClick={() => this.props.setType(MODAL_ADD_OWNER)}
+                    >
+                        Add Owner
+                    </button>
+                </div>
                 <Datatable
                     params={dataHeading}
                     body={dataBody}

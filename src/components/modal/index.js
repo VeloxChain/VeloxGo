@@ -11,6 +11,7 @@ import {
     SHARE_DATA,
     INSUFFICIENT_FUNDS,
     TRANSFER_BIKE,
+    ADD_OWNER,
     // UNLOCK_ACCOUNT,
     MODAL_REGISTER_BIKE,
     REGISTER_BIKE,
@@ -26,7 +27,8 @@ import {
     MODAL_INSUFFICIENT_FUNDS,
     MODAL_CONFIRM_TRANSACTION,
     CONFIRM_TRANSACTION,
-    MODAL_TRANSFER_BIKE
+    MODAL_TRANSFER_BIKE,
+    MODAL_ADD_OWNER
 } from "./constants";
 import NewAccount from "./body/NewAccountForm";
 import OwnerLogin from "./body/OwnerLoginForm";
@@ -41,6 +43,7 @@ import ConfirmTransaction from "./body/ConfirmTransactionForm";
 import RegisterBike from "./body/RegisterBike/RegisterBikeForm";
 import SumaryOfBike from "./body/SumaryOfBikeForm";
 import TransferBike from "./body/TransferBikeForm";
+import AddOwner from "./body/AddOwnerForm";
 class ModalCustom extends Component {
     _renderBodyModal = () => {
         switch (this.props.type) {
@@ -68,6 +71,8 @@ class ModalCustom extends Component {
             return ( <ConfirmTransaction {...this.props} /> );
         case MODAL_TRANSFER_BIKE:
             return ( <TransferBike {...this.props} /> );
+        case MODAL_ADD_OWNER:
+            return ( <AddOwner {...this.props} /> );
         default:
             return ( <OwnerLogin {...this.props} /> );
         }
@@ -98,6 +103,8 @@ class ModalCustom extends Component {
             return SUMARY_OF_BIKE;
         case MODAL_TRANSFER_BIKE:
             return TRANSFER_BIKE;
+        case MODAL_ADD_OWNER:
+            return ADD_OWNER;
         default:
             return OWNER_LOGIN;
         }

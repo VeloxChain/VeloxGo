@@ -30,7 +30,7 @@ class SumaryOfBike extends Component {
                     <h4 style={styles.text}>{200}</h4>
                 </div>
                 <div className="text-center">
-                    <button style={styles.button}>send hire request</button>
+                    <button style={styles.button}>Book</button>
                 </div>
             </div>
         );
