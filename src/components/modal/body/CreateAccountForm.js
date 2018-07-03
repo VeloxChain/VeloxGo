@@ -6,6 +6,9 @@ import Dropzone from "react-dropzone";
 import _ from "lodash";
 import styles from "./CustomCss";
 import { toast } from "react-toastify";
+import { Dialog } from "material-ui";
+import ImageCroper from "../../image_croper/ImageCroper";
+
 class CreateAccount extends Component {
     constructor(props) {
         super(props);
@@ -18,10 +21,12 @@ class CreateAccount extends Component {
             disabled:false,
             submitted:false,
             labelButton: "CREATE BIKECOIN ACCOUNT",
-            fileData: "",
-            preview: "",
+            imageData: "",
+            isOpenCropImage: false,
+            imagePreview: null
         };
     }
+
     handleKeyPress = (target) => {
         if(target.charCode===13){
             this.createProfile();
@@ -42,11 +47,12 @@ class CreateAccount extends Component {
         if (this.state.passpharse === "" && this.isMetamask() === false) {
             return false;
         }
-        if (this.state.fileData === "") {
+        if (this.state.imageData === "") {
             return false;
         }
         return true;
     }
+
     createProfile = async () => {
         if (this.state.submitted) {
             return;
@@ -61,7 +67,7 @@ class CreateAccount extends Component {
             email: state.email,
             lastname: state.lastname,
             firstname: state.firstname,
-            avatarData: state.fileData,
+            avatarData: state.imageData,
             avatar: state.avatar,
             accountAddress:this.props.getAccountAddress(),
             ethereum: this.props.ethereum,
@@ -71,42 +77,26 @@ class CreateAccount extends Component {
         await this.props.dispatch(uploadUserProfileToIPFS(userInfo));
         this.props.closeModal();
     }
+
     getContractAddress = (userProfileAddress) => {
         this.setState({
             userProfileAddress:userProfileAddress
         });
     }
+
     rejectTransaction = () => {
         this.setState({submitted: false, labelButton: "CREATE NEXTID ACCOUNT"});
     }
+
     submitTransaction = () => {
         this.setState({submitted: true, labelButton: "PENDING..."});
     }
-    onDrop = (images) => {
-        if (_.isEmpty(images)) {
-            return;
-        }
-        images = images[0];
-        var fileReader = new FileReader();
-        fileReader.onload = (event) => {
-            var fileData = event.target.result;
-            this.setState({
-                // fileData: new Buffer(fileData).toString("base64"),
-                fileData: new Buffer(fileData),
-                avatar: images.name,
-                preview: images.preview
-            });
-        };
-        try {
-            fileReader.readAsArrayBuffer(images);
-        } catch (e) {
-            //
-        }
-    }
+    
     isMetamask =  () => {
         const { accounts } = this.props;
         return (_.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key));
     }
+    
     _renderPassphrase = () => {
         if (this.isMetamask()) {
             return undefined;
@@ -124,16 +114,64 @@ class CreateAccount extends Component {
             />
         );
     }
-    _renderPreview = () => {
-        if (this.state.preview) {
-            return (
-                <img src={ this.state.preview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="" />
-            );
+
+    onDrop = (images) => {
+        if (_.isEmpty(images)) {
+            return;
         }
-        return (
-            <i className="fa fa-camera icon-camera"></i>
-        );
+        images = images[0];
+        this.readFile(images, "images");
     }
+
+    readFile = (file, name) => {
+        var fileReader = new FileReader();
+        fileReader.onload = (event) => {
+            var fileData = event.target.result;
+            if (name === "images") {
+                this.setState({
+                    imageData: new Buffer(fileData),
+                    avatar: file.name,
+                    imagePreview: file.preview
+                });
+
+                this.onHandleOpenCropImage();
+                return;
+            }
+        };
+        try {
+            fileReader.readAsArrayBuffer(file);
+        } catch (e) {
+            //
+        }
+    }
+
+    _renderPreview = () => {
+        if (this.state.imagePreview) {
+            return <img src={ this.state.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="BikeCoin" />;
+        }
+        return <i className="fa fa-camera icon-camera"></i>;
+    }
+
+    handleCropImage = (newSrc) => {
+        this.setState({
+            imageData: new Buffer(newSrc.replace(/^data:image\/(png|gif|jpeg|jpg);base64,/,""), "base64"),
+            // imageName: file.name,
+            imagePreview: newSrc
+        });
+    }
+
+    onHandleOpenCropImage = () => {
+        this.setState({
+            isOpenCropImage: true
+        });
+    }
+
+    onHandleCloseCropImage = () => {
+        this.setState({
+            isOpenCropImage: false
+        });
+    }
+
     render() {
         return (
             <div className="mh250 pd10 relative">
@@ -146,9 +184,27 @@ class CreateAccount extends Component {
                         )
                         : undefined
                 }
+
+                <Dialog
+                    title="Select an area on image"
+                    modal={false}
+                    onRequestClose={this.onHandleCloseCropImage}
+                    open={this.state.isOpenCropImage}
+                    autoScrollBodyContent={true}
+                    repositionOnUpdate={true}
+                >
+                    <ImageCroper
+                        handleCropImage={this.handleCropImage}
+                        imagePreview={this.state.imagePreview}
+                        onHandleCloseCropImage={this.onHandleCloseCropImage}
+                        aspect={1 / 1}
+                    />
+                </Dialog>
+
                 <div className="form-modal">
+
                     <Dropzone onDrop={this.onDrop} className="avatarDrop" multiple={false} activeClassName="onDrop" accept=".jpeg,.jpg,.png">
-                        {this._renderPreview()}
+                        { this._renderPreview() }
                     </Dropzone>
 
                     <TextField
