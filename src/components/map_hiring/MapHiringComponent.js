@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import { compose, withProps, withStateHandlers } from "recompose";
 import {
     withScriptjs,
@@ -12,7 +12,50 @@ import appConfig from "../../config/app.json";
 import mapStyle from "../../config/mapStyle.json";
 import MapBikeIcon from "../../assets/images/map_bike_icon.png";
 
-const MapHiringComponent = compose(
+class MapHiringComponent extends Component {
+    constructor(props) {
+        super(props);
+
+    }
+    
+    render(){
+        return(
+            <GoogleMap
+                defaultZoom={13}
+                defaultCenter={{
+                    lng: this.props.mapDefaultLocation.long,
+                    lat: this.props.mapDefaultLocation.lat
+                }}
+                onClick={() => this.props.handleSelectBike("")}
+                clickableIcons={false}
+                // defaultOptions={{ styles: mapStyle }}
+            >
+                {
+                    this.props.bikes.network.map((bike, index) => {
+                        console.log(index, bike)
+                        return (
+                            <Marker
+                                key={index}
+                                position={{ lat: bike.location.lat, lng: bike.location.long }}
+                                onClick={() => this.props.handleSelectBike(bike.tokenId)}
+                                icon={MapBikeIcon}
+                            >
+                                {bike.tokenId == this.props.bikeHashSelected && <InfoBox
+                                    onCloseClick={this.props.onToggleOpen}
+                                    options={{ closeBoxURL: "", enableEventPropagation: false }}
+                                >
+                                    <BikeHiringInfo externalData={bike}/>
+                                </InfoBox>
+                                }
+                            </Marker>
+                        )})
+                }
+            </GoogleMap>
+        );
+    }
+}
+
+export default compose(
     withProps({
         googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${appConfig.google_map_api_key}&v=3.exp&libraries=geometry,drawing,places`,
         loadingElement: <div style={{ height: "100%" }} />,
@@ -31,42 +74,5 @@ const MapHiringComponent = compose(
         })
     }),
     withScriptjs,
-    withGoogleMap
-)(props =>
-{
-    return(
-        <GoogleMap
-            defaultZoom={13}
-            defaultCenter={{
-                lng: props.mapDefaultLocation.long,
-                lat: props.mapDefaultLocation.lat
-            }}
-            onClick={() => props.handleSelectBike("")}
-            defaultOptions={{ styles: mapStyle }}
-        >
-            {
-                props.bikes.network.map((bike, index) => {
-                    console.log(index, bike)
-                    return (
-                        <Marker
-                            key={index}
-                            position={{ lat: bike.location.lat, lng: bike.location.long }}
-                            onClick={() => props.handleSelectBike(bike.tokenId)}
-                            icon={MapBikeIcon}
-                        >
-                            {bike.tokenId == props.bikeHashSelected && <InfoBox
-                                onCloseClick={props.onToggleOpen}
-                                options={{ closeBoxURL: "", enableEventPropagation: false }}
-                            >
-                                <BikeHiringInfo externalData={bike}/>
-                            </InfoBox>
-                            }
-                        </Marker>
-                    )})
-            }
-        </GoogleMap>
-    );
-}
-);
-
-export default MapHiringComponent;
+    withGoogleMap,
+)(MapHiringComponent) ;

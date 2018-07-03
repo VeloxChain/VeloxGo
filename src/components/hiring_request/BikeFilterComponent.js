@@ -14,14 +14,14 @@ class BikeFilterComponent extends Component {
         return (
             <div style={styles.maps}>
                 <i
-                    className="fa fa-list"
-                    style={!this.props.isRenderMap ? styles.iconFilter : styles.icon}
-                    onClick={() => this.onChangeFilter(false)}    
-                />
-                <i
                     className="fa fa-map-marker"
                     style={this.props.isRenderMap ? styles.iconFilter : styles.icon}
                     onClick={() => this.onChangeFilter(true)}    
+                />
+                 <i
+                    className="fa fa-list"
+                    style={!this.props.isRenderMap ? styles.iconFilter : styles.icon}
+                    onClick={() => this.onChangeFilter(false)}    
                 />
             </div>
         );
