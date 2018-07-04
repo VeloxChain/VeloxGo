@@ -12,7 +12,7 @@
     "fixed-data-table": "^0.6.4",
     "history": "^4.7.2",
     "ipfs": "^0.29.3",
-    "ipfs-api": "^22.1.0",
+    "ipfs-api": "^22.2.1",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.20.0",
