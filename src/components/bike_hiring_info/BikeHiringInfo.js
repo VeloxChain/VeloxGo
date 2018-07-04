@@ -22,7 +22,7 @@ class BikeHiringInfo extends Component {
                 </div>
 
                 <div className="text-center">
-                    <button style={styles.button}>send hire request</button>
+                    <button style={styles.button}>Book</button>
                 </div>
             </div>
         );
