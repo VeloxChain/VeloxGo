@@ -75,6 +75,7 @@ class root extends React.Component {
         return isMetaMask;
     }
     render() {
+        console.log(this.props);
         return (
             <RootContainer {...this.props} setType={this.setType}>
                 {this._renderHomePage()}
