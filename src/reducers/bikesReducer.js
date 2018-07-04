@@ -64,7 +64,11 @@ const bikesReducer = (state = initState, action) => {
             data: newState
         };
     case ACC_ACTION.LOG_OUT:
-        return initState;
+        return {
+            data: [],
+            network: [],
+            loadded: []
+        };
     default:
         return state;
     }

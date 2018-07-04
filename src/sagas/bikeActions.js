@@ -134,7 +134,7 @@ function* uploadModifiedBikeToIPFS(action) {
 function* loadBikeFromNetWork(action){
     const { address, ethereum } = action.payload;
     yield delay(500);
-    yield put({type: "APP_LOADING_START"});
+    yield put({type: "APP_LOADING_START", payload: "Loading bikes....."});
     const bikes = yield select(bikesState);
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
     let networkTokens = yield call(ethereum.networkAdress.getBikeTokens);
@@ -150,11 +150,11 @@ function* loadBikeFromNetWork(action){
         return;
     }
     if (!isLoaddedUser) {
-        yield fork(loadHashFromUserToken, ethereum, userBikeTokens);
+        yield call(loadHashFromUserToken, ethereum, userBikeTokens);
     }
     if (!isLoaddedUser) {
         let differenceBike = _.difference(networkTokens, userBikeTokens);
-        yield fork(loadHashFromNetworkToken, ethereum, differenceBike);
+        yield call(loadHashFromNetworkToken, ethereum, differenceBike);
     }
     yield put({type: "APP_LOADING_END"});
 }
