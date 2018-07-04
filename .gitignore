@@ -1,5 +1,4 @@
 node_modules/
-build/
 server/node_modules/
 package-lock.json
 yarn.lock
