@@ -9,18 +9,32 @@ import {
 import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 import BikeHiringInfo from "../bike_hiring_info/BikeHiringInfo";
 import appConfig from "../../config/app.json";
-import mapStyle from "../../config/mapStyle.json";
 import MapBikeIcon from "../../assets/images/map_bike_icon.png";
 
 class MapHiringComponent extends Component {
     constructor(props) {
         super(props);
+        this.googleMap = null;
 
     }
-    
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.mapDefaultLocation != this.props.mapDefaultLocation) {
+            this.googleMap.panTo(
+                {
+                    lng: nextProps.mapDefaultLocation.long,
+                    lat: nextProps.mapDefaultLocation.lat
+                }
+            );
+
+        }
+    }
+
     render(){
         return(
             <GoogleMap
+                ref={(map) => {this.googleMap = map;} }
+
                 defaultZoom={13}
                 defaultCenter={{
                     lng: this.props.mapDefaultLocation.long,
@@ -28,11 +42,9 @@ class MapHiringComponent extends Component {
                 }}
                 onClick={() => this.props.handleSelectBike("")}
                 clickableIcons={false}
-                // defaultOptions={{ styles: mapStyle }}
             >
                 {
                     this.props.bikes.network.map((bike, index) => {
-                        console.log(index, bike)
                         return (
                             <Marker
                                 key={index}
@@ -48,7 +60,7 @@ class MapHiringComponent extends Component {
                                 </InfoBox>
                                 }
                             </Marker>
-                        )})
+                        );})
                 }
             </GoogleMap>
         );

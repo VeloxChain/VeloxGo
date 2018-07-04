@@ -15,7 +15,7 @@ class TransferBike extends Component {
             isFlash: false,
             isHonk: false,
             isLock: false,
-        }
+        };
     }
     render() {
         return (

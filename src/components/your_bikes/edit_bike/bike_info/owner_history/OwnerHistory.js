@@ -1,7 +1,7 @@
-import React from 'react';
-import Datatable from '../../../../datatable/Datatable';
-import styles from './OwnerHistoryStyle';
-import { MODAL_ADD_OWNER } from '../../../../modal/constants';
+import React from "react";
+import Datatable from "../../../../datatable/Datatable";
+import styles from "./OwnerHistoryStyle";
+import { MODAL_ADD_OWNER } from "../../../../modal/constants";
 
 const dataHeading = [
     {value: "ex_owner_address", title: "Ex-Owner Address"},

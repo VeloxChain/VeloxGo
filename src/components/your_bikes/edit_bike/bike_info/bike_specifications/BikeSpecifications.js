@@ -1,15 +1,15 @@
-import React from 'react';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import React from "react";
+import {Tabs, Tab} from "material-ui/Tabs";
 import styles from "./BikeSpecificationsStyle.js";
-import Components from './Components.js';
-import Geometry from './Geometry.js';
+import Components from "./Components.js";
+import Geometry from "./Geometry.js";
 
 class BikeSpecifications extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            value: '1',
+            value: "1",
         };
     }
 

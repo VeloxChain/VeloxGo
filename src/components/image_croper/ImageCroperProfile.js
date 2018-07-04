@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactCrop, { makeAspectCrop } from "react-image-crop";
 import styles from "./ImageCroperStyle";
 import "react-image-crop/dist/ReactCrop.css";
-import "./ImageCroperProfileStyle.css"
+import "./ImageCroperProfileStyle.css";
 
 class ImageCroperProfile extends Component {
     constructor(props) {

@@ -18,7 +18,7 @@ class BikeFilterComponent extends Component {
                     style={this.props.isRenderMap ? styles.iconFilter : styles.icon}
                     onClick={() => this.onChangeFilter(true)}    
                 />
-                 <i
+                <i
                     className="fa fa-list"
                     style={!this.props.isRenderMap ? styles.iconFilter : styles.icon}
                     onClick={() => this.onChangeFilter(false)}    
