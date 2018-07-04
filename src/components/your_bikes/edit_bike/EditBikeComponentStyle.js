@@ -283,7 +283,18 @@ const Styles = {
     listItemLeaderBoard: {
         borderBottom: "1px solid gainsboro",
         textAlign: "left"
-    }
+    },
+
+    buttonVerified: {
+        background: "#fff",
+        border: "1px solid #00d679",
+        borderRadius: "5px",
+        padding: "7px 20px",
+        textTransform: "uppercase",
+        letterSpacing: "2px",
+        display: "block",
+        minWidth: "168px"
+    },
 };
 
 export default Styles;

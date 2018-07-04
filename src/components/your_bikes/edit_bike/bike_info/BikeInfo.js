@@ -19,6 +19,22 @@ class BikeInfo extends Component {
         });
     };
 
+    _renderOwnerHistory = () => {
+        if (this.props.isVerified) {
+            return;
+        }
+
+        return (
+            <Tab
+                label="Owner history"
+                value={2}
+                style={this.state.tabIndex === 2 ? styles.tabActive : styles.tab}
+            >
+                <OwnerHistory {...this.props} />
+            </Tab>
+        );
+    }
+
     render() {
         return (
             <Tabs
@@ -40,13 +56,9 @@ class BikeInfo extends Component {
                 >
                     <BikeSpecifications {...this.props} />
                 </Tab>
-                <Tab
-                    label="Owner history"
-                    value={2}
-                    style={this.state.tabIndex === 2 ? styles.tabActive : styles.tab}
-                >
-                    <OwnerHistory {...this.props} />
-                </Tab>
+                
+                {this._renderOwnerHistory()}
+
                 <Tab
                     label="Riding perfomance"
                     value={3}

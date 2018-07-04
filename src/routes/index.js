@@ -11,6 +11,7 @@ import YourBikesComponent from "../components/your_bikes/YourBikeComponent";
 import HiringRequestComponent from "../components/hiring_request/HiringRequestComponent";
 import YourAccountComponent from "../components/your_account/YourAccountComponent";
 import Web3 from "web3";
+import VerifiedBikeComponent from "../components/verified/VerifiedBikeComponent";
 class root extends React.Component {
     constructor(props) {
         super(props);
@@ -43,6 +44,7 @@ class root extends React.Component {
                 <Route exact path="/" render={() => <YourBikesComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
                 <Route exact path="/hiring_request" render={() => <HiringRequestComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
                 <Route exact path="/your_account" render={() => <YourAccountComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
+                <Route exact path="/verified" render={() => <VerifiedBikeComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
             </Switch>
         );
     }
