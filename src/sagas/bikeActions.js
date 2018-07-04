@@ -132,9 +132,9 @@ function* uploadModifiedBikeToIPFS(action) {
 // }
 
 function* loadBikeFromNetWork(action){
-    const { address, ethereum } = action.payload;
+    yield put({type: "APP_LOADING_START", payload: "Loading bikes from bikecoin network....."});
     yield delay(500);
-    yield put({type: "APP_LOADING_START", payload: "Loading bikes....."});
+    const { address, ethereum } = action.payload;
     const bikes = yield select(bikesState);
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
     let networkTokens = yield call(ethereum.networkAdress.getBikeTokens);
