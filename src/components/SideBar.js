@@ -19,10 +19,6 @@ class SideBar extends Component{
                             <img src="images/XMLID_2.png" className="mgr-15" alt="Bikecoin" />
                             <span>YOUR ACCOUNT</span>
                         </NavLink>
-                        <NavLink to="/verified">
-                            <img src="images/XMLID_3.png" className="mgr-15" alt="Bikecoin" />
-                            <span>VERIFIED</span>
-                        </NavLink>
                     </ul>
                 </div>
             </div>
