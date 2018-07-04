@@ -12,7 +12,7 @@ class HiringRequestComponent extends Component {
             bikeHashSelected: "",
             isRenderMap: true,
             mapDefaultLocation: {
-                index: "sg",
+                index: "none",
                 long: 103.819836,
                 lat: 1.352083
             }
@@ -40,7 +40,19 @@ class HiringRequestComponent extends Component {
     _renderBike = () => {
         let renderBike = [];
 
+        let listBikeFilter = [];
+    
         _.forEach(this.props.bikes.network, (value, index) => {
+            if (value.location.country.code === this.state.mapDefaultLocation.index) {
+                listBikeFilter = [...listBikeFilter, value]
+            }
+        });
+
+        if(this.state.mapDefaultLocation.index === 'none') {
+            listBikeFilter = this.props.bikes.network;
+        }
+
+        _.forEach(listBikeFilter, (value, index) => {
             renderBike.push(<Bike bike={value} key={index} {...this.props} />);
         });
 

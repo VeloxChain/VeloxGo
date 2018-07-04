@@ -11,19 +11,28 @@ class BikeSearchComponent extends Component {
 
         this.state = {
             mapLocation: {
-                sg: {
+                none: {
+                    index: 'none',
                     long: 103.819836,
                     lat: 1.352083
                 },
-                del: {
+                SG: {
+                    index: 'SG',
+                    long: 103.819836,
+                    lat: 1.352083
+                },
+                US: {
+                    index: 'US',
                     long: -83.06797,
                     lat: 40.29867
                 },
-                mil: {
+                IT: {
+                    index: 'IT',
                     long: 9.191383,
                     lat: 45.464211
                 },
-                san: {
+                SM: {
+                    index: 'SM',
                     long: -122.431297,
                     lat: 37.773972
                 },
@@ -32,7 +41,7 @@ class BikeSearchComponent extends Component {
     }
 
     handleChange = (event, index, value) => {
-        this.props.handleChangeMapDefaultLocation({...this.state.mapLocation[value], index: value, });
+        this.props.handleChangeMapDefaultLocation(this.state.mapLocation[value]);
     };
 
     render() {
@@ -47,19 +56,23 @@ class BikeSearchComponent extends Component {
                         selectedMenuItemStyle={styles.selectedMenuItemStyle}
                     >
                         <MenuItem 
-                            value={"sg"}
+                            value={"none"}
+                            primaryText="Select country" 
+                        />
+                        <MenuItem 
+                            value={"SG"}
                             primaryText="Singapore" 
                         />
                         <MenuItem 
-                            value={"del"}
+                            value={"US"}
                             primaryText="Delaware" 
                         />
                         <MenuItem 
-                            value={"mil"}
+                            value={"IT"}
                             primaryText="Milano (Italy)" 
                         />
                         <MenuItem 
-                            value={"san"}
+                            value={"SM"}
                             primaryText="San Francisco" 
                         />
                     </SelectField>

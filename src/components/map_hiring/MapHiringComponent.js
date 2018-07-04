@@ -26,7 +26,6 @@ class MapHiringComponent extends Component {
                     lat: nextProps.mapDefaultLocation.lat
                 }
             );
-
         }
     }
 
@@ -34,7 +33,6 @@ class MapHiringComponent extends Component {
         return(
             <GoogleMap
                 ref={(map) => {this.googleMap = map;} }
-
                 defaultZoom={13}
                 defaultCenter={{
                     lng: this.props.mapDefaultLocation.long,
