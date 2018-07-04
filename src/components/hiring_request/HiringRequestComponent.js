@@ -37,6 +37,21 @@ class HiringRequestComponent extends Component {
         });
     }
 
+    listToMatrix = (list, elementsPerSubArray) => {
+        var matrix = [], i, k;
+    
+        for (i = 0, k = -1; i < list.length; i++) {
+            if (i % elementsPerSubArray === 0) {
+                k++;
+                matrix[k] = [];
+            }
+    
+            matrix[k].push(list[i]);
+        }
+    
+        return matrix;
+    }
+
     _renderBike = () => {
         let renderBike = [];
 
@@ -52,9 +67,32 @@ class HiringRequestComponent extends Component {
             listBikeFilter = this.props.bikes.network;
         }
 
-        _.forEach(listBikeFilter, (value, index) => {
-            renderBike.push(<Bike bike={value} key={index} {...this.props} />);
-        });
+        listBikeFilter = this.listToMatrix(listBikeFilter, 4);
+
+        for(let i= 0; i< listBikeFilter.length; i++) {
+            let test = []
+            for(let j= 0; j< listBikeFilter[i].length; j++) {
+                    test = [...test, (<Bike bike={listBikeFilter[i][j]} key={i+j} {...this.props} />)];
+            }
+
+            renderBike = [
+                ...renderBike,
+                (<div className="row">
+                    {
+                        test
+                    }
+                </div>)
+            ]
+              
+        }
+
+        if (listBikeFilter.length === 0) {
+            renderBike = (
+                <div className="text-center">
+                    <h2 style={styles.fail}>This is no bike</h2>
+                </div>
+            )
+        }
 
         return renderBike;
     }
@@ -80,7 +118,6 @@ class HiringRequestComponent extends Component {
     _renderContent = () => {
         if (this.state.isRenderMap) {
             return this._renderBikeMaps();
-        
         }
         return this._renderBike();
     }
@@ -94,9 +131,8 @@ class HiringRequestComponent extends Component {
                     handleChangeMapDefaultLocation={this.handleChangeMapDefaultLocation}
                     isRenderMap={this.state.isRenderMap}
                 />
-                <div className="row">
-                    {this._renderContent()}
-                </div>
+                
+                {this._renderContent()}
             </div>
         );
     }

@@ -72,6 +72,12 @@ const Styles = {
 
     search: {
         marginRight: "80px",
+    },
+
+    fail: {
+        color: "rgb(158, 158, 158)",
+        letterSpacing: "2px",
+        marginTop: "30px"
     }
 };
   
