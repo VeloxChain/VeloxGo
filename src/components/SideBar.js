@@ -7,7 +7,7 @@ class SideBar extends Component{
             <div id="sidebar-menu" className="main_menu_side hidden-print main_menu">
                 <div className="menu_section">
                     <ul className="nav side-menu">
-                        <NavLink to="/your_bikes">
+                        <NavLink to="/">
                             <img src="images/XMLID_3.png" className="mgr-15" alt="Bikecoin" />
                             <span>YOUR BIKES</span>
                         </NavLink>

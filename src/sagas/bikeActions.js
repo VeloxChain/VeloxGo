@@ -1,10 +1,11 @@
-import { put, call, takeEvery, all, takeLatest} from "redux-saga/effects";
+import { put, call, takeEvery, all, takeLatest, fork, select } from "redux-saga/effects";
 import BIKES from "../constants/bikes";
 import { createNewBike, transferBike } from "../services/exchange";
 import { toast } from "react-toastify";
 import SERVICE_IPFS from "../services/ipfs";
 import _ from "lodash";
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
+export const bikesState = (state) => state.bikes;
 function* uploadNewBikeToIPFS(action) {
     yield put({type: "APP_LOADING_START"});
     let { bikeInfo, location, callBack, ethereum, keyStore, passphrase } = action.payload;
@@ -130,40 +131,81 @@ function* uploadModifiedBikeToIPFS(action) {
 // }
 
 function* loadBikeFromNetWork(action){
-    // const action = yield take(BIKES.INIT);
     const { address, ethereum } = action.payload;
-    let ownerBikes = [];
-    let networkBikes = [];
+    console.log("loading bike.....");
+    const bikes = yield select(bikesState);
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
-    let bikeTokens = yield call(ethereum.networkAdress.getBikeTokens);
+    let networkTokens = yield call(ethereum.networkAdress.getBikeTokens);
     let userBikeTokens = yield call(ethereum.userProfileContract.at(userProfileAddress).getBikeTokens);
     userBikeTokens = JSON.parse("[" + userBikeTokens + "]");
-    bikeTokens = JSON.parse("[" + bikeTokens + "]");
-    let anotherBikes = _.difference(bikeTokens, userBikeTokens);
-    let ownerHashs = yield all(userBikeTokens.map((value) => {
-        return call(ethereum.ownerShipContract.tokenURI, value);
-    }));
-    let bikeOwnerDatas = yield all(ownerHashs.map((value) => {
-        return call(SERVICE_IPFS.getDataFromIPFS, value);
-    }));
-    let anotherHashs = yield all(anotherBikes.map((value) => {
-        return call(ethereum.ownerShipContract.tokenURI, value);
-    }));
-    let anotherBikesData = yield all(anotherHashs.map((value) => {
-        return call(SERVICE_IPFS.getDataFromIPFS, value);
-    }));
-    _.forEach(bikeOwnerDatas, (value, index) => {
-        value = JSON.parse(value);
-        value.tokenId = userBikeTokens[index];
-        ownerBikes.push(value);
-        networkBikes.push(value);
+    networkTokens = JSON.parse("[" + networkTokens + "]");
+    let loaddedUser = _.difference(networkTokens, bikes.loadded);
+    let loaddedNetwork = _.difference(userBikeTokens, bikes.loadded);
+    let isLoaddedUser = _.isEmpty(loaddedUser);
+    let isLoaddedNetwork = _.isEmpty(loaddedNetwork);
+    if (isLoaddedUser && isLoaddedNetwork) {
+        return;
+    }
+    if (!isLoaddedUser) {
+        yield fork(loadHashFromUserToken, ethereum, userBikeTokens);
+    }
+    if (!isLoaddedUser) {
+        let differenceBike = _.difference(networkTokens, userBikeTokens);
+        yield fork(loadHashFromNetworkToken, ethereum, differenceBike);
+    }
+    // let ownerHashs = yield all(userBikeTokens.map((value) => {
+    //     return call(ethereum.ownerShipContract.tokenURI, value);
+    // }));
+    // let bikeOwnerDatas = yield all(ownerHashs.map((value) => {
+    //     return call(SERVICE_IPFS.getDataFromIPFS, value);
+    // }));
+    // let anotherHashs = yield all(anotherBikes.map((value) => {
+    //     return call(ethereum.ownerShipContract.tokenURI, value);
+    // }));
+    // let anotherBikesData = yield all(anotherHashs.map((value) => {
+    //     return call(SERVICE_IPFS.getDataFromIPFS, value);
+    // }));
+    // _.forEach(bikeOwnerDatas, (value, index) => {
+    //     value = JSON.parse(value);
+    //     value.tokenId = userBikeTokens[index];
+    //     ownerBikes.push(value);
+    //     networkBikes.push(value);
+    // });
+    // _.forEach(anotherBikesData, (value, index) => {
+    //     value = JSON.parse(value);
+    //     value.tokenId = anotherBikes[index];
+    //     networkBikes.push(value);
+    // });
+    // yield put({type: BIKES.LOAD_BIKES, payload:ownerBikes, networkBikes: networkBikes});
+}
+
+function* loadHashFromUserToken(ethereum, userBikeTokens) {
+    for (const key in userBikeTokens) {
+        let hash = yield call(ethereum.ownerShipContract.tokenURI, userBikeTokens[key]);
+        yield fork(getDataFromBikeHash, hash, userBikeTokens[key], "owner");
+    }
+}
+function* loadHashFromNetworkToken(ethereum, networkTokens) {
+    for (const key in networkTokens) {
+        let hash = yield call(ethereum.ownerShipContract.tokenURI, networkTokens[key]);
+        yield fork(getDataFromBikeHash, hash, networkTokens[key], "network");
+    }
+}
+function* getDataFromBikeHash(hash, tokenId, dataOf) {
+    let bikeData = yield call(SERVICE_IPFS.getDataFromIPFS, hash);
+    bikeData = JSON.parse(bikeData);
+    bikeData.tokenId = tokenId;
+    if (dataOf === "network") {
+        yield put({
+            type: BIKES.LOAD_NETWORK_BIKE,
+            payload: bikeData
+        });
+        return;
+    }
+    yield put({
+        type: BIKES.LOAD_OWNER_BIKES,
+        payload: bikeData
     });
-    _.forEach(anotherBikesData, (value, index) => {
-        value = JSON.parse(value);
-        value.tokenId = anotherBikes[index];
-        networkBikes.push(value);
-    });
-    yield put({type: BIKES.LOAD_BIKES, payload:ownerBikes, networkBikes: networkBikes});
 }
 
 function* transferBikeInNetwork(action) {

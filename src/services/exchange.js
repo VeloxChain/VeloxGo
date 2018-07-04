@@ -163,10 +163,10 @@ export const createNewBike = async (address, profileAddress, ipfsHash ,ethereum,
 export const transferBike = async (address, addressFrom, addressTo, tokenID ,ethereum, keyStore, password) => {
     console.log(address, addressFrom, addressTo, tokenID); //eslint-disable-line
     let isMetamask = _.isUndefined(password) || password === "";
-    let transferBikeData = encodeFunctionTxData("safeTransferFrom", ["address", "address", "uint256"], [addressFrom, addressTo, tokenID]);
+    let transferBikeData = encodeFunctionTxData("transferFrom", ["address", "address", "uint256"], [addressFrom, addressTo, tokenID]);
     let zeroAddress = "0x0000000000000000000000000000000000000000";
-    let types = ["address", "address", "uint256", "bytes", "bytes32"];
-    let params = [address, constants.BIKECOIN_OWNER_SHIP_ADDRESS , 0, transferBikeData, "0x0"];
+    let types = ["address", "address","address",  "uint256", "bytes"];
+    let params = [address, addressFrom,constants.BIKECOIN_OWNER_SHIP_ADDRESS , 0, transferBikeData];
     let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
     let txRelay = ethereum.relayTxContract;
     var privKey = "";
