@@ -7,7 +7,7 @@ import _ from "lodash";
 import styles from "./CustomCss";
 import { toast } from "react-toastify";
 import { Dialog } from "material-ui";
-import ImageCroper from "../../image_croper/ImageCroper";
+import ImageCroperProfile from "../../image_croper/ImageCroperProfile";
 
 class CreateAccount extends Component {
     constructor(props) {
@@ -193,7 +193,7 @@ class CreateAccount extends Component {
                     autoScrollBodyContent={true}
                     repositionOnUpdate={true}
                 >
-                    <ImageCroper
+                    <ImageCroperProfile
                         handleCropImage={this.handleCropImage}
                         imagePreview={this.state.imagePreview}
                         onHandleCloseCropImage={this.onHandleCloseCropImage}
