@@ -8,9 +8,14 @@ class BikeComponent extends Component {
         return (
             <div className="col-sm-3">
                 <div style={styles.block}>
-                    <img src={"https://gateway.ipfs.io/ipfs/" + this.props.bike.avatar} alt="Bikecoin" style={styles.bike} />
+                    <img
+                        src={"https://gateway.ipfs.io/ipfs/" + this.props.bike.avatar}
+                        alt="Bikecoin"
+                        style={styles.bike}
+                        onClick={() => this.props.setType(MODAL_SUMARY_OF_BIKE, this.props.bike)}
+                    />
                     <div style={styles.action}>
-                        <button style={styles.button}  onClick={() => this.props.setType(MODAL_SUMARY_OF_BIKE, this.props.bike)}>bike detail</button>
+                        <button style={styles.button}>book</button>
                     </div>
                 </div>
             </div>
