@@ -68,14 +68,14 @@ function* finishUploadNewBikeToIPFS(action) {
         return;
     }
     yield call(callBack);
-    let userBikeTokens = yield call(ethereum.userProfileContract.at(userProfileAddress).getBikeTokens);
-    userBikeTokens = JSON.parse("[" + userBikeTokens + "]");
     const bikes = yield select(bikesState);
-    let loaddedUser = _.difference(userBikeTokens, bikes.loadded);
-    let isLoaddedUser = _.isEmpty(loaddedUser);
-    if (!isLoaddedUser) {
-        yield fork(loadHashFromUserToken, ethereum, userBikeTokens);
+    let totalTokens = yield call(ethereum.ownerShipContract.balanceOf,userProfileAddress);
+    totalTokens = parseInt(totalTokens.toString()) -1;
+    if (totalTokens === bikes.data.length) {
+        yield put({type: "APP_LOADING_END"});
+        return;
     }
+    yield call(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes.loaded);
     yield put({type: "APP_LOADING_END"});
 }
 
@@ -143,7 +143,7 @@ function* loadUserBikeFromNetWork(action){
         yield put({type: "APP_LOADING_END"});
         return;
     }
-    yield call(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress);
+    yield call(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes.loaded);
     yield put({type: "APP_LOADING_END"});
 }
 function* loadNetworkBikeFromNetWork(action){
@@ -161,12 +161,14 @@ function* loadNetworkBikeFromNetWork(action){
     yield put({type: "APP_LOADING_END"});
 }
 
-function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress) {
+function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress, loaded) {
     for (var key=1; key <= totalTokens; key++) {
         let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, key);
         tokenIndex = tokenIndex.toString();
-        let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
-        yield fork(getDataFromBikeHash, hash, tokenIndex, "owner");
+        if (loaded.includes(tokenIndex) === false) {
+            let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
+            yield fork(getDataFromBikeHash, hash, tokenIndex, "owner");
+        }
     }
 }
 function* loadHashFromNetworkToken(ethereum, totalTokens, loaded) {
