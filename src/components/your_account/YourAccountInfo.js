@@ -73,6 +73,11 @@ class YourAccountInfo extends Component {
             imageData: new Buffer(newSrc.replace(/^data:image\/(png|gif|jpeg|jpg);base64,/,""), "base64"),
             imagePreview: newSrc
         });
+
+        let data = [];
+        data["imageData"] = new Buffer(newSrc.replace(/^data:image\/(png|gif|jpeg|jpg);base64,/,""), "base64");
+
+        this.props.onChangeAvatar(data);
     }
 
     render() {
