@@ -3,29 +3,28 @@ import ACC_ACTION from "../constants/accActions";
 const initState = {
     data: [],
     network: [],
-    loadded: []
+    loaded: []
 };
 
 const bikesReducer = (state = initState, action) => {
     var newState, bikeInfo, newNetwork, newLoadded;
     switch (action.type) {
     case BIKES.LOAD_OWNER_BIKES :
-        newLoadded = state.loadded;
-        if (newLoadded.includes(action.payload.tokenId)) {
-            return state;
-        }
+        newLoadded = state.loaded;
         newState = state.data;
         newNetwork = state.network;
+        if (newLoadded.includes(action.payload.tokenId) === false) {
+            newLoadded.push(action.payload.tokenId);
+            newNetwork.push(action.payload);
+        }
         newState.push(action.payload);
-        newNetwork.push(action.payload);
-        newLoadded.push(action.payload.tokenId);
         return {
             ...state,
             data: newState,
             network: newNetwork
         };
     case BIKES.LOAD_NETWORK_BIKE :
-        newLoadded = state.loadded;
+        newLoadded = state.loaded;
         if (newLoadded.includes(action.payload.tokenId)) {
             return state;
         }
@@ -63,11 +62,18 @@ const bikesReducer = (state = initState, action) => {
             ...state,
             data: newState
         };
+    case BIKES.FINISH_TRANSFER:
+        newState = state.data;
+        newState = newState.filter((bike) =>  bike.tokenId != action.payload);
+        return {
+            ...state,
+            data: newState
+        };
     case ACC_ACTION.LOG_OUT:
         return {
             data: [],
             network: [],
-            loadded: []
+            loaded: []
         };
     default:
         return state;

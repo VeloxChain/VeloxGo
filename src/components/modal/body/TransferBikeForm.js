@@ -33,14 +33,15 @@ class ConfirmTransaction extends Component {
             toast.error("Invalid Form");
             return;
         }
-        const { address, tokenId } = this.props.externalData;
+        const { address, tokenId, callBack } = this.props.externalData;
         let payload = {
             address: address,
             addressTo: this.state.addressTo,
             tokenId: tokenId,
             ethereum: this.props.ethereum,
             keyStore: this.props.accounts.accounts.key,
-            passphrase: this.state.passphrase
+            passphrase: this.state.passphrase,
+            callBack: callBack
         };
         this.props.dispatch(transferBike(payload));
         this.props.closeModal();

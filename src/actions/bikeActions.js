@@ -31,9 +31,15 @@ export function transferBike(payload) {
         payload
     };
 }
-export function initBikes(payload) {
+export function initUserBikes(payload) {
     return {
-        type: BIKES.INIT,
+        type: BIKES.USER_INIT,
+        payload
+    };
+}
+export function initNetworkBikes(payload) {
+    return {
+        type: BIKES.NETWORK_INIT,
         payload
     };
 }

@@ -23,7 +23,8 @@ class EditBikeComponent extends Component {
     transferBike = () => {
         this.props.setType(MODAL_TRANSFER_BIKE, {
             address: this.props.getAccountAddress(),
-            tokenId: this.props.bikeInfo.tokenId
+            tokenId: this.props.bikeInfo.tokenId,
+            callBack: this.props.switchState
         });
     }
 

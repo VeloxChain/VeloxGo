@@ -4,7 +4,7 @@ import Bike from "./BikeComponent";
 import BikeSearchComponent from "./BikeSearchComponent";
 import _ from "lodash";
 import MapHiringComponent from "../map_hiring/MapHiringComponent";
-
+import { initNetworkBikes } from "../../actions/bikeActions";
 class HiringRequestComponent extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +17,11 @@ class HiringRequestComponent extends Component {
                 lat: 1.352083
             }
         };
+    }
+
+    componentDidMount() {
+        const { accounts } = this.props;
+        this.props.dispatch(initNetworkBikes({ethereum: this.props.ethereum }));
     }
 
     handleChangeMapDefaultLocation = (mapDefaultLocation) => {
@@ -39,16 +44,16 @@ class HiringRequestComponent extends Component {
 
     listToMatrix = (list, elementsPerSubArray) => {
         var matrix = [], i, k;
-    
+
         for (i = 0, k = -1; i < list.length; i++) {
             if (i % elementsPerSubArray === 0) {
                 k++;
                 matrix[k] = [];
             }
-    
+
             matrix[k].push(list[i]);
         }
-    
+
         return matrix;
     }
 
@@ -56,7 +61,7 @@ class HiringRequestComponent extends Component {
         let renderBike = [];
 
         let listBikeFilter = [];
-    
+
         _.forEach(this.props.bikes.network, (value, index) => {
             if (value.location.country.code === this.state.mapDefaultLocation.index) {
                 listBikeFilter = [...listBikeFilter, value]
@@ -83,7 +88,7 @@ class HiringRequestComponent extends Component {
                     }
                 </div>)
             ]
-              
+
         }
 
         if (listBikeFilter.length === 0) {
@@ -131,7 +136,7 @@ class HiringRequestComponent extends Component {
                     handleChangeMapDefaultLocation={this.handleChangeMapDefaultLocation}
                     isRenderMap={this.state.isRenderMap}
                 />
-                
+
                 {this._renderContent()}
             </div>
         );

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import _ from "lodash";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
@@ -44,23 +44,15 @@ class RootContainer extends React.Component {
     }
 
 
-    scomponentWillReceiveProps(props){
-        if(!_.isUndefined(props.toast)) {
-            if(props.toast.message !== "") {
-                toast(
-                    props.toast.message,
-                    {
-                        ...props.toast.option,
-                        onClose: () => this.props.addNewToast({message: ""})
-                    }
-                );
-            }
-        }
-    }
     _renderTxHash = (AppReducer) => {
         if (AppReducer.txHash) {
+            if (AppReducer.txHash.lenth === 66) {
+                return (
+                    <a href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash} style={{fontSize:20}} target="_blank">{"Tx: " + AppReducer.txHash}</a>
+                );
+            }
             return (
-                <a href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash} style={{fontSize:20}} target="_blank">{"Tx: " + AppReducer.txHash}</a>
+                <a style={{fontSize:20}} target="_blank">{AppReducer.txHash}</a>
             );
         }
     }
