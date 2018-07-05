@@ -703,6 +703,18 @@ a {
     margin: 30px auto;
     cursor: pointer;
 }
+.avatarDropProfile {
+    width: 110px;
+    height: 110px;
+    border: 2px dashed rgb(173, 173, 173);
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px auto;
+    cursor: pointer;
+}
 .icon-camera {
     font-size: 40px;
     color: #868686;
@@ -940,4 +952,8 @@ input#file:focus {
 
 .wrappOwner {
     min-height: 100px;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+    overflow: scroll;
 }
