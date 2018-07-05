@@ -125,13 +125,12 @@ class NewAccount extends Component {
         return (
             <div className="downloadKeyStore flexible mgb-30">
                 <div className="text-center">
-                    <h3 className="mgb-30">Download Key Your Store</h3>
+                    <h3 className="mgb-30">Download Your Key Store</h3>
                     <button className="btn" onClick={this.downloadKeyStore}>
                         <i className="fa fa-download"></i>
                     </button>
                 </div>
             </div>
-
         );
     }
 
