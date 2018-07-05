@@ -1,4 +1,4 @@
-import { put, call, takeEvery, all, takeLatest, fork, select } from "redux-saga/effects";
+import { put, call, takeEvery, takeLatest, fork, select } from "redux-saga/effects";
 import BIKES from "../constants/bikes";
 import { createNewBike, transferBike } from "../services/exchange";
 import { toast } from "react-toastify";

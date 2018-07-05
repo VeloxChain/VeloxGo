@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./EditBikeComponentStyle";
-
+import { toast } from "react-toastify";
 const lockedOff = "images/lockedOff.png";
 const lockedOn = "images/lockedOn.png";
 const flashOff = "images/flashOff.png";
@@ -17,6 +17,9 @@ class TransferBike extends Component {
             isLock: false,
         };
     }
+    notifyFeatures = () => {
+        toast.info("This feature is not supported in MVP");
+    }
     render() {
         return (
             <div style={styles.wrappRight}>
@@ -30,8 +33,8 @@ class TransferBike extends Component {
                 <div style={styles.boxRight}>
                     <div>
                         <button style={styles.buttonTransfer} onClick={this.props.transferBike}>Transfer</button>
-                        <button style={styles.buttonDelete} onClick={this.props.deytroyBike}>Destroy</button>
-                        <button style={styles.buttonTransfer}>Lost mode</button>
+                        <button style={styles.buttonDelete} onClick={this.notifyFeatures}>Destroy</button>
+                        <button style={styles.buttonTransfer} onClick={this.notifyFeatures}>Lost mode</button>
 
                         <div style={styles.wrappStatus}>
                             <img
