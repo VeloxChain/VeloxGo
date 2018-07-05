@@ -10,8 +10,8 @@ var IPFS = require("ipfs-api");
 // });
 
 var ipfs = IPFS({
-    host: "demo.bikecoin.network",
-    port: 5001,
+    host: "ipfs.bikecoin.network",
+    port: 5002,
     protocol: "https"
 });
 

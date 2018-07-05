@@ -89,7 +89,7 @@ class HiringRequestComponent extends Component {
         if (listBikeFilter.length === 0) {
             renderBike = (
                 <div className="text-center">
-                    <h2 style={styles.fail}>This is no bike</h2>
+                    <h2 style={styles.fail}>There is no bike</h2>
                 </div>
             )
         }
