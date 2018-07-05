@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import TextField from "material-ui/TextField";
 import  {verifyEmail } from "../../../utils/validators";
-import { uploadUserProfileToIPFS } from "../../../actions/userProfileActions";
+import { createUserProfileToIPFS } from "../../../actions/userProfileActions";
 import Dropzone from "react-dropzone";
 import _ from "lodash";
 import styles from "./CustomCss";
@@ -23,7 +23,7 @@ class CreateAccount extends Component {
             labelButton: "CREATE BIKECOIN ACCOUNT",
             imageData: "",
             isOpenCropImage: false,
-            imagePreview: null
+            imagePreview: "images/avatar.png"
         };
     }
 
@@ -36,35 +36,34 @@ class CreateAccount extends Component {
     validate = async () => {
         let isValidEmail = await verifyEmail(this.state.email);
         if (!isValidEmail) {
-            return false;
+            return 'Invalid Email';
         }
         if (this.state.firstname === "") {
-            return false;
+            return 'Invalid First Name';
         }
         if (this.state.lastname === "") {
-            return false;
+            return 'Invalid Last Name';
         }
         if (this.state.passpharse === "" && this.isMetamask() === false) {
-            return false;
+            return 'Invalid Passpharse';
         }
-        if (this.state.imageData === "") {
-            return false;
-        }
-        return true;
+        
+        return '';
     }
 
     createProfile = async () => {
         if (this.state.submitted) {
             return;
         }
-        let isValidData = await this.validate();
-        if (!isValidData) {
-            toast.error("Invalid Form");
+        let validDataMessenger = await this.validate();
+        if (validDataMessenger != '') {
+            toast.error(validDataMessenger);
             return;
         }
         var state = this.state;
         let userInfo = {
             email: state.email,
+            isCreateNew: true,
             lastname: state.lastname,
             firstname: state.firstname,
             avatarData: state.imageData,
@@ -74,7 +73,7 @@ class CreateAccount extends Component {
             keyStore: this.props.accounts.accounts.key,
             passphrase: state.passpharse
         };
-        await this.props.dispatch(uploadUserProfileToIPFS(userInfo));
+        await this.props.dispatch(createUserProfileToIPFS(userInfo));
         this.props.closeModal();
     }
 

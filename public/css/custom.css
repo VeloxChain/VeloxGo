@@ -941,3 +941,7 @@ input#file:focus {
 .wrappOwner {
     min-height: 100px;
 }
+
+.ReactModalPortal .ReactModal__Overlay {
+    overflow: scroll;
+}

@@ -26,6 +26,14 @@ export function uploadUserProfileToIPFS(userProfile) {
         payload: userProfile
     };
 }
+
+export function createUserProfileToIPFS(userProfile) {
+    return {
+        type: USER_PROFILE.UPLOAD_PROFILE_TO_IPFS,
+        payload: userProfile
+    };
+}
+
 export function finishUploadNewProfileToIPFS(payload) {
     return {
         type: USER_PROFILE.FINISH_UPLOAD_NEW_PROFILE,

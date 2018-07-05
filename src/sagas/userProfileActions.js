@@ -16,15 +16,16 @@ function* uploadProfileToIPFS(action) {
     delete userInfo.ethereum;
     delete userInfo.keyStore;
     delete userInfo.passphrase;
-    var isNewProfile = false;
-    if (!_.isUndefined(userInfo.avatarData)) {
-        isNewProfile = true;
+    if (!_.isEmpty(userInfo.avatarData)) {
         let resultPutFileToIPFS = yield call(SERVICE_IPFS.putFileToIPFS, userInfo.avatarData);
         userInfo["avatar"] = resultPutFileToIPFS;
         delete userInfo.avatarData;
+    } else {
+        userInfo["avatar"] = "Qmdqv5Jo1R94WykcpPc1L2JJkfTAG8GUeNkgTuExaZ7g3m";
     }
     let hashData = yield call (SERVICE_IPFS.putDataToIPFS, userInfo);
-    if (isNewProfile) {
+
+    if (userInfo.isCreateNew) {
         yield put({
             type: USER_PROFILE.FINISH_UPLOAD_NEW_PROFILE,
             payload: {userInfo: userInfo,hashData: hashData, ethereum: ethereum, keyStore: keyStore, passphrase: passphrase}
@@ -147,6 +148,7 @@ function* retrieveUserProfile(action) {
 
 export function* watchUserProfile() {
     yield takeEvery(USER_PROFILE.UPLOAD_PROFILE_TO_IPFS, uploadProfileToIPFS);
+    yield takeEvery(USER_PROFILE.CREATE_PROFILE_TO_IPFS, uploadProfileToIPFS);
     yield takeEvery(USER_PROFILE.FINISH_UPLOAD_NEW_PROFILE, finishUploadNewProfileToIPFS);
     yield takeEvery(USER_PROFILE.FINISH_UPLOAD_MODIFIED_PROFILE, finishUploadModifiedProfileToIPFS);
     yield takeEvery(USER_PROFILE.RETRIEVE_PROFILE, retrieveUserProfile);
