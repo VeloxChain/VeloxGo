@@ -10,9 +10,9 @@ var IPFS = require("ipfs-api");
 // });
 
 var ipfs = IPFS({
-    host: "ec2-34-217-177-160.us-west-2.compute.amazonaws.com",
+    host: "demo.bikecoin.network",
     port: 5001,
-    protocol: "http"
+    protocol: "https"
 });
 
 // var ipfs = IPFS();
