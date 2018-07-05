@@ -17,12 +17,24 @@ class YourAccountComponent extends Component {
             userProfileAddress: ""
         };
     }
+
+
+    onChangeAvatar = (newData) => {
+        this.setState({
+            userProfile: {
+                ...this.state.userProfile,
+                ...newData
+            }
+        });   
+    }
+
     saveInformation = () => {
         const { userProfile, accountAddress } = this.state;
         let data = {
             email: userProfile.email,
             lastname: userProfile.lastname,
             firstname: userProfile.firstname,
+            avatarData: userProfile.imageData,
             avatar: userProfile.avatar,
             accountAddress: accountAddress,
             ethereum: this.props.ethereum,
@@ -67,7 +79,7 @@ class YourAccountComponent extends Component {
             <div style={styles.wrapp}>
                 <div className="row">
                     <div className="col-sm-4" style={{minWidth:400}}>
-                        <YourAccountInfo {...this.props} info={this.state.info}/>
+                        <YourAccountInfo {...this.props} info={this.state.info} onChangeAvatar={this.onChangeAvatar} />
                     </div>
                     <div className="col-sm-6">
                         <YourAccountForm
