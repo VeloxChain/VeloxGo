@@ -29,7 +29,7 @@ const Styles = {
 
     bike: {
         width: "100%",
-        padding: "20px",
+        padding: "20px 20px 10px",
         cursor: "pointer"
     },
 
@@ -68,6 +68,29 @@ const Styles = {
         color: "rgb(158, 158, 158)",
         letterSpacing: "2px",
         marginTop: "30px"
+    },
+    
+    info: {
+        padding: "0px 20px"
+    },
+    
+    bold: {
+        fontWeight: "bold"
+    },
+
+    address: {
+        minHeight: "40px",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        display: "-webkit-box",
+        WebkitLineClamp: "2",
+        WebkitBoxOrient: "vertical",
+        fontSize: "16px"
+    },
+
+    number: {
+        marginBottom: "5px",
+        fontSize: "16px"
     }
 };
   

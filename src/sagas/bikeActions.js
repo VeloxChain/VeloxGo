@@ -143,9 +143,7 @@ function* loadUserBikeFromNetWork(action){
         yield put({type: "APP_LOADING_END"});
         return;
     }
-    if (totalTokens > 1) {
-        totalTokens = totalTokens - 1;
-    }
+    totalTokens = totalTokens - 1;
     yield call(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes.loaded);
     yield put({type: "APP_LOADING_END"});
 }
@@ -160,9 +158,7 @@ function* loadNetworkBikeFromNetWork(action){
         yield put({type: "APP_LOADING_END"});
         return;
     }
-    if (totalTokens > 1) {
-        totalTokens = totalTokens - 1;
-    }
+    totalTokens = totalTokens - 1;
     yield call(loadHashFromNetworkToken, ethereum, totalTokens, bikes.loaded);
     yield put({type: "APP_LOADING_END"});
 }
