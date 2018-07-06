@@ -8,7 +8,7 @@ class RegisterBikeConfirm extends Component {
         if (this.props.isMetamask === false) {
             return (
                 <TextField
-                    floatingLabelText="Enter your passport wallet"
+                    floatingLabelText="Enter your password wallet"
                     type="password"
                     fullWidth
                     style={styles.mb80}

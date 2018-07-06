@@ -37,26 +37,20 @@ const Styles = {
         marginBottom: "20px"
     },
 
-    filter: {
-        position: "relative"
-    },
-
     maps: {
-        position: "absolute",
-        bottom: "10px",
-        right: 0
+        marginTop: "40px"
     },
 
     iconFilter: {
         fontSize: "18px",
-        marginRight: "15px",
+        marginLeft: "15px",
         cursor: "pointer",
         color: "#00d679"
     },
 
     icon: {
         fontSize: "18px",
-        marginRight: "15px",
+        marginLeft: "15px",
         cursor: "pointer",
     },
 
@@ -68,10 +62,6 @@ const Styles = {
         border: "none",
         width: "100%",
         height: "calc(100vh - 195px)"
-    },
-
-    search: {
-        marginRight: "80px",
     },
 
     fail: {

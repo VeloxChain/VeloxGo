@@ -114,7 +114,7 @@ class YourAccountInfo extends Component {
                         </p>
                         <button style={styles.buttonCollect}>
                             <span>collect 200 </span>
-                            <img src="images/icon.png" alt="Bikecoin" />
+                            <img src="images/icon.png" alt="Bikecoin" style={styles.icon} />
                         </button>
                     </div>
                 </div>

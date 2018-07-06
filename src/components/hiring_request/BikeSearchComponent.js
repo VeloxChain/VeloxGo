@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styles from "./HiringRequestComponentStyle";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
-import TextField from "material-ui/TextField";
 import BikeFilterComponent from "./BikeFilterComponent";
 
 class BikeSearchComponent extends Component {
@@ -47,7 +46,7 @@ class BikeSearchComponent extends Component {
     render() {
         return (
             <div className="row" style={styles.mb20}>
-                <div className="col-sm-3">
+                <div className="col-sm-4">
                     <SelectField
                         floatingLabelText="Location"
                         value={this.props.mapDefaultLocation.index}
@@ -77,16 +76,8 @@ class BikeSearchComponent extends Component {
                         />
                     </SelectField>
                 </div>
-                <div className="col-sm-9">
-                    <div style={styles.filter}>
-                        <div style={styles.search}>
-                            <TextField
-                                floatingLabelText="Search"
-                                fullWidth
-                            />
-                        </div>
-                        <BikeFilterComponent isRenderMap={this.props.isRenderMap} onHandleSwitchView={this.props.onHandleSwitchView}/>
-                    </div>
+                <div className="col-sm-8 text-right">
+                    <BikeFilterComponent isRenderMap={this.props.isRenderMap} onHandleSwitchView={this.props.onHandleSwitchView}/>
                 </div>
             </div>
         );
