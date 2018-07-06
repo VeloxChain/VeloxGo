@@ -139,12 +139,12 @@ function* loadUserBikeFromNetWork(action){
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
     let totalTokens = yield call(ethereum.ownerShipContract.balanceOf,userProfileAddress);
     totalTokens = parseInt(totalTokens.toString());
-    if (totalTokens > 1) {
-        totalTokens = totalTokens - 1;
-    }
     if (totalTokens === bikes.data.length) {
         yield put({type: "APP_LOADING_END"});
         return;
+    }
+    if (totalTokens > 1) {
+        totalTokens = totalTokens - 1;
     }
     yield call(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes.loaded);
     yield put({type: "APP_LOADING_END"});
@@ -156,19 +156,19 @@ function* loadNetworkBikeFromNetWork(action){
     const bikes = yield select(bikesState);
     let totalTokens = yield call(ethereum.ownerShipContract.totalSupply);
     totalTokens = parseInt(totalTokens.toString());
-    if (totalTokens > 1) {
-        totalTokens = totalTokens - 1;
-    }
     if (totalTokens === bikes.network.length) {
         yield put({type: "APP_LOADING_END"});
         return;
+    }
+    if (totalTokens > 1) {
+        totalTokens = totalTokens - 1;
     }
     yield call(loadHashFromNetworkToken, ethereum, totalTokens, bikes.loaded);
     yield put({type: "APP_LOADING_END"});
 }
 
 function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress, loaded) {
-    for (var key=0; key < totalTokens; key++) {
+    for (var key=0; key <= totalTokens; key++) {
         let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, key);
         tokenIndex = tokenIndex.toString();
         if (loaded.includes(tokenIndex) === false) {
@@ -178,7 +178,7 @@ function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress, loade
     }
 }
 function* loadHashFromNetworkToken(ethereum, totalTokens, loaded) {
-    for (var key=0; key < totalTokens; key++) {
+    for (var key=0; key <= totalTokens; key++) {
         let tokenIndex = yield call(ethereum.ownerShipContract.tokenByIndex, key);
         tokenIndex = tokenIndex.toString();
         if (loaded.includes(tokenIndex) === false) {
