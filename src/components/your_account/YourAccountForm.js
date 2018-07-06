@@ -3,17 +3,42 @@ import styles from "./YourAccountComponentStyle";
 import TextField from "material-ui/TextField";
 
 class YourAccountForm extends Component {
+    _viewETHOnEtherScan = () =>{
+        const { accounts } = this.props.accounts;
+        return (
+            <a
+                href={"https://ropsten.etherscan.io/address/" + accounts.address}
+                title="View ETH Address On EtherScan"
+                target="_blank" >
+                {accounts.address + " "}
+                <i className="fa fa-external-link"></i>
+            </a>
+        );
+    }
+    _viewProfileOnEtherScan = () =>{
+        const { userProfileAddress } = this.props;
+        return (
+            <a
+                href={"https://ropsten.etherscan.io/address/" + userProfileAddress}
+                title="View Profile Address On EtherScan"
+                target="_blank" >
+                {userProfileAddress + " "}
+                <i className="fa fa-external-link"></i>
+            </a>
+        );
+    }
     render() {
         return (
             <div>
-                <h3 style={styles.title}>
-                    ETH Address: <a href={"https://ropsten.etherscan.io/address/" + this.props.accounts.accounts.address} target="_blank">{this.props.accounts.accounts.address}</a>
-                </h3>
-                <TextField
-                    floatingLabelText="User Profile Address"
-                    fullWidth
-                    value={this.props.userProfileAddress}
-                />
+                <h4 style={styles.title}>
+                    Network: {this.props.global.nodeName}
+                </h4>
+                <p style={styles.address}>
+                    ETH Address: {this._viewETHOnEtherScan()}
+                </p>
+                <p style={styles.address}>
+                    User Profile Address: {this._viewProfileOnEtherScan()}
+                </p>
                 <TextField
                     floatingLabelText="Email"
                     fullWidth
