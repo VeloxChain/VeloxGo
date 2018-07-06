@@ -28,6 +28,10 @@ const Styles = {
     title: {
         marginTop: "0px"
     },
+    address: {
+        marginTop: "0px",
+        fontSize:16
+    },
 
     name: {
         marginTop: "0px",

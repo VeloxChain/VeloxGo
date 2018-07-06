@@ -25,7 +25,7 @@ class YourAccountComponent extends Component {
                 ...this.state.userProfile,
                 ...newData
             }
-        });   
+        });
     }
 
     saveInformation = () => {
@@ -68,7 +68,7 @@ class YourAccountComponent extends Component {
         this._renderAddress();
     }
     _renderAddress = async () => {
-        let accountAddress = await this.props.getAccountAddress();
+        let accountAddress = this.props.getAccountAddress();
         this.props.ethereum.getBalance(accountAddress, this._renderETHBalance);
         this.props.ethereum.getBikeCoinBalance(accountAddress, this._renderBKCBalance);
         let userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(accountAddress);
