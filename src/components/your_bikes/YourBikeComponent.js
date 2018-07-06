@@ -5,6 +5,7 @@ import styles from "./YourBikesComponentStyle";
 import EditBikeComponent from "./edit_bike/EditBikeComponent";
 import Toggle from "material-ui/Toggle";
 import { initUserBikes } from "../../actions/bikeActions";
+import _ from "lodash";
 class YourBikesComponent extends Component {
     constructor(props) {
         super(props);
@@ -77,7 +78,7 @@ class YourBikesComponent extends Component {
                 </div>
                 <Datatable
                     params={this.state.params}
-                    body={this.props.bikes.data}
+                    body={_.orderBy(this.props.bikes.data, ["tokenId"], ["desc"])}
                     editRow={this.editRow}
                     actions={this.state.actions}
                     toggle={this.state.toggle}

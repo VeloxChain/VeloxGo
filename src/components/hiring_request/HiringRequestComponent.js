@@ -20,7 +20,6 @@ class HiringRequestComponent extends Component {
     }
 
     componentDidMount() {
-        const { accounts } = this.props;
         this.props.dispatch(initNetworkBikes({ethereum: this.props.ethereum }));
     }
 
@@ -61,33 +60,33 @@ class HiringRequestComponent extends Component {
         let renderBike = [];
 
         let listBikeFilter = [];
-
-        _.forEach(this.props.bikes.network, (value, index) => {
+        let networkBikes = _.orderBy(this.props.bikes.network, ["tokenId"], ["desc"]);
+        _.forEach(networkBikes, (value) => {
             if (value.location.country.code === this.state.mapDefaultLocation.index) {
-                listBikeFilter = [...listBikeFilter, value]
+                listBikeFilter = [...listBikeFilter, value];
             }
         });
 
-        if(this.state.mapDefaultLocation.index === 'none') {
-            listBikeFilter = this.props.bikes.network;
+        if(this.state.mapDefaultLocation.index === "none") {
+            listBikeFilter = networkBikes;
         }
 
         listBikeFilter = this.listToMatrix(listBikeFilter, 4);
 
         for(let i= 0; i< listBikeFilter.length; i++) {
-            let test = []
+            let test = [];
             for(let j= 0; j< listBikeFilter[i].length; j++) {
-                    test = [...test, (<Bike bike={listBikeFilter[i][j]} key={i+j} {...this.props} />)];
+                test = [...test, (<Bike bike={listBikeFilter[i][j]} key={i+j} {...this.props} />)];
             }
 
             renderBike = [
                 ...renderBike,
-                (<div className="row">
+                (<div className="row" key={i}>
                     {
                         test
                     }
                 </div>)
-            ]
+            ];
 
         }
 
@@ -96,7 +95,7 @@ class HiringRequestComponent extends Component {
                 <div className="text-center">
                     <h2 style={styles.fail}>There is no bike</h2>
                 </div>
-            )
+            );
         }
 
         return renderBike;

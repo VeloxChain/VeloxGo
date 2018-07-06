@@ -184,7 +184,7 @@ function* loadHashFromNetworkToken(ethereum, totalTokens, loaded) {
 function* getDataFromBikeHash(hash, tokenId, dataOf) {
     let bikeData = yield call(SERVICE_IPFS.getDataFromIPFS, hash);
     bikeData = JSON.parse(bikeData);
-    bikeData.tokenId = tokenId;
+    bikeData.tokenId = parseInt(tokenId);
     if (dataOf === "network") {
         yield put({
             type: BIKES.LOAD_NETWORK_BIKE,

@@ -30,6 +30,21 @@ export default class EthereumService {
         return this.rpc.version.api;
     }
 
+    getEventLogs = () => {
+        return new Promise((resolve) => {
+            return this.rpc.eth.filter({
+                fromBlock: 0,
+                toBlock: "latest",
+                address: "0x659d3946f3d5d74e74afccded83b650405352d6e",
+                topics: [ this.rpc.sha3("Transfer(address,address,uint256)"), null, "0x00000000000000000000000030fd5980a1fdddc7c6f630a26a7393e2db5b7c30" ],
+            }).get(function (err, result) {
+                console.log(err);
+                console.log(result)
+                resolve(result);
+            });
+        });
+    }
+
     getLatestBlockPromise(ethereum) {
         return new Promise((resolve) => {
             ethereum.rpc.eth.getBlock("latest", false, (error, block) => {
@@ -89,11 +104,11 @@ export default class EthereumService {
     }
 
     watch() {
-        this.rpc.eth.filter("latest", this.actAndWatch.bind(this), (error) => { // eslint-disable-line
-            // the node is not support for filtering
-            this.fetchData();
-            this.intervalID = setInterval(this.fetchData.bind(this), 10000);
-        });
+        // this.rpc.eth.filter("latest", this.actAndWatch.bind(this), (error) => { // eslint-disable-line
+        //     // the node is not support for filtering
+        //     this.fetchData();
+        //     this.intervalID = setInterval(this.fetchData.bind(this), 10000);
+        // });
     }
 
     fetchTxsData = () => {
