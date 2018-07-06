@@ -146,7 +146,16 @@ class RegisterBike extends Component {
             );
         }
     }
-
+    _renderButtonLabel = () => {
+        const {stepIndex} = this.state;
+        if (stepIndex === 2) {
+            return "Submit";
+        }
+        if (stepIndex < 2) {
+            return "Next";
+        }
+        return "Finish";
+    }
     render() {
         const {stepIndex} = this.state;
         const contentStyle = {margin: "0 16px"};
@@ -186,7 +195,7 @@ class RegisterBike extends Component {
                                 onClick={this.handleNext}
                                 style={styles.buttonBack}
                             >
-                                {stepIndex > 2 ? "Finish" : "Next"}
+                                {this._renderButtonLabel()}
                             </button>
                         </div>
                     </div>
