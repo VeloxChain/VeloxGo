@@ -20,7 +20,6 @@ class HiringRequestComponent extends Component {
     }
 
     componentDidMount() {
-        const { accounts } = this.props;
         this.props.dispatch(initNetworkBikes({ethereum: this.props.ethereum }));
     }
 
@@ -77,12 +76,12 @@ class HiringRequestComponent extends Component {
         for(let i= 0; i< listBikeFilter.length; i++) {
             let test = []
             for(let j= 0; j< listBikeFilter[i].length; j++) {
-                    test = [...test, (<Bike bike={listBikeFilter[i][j]} key={i+j} {...this.props} />)];
+                test = [...test, (<Bike bike={listBikeFilter[i][j]} key={i+j} {...this.props} />)];
             }
 
             renderBike = [
                 ...renderBike,
-                (<div className="row">
+                (<div className="row" key={i}>
                     {
                         test
                     }
