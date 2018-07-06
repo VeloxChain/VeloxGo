@@ -4,6 +4,20 @@ import styles from "../CustomCss";
 
 class RegisterBikeConfirm extends Component {
 
+    _renderPassphrase = () => {
+        if (this.props.isMetamask === false) {
+            return (
+                <TextField
+                    floatingLabelText="Enter your passport wallet"
+                    type="password"
+                    fullWidth
+                    style={styles.mb80}
+                    value={this.props.info.passphrase}
+                    onChange={(e) => this.props.handleChangeState({passphrase: e.target.value})}
+                />
+            );
+        }
+    }
     render() {
         return (
             <div className="wrapp">
@@ -14,14 +28,7 @@ class RegisterBikeConfirm extends Component {
                                 <h4>By register your bike!</h4>
                                 <h3 className="color-web">You will receive 20BKC</h3>
                             </div>
-                            <TextField
-                                floatingLabelText="Enter your passport wallet"
-                                type="password"
-                                fullWidth
-                                style={styles.mb80}
-                                value={this.props.info.passphrase}
-                                onChange={(e) => this.props.handleChangeState({passphrase: e.target.value})}
-                            />
+                            {this._renderPassphrase()}
                         </div>
                     </div>
                 </div>

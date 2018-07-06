@@ -71,10 +71,6 @@ class RegisterBike extends Component {
             return;
         }
         if (stepIndex < 2) {
-            if (stepIndex === 1 && this.props.isMetamask) {
-                this.registerBike();
-                return;
-            }
             this.setState({
                 stepIndex: stepIndex + 1,
             });
