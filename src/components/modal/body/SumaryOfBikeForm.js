@@ -17,9 +17,6 @@ class SumaryOfBike extends Component {
                     <p style={styles.title}>Manufacturer</p>
                     <h4 style={styles.text}>{this.props.externalData.manufacturer}</h4>
 
-                    <p style={styles.title}>Owner</p>
-                    <h4 style={styles.text}>{this.props.externalData.owner}</h4>
-
                     <p style={styles.title}>Bike serial</p>
                     <h4 style={styles.text}>{this.props.externalData.snNumber}</h4>
 

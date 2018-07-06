@@ -13,10 +13,9 @@ class BikeHiringInfo extends Component {
                     />
                     <div style={styles.line} ></div>
                     <div style={styles.boxContent}>
-                        <p style={styles.text}>Manufacturer: { this.props.externalData.manufacturer }</p>
-                        <p style={styles.text}>Owner: { this.props.externalData.owner }</p>
-                        <p style={styles.text}>Bike serial: { this.props.externalData.snNumber }</p>
-                        <p style={styles.text}>Price: 20 BKC</p>
+                        <p style={styles.text}><span style={styles.bold}>Manufacturer:</span> { this.props.externalData.manufacturer }</p>
+                        <p style={styles.text}><span style={styles.bold}>Bike serial:</span> { this.props.externalData.snNumber }</p>
+                        <p style={styles.text}><span style={styles.bold}>Price:</span> 20 BKC</p>
                     </div>
                         
                 </div>

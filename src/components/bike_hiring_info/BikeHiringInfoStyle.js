@@ -42,7 +42,11 @@ const Styles = {
 
     boxContent: {
         width: "calc(100% - 120px)"
-    }
+    },
+
+    bold: {
+        fontWeight: "bold"
+    },
 };
 
 export default Styles;
