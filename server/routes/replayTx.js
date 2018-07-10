@@ -29,7 +29,7 @@ module.exports = function (app) {
                 to: TXRELAYAddress,
                 value: 0,
                 nonce: nonce,
-                gasPrice: 10000000000,
+                gasPrice: 100000000000,
                 gasLimit: 1000000,
                 data: txRelayData,
                 chainId: 3 /* see https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md */
