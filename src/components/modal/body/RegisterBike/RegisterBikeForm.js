@@ -1,9 +1,4 @@
 import React, { Component } from "react";
-import {
-    Step,
-    Stepper,
-    StepLabel,
-} from "material-ui/Stepper";
 import styles from "../CustomCss";
 import RegisterBikeInformation from "./RegisterBikeInformation";
 import RegisterBikeLocation from "./RegisterBikeLocation";
@@ -156,28 +151,71 @@ class RegisterBike extends Component {
         }
         return "Finish";
     }
+
+    _renderStep = (number) => {
+        if (this.state.stepIndex >= number) {
+            return (
+                <div className={number === 1 ? "step-tab second active" : "step-tab last active"}>
+                    <div style={styles.count}>
+                        {
+                            this.state.stepIndex > number ?
+                            <img src="images/check.png" style={styles.icon} alt="BikeCoin" />
+                            : 
+                            <span style={styles.number}>{number + 1}</span>
+                        }
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <div className={number === 1 ? "step-tab" : "step-tab last"}>
+                <div style={styles.block}></div>
+            </div>
+        );
+    }
+
+    _renderStepFirst = () => {
+        return (
+            <div className="step-tab active">
+                <div style={styles.count}>
+                    {
+                        this.state.stepIndex > 0 ?
+                        <img src="images/check.png" style={styles.icon} alt="BikeCoin" />
+                        : 
+                        <span style={styles.number}>1</span>
+                    }
+                </div>
+            </div>
+        );
+    }
+
     render() {
         const {stepIndex} = this.state;
         const contentStyle = {margin: "0 16px"};
         return (
             <div>
-                <Stepper activeStep={stepIndex} style={styles.step}>
-                    <Step>
-                        <StepLabel style={styles.stepLabel} className="step-label" iconContainerStyle={{display: "block"}}>
-                            <span className="text-step">Bike Information</span>
-                        </StepLabel>
-                    </Step>
-                    <Step>
-                        <StepLabel style={styles.stepLabel} className="step-label" iconContainerStyle={{display: "block"}}>
-                            <span className="text-step">Location</span>
-                        </StepLabel>
-                    </Step>
-                    <Step>
-                        <StepLabel style={styles.stepLabel} className="step-label" iconContainerStyle={{display: "block"}}>
-                            <span className="text-step">Confirm</span>
-                        </StepLabel>
-                    </Step>
-                </Stepper>
+                <div style={styles.stepTabs}>
+                    <div style={styles.stepTab}>
+                        <div>
+                            <h4>Bike Information</h4>
+                            { this._renderStepFirst() }
+                        </div>
+                    </div>
+                    <div style={styles.stepTab}>
+                        <div>
+                            <h4>Location</h4>
+                            { this._renderStep(1) }
+                        </div>
+                    </div>
+                    <div style={styles.stepTab}>
+                        <div>
+                            <h4>Confirm</h4>
+                            { this._renderStep(2) }
+                        </div>
+                    </div>
+                </div>
+
                 <div style={contentStyle}>
                     <div>{this.getStepContent(stepIndex)}</div>
                     <div className="row" style={{marginTop: 12}}>
