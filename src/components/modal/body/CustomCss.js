@@ -123,12 +123,13 @@ const Styles = {
         width: "70px",
         height: "70px",
         borderRadius: "50%",
-        border: "3px solid #00d679",
+        border: "1px solid rgb(0, 245, 138)",
         margin: "0 auto",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        position: "relative"
+        position: "relative",
+        boxShadow: "0px 0px 3px #28f58a"
     },
 
     number: {
@@ -143,10 +144,10 @@ const Styles = {
     },
 
     block: {
-        width: "20px",
-        height: "20px",
+        width: "14px",
+        height: "14px",
         borderRadius: "50%",
-        background: "#00d679"
+        background: "rgb(0, 245, 138)"
     },
 
     icon: {

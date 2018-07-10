@@ -971,8 +971,8 @@ input#file:focus {
 
 .step-tab::after {
     width: 100px;
-    height: 3px;
-    background: #293448;
+    height: 1px;
+    background: #b9b9b9;
     position: absolute;
     content: "";
     right: -130px;
