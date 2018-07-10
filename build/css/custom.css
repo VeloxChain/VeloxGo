@@ -957,3 +957,32 @@ input#file:focus {
 .ReactModalPortal .ReactModal__Overlay {
     overflow: scroll;
 }
+
+.step-tab {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-tab::after {
+    width: 100px;
+    height: 3px;
+    background: #293448;
+    position: absolute;
+    content: "";
+    right: -130px;
+}
+
+.step-tab.active::after {
+    top: 33px;
+    right: -100px;
+}
+
+.step-tab.active.second::after {
+    right: -130px;
+}
+
+.step-tab.last::after {
+    content: none;
+}
