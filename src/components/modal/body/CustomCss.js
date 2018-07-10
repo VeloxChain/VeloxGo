@@ -61,8 +61,7 @@ const Styles = {
     },
 
     sumaryOfBike: {
-        minHeight: "440px",
-        paddingTop: "30px"
+        padding: "30px 0px",
     },
 
     button: {
