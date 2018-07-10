@@ -27,7 +27,7 @@ const bikeInfo = {
     status: "ACTIVE",
     tokenId: 5,
     year: 2018
-}
+};
 
 class VerifiedBikeComponent extends Component {
 
