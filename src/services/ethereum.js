@@ -9,7 +9,7 @@ import { updateTx } from "../actions/txActions";
 import * as ethUtil from "ethereumjs-util";
 import store from "../store";
 import { sealTxByKeystore } from "../utils/sealer";
-// import { getEventLogs } from "./apiCall"
+import { getEventLogs } from "./apiCall";
 // import _ from "lodash";
 // import ethereumUtil from "ethereumjs-util";
 export default class EthereumService {
@@ -90,12 +90,7 @@ export default class EthereumService {
     }
 
     watch() {
-        // getEventLogs("0x30fd5980a1fdddc7c6f630a26a7393e2db5b7c30");
-        // this.rpc.eth.filter("latest", this.actAndWatch.bind(this), (error) => { // eslint-disable-line
-        //     // the node is not support for filtering
-        //     this.fetchData();
-        //     this.intervalID = setInterval(this.fetchData.bind(this), 10000);
-        // });
+        getEventLogs(this);
     }
 
     fetchTxsData = () => {

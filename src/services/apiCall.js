@@ -1,26 +1,18 @@
 import constants from "./constants";
-const leftPad = require("left-pad");
-function pad(n) {
-    let data;
-    if (n.startsWith("0x")) {
-        data = "0x" + leftPad(n.slice(2), "64", "0");
-        // assert.equal(data.length, 66, "packed incorrectly")
-        return data;
-    } else {
-        data = "0x" + leftPad(n, "64", "0");
-        // assert.equal(data.length, 66, "packed incorrectly")
-        return data;
-    }
+import _ from "lodash";
+function retrieveAddress(address) {
+    address = "0x" + address.slice(26);
+    return address;
 }
-export const getEventLogs = (profileAddress) => {
+export const getEventLogs = (ethereum) => {
     let module = "logs";
     let action = "getLogs";
     let fromBlock = 0;
     let toBlock = "latest";
     let address = constants.BIKECOIN_OWNER_SHIP_ADDRESS;
-    let topic2 = pad(profileAddress);
+    // let topic2 = pad(profileAddress);
     let apikey = constants.BIKECOIN_APIKEY;
-    return fetch(`https://api-ropsten.etherscan.io/api?module=${module}&action=${action}&fromBlock=${fromBlock}&toBlock=${toBlock}&address=${address}&topic2=${topic2}&apikey=${apikey}`, {
+    return fetch(`https://api-ropsten.etherscan.io/api?module=${module}&action=${action}&fromBlock=${fromBlock}&toBlock=${toBlock}&address=${address}&apikey=${apikey}`, {
         method: "GET",
         headers: {
             "Accept": "application/json",
@@ -28,5 +20,16 @@ export const getEventLogs = (profileAddress) => {
         },
     }).then((response) => {
         return response.json();
+    }).then((res) => {
+        var ownerHistories = [];
+        _.forEach(res.result, (item) => {
+            let ownerHistory = {};
+            ownerHistory.tokenId = ethereum.rpc.toBigNumber(item.data).toNumber();
+            ownerHistory.from = retrieveAddress(item.topics[1]);
+            ownerHistory.to = retrieveAddress(item.topics[2]);
+            ownerHistories.push(ownerHistory);
+        });
+        ownerHistories = JSON.stringify(ownerHistories);
+        localStorage.setItem("ownerHistories", ownerHistories);
     });
 };

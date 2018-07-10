@@ -67,16 +67,21 @@ function* finishUploadNewBikeToIPFS(action) {
         toast.error("Transaction failed!.");
         return;
     }
-    yield call(callBack);
     const bikes = yield select(bikesState);
-    let totalTokens = yield call(ethereum.ownerShipContract.balanceOf,userProfileAddress);
-    totalTokens = parseInt(totalTokens.toString()) -1;
-    if (totalTokens === bikes.data.length) {
-        yield put({type: "APP_LOADING_END"});
-        return;
+    var latestToken = bikes.data.length;
+    while (latestToken === bikes.data.length) {
+        yield delay(2000);
+        console.log("syncing bike..."); //eslint-disable-line
+        latestToken = yield call(ethereum.ownerShipContract.balanceOf,userProfileAddress);
+        latestToken = latestToken.toNumber();
     }
-    yield call(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes.loaded);
+    latestToken = latestToken - 1;
+    let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, latestToken);
+    tokenIndex = parseInt(tokenIndex.toString());
+    let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
+    yield fork(getDataFromBikeHash, hash, tokenIndex, "owner");
     yield put({type: "APP_LOADING_END"});
+    yield call(callBack);
 }
 
 function* uploadModifiedBikeToIPFS(action) {
@@ -138,7 +143,7 @@ function* loadUserBikeFromNetWork(action){
     const bikes = yield select(bikesState);
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
     let totalTokens = yield call(ethereum.ownerShipContract.balanceOf,userProfileAddress);
-    totalTokens = parseInt(totalTokens.toString());
+    totalTokens = totalTokens.toNumber();
     if (totalTokens === bikes.data.length) {
         yield put({type: "APP_LOADING_END"});
         return;
@@ -153,7 +158,7 @@ function* loadNetworkBikeFromNetWork(action){
     const { ethereum } = action.payload;
     const bikes = yield select(bikesState);
     let totalTokens = yield call(ethereum.ownerShipContract.totalSupply);
-    totalTokens = parseInt(totalTokens.toString());
+    totalTokens = totalTokens.toNumber();
     if (totalTokens === bikes.network.length) {
         yield put({type: "APP_LOADING_END"});
         return;
@@ -166,7 +171,7 @@ function* loadNetworkBikeFromNetWork(action){
 function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress, loaded) {
     for (var key=0; key <= totalTokens; key++) {
         let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, key);
-        tokenIndex = tokenIndex.toString();
+        tokenIndex = tokenIndex.toNumber();
         if (loaded.includes(tokenIndex) === false) {
             let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
             yield fork(getDataFromBikeHash, hash, tokenIndex, "owner");
@@ -176,7 +181,7 @@ function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress, loade
 function* loadHashFromNetworkToken(ethereum, totalTokens, loaded) {
     for (var key=0; key <= totalTokens; key++) {
         let tokenIndex = yield call(ethereum.ownerShipContract.tokenByIndex, key);
-        tokenIndex = tokenIndex.toString();
+        tokenIndex = tokenIndex.toNumber();
         if (loaded.includes(tokenIndex) === false) {
             let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
             yield fork(getDataFromBikeHash, hash, tokenIndex, "network");
