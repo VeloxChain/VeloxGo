@@ -7,15 +7,6 @@ const Styles = {
         marginBottom: "80px"
     },
 
-    stepLabel: {
-        height: "auto",
-        display: "block"
-    },
-
-    step: {
-        margin: "30px 0px"
-    },
-
     crop: {
         width: "100%",
         height: "400px",
@@ -115,7 +106,53 @@ const Styles = {
     actionAddOwner: {
         textAlign: "center",
         marginBottom: "30px"
+    },
+
+    stepTabs: {
+        display: "flex",
+        padding: "30px 0px 0px"
+    },
+
+    stepTab: {
+        display: "flex",
+        width: "33%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+
+    count: {
+        width: "70px",
+        height: "70px",
+        borderRadius: "50%",
+        border: "3px solid #00d679",
+        margin: "0 auto",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        position: "relative"
+    },
+
+    number: {
+        width: "40px",
+        height: "40px",
+        textAlign: "center",
+        background: "rgb(65, 245, 137)",
+        borderRadius: "50%",
+        lineHeight: "40px",
+        fontSize: "18px",
+        color: "#fff"
+    },
+
+    block: {
+        width: "20px",
+        height: "20px",
+        borderRadius: "50%",
+        background: "#00d679"
+    },
+
+    icon: {
+        width: "40px"
     }
-};
+}
 
 export default Styles;
