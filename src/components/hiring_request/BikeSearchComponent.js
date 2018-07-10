@@ -39,42 +39,48 @@ class BikeSearchComponent extends Component {
         };
     }
 
-    handleChange = (event, index, value) => {
-        this.props.handleChangeMapDefaultLocation(this.state.mapLocation[value]);
+    handleChange = (event) => {
+        this.props.handleChangeMapDefaultLocation(this.state.mapLocation[event.target.value]);
     };
 
     render() {
         return (
             <div className="row" style={styles.mb20}>
                 <div className="col-sm-4">
-                    <SelectField
-                        floatingLabelText="Location"
-                        value={this.props.mapDefaultLocation.index}
-                        onChange={this.handleChange}
-                        fullWidth
-                        selectedMenuItemStyle={styles.selectedMenuItemStyle}
-                    >
-                        <MenuItem 
-                            value={"none"}
-                            primaryText="Select country" 
-                        />
-                        <MenuItem 
-                            value={"SG"}
-                            primaryText="Singapore" 
-                        />
-                        <MenuItem 
-                            value={"US"}
-                            primaryText="Delaware" 
-                        />
-                        <MenuItem 
-                            value={"IT"}
-                            primaryText="Milano (Italy)" 
-                        />
-                        <MenuItem 
-                            value={"SM"}
-                            primaryText="San Francisco" 
-                        />
-                    </SelectField>
+                    <div className="form-group">
+                        <label style={styles.label}>Location</label>
+                        <select
+                            className="form-control"
+                            value={this.props.mapDefaultLocation.index}
+                            onChange={e => this.handleChange(e)}
+                        >
+                            <option
+                                value={"none"}
+                            >
+                                Select Country
+                            </option>
+                            <option
+                                value={"SG"}
+                            >
+                                Singapore
+                            </option>
+                            <option
+                                value={"US"}
+                            >
+                                Delaware
+                            </option>
+                            <option
+                                value={"IT"}
+                            >
+                                Milano (Italy)
+                            </option>
+                            <option
+                                value={"SM"}
+                            >
+                                San Francisco
+                            </option>
+                        </select>
+                    </div>
                 </div>
                 <div className="col-sm-8 text-right">
                     <BikeFilterComponent isRenderMap={this.props.isRenderMap} onHandleSwitchView={this.props.onHandleSwitchView}/>

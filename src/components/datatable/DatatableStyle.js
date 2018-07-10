@@ -4,7 +4,7 @@ const Styles = {
     },
 
     thead: {
-        background: "#2a2a2a"
+        background: "#A4A4A4"
     },
 
     th: {

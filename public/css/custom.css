@@ -108,7 +108,7 @@ td {
     background-color: #e9f0f3;
 }
 .left_col {
-  background-color: #000;
+  background-color: #1D1D1D;
   position: fixed;
   width: 230px;
   top: 0;
@@ -127,7 +127,7 @@ a {
     float: left;
 }
 .bg-header {
-    background-color: #2a2a2a;
+    background-color: #3B3B3B;
 }
 .right-col {
     width: calc(100% - 230px);
@@ -325,8 +325,8 @@ a {
     height: 100vh;
 }
 .logo-menu img {
-    width: 150px;
-    margin: 20px 0px;
+    height: 100px;
+    margin: 30px 0px;
 }
 .logo-bikecoin {
     height: 40px;
@@ -938,8 +938,8 @@ input#file:focus {
 .infoBox {
     background-color: white;
     width: 300px;
-    padding: 10px;
-    border: 1px solid rgb(0, 214, 121);
+    padding: 5px;
+    border: 1px solid #CACACA;
     box-shadow: rgb(178, 189, 181) 0px 0px 2px 1px;
 }
 
@@ -956,6 +956,10 @@ input#file:focus {
 
 .ReactModalPortal .ReactModal__Overlay {
     overflow: scroll;
+}
+
+.ReactModalPortal .ReactModal__Overlay .ReactModal__Content {
+    border: none !important;
 }
 
 .step-tab {
