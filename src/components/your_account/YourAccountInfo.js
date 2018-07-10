@@ -100,22 +100,25 @@ class YourAccountInfo extends Component {
                     />
                 </Dialog>
                 <div style={styles.wrappTop}>
-                    <div style={{float:"left", marginRight: 20}}>
+                    <div>
                         <Dropzone onDrop={this.onDrop} className="avatarDropProfile" multiple={false} activeClassName="onDrop" accept=".jpeg,.jpg,.png">
                             { this._renderPreview() }
                         </Dropzone>
                     </div>
-                    <div style={{float:"left"}}>
+                    <div style={styles.block}>
                         <h4 style={styles.name}>{userProfile.data.firstname + " " + userProfile.data.lastname}</h4>
-                        <p style={styles.text}>
-                            BKC: {this.props.info.bkc}
-                            <br />
-                            ETH: {this.props.info.eth}
-                        </p>
                         <button style={styles.buttonCollect}>
                             <span>collect 200 </span>
                             <img src="images/icon.png" alt="Bikecoin" style={styles.icon} />
                         </button>
+                    </div>
+                    <div style={styles.wrappFlex}>
+                        <div style={styles.wrappFlexLeft}>
+                            BKC: {this.props.info.bkc}
+                        </div>
+                        <div style={styles.wrappFlexRight}>
+                            ETH: {this.props.info.eth}
+                        </div>
                     </div>
                 </div>
             </div>

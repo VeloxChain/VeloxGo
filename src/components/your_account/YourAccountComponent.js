@@ -81,7 +81,7 @@ class YourAccountComponent extends Component {
                     <div className="col-sm-4" style={{minWidth:400}}>
                         <YourAccountInfo {...this.props} info={this.state.info} onChangeAvatar={this.onChangeAvatar} />
                     </div>
-                    <div className="col-sm-6">
+                    <div className="col-sm-8">
                         <YourAccountForm
                             {...this.props}
                             handleChangeState={this.handleChangeState}

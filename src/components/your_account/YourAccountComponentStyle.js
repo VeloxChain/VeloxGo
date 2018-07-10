@@ -4,18 +4,20 @@ const Styles = {
     },
 
     wrappLeft: {
-        border: "1px solid #00d679",
+        border: "1px solid #CACACA",
         background: "#fff",
-        borderRadius: "5px",
-        float: "left",
         width: "100%",
         marginBottom: "30px"
     },
 
     wrappTop: {
-        padding: "20px",
-        float: "left",
         width: "100%"
+    },
+
+    block: {
+        textAlign: "center",
+        padding: "0px 20px 30px",
+        borderBottom: "1px solid #CACACA"
     },
 
     avatar: {
@@ -26,8 +28,11 @@ const Styles = {
     },
 
     title: {
-        marginTop: "0px"
+        marginTop: "0px",
+        marginBottom: "20px",
+        fontWeight: "bold"
     },
+
     address: {
         marginTop: "0px",
         fontSize:16
@@ -35,6 +40,7 @@ const Styles = {
 
     name: {
         marginTop: "0px",
+        marginBottom: "20px",
         letterSpacing: "2px"
     },
 
@@ -42,14 +48,9 @@ const Styles = {
         padding: "20px"
     },
 
-    text: {
-        textTransform: "uppercase",
-        letterSpacing: "2px"
-    },
-
     button: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid #00F58A",
         borderRadius: "5px",
         padding: "7px 30px",
         marginTop: "20px",
@@ -58,7 +59,7 @@ const Styles = {
     },
     buttonCollect: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid #00F58A",
         borderRadius: "5px",
         padding: "5px 15px",
         textTransform: "uppercase",
@@ -66,6 +67,34 @@ const Styles = {
     },
     icon: {
         width: "30px"
+    },
+
+    wrappFlex: {
+        display: "flex",
+        padding: "10px 20px"
+    },
+
+    wrappFlexLeft: {
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        width: "50%"
+    },
+
+    wrappFlexRight: {
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "center",
+        width: "50%"
+    },
+
+    labelText: {
+        fontWeight: "100"
+    },
+
+    form: {
+        paddingBottom: "10px",
+        borderBottom: "2px solid rgb(222, 222, 222)"
     }
 };
 

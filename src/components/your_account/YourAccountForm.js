@@ -33,12 +33,21 @@ class YourAccountForm extends Component {
                 <h4 style={styles.title}>
                     Network: {this.props.global.nodeName}
                 </h4>
-                <p style={styles.address}>
-                    ETH Address: {this._viewETHOnEtherScan()}
-                </p>
-                <p style={styles.address}>
-                    User Profile Address: {this._viewProfileOnEtherScan()}
-                </p>
+                <form style={styles.form}>
+                    <div className="form-group row">
+                        <label className="col-sm-3" style={styles.labelText}>ETH Address:</label>
+                        <div className="col-sm-9">
+                            <p style={styles.address}>{this._viewETHOnEtherScan()}</p>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label className="col-sm-3" style={styles.labelText}>User Profile Address:</label>
+                        <div className="col-sm-9">
+                            <p style={styles.address}>{this._viewProfileOnEtherScan()}</p>
+                        </div>
+                    </div>
+                </form>
+                
                 <TextField
                     floatingLabelText="Email"
                     fullWidth
@@ -46,22 +55,29 @@ class YourAccountForm extends Component {
                     onChange={(e) => this.props.handleChangeState({email: e.target.value})}
                     onKeyPress={(e) => this.props.handleKeyPress(e)}
                 />
-                <TextField
-                    floatingLabelText="First Name"
-                    fullWidth
-                    value={this.props.userInfo.firstname}
-                    onChange={(e) => this.props.handleChangeState({firstname: e.target.value})}
-                    onKeyPress={(e) => this.props.handleKeyPress(e)}
-                />
-                <TextField
-                    floatingLabelText="Last Name"
-                    fullWidth
-                    value={this.props.userInfo.lastname}
-                    onChange={(e) => this.props.handleChangeState({lastname: e.target.value})}
-                    onKeyPress={(e) => this.props.handleKeyPress(e)}
-                />
+                
+                <div className="row">
+                    <div className="col-sm-6">
+                        <TextField
+                            floatingLabelText="First Name"
+                            fullWidth
+                            value={this.props.userInfo.firstname}
+                            onChange={(e) => this.props.handleChangeState({firstname: e.target.value})}
+                            onKeyPress={(e) => this.props.handleKeyPress(e)}
+                        />
+                    </div>
+                    <div className="col-sm-6">
+                        <TextField
+                            floatingLabelText="Last Name"
+                            fullWidth
+                            value={this.props.userInfo.lastname}
+                            onChange={(e) => this.props.handleChangeState({lastname: e.target.value})}
+                            onKeyPress={(e) => this.props.handleKeyPress(e)}
+                        />
+                    </div>
+                </div>
 
-                <div className="text-right">
+                <div className="text-left">
                     <button style={styles.button} onClick={this.props.saveInformation}>update</button>
                 </div>
             </div>
