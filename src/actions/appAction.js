@@ -16,6 +16,11 @@ export const useMetamask = (data) => {
         data: data
     };
 };
+export const unlockedMetamask = () => {
+    return {
+        type: "UNLOCK_METAMASK",
+    };
+};
 
 
 export const getEthereumKeyFromLocal = (dispatch) => {

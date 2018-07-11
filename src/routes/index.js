@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import EthereumService from "../services/ethereum";
 import ServerService from "../services/server";
 import { MODAL_OWNER_LOGIN } from "../components/modal/constants";
+import { unlockedMetamask } from "../actions/appAction";
 import _ from "lodash";
 import YourBikesComponent from "../components/your_bikes/YourBikeComponent";
 import HiringRequestComponent from "../components/hiring_request/HiringRequestComponent";
@@ -39,6 +40,14 @@ class root extends React.Component {
         if (_.isEmpty(this.props.userProfile.data) || _.isEmpty(this.props.accounts.accounts)) {
             return (<div></div>);
         }
+        if (_.isUndefined(this.getAccountAddress())) {
+            return (
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "80vh"}}>
+                    <h2>You have not unlock your metamask wallet. Please unlock it</h2>
+                </div>
+            );
+        }
+
         return (
             <Switch>
                 <Route exact path="/" render={() => <YourBikesComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
@@ -48,7 +57,16 @@ class root extends React.Component {
             </Switch>
         );
     }
-    componentWillReceiveProps(nextProps) {
+    componentDidMount() {
+        const timer = setInterval(() => {
+            let isUnlocked = this.getAccountAddress();
+            if (!_.isUndefined(isUnlocked)) {
+                clearInterval(timer);
+                this.props.dispatch(unlockedMetamask());
+            }
+        }, 1000);
+    }
+    componentWillsReceiveProps(nextProps) {
         const { accounts } = nextProps;
         if (accounts.isLogout) {
             this.setType(MODAL_OWNER_LOGIN);
