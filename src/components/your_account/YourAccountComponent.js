@@ -53,10 +53,24 @@ class YourAccountComponent extends Component {
         }
     }
     _renderETHBalance = (balance) => {
-        this.setState({eth: balance});
+        this.setState((prevState) => {
+            return {
+                info: {
+                    ...prevState.info,
+                    eth: balance
+                }
+            };
+        });
     }
     _renderBKCBalance = (balance) => {
-        this.setState({bkc: balance});
+        this.setState((prevState) => {
+            return {
+                info: {
+                    ...prevState.info,
+                    bkc: balance
+                }
+            };
+        });
     }
     handleChangeState = (data) => {
         const { userProfile } = this.state;
