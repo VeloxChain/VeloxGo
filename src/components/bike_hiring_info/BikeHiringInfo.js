@@ -1,14 +1,29 @@
 import React, { Component } from "react";
 import styles from "./BikeHiringInfoStyle";
+import loadingImage from '../../assets/images/loading.gif'
 
 class BikeHiringInfo extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            loaded: false
+        };
+    }
+
     render() {
         return (
             <div style={styles.sumaryOfBike}>
                 <img
-                    style={styles.bikeImage}
+                    style={{...styles.bikeImage, ...{display: this.state.loaded? 'block': 'none'}}}
                     src={"https://gateway.ipfs.io/ipfs/" + this.props.externalData.avatar}
                     alt="Bikecoin"
+                    onLoad={()=>this.setState({loaded: true })}
+                />
+                <img
+                    src={loadingImage}
+                    alt="Bikecoin"
+                    style={{...styles.bikeImage, ...{display: this.state.loaded? 'none': 'block'}}}
                 />
 
                 <div style={styles.bodyContent}>
