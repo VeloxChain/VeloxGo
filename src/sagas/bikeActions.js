@@ -9,7 +9,14 @@ export const bikesState = (state) => state.bikes;
 function* uploadNewBikeToIPFS(action) {
     yield put({type: "APP_LOADING_START"});
     let { bikeInfo, location, callBack, ethereum, keyStore, passphrase } = action.payload;
-    let [hashAvatar, hashInvoice] = yield [ call(SERVICE_IPFS.putFileToIPFS, bikeInfo.imageData), call(SERVICE_IPFS.putFileToIPFS, bikeInfo.invoiceData)];
+    let hashAvatar, hashInvoice;
+    try {
+        [hashAvatar, hashInvoice] = yield [ call(SERVICE_IPFS.putFileToIPFS, bikeInfo.imageData), call(SERVICE_IPFS.putFileToIPFS, bikeInfo.invoiceData)];
+    } catch (e) {
+        toast.error("Files size is too large!");
+        yield put({type: "APP_LOADING_END"});
+        return;
+    }
     let bike = {
         avatar: hashAvatar,
         invoice: hashInvoice,

@@ -36,19 +36,18 @@ class CreateAccount extends Component {
     validate = async () => {
         let isValidEmail = await verifyEmail(this.state.email);
         if (!isValidEmail) {
-            return 'Invalid Email';
+            return "Invalid Email";
         }
         if (this.state.firstname === "") {
-            return 'Invalid First Name';
+            return "Invalid First Name";
         }
         if (this.state.lastname === "") {
-            return 'Invalid Last Name';
+            return "Invalid Last Name";
         }
         if (this.state.passpharse === "" && this.isMetamask() === false) {
-            return 'Invalid Passpharse';
+            return "Invalid Passpharse";
         }
-        
-        return '';
+        return "";
     }
 
     createProfile = async () => {
@@ -56,7 +55,7 @@ class CreateAccount extends Component {
             return;
         }
         let validDataMessenger = await this.validate();
-        if (validDataMessenger != '') {
+        if (validDataMessenger != "") {
             toast.error(validDataMessenger);
             return;
         }
@@ -90,12 +89,12 @@ class CreateAccount extends Component {
     submitTransaction = () => {
         this.setState({submitted: true, labelButton: "PENDING..."});
     }
-    
+
     isMetamask =  () => {
         const { accounts } = this.props;
         return (_.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key));
     }
-    
+
     _renderPassphrase = () => {
         if (this.isMetamask()) {
             return undefined;

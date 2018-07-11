@@ -13,13 +13,21 @@ function* uploadProfileToIPFS(action) {
     let ethereum = userInfo.ethereum;
     let keyStore = userInfo.keyStore;
     let passphrase = userInfo.passphrase;
+    let resultPutFileToIPFS;
     delete userInfo.ethereum;
     delete userInfo.keyStore;
     delete userInfo.passphrase;
     if (!_.isEmpty(userInfo.avatarData)) {
-        let resultPutFileToIPFS = yield call(SERVICE_IPFS.putFileToIPFS, userInfo.avatarData);
-        userInfo["avatar"] = resultPutFileToIPFS;
-        delete userInfo.avatarData;
+        try {
+            resultPutFileToIPFS = yield call(SERVICE_IPFS.putFileToIPFS, userInfo.avatarData);
+            userInfo["avatar"] = resultPutFileToIPFS;
+            delete userInfo.avatarData;
+        } catch (e) {
+            toast.error("Files size is too large!");
+            yield put({type: "APP_LOADING_END"});
+            return;
+        }
+
     } else {
         userInfo["avatar"] = "Qmdqv5Jo1R94WykcpPc1L2JJkfTAG8GUeNkgTuExaZ7g3m";
     }
