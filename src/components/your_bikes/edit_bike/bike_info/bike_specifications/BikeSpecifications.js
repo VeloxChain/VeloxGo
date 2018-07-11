@@ -1,8 +1,10 @@
 import React from "react";
 import {Tabs, Tab} from "material-ui/Tabs";
 import styles from "./BikeSpecificationsStyle.js";
-import Components from "./Components.js";
-import Geometry from "./Geometry.js";
+import ComponentsModel1C from "./ComponentsModel1C";
+import ComponentsModel1 from "./ComponentsModel1";
+import GeometryModel1C from "./GeometryModel1C";
+import GeometryModel1 from "./GeometryModel1";
 
 class BikeSpecifications extends React.Component {
 
@@ -19,6 +21,22 @@ class BikeSpecifications extends React.Component {
         });
     };
 
+    _renderComponents = () => {
+        if (this.props.bikeInfo.model === "1") {
+            return <ComponentsModel1 />;
+        }
+
+        return <ComponentsModel1C />;
+    }
+
+    _renderGeometry = () => {
+        if (this.props.bikeInfo.model === "1") {
+            return <GeometryModel1 />;
+        }
+
+        return <GeometryModel1C />;
+    }
+
     render() {
         return (
             <Tabs
@@ -29,10 +47,13 @@ class BikeSpecifications extends React.Component {
                 style={styles.tabs}>
             >
                 <Tab label="components" value="1" style={styles.tab}>
-                    <Components />
+                    {this._renderComponents()}
                 </Tab>
                 <Tab label="geometry" value="2" style={styles.tab}>
-                    <Geometry />
+                    <div className="text-center" style={{ marginTop: "30px" }}>
+                        <img src="images/geometries-black-1c.jpg" style={{ width: "500px" }} />
+                    </div>
+                    {this._renderGeometry()}
                 </Tab>
             </Tabs>
         );

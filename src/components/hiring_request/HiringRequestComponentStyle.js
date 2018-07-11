@@ -1,36 +1,32 @@
 const Styles = {
     wrapp: {
-        margin: "10px 5px"
+        margin: "20px 5px"
     },
 
     block: {
         background: "#fff",
-        border: "1px solid #00d679",
         marginBottom: "20px",
-        borderRadius: "5px"
+        boxShadow: "rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px"
     },
 
     action: {
         borderTop: "1px solid rgb(218, 218, 218)",
-        padding: "20px 0px"
+        padding: "10px",
+        display: "flex"
     },
 
     button: {
-        background: "#fff",
+        background: "#00d679",
         border: "1px solid #00d679",
-        borderRadius: "5px",
-        padding: "7px 20px",
-        marginTop: "20px",
+        borderRadius: "2px",
+        padding: "3px 10px",
+        color: "#fff",
         textTransform: "uppercase",
         letterSpacing: "1px",
-        display: "block",
-        margin: "0 auto",
     },
 
     bike: {
-        width: "100%",
-        padding: "20px 20px 10px",
-        cursor: "pointer"
+        width: "100%"
     },
 
     mb20: {
@@ -38,20 +34,24 @@ const Styles = {
     },
 
     maps: {
-        marginTop: "40px"
+        height: "34px",
+        background: "#fff",
+        marginTop: "25px",
+        display: "flex",
+        padding: "0px 10px",
+        justifyContent: "flex-end",
+        alignItems: "center"
+    },
+
+    iconFilterList: {
+        marginLeft: "15px",
+        cursor: "pointer",
+        height: "15px"
     },
 
     iconFilter: {
-        fontSize: "18px",
         marginLeft: "15px",
-        cursor: "pointer",
-        color: "#00d679"
-    },
-
-    icon: {
-        fontSize: "18px",
-        marginLeft: "15px",
-        cursor: "pointer",
+        cursor: "pointer"
     },
 
     selectedMenuItemStyle: {
@@ -64,12 +64,6 @@ const Styles = {
         height: "calc(100vh - 195px)"
     },
 
-    fail: {
-        color: "rgb(158, 158, 158)",
-        letterSpacing: "2px",
-        marginTop: "30px"
-    },
-    
     info: {
         padding: "0px 20px"
     },
@@ -79,18 +73,60 @@ const Styles = {
     },
 
     address: {
-        minHeight: "40px",
+        position: "absolute",
+        bottom: "5px",
+        left: "5px",
+        width: "calc(100% - 10px)",
+        color: "#fff",
+        marginRight: "5px",
+        padding: "10px",
+        background: "rgba(23,38,66,.7)"
+    },
+
+    text: {
         overflow: "hidden",
         textOverflow: "ellipsis",
         display: "-webkit-box",
         WebkitLineClamp: "2",
         WebkitBoxOrient: "vertical",
-        fontSize: "16px"
+        minHeight: "40px"
     },
 
     number: {
-        marginBottom: "5px",
-        fontSize: "16px"
+        marginRight: "10px",
+        fontSize: "20px",
+        color: "#00d679"
+    },
+
+    logo: {
+        width: "20px",
+    },
+
+    label: {
+        color: "rgb(119, 119, 119)",
+        fontWeight: "100"
+    },
+
+    wrapper: {
+        padding: "5px",
+        position: "relative",
+        cursor: "pointer"
+    },
+
+    dvdButton: {
+        width: "90px",
+        textAlign: "right"
+    },
+
+    price: {
+        width: "calc(100% - 90px)",
+        display: "flex",
+        alignItems: "center"
+    },
+
+    fail: {
+        width: "70%",
+        marginTop: "20px"
     }
 };
   

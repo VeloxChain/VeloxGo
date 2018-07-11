@@ -77,6 +77,11 @@ const AppReducer = (state = initialState, action) => {
             isLoading: false,
             txHash: ""
         };
+    case "UNLOCK_METAMASK":
+        return {
+            ...state,
+            unlocked: true
+        };
     default:
         return state;
     }

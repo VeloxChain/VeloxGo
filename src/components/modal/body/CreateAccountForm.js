@@ -36,19 +36,18 @@ class CreateAccount extends Component {
     validate = async () => {
         let isValidEmail = await verifyEmail(this.state.email);
         if (!isValidEmail) {
-            return 'Invalid Email';
+            return "Invalid Email";
         }
         if (this.state.firstname === "") {
-            return 'Invalid First Name';
+            return "Invalid First Name";
         }
         if (this.state.lastname === "") {
-            return 'Invalid Last Name';
+            return "Invalid Last Name";
         }
         if (this.state.passpharse === "" && this.isMetamask() === false) {
-            return 'Invalid Passpharse';
+            return "Invalid Passpharse";
         }
-        
-        return '';
+        return "";
     }
 
     createProfile = async () => {
@@ -56,7 +55,7 @@ class CreateAccount extends Component {
             return;
         }
         let validDataMessenger = await this.validate();
-        if (validDataMessenger != '') {
+        if (validDataMessenger != "") {
             toast.error(validDataMessenger);
             return;
         }
@@ -90,12 +89,12 @@ class CreateAccount extends Component {
     submitTransaction = () => {
         this.setState({submitted: true, labelButton: "PENDING..."});
     }
-    
+
     isMetamask =  () => {
         const { accounts } = this.props;
         return (_.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key));
     }
-    
+
     _renderPassphrase = () => {
         if (this.isMetamask()) {
             return undefined;
@@ -211,6 +210,8 @@ class CreateAccount extends Component {
                         fullWidth={true}
                         disabled={this.state.disabled}
                         value={this.props.getAccountAddress()}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     <TextField
                         floatingLabelText="Email"
@@ -221,6 +222,8 @@ class CreateAccount extends Component {
                         errorText={ this.state.errors ? this.state.errors.email : null}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({email: e.target.value})}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     <TextField
                         floatingLabelText="First Name"
@@ -230,6 +233,8 @@ class CreateAccount extends Component {
                         errorText={ this.state.errors ? this.state.errors.firstname : null}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({firstname: e.target.value})}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     <TextField
                         floatingLabelText="Last Name"
@@ -239,19 +244,21 @@ class CreateAccount extends Component {
                         errorText={ this.state.errors ? this.state.errors.lastname : null}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({lastname: e.target.value})}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     {this._renderPassphrase()}
-                    <div className="flexible-end mg30-0">
-                        <button
-                            disabled={this.state.disabled}
-                            onClick={this.createProfile}
-                            style={styles.buttonBack}
-                        >
-                            {this.state.labelButton}
-                        </button>
-                    </div>
                 </div>
 
+                <div className="action-form">
+                    <button
+                        disabled={this.state.disabled}
+                        onClick={this.createProfile}
+                        style={styles.buttonBack}
+                    >
+                        {this.state.labelButton}
+                    </button>
+                </div>
             </div>
         );
     }

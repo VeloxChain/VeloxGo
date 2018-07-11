@@ -4,12 +4,14 @@ const Styles = {
     },
 
     thead: {
-        background: "#2a2a2a"
+        background: "#fff"
     },
 
     th: {
         border: "none",
-        color: "#fff"
+        color: "#212529",
+        fontWeight: "bold",
+        padding: "15px 10px"
     },
 
     tdColSpan: {
@@ -20,6 +22,10 @@ const Styles = {
         color: "#00d679"
     },
 
+    textTd: {
+        color: "rgb(93, 93, 93)",
+        borderBottom: "1px solid #f3f3f3"
+    }
 };
 
 export default Styles;

@@ -38,25 +38,29 @@ class ConfirmTransaction extends Component {
 
     render() {
         return (
-            <div className="mh250 pd10 relative">
-                <div className="form-modal">
-                    <TextField
-                        floatingLabelText="Passpharse"
-                        fullWidth={true}
-                        type="password"
-                        disabled={this.state.disabled}
-                        value={this.state.passphrase}
-                        errorText={this.state.errors.passphrase}
-                        onKeyPress={(e) => this.handleKeyPress(e)}
-                        onChange={(e) => this.setState({ passphrase: e.target.value })}
-                    />
-                    <div className="flexible-end mg30-0">
+            <div className="mh250 pd10 transaction">
+                <div className="w100p">
+                    <div className="form-modal">
+                        <TextField
+                            floatingLabelText="Passpharse"
+                            fullWidth={true}
+                            type="password"
+                            disabled={this.state.disabled}
+                            value={this.state.passphrase}
+                            errorText={this.state.errors.passphrase}
+                            onKeyPress={(e) => this.handleKeyPress(e)}
+                            onChange={(e) => this.setState({ passphrase: e.target.value })}
+                            floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                            underlineFocusStyle={styles.underlineStyle}
+                        />
+                        
+                    </div>
+                    <div className="action-form">
                         <button onClick={this._onDeploy} style={styles.buttonBack}>
                             {this.state.labelButton}
                         </button>
                     </div>
                 </div>
-
             </div>
         );
     }

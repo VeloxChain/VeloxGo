@@ -1,21 +1,31 @@
 import React, {Component} from "react";
-import { compose, withProps, withStateHandlers } from "recompose";
+import { compose, withProps, withStateHandlers, withHandlers } from "recompose";
 import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
     Marker
 }  from "react-google-maps";
+import _ from 'lodash';
 import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 import BikeHiringInfo from "../bike_hiring_info/BikeHiringInfo";
 import appConfig from "../../config/app.json";
 import MapBikeIcon from "../../assets/images/map_bike_icon.png";
+const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 
 class MapHiringComponent extends Component {
     constructor(props) {
         super(props);
         this.googleMap = null;
+        this.state = {
+            listMarkerData: []
+        }
+    }
 
+    componentDidMount(){
+        this.setState({
+            listMarkerData: this.props.bikes.network
+        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -26,6 +36,42 @@ class MapHiringComponent extends Component {
                     lat: nextProps.mapDefaultLocation.lat
                 }
             );
+        }
+    }
+
+    getMarkerPoint = (markerData) => {
+
+        let indexOverLap = 0;
+
+        let findOverLapMarker = _.find(this.state.listMarkerData, (value, index) => {
+            indexOverLap= index;
+            return value.location.lat == markerData.location.lat && value.location.long == markerData.location.long && value.tokenId != markerData.tokenId ; 
+        });
+
+        console.log(this.state.listMarkerData);
+
+        if(!_.isEmpty(findOverLapMarker)) {
+
+            let newListMarkerData = this.state.listMarkerData;
+
+            newListMarkerData[indexOverLap].location.long = _.toNumber(findOverLapMarker.location.long) + 0.000001;
+            newListMarkerData[indexOverLap].location.lat = _.toNumber(findOverLapMarker.location.lat) + 0.000001;
+
+            this.setState({
+                listMarkerData: newListMarkerData
+            }, ()=>console.log('this.state.listMarkerData', this.state.listMarkerData));
+
+            
+
+            return {
+                long: _.toNumber(findOverLapMarker.location.long) + 0.000001,
+                lat: _.toNumber(findOverLapMarker.location.lat) + 0.000001,
+            }
+        }
+
+        return {
+            long: markerData.location.long,
+            lat: markerData.location.lat,
         }
     }
 
@@ -41,25 +87,34 @@ class MapHiringComponent extends Component {
                 onClick={() => this.props.handleSelectBike("")}
                 clickableIcons={false}
             >
-                {
-                    this.props.bikes.network.map((bike, index) => {
-                        return (
-                            <Marker
-                                key={index}
-                                position={{ lat: bike.location.lat, lng: bike.location.long }}
-                                onClick={() => this.props.handleSelectBike(bike.tokenId)}
-                                icon={MapBikeIcon}
-                            >
-                                {bike.tokenId == this.props.bikeHashSelected && <InfoBox
-                                    onCloseClick={this.props.onToggleOpen}
-                                    options={{ closeBoxURL: "", enableEventPropagation: false }}
+                <MarkerClusterer
+                    onClick={this.props.onMarkerClustererClick}
+                    averageCenter
+                    enableRetinaIcons
+                    gridSize={20}
+                >
+                    {
+                        this.props.bikes.network.map((bike, index) => {
+                            let newPoint = this.getMarkerPoint(bike);
+                            return (
+                                <Marker
+                                    key={index}
+                                    position={{ lat: newPoint.lat, lng: newPoint.long }}
+                                    onClick={() => this.props.handleSelectBike(bike.tokenId)}
+                                    icon={MapBikeIcon}
                                 >
-                                    <BikeHiringInfo externalData={bike}/>
-                                </InfoBox>
-                                }
-                            </Marker>
-                        );})
-                }
+                                    {bike.tokenId == this.props.bikeHashSelected && <InfoBox
+                                        onCloseClick={this.props.onToggleOpen}
+                                        options={{ closeBoxURL: "", enableEventPropagation: false }}
+                                    >
+                                        <BikeHiringInfo externalData={bike}/>
+                                    </InfoBox>
+                                    }
+                                </Marker>
+                            );
+                        })
+                    }
+                </MarkerClusterer>
             </GoogleMap>
         );
     }
@@ -82,6 +137,13 @@ export default compose(
         onClose: () => () => ({
             isOpen: false,
         })
+    }),
+    withHandlers({
+        onMarkerClustererClick: () => (markerClusterer) => {
+          const clickedMarkers = markerClusterer.getMarkers()
+          console.log(`Current clicked markers length: ${clickedMarkers.length}`)
+          console.log(clickedMarkers)
+        },
     }),
     withScriptjs,
     withGoogleMap,

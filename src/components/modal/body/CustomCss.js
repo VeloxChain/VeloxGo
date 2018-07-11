@@ -61,13 +61,12 @@ const Styles = {
     },
 
     sumaryOfBike: {
-        minHeight: "440px",
-        paddingTop: "30px"
+        padding: "30px 0px",
     },
 
     button: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid #00F58A",
         borderRadius: "5px",
         padding: "7px 20px",
         marginTop: "20px",
@@ -83,7 +82,8 @@ const Styles = {
 
     text: {
         marginTop: "0",
-        marginBottom: "20px"
+        marginBottom: "20px",
+        fontSize: "16px"
     },
 
     image: {
@@ -94,8 +94,8 @@ const Styles = {
 
     buttonBack: {
         background: "#fff",
-        border: "1px solid rgb(0, 214, 121)",
-        color: "rgb(0, 214, 121)",
+        border: "1px solid #00F58A",
+        color: "#00F58A",
         borderRadius: "5px",
         padding: "7px 30px",
         marginBottom: "20px",
@@ -104,8 +104,9 @@ const Styles = {
     },
 
     actionAddOwner: {
-        textAlign: "center",
-        marginBottom: "30px"
+        textAlign: "right",
+        marginBottom: "30px",
+        marginRight: "10px"
     },
 
     stepTabs: {
@@ -124,12 +125,13 @@ const Styles = {
         width: "70px",
         height: "70px",
         borderRadius: "50%",
-        border: "3px solid #00d679",
+        border: "1px solid rgb(0, 245, 138)",
         margin: "0 auto",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        position: "relative"
+        position: "relative",
+        boxShadow: "0px 0px 3px #28f58a"
     },
 
     number: {
@@ -144,14 +146,68 @@ const Styles = {
     },
 
     block: {
-        width: "20px",
-        height: "20px",
+        width: "14px",
+        height: "14px",
         borderRadius: "50%",
-        background: "#00d679"
+        background: "rgb(0, 245, 138)"
     },
 
     icon: {
         width: "40px"
+    },
+
+    underlineStyle: {
+        borderColor: "#66F9B8"
+    },
+
+    floatingLabelStyle: {
+        color: "#66F9B8"
+    },
+
+    floatingLabelFocusStyle: {
+        color: "rgba(0, 0, 0, 0.3)"
+    },
+
+    wrappLeft: {
+        border: "1px solid #ababab"
+    },
+
+    bikeShow: {
+        padding: "5px",
+        width: "100%"
+    },
+
+    buttonBook: {
+        background: "#00d679",
+        border: "1px solid #00d679",
+        borderRadius: "2px",
+        padding: "5px 20px",
+        color: "#fff",
+        textTransform: "uppercase",
+        letterSpacing: "1px",
+        marginBottom: "30px"
+    },
+
+    numberPrice: {
+        marginRight: "10px",
+        fontSize: "20px",
+        color: "#00d679"
+    },
+
+    logo: {
+        width: "20px",
+        marginTop: "-5px"
+    },
+
+    dvd: {
+        width: "100%",
+        height: "2px",
+        background: "rgb(236, 236, 236)",
+        marginBottom: "15px"
+    },
+
+    selectedMenuItemStyle: {
+        color: "#00F58A"
     }
 }
 

@@ -158,6 +158,7 @@ const accounts = (state=initState, action) => {
         };
     }
     case ACC_ACTION.LOG_OUT:
+        localStorage.removeItem("userProfileAddress");
         return {
             ...state,
             accounts: {},

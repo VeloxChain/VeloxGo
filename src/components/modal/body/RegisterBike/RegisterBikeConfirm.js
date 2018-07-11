@@ -14,6 +14,8 @@ class RegisterBikeConfirm extends Component {
                     style={styles.mb80}
                     value={this.props.info.passphrase}
                     onChange={(e) => this.props.handleChangeState({passphrase: e.target.value})}
+                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                    underlineFocusStyle={styles.underlineStyle}
                 />
             );
         }

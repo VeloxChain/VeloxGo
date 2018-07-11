@@ -9,7 +9,14 @@ export const bikesState = (state) => state.bikes;
 function* uploadNewBikeToIPFS(action) {
     yield put({type: "APP_LOADING_START"});
     let { bikeInfo, location, callBack, ethereum, keyStore, passphrase } = action.payload;
-    let [hashAvatar, hashInvoice] = yield [ call(SERVICE_IPFS.putFileToIPFS, bikeInfo.imageData), call(SERVICE_IPFS.putFileToIPFS, bikeInfo.invoiceData)];
+    let hashAvatar, hashInvoice;
+    try {
+        [hashAvatar, hashInvoice] = yield [ call(SERVICE_IPFS.putFileToIPFS, bikeInfo.imageData), call(SERVICE_IPFS.putFileToIPFS, bikeInfo.invoiceData)];
+    } catch (e) {
+        toast.error("Files size is too large!");
+        yield put({type: "APP_LOADING_END"});
+        return;
+    }
     let bike = {
         avatar: hashAvatar,
         invoice: hashInvoice,
@@ -24,6 +31,7 @@ function* uploadNewBikeToIPFS(action) {
         isFlash: false,
         isHonk: false,
         isLock: false,
+        model: bikeInfo.model
     };
     let hashData = yield call(SERVICE_IPFS.putDataToIPFS, bike);
     yield put({
@@ -149,7 +157,7 @@ function* loadUserBikeFromNetWork(action){
         return;
     }
     totalTokens = totalTokens - 1;
-    yield fork(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes.loaded);
+    yield fork(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes);
     // yield put({type: "APP_LOADING_END"});
 }
 function* loadNetworkBikeFromNetWork(action){
@@ -164,15 +172,15 @@ function* loadNetworkBikeFromNetWork(action){
         return;
     }
     totalTokens = totalTokens - 1;
-    yield call(loadHashFromNetworkToken, ethereum, totalTokens, bikes.loaded);
+    yield fork(loadHashFromNetworkToken, ethereum, totalTokens, bikes.loaded);
     // yield put({type: "APP_LOADING_END"});
 }
 
-function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress, loaded) {
+function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress, bikes) {
     for (var key=0; key <= totalTokens; key++) {
         let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, key);
         tokenIndex = tokenIndex.toNumber();
-        if (loaded.includes(tokenIndex) === false) {
+        if (_.isUndefined(_.find(bikes.data, (bike) => bike.tokenId == tokenIndex))) {
             let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
             yield fork(getDataFromBikeHash, hash, tokenIndex, "owner");
         }

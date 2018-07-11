@@ -100,6 +100,8 @@ class NewAccount extends Component {
                         errorText={this.state.errorName}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({accountName: e.target.value, errorName: false})}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     <TextField
                         floatingLabelText="Passpharse"
@@ -109,6 +111,8 @@ class NewAccount extends Component {
                         errorText={this.state.errorPass}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({passpharse: e.target.value, errorPass: false})}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     <TextField
                         floatingLabelText="Retype Passpharse"
@@ -118,6 +122,8 @@ class NewAccount extends Component {
                         errorText={this.state.error}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({rePasspharse: e.target.value, error: false})}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     />
                 </div>
             );
@@ -125,7 +131,7 @@ class NewAccount extends Component {
         return (
             <div className="downloadKeyStore flexible mgb-30">
                 <div className="text-center">
-                    <h3 className="mgb-30">Download Your Key Store</h3>
+                    <h3 className="mgb-30 key-store">Download Your Key Store</h3>
                     <button className="btn" onClick={this.downloadKeyStore}>
                         <i className="fa fa-download"></i>
                     </button>
@@ -139,27 +145,26 @@ class NewAccount extends Component {
             <div className="mh250 pd10">
                 <div className="form-modal">
                     {this._renderBody()}
-                    <div className="flexible-end mg30-0">
-                        {
-                            !this.state.loading ?
-                                (
-                                    <button
-                                        onClick={(e) => this.state.step === 1 ? this.createAccount(e) : this.nextStep(e)}
-                                        style={styles.buttonBack}
-                                    >
-                                        {this.state.step === 1 ? "CREATE AN ACCOUNT" : "NEXT"}
-                                    </button>
-                                )
-                                :
-                                (
-                                    <div className="maskButton pd-5-50">
-                                        <div className="loader-mini" />
-                                    </div>
-                                )
-                        }
-                    </div>
                 </div>
-
+                <div className="action-form">
+                    {
+                        !this.state.loading ?
+                            (
+                                <button
+                                    onClick={(e) => this.state.step === 1 ? this.createAccount(e) : this.nextStep(e)}
+                                    style={styles.buttonBack}
+                                >
+                                    {this.state.step === 1 ? "CREATE AN ACCOUNT" : "NEXT"}
+                                </button>
+                            )
+                            :
+                            (
+                                <div className="maskButton pd-5-50">
+                                    <div className="loader-mini" />
+                                </div>
+                            )
+                    }
+                </div>
             </div>
         );
     }

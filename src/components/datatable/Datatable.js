@@ -37,7 +37,7 @@ class Datatable extends Component {
                 rowData = (this._renderToggle(data, rowIndex, value.name));
             }
 
-            fields.push(<td key={key}>{rowData}</td>);
+            fields.push(<td key={key} style={styles.textTd}>{rowData}</td>);
 
         });
 

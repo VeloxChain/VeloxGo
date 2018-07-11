@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import constants from "../../../services/constants";
 const styles = {
     title: {
         fontWeight: "bold",
@@ -12,13 +13,32 @@ const styles = {
     },
 };
 class EditBikeForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userProfileAddress: "",
+        };
+    }
+    componentDidMount() {
+        this.getProfileAddress();
+    }
+    getProfileAddress = async () => {
+        let userProfileAddress = await this.props.getUserProfileAddress();
+        this.setState({
+            userProfileAddress: userProfileAddress
+        });
+    }
     render() {
         return (
             <div>
                 <p style={styles.title}>Owner</p>
                 <h4 style={styles.text}>
-                    <a href={"https://ropsten.etherscan.io/address/" + this.props.accounts.accounts.address} target="_blank">
-                        {this.props.accounts.accounts.address}
+                    <a
+                        href={"https://ropsten.etherscan.io/address/" + this.state.userProfileAddress}
+                        target="_blank"
+                        title="View Profile Address On EtherScan">
+                        {this.state.userProfileAddress + " "}
+                        <i className="fa fa-external-link"></i>
                     </a>
                 </h4>
 
@@ -28,11 +48,19 @@ class EditBikeForm extends Component {
                 <p style={styles.title}>Bike serial</p>
                 <h4 style={styles.text}>{this.props.bikeInfo.snNumber}</h4>
 
-                <p style={styles.title}>STATUS</p>
-                <h4 style={styles.text}>{this.props.bikeInfo.status}</h4>
+                <p style={styles.title}>ERC721 TOKEN</p>
+                <h4 style={styles.text}>
+                    <a
+                        href={"https://ropsten.etherscan.io/token/" + constants.BIKECOIN_OWNER_SHIP_ADDRESS}
+                        target="_blank"
+                        title="View ERC721 Token On EtherScan">
+                        {constants.BIKECOIN_OWNER_SHIP_ADDRESS + " "}
+                        <i className="fa fa-external-link"></i>
+                    </a>
+                </h4>
 
-                <p style={styles.title}>Price (BKC)</p>
-                <h4 style={styles.text}>{200}</h4>
+                <p style={styles.title}>BIKE TOKEN</p>
+                <h4 style={styles.text}>{this.props.bikeInfo.tokenId}</h4>
             </div>
         );
     }

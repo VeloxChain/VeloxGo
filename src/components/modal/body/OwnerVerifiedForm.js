@@ -7,30 +7,36 @@ class OwnerVerifiedForm extends Component {
         return (
             <div style={styles.sumaryOfBike}>
                 <div className="col-sm-4">
-                    <img
-                        src={"https://gateway.ipfs.io/ipfs/" + this.props.externalData.avatar}
-                        style={styles.image}
-                        alt="Bikecoin"
-                    />
+                    <div style={styles.wrappLeft}>
+                        <img
+                            src={"https://gateway.ipfs.io/ipfs/" + this.props.externalData.avatar}
+                            style={styles.bikeShow}
+                            alt="Bikecoin"
+                        />
+                    </div>
+                    
                 </div>
                 <div className="col-sm-8">
                     <p style={styles.title}>Manufacturer</p>
-                    <h4 style={styles.text}>{this.props.externalData.manufacturer}</h4>
-
-                    <p style={styles.title}>Owner</p>
-                    <h4 style={styles.text}>{this.props.externalData.originalOwner}</h4>
+                    <h5 style={styles.text}>{this.props.externalData.manufacturer}</h5>
 
                     <p style={styles.title}>Bike serial</p>
-                    <h4 style={styles.text}>{this.props.externalData.snNumber}</h4>
+                    <h5 style={styles.text}>{this.props.externalData.snNumber}</h5>
+
+                    <div style={styles.dvd} />
 
                     <p style={styles.title}>Address</p>
-                    <h4 style={styles.text}>{this.props.externalData.location.name}</h4>
+                    <h5 style={styles.text}>{this.props.externalData.location.name}</h5>
 
-                    <p style={styles.title}>Price (BKC)</p>
-                    <h4 style={styles.text}>{200}</h4>
-                </div>
-                <div className="text-center">
-                    <button style={styles.button}>Verified</button>
+                    <p style={styles.title}>Price</p>
+                    <h5 style={styles.text}>
+                        <span style={styles.numberPrice}>200</span>
+                        <img src="images/Logo.png" style={styles.logo} alt="BikeCoin" />
+                    </h5>
+                    
+                    <div>
+                        <button style={styles.buttonBook}>Verified</button>
+                    </div>
                 </div>
             </div>
         );

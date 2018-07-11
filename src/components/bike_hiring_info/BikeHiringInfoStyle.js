@@ -8,28 +8,23 @@ const Styles = {
     },
 
     bodyContent: {
-        display: "flex"
+        display: "flex",
+        padding: "10px 5px 0px"
     },
 
     bikeImage: {
-        width: "100px",
-        height: "100%"
-    },
-
-    line: {
-        backgroundColor: "rgb(201, 208, 205)",
-        width: "2px",
-        height: "70px",
-        marginLeft: "5px",
-        marginRight: "10px",
+        width: "100%",
+        borderBottom: "1px solid #e2e2e2",
+        paddingBottom: "5px"
     },
 
     button: {
-        background: "#fff",
+        background: "#00d679",
         border: "1px solid #00d679",
-        borderRadius: "5px",
+        borderRadius: "2px",
         padding: "7px 20px",
-        marginTop: "20px",
+        marginTop: "5px",
+        color: "#fff",
         textTransform: "uppercase",
         letterSpacing: "1px",
     },
@@ -37,16 +32,41 @@ const Styles = {
     text: {
         whiteSpace: "nowrap", 
         overflow: "hidden",
-        textOverflow: "ellipsis"
+        textOverflow: "ellipsis",
+        margin: "5px 0px 15px",
+        color: "#2A2A2A",
+        fontSize: "12px"
     },
 
     boxContent: {
-        width: "calc(100% - 120px)"
+        width: "calc(100% - 100px)",
+        display: "flex",
+        alignItems: "center"
     },
 
     bold: {
         fontWeight: "bold"
     },
+
+    number: {
+        fontSize: "20px",
+        color: "#00d679"
+    },
+
+    icon: {
+        width: "20px",
+        marginTop: "-10px",
+        marginLeft: "5px"
+    },
+
+    action: {
+        width: "100px",
+        textAlign: "right"
+    },
+
+    w100: {
+        width: "100%"
+    }
 };
 
 export default Styles;

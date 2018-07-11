@@ -1,27 +1,45 @@
 import React, { Component } from "react";
 import styles from "./BikeHiringInfoStyle";
+import loadingImage from '../../assets/images/loading.gif'
 
 class BikeHiringInfo extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            loaded: false
+        };
+    }
+
     render() {
         return (
             <div style={styles.sumaryOfBike}>
-                <div style={styles.bodyContent}>
-                    <img
-                        style={styles.bikeImage}
-                        src={"https://gateway.ipfs.io/ipfs/" + this.props.externalData.avatar}
-                        alt="Bikecoin"
-                    />
-                    <div style={styles.line} ></div>
-                    <div style={styles.boxContent}>
-                        <p style={styles.text}><span style={styles.bold}>Manufacturer:</span> { this.props.externalData.manufacturer }</p>
-                        <p style={styles.text}><span style={styles.bold}>Bike serial:</span> { this.props.externalData.snNumber }</p>
-                        <p style={styles.text}><span style={styles.bold}>Price:</span> 20 BKC</p>
-                    </div>
-                        
-                </div>
+                <img
+                    style={{...styles.bikeImage, ...{display: this.state.loaded? 'block': 'none'}}}
+                    src={"https://gateway.ipfs.io/ipfs/" + this.props.externalData.avatar}
+                    alt="Bikecoin"
+                    onLoad={()=>this.setState({loaded: true })}
+                />
+                <img
+                    src={loadingImage}
+                    alt="Bikecoin"
+                    style={{...styles.bikeImage, ...{display: this.state.loaded? 'none': 'block'}}}
+                />
 
-                <div className="text-center">
-                    <button style={styles.button}>Book</button>
+                <div style={styles.bodyContent}>
+                    <div style={styles.boxContent}>
+                        <div style={styles.w100}>
+                            <p style={styles.text}><span style={styles.bold}>Manufacturer:</span> { this.props.externalData.manufacturer }</p>
+                            <p style={styles.text}><span style={styles.bold}>Bike serial:</span> { this.props.externalData.snNumber }</p>
+                        </div>
+                    </div>
+                    <div style={styles.action}>
+                        <div>
+                            <span style={styles.number}>20</span>
+                            <img src="images/Logo.png" style={styles.icon} alt="BikeCoin" />
+                        </div>
+                        <button style={styles.button}>Book</button>
+                    </div>
                 </div>
             </div>
         );

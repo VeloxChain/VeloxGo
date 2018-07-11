@@ -137,15 +137,18 @@ class ImportAccount extends Component {
                         value={this.state.accountName}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({ accountName: e.target.value })}
-                    /><br />
-                    <div className="flexible-end mg30-0">
-                        <button
-                            onClick={this.importAccount}
-                            style={styles.buttonBack}
-                        >
-                            IMPORT ACCOUNT
-                        </button>
-                    </div>
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
+                    />
+                </div>
+
+                <div className="action-form">
+                    <button
+                        onClick={this.importAccount}
+                        style={styles.buttonBack}
+                    >
+                        IMPORT ACCOUNT
+                    </button>
                 </div>
 
             </div>

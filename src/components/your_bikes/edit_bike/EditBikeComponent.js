@@ -42,7 +42,7 @@ class EditBikeComponent extends Component {
                 <div className="row">
                     <div className="col-sm-7">
                         <div style={styles.wrappLeft}>
-                            <EditBikeForm bikeInfo={this.props.bikeInfo} accounts={this.props.accounts} />
+                            <EditBikeForm bikeInfo={this.props.bikeInfo} accounts={this.props.accounts} getUserProfileAddress={this.props.getUserProfileAddress} />
                         </div>
                     </div>
                     <div className="col-sm-5">

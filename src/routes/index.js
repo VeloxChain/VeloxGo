@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import EthereumService from "../services/ethereum";
 import ServerService from "../services/server";
 import { MODAL_OWNER_LOGIN } from "../components/modal/constants";
+import { unlockedMetamask } from "../actions/appAction";
 import _ from "lodash";
 import YourBikesComponent from "../components/your_bikes/YourBikeComponent";
 import HiringRequestComponent from "../components/hiring_request/HiringRequestComponent";
@@ -39,16 +40,33 @@ class root extends React.Component {
         if (_.isEmpty(this.props.userProfile.data) || _.isEmpty(this.props.accounts.accounts)) {
             return (<div></div>);
         }
+        if (_.isUndefined(this.getAccountAddress())) {
+            return (
+                <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "80vh"}}>
+                    <h2>You have not unlock your metamask wallet. Please unlock it</h2>
+                </div>
+            );
+        }
+
         return (
             <Switch>
-                <Route exact path="/" render={() => <YourBikesComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
-                <Route exact path="/hiring_request" render={() => <HiringRequestComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
-                <Route exact path="/your_account" render={() => <YourAccountComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
-                <Route exact path="/verified" render={() => <VerifiedBikeComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
+                <Route exact path="/" render={() => <YourBikesComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
+                <Route exact path="/hiring_request" render={() => <HiringRequestComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
+                <Route exact path="/your_account" render={() => <YourAccountComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
+                <Route exact path="/verified" render={() => <VerifiedBikeComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
             </Switch>
         );
     }
-    componentWillReceiveProps(nextProps) {
+    componentDidMount() {
+        const timer = setInterval(() => {
+            let isUnlocked = this.getAccountAddress();
+            if (!_.isUndefined(isUnlocked)) {
+                clearInterval(timer);
+                this.props.dispatch(unlockedMetamask());
+            }
+        }, 1000);
+    }
+    componentWillsReceiveProps(nextProps) {
         const { accounts } = nextProps;
         if (accounts.isLogout) {
             this.setType(MODAL_OWNER_LOGIN);
@@ -76,6 +94,16 @@ class root extends React.Component {
         let isMetaMask = _.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key);
         return isMetaMask;
     }
+    getUserProfileAddress = async () => {
+        let userProfileAddress = localStorage.getItem("userProfileAddress");
+        if (userProfileAddress !== null) {
+            return userProfileAddress;
+        }
+        let accountAddress = this.getAccountAddress();
+        userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(accountAddress);
+        localStorage.setItem("userProfileAddress", userProfileAddress);
+        return userProfileAddress;
+    }
     render() {
         console.log(this.props);
         return (
@@ -99,6 +127,7 @@ class root extends React.Component {
                     keystore={this.props.keystore}
                     externalData={this.state.externalData}
                     getAccountAddress={this.getAccountAddress}
+                    getUserProfileAddress={this.getUserProfileAddress}
 
                 />
             </RootContainer>

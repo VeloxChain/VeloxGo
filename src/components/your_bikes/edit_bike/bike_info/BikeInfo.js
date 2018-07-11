@@ -54,7 +54,7 @@ class BikeInfo extends Component {
                     value={1}
                     style={this.state.tabIndex === 1 ? styles.tabActive : styles.tab}
                 >
-                    <BikeSpecifications {...this.props} />
+                    <BikeSpecifications bikeInfo={this.props.bikeInfo} {...this.props} />
                 </Tab>
                 
                 {this._renderOwnerHistory()}

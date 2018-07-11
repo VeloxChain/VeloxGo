@@ -64,6 +64,23 @@ const MapRegisterBike = compose(
 
                     const nextCenter = _.get(nextMarkers, "0.position", this.state.center);
 
+                    var filtered_locality = places[0].address_components.filter(function(address_component){
+                        return address_component.types.includes("locality");
+                    });
+
+                    var filtered_admin_lv1 = places[0].address_components.filter(function(address_component){
+                        return address_component.types.includes("administrative_area_level_1");
+                    });
+
+                    var cityName = filtered_locality.length ? 
+                        filtered_locality[0].short_name: 
+                        filtered_admin_lv1.length ? 
+                        filtered_admin_lv1[0].short_name:
+                        countryName
+                    ;
+
+                    console.log(cityName);
+
                     this.props.handleChangeState({
                         location: {
                             name: places[0].formatted_address,
@@ -71,6 +88,7 @@ const MapRegisterBike = compose(
                                 name: countryName,
                                 code: countryCode,
                             },
+                            cityName: cityName,
                             long: nextCenter.lng(),
                             lat: nextCenter.lat()
                         }

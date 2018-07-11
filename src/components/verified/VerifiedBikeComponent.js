@@ -37,7 +37,7 @@ class VerifiedBikeComponent extends Component {
                 <div className="row">
                     <div className="col-sm-7">
                         <div style={styles.wrappLeft}>
-                            <EditBikeForm bikeInfo={bikeInfo} accounts={this.props.accounts} />
+                            <EditBikeForm bikeInfo={bikeInfo} accounts={this.props.accounts} getUserProfileAddress={this.props.getUserProfileAddress} />
                         </div>
                     </div>
                     <div className="col-sm-5">
