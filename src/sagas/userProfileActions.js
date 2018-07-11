@@ -147,6 +147,7 @@ function* retrieveUserProfile(action) {
             privateKey: ""
         }
     });
+    localStorage.setItem("userProfileAddress", userProfileAddress);
     yield put({
         type: USER_PROFILE.CREATE,
         payload: {userProfile: retreiveUserProfile,hash: ipfsHash}

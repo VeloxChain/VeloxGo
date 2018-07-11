@@ -53,10 +53,24 @@ class YourAccountComponent extends Component {
         }
     }
     _renderETHBalance = (balance) => {
-        this.setState({eth: balance});
+        this.setState((prevState) => {
+            return {
+                info: {
+                    ...prevState.info,
+                    eth: balance
+                }
+            };
+        });
     }
     _renderBKCBalance = (balance) => {
-        this.setState({bkc: balance});
+        this.setState((prevState) => {
+            return {
+                info: {
+                    ...prevState.info,
+                    bkc: balance
+                }
+            };
+        });
     }
     handleChangeState = (data) => {
         const { userProfile } = this.state;
@@ -71,7 +85,7 @@ class YourAccountComponent extends Component {
         let accountAddress = this.props.getAccountAddress();
         this.props.ethereum.getBalance(accountAddress, this._renderETHBalance);
         this.props.ethereum.getBikeCoinBalance(accountAddress, this._renderBKCBalance);
-        let userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(accountAddress);
+        let userProfileAddress = await this.props.getUserProfileAddress();
         this.setState({userProfileAddress: userProfileAddress, accountAddress: accountAddress});
     }
     render() {

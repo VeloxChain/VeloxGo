@@ -18,6 +18,8 @@ class OwnerHistory extends React.Component {
         let ownerHistories = localStorage.getItem("ownerHistories");
         ownerHistories = JSON.parse(ownerHistories);
         let ownerHistory = _.filter(ownerHistories, (history) => history.tokenId === this.props.bikeInfo.tokenId);
+        ownerHistory = _.reverse(ownerHistory);
+        ownerHistory[0].to = ownerHistory[0].to + " (YOU)";
         this.setState({
             data: ownerHistory
         });

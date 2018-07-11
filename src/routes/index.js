@@ -41,10 +41,10 @@ class root extends React.Component {
         }
         return (
             <Switch>
-                <Route exact path="/" render={() => <YourBikesComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
-                <Route exact path="/hiring_request" render={() => <HiringRequestComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
-                <Route exact path="/your_account" render={() => <YourAccountComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
-                <Route exact path="/verified" render={() => <VerifiedBikeComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} />} />
+                <Route exact path="/" render={() => <YourBikesComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
+                <Route exact path="/hiring_request" render={() => <HiringRequestComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
+                <Route exact path="/your_account" render={() => <YourAccountComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
+                <Route exact path="/verified" render={() => <VerifiedBikeComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
             </Switch>
         );
     }
@@ -76,6 +76,16 @@ class root extends React.Component {
         let isMetaMask = _.isEmpty(accounts.accounts) || accounts.accounts.key === "" || accounts.accounts.keystring === "" || _.isUndefined(accounts.accounts.key);
         return isMetaMask;
     }
+    getUserProfileAddress = async () => {
+        let userProfileAddress = localStorage.getItem("userProfileAddress");
+        if (userProfileAddress !== null) {
+            return userProfileAddress;
+        }
+        let accountAddress = this.getAccountAddress();
+        userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(accountAddress);
+        localStorage.setItem("userProfileAddress", userProfileAddress);
+        return userProfileAddress;
+    }
     render() {
         console.log(this.props);
         return (
@@ -99,6 +109,7 @@ class root extends React.Component {
                     keystore={this.props.keystore}
                     externalData={this.state.externalData}
                     getAccountAddress={this.getAccountAddress}
+                    getUserProfileAddress={this.getUserProfileAddress}
 
                 />
             </RootContainer>
