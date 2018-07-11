@@ -31,6 +31,7 @@ function* uploadNewBikeToIPFS(action) {
         isFlash: false,
         isHonk: false,
         isLock: false,
+        model: bikeInfo.model
     };
     let hashData = yield call(SERVICE_IPFS.putDataToIPFS, bike);
     yield put({

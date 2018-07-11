@@ -5,7 +5,8 @@ import Dropzone from "react-dropzone";
 import _ from "lodash";
 import { Dialog } from "material-ui";
 import ImageCroper from "../../../image_croper/ImageCroper";
-
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 class RegisterBikeInformation extends Component {
     constructor(props) {
@@ -125,20 +126,36 @@ class RegisterBikeInformation extends Component {
                                 value={this.props.info.manufacturer}
                                 fullWidth
                                 onChange={(e) => this.props.handleChangeState({manufacturer: e.target.value})}
-
+                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                underlineFocusStyle={styles.underlineStyle}
                             />
                             <TextField
                                 floatingLabelText="Owner"
                                 value={this.props.info.owner}
                                 fullWidth
+                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                underlineFocusStyle={styles.underlineStyle}
                             />
                             <TextField
                                 floatingLabelText="Bike serial"
                                 value={this.props.info.snNumber}
                                 fullWidth
-                                style={styles.mb20}
                                 onChange={(e) => this.props.handleChangeState({snNumber: e.target.value})}
+                                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                underlineFocusStyle={styles.underlineStyle}
                             />
+
+                            <SelectField
+                                floatingLabelText="Model"
+                                value={this.props.info.model}
+                                onChange={(event, index, value) => this.props.handleChangeState({model: value})}
+                                selectedMenuItemStyle={styles.selectedMenuItemStyle}
+                                style={styles.mb20}
+                                fullWidth
+                            >
+                                <MenuItem value={"1"} primaryText="Model 1" />
+                                <MenuItem value={"1C"} primaryText="Model 1C" />
+                            </SelectField>
 
                             <p style={styles.upload}>Upload your invoice</p>
                             <input type="file" onChange={(event)=> this.readFile(event.target.files[0], "invoice")} />

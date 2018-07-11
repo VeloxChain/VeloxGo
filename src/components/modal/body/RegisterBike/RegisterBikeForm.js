@@ -19,7 +19,8 @@ class RegisterBike extends Component {
                 imagePreview: "",
                 manufacturer: "Volata Cycles",
                 owner: this.props.accounts.accounts.address || this.props.accounts.address,
-                snNumber: ""
+                snNumber: "",
+                model: "1"
             },
             stepTwo: {
                 location: {

@@ -204,6 +204,10 @@ const Styles = {
         height: "2px",
         background: "rgb(236, 236, 236)",
         marginBottom: "15px"
+    },
+
+    selectedMenuItemStyle: {
+        color: "#00F58A"
     }
 }
 

@@ -31,7 +31,6 @@ class BikeComponent extends Component {
                         />
                         <div style={styles.address}>
                             <div style={styles.text}>
-                                <span style={styles.bold}>Location: </span>
                                 <span>{this.props.bike.location.name}</span>
                             </div>
                         </div>

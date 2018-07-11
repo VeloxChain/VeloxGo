@@ -89,8 +89,7 @@ const Styles = {
         display: "-webkit-box",
         WebkitLineClamp: "2",
         WebkitBoxOrient: "vertical",
-        fontSize: "16px",
-        minHeight: "41px"
+        minHeight: "40px"
     },
 
     number: {
