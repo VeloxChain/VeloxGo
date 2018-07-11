@@ -31,7 +31,9 @@ class YourBikesComponent extends Component {
     }
     componentDidMount() {
         const { accounts } = this.props;
-        this.props.dispatch(initUserBikes({address: accounts.accounts.address, ethereum: this.props.ethereum }));
+        setTimeout(()=> {
+            this.props.dispatch(initUserBikes({address: accounts.accounts.address, ethereum: this.props.ethereum }))
+        }, 1)
     }
     // changeBikeInfo = async (isInputChecked, rowEdit,rowIndex) => {
     //     // let dataChanges = Object.assign(rowEdit, {forRent: isInputChecked});

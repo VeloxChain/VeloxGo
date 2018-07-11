@@ -20,7 +20,9 @@ class HiringRequestComponent extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(initNetworkBikes({ethereum: this.props.ethereum }));
+        setTimeout(()=> {
+            this.props.dispatch(initNetworkBikes({ethereum: this.props.ethereum }))
+        }, 1)
     }
 
     handleChangeMapDefaultLocation = (mapDefaultLocation) => {
