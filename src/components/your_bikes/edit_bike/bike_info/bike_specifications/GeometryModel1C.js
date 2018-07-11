@@ -40,7 +40,7 @@ const dataBody = [
 
 ];
 
-class Geometry extends React.Component {
+class GeometryModel1C extends React.Component {
 
     _renderField = (data) => {
         var fields = [];
@@ -107,4 +107,4 @@ class Geometry extends React.Component {
     }
 }
 
-export default Geometry;
+export default GeometryModel1C;

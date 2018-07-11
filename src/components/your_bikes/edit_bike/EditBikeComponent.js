@@ -29,7 +29,6 @@ class EditBikeComponent extends Component {
     }
 
     render() {
-        console.log(this.props.bikeInfo);
         return (
             <div style={styles.wrapp}>
                 <div className="row" style={styles.rowButton}>

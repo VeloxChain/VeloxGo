@@ -37,7 +37,7 @@ const dataBody = [
     {parts: "Weight", suppliers: "", description: "24.7lb (11.3 kg) Size M"},
 ];
 
-class Components extends React.Component {
+class ComponentsModel1C extends React.Component {
 
     _renderField = (data) => {
         var fields = [];
@@ -88,4 +88,4 @@ class Components extends React.Component {
     }
 }
 
-export default Components;
+export default ComponentsModel1C;
