@@ -605,8 +605,8 @@ a {
 }
 .maskButton {
     background: rgb(255, 255, 255);
-    border: 1px solid rgb(0, 214, 121);
-    color: rgb(0, 214, 121);
+    border: 1px solid #00F58A;
+    color: #00F58A;
     border-radius: 5px;
     padding: 7px 30px;
     margin-bottom: 20px;
@@ -694,7 +694,6 @@ a {
 .avatarDrop {
     width: 150px;
     height: 150px;
-    border: 2px dashed rgb(173, 173, 173);
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -706,7 +705,6 @@ a {
 .avatarDropProfile {
     width: 110px;
     height: 110px;
-    border: 2px dashed rgb(173, 173, 173);
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -989,4 +987,19 @@ input#file:focus {
 
 .step-tab.last::after {
     content: none;
+}
+
+.action-form {
+    margin-top: 30px;
+    padding: 0px 15px;
+    text-align: right;
+}
+
+.key-store {
+    color: #808080;
+}
+
+.transaction {
+    display: flex;
+    align-items: center;
 }

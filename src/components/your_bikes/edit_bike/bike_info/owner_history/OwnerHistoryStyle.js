@@ -5,7 +5,7 @@ const Styles = {
     },
     button: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid #00F58A",
         borderRadius: "5px",
         padding: "7px 30px",
         textTransform: "uppercase",

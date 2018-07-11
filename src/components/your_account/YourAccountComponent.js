@@ -78,7 +78,7 @@ class YourAccountComponent extends Component {
         return (
             <div style={styles.wrapp}>
                 <div className="row">
-                    <div className="col-sm-4" style={{minWidth:400}}>
+                    <div className="col-sm-4">
                         <YourAccountInfo {...this.props} info={this.state.info} onChangeAvatar={this.onChangeAvatar} />
                     </div>
                     <div className="col-sm-8">

@@ -211,6 +211,9 @@ class CreateAccount extends Component {
                         fullWidth={true}
                         disabled={this.state.disabled}
                         value={this.props.getAccountAddress()}
+                        underlineStyle={styles.underlineStyle}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     <TextField
                         floatingLabelText="Email"
@@ -221,6 +224,9 @@ class CreateAccount extends Component {
                         errorText={ this.state.errors ? this.state.errors.email : null}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({email: e.target.value})}
+                        underlineStyle={styles.underlineStyle}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     <TextField
                         floatingLabelText="First Name"
@@ -230,6 +236,9 @@ class CreateAccount extends Component {
                         errorText={ this.state.errors ? this.state.errors.firstname : null}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({firstname: e.target.value})}
+                        underlineStyle={styles.underlineStyle}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     <TextField
                         floatingLabelText="Last Name"
@@ -239,19 +248,22 @@ class CreateAccount extends Component {
                         errorText={ this.state.errors ? this.state.errors.lastname : null}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({lastname: e.target.value})}
+                        underlineStyle={styles.underlineStyle}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     /><br />
                     {this._renderPassphrase()}
-                    <div className="flexible-end mg30-0">
-                        <button
-                            disabled={this.state.disabled}
-                            onClick={this.createProfile}
-                            style={styles.buttonBack}
-                        >
-                            {this.state.labelButton}
-                        </button>
-                    </div>
                 </div>
 
+                <div className="action-form">
+                    <button
+                        disabled={this.state.disabled}
+                        onClick={this.createProfile}
+                        style={styles.buttonBack}
+                    >
+                        {this.state.labelButton}
+                    </button>
+                </div>
             </div>
         );
     }
