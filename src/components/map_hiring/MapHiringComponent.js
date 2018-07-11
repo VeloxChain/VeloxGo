@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { compose, withProps, withStateHandlers } from "recompose";
+import { compose, withProps, withStateHandlers, withHandlers } from "recompose";
 import {
     withScriptjs,
     withGoogleMap,
@@ -10,6 +10,7 @@ import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 import BikeHiringInfo from "../bike_hiring_info/BikeHiringInfo";
 import appConfig from "../../config/app.json";
 import MapBikeIcon from "../../assets/images/map_bike_icon.png";
+const { MarkerClusterer } = require("react-google-maps/lib/components/addons/MarkerClusterer");
 
 class MapHiringComponent extends Component {
     constructor(props) {
@@ -41,25 +42,33 @@ class MapHiringComponent extends Component {
                 onClick={() => this.props.handleSelectBike("")}
                 clickableIcons={false}
             >
-                {
-                    this.props.bikes.network.map((bike, index) => {
-                        return (
-                            <Marker
-                                key={index}
-                                position={{ lat: bike.location.lat, lng: bike.location.long }}
-                                onClick={() => this.props.handleSelectBike(bike.tokenId)}
-                                icon={MapBikeIcon}
-                            >
-                                {bike.tokenId == this.props.bikeHashSelected && <InfoBox
-                                    onCloseClick={this.props.onToggleOpen}
-                                    options={{ closeBoxURL: "", enableEventPropagation: false }}
+                <MarkerClusterer
+                    onClick={this.props.onMarkerClustererClick}
+                    averageCenter
+                    enableRetinaIcons
+                    gridSize={20}
+                >
+                    {
+                        this.props.bikes.network.map((bike, index) => {
+                            return (
+                                <Marker
+                                    key={index}
+                                    position={{ lat: bike.location.lat, lng: bike.location.long }}
+                                    onClick={() => this.props.handleSelectBike(bike.tokenId)}
+                                    icon={MapBikeIcon}
                                 >
-                                    <BikeHiringInfo externalData={bike}/>
-                                </InfoBox>
-                                }
-                            </Marker>
-                        );})
-                }
+                                    {bike.tokenId == this.props.bikeHashSelected && <InfoBox
+                                        onCloseClick={this.props.onToggleOpen}
+                                        options={{ closeBoxURL: "", enableEventPropagation: false }}
+                                    >
+                                        <BikeHiringInfo externalData={bike}/>
+                                    </InfoBox>
+                                    }
+                                </Marker>
+                            );
+                        })
+                    }
+                </MarkerClusterer>
             </GoogleMap>
         );
     }
@@ -82,6 +91,13 @@ export default compose(
         onClose: () => () => ({
             isOpen: false,
         })
+    }),
+    withHandlers({
+        onMarkerClustererClick: () => (markerClusterer) => {
+          const clickedMarkers = markerClusterer.getMarkers()
+          console.log(`Current clicked markers length: ${clickedMarkers.length}`)
+          console.log(clickedMarkers)
+        },
     }),
     withScriptjs,
     withGoogleMap,
