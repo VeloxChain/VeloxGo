@@ -108,7 +108,7 @@ td {
     background-color: #e9f0f3;
 }
 .left_col {
-  background-color: #000;
+  background-color: #1D1D1D;
   position: fixed;
   width: 230px;
   top: 0;
@@ -127,7 +127,7 @@ a {
     float: left;
 }
 .bg-header {
-    background-color: #2a2a2a;
+    background-color: #3B3B3B;
 }
 .right-col {
     width: calc(100% - 230px);
@@ -325,8 +325,8 @@ a {
     height: 100vh;
 }
 .logo-menu img {
-    width: 150px;
-    margin: 20px 0px;
+    height: 100px;
+    margin: 30px 0px;
 }
 .logo-bikecoin {
     height: 40px;
@@ -605,8 +605,8 @@ a {
 }
 .maskButton {
     background: rgb(255, 255, 255);
-    border: 1px solid rgb(0, 214, 121);
-    color: rgb(0, 214, 121);
+    border: 1px solid #00F58A;
+    color: #00F58A;
     border-radius: 5px;
     padding: 7px 30px;
     margin-bottom: 20px;
@@ -694,7 +694,6 @@ a {
 .avatarDrop {
     width: 150px;
     height: 150px;
-    border: 2px dashed rgb(173, 173, 173);
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -706,7 +705,6 @@ a {
 .avatarDropProfile {
     width: 110px;
     height: 110px;
-    border: 2px dashed rgb(173, 173, 173);
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -938,8 +936,8 @@ input#file:focus {
 .infoBox {
     background-color: white;
     width: 300px;
-    padding: 10px;
-    border: 1px solid rgb(0, 214, 121);
+    padding: 5px;
+    border: 1px solid #CACACA;
     box-shadow: rgb(178, 189, 181) 0px 0px 2px 1px;
 }
 
@@ -956,4 +954,56 @@ input#file:focus {
 
 .ReactModalPortal .ReactModal__Overlay {
     overflow: scroll;
+}
+
+.ReactModalPortal .ReactModal__Overlay .ReactModal__Content {
+    border: none !important;
+}
+
+.step-tab {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.step-tab::after {
+    width: 100px;
+    height: 1px;
+    background: #b9b9b9;
+    position: absolute;
+    content: "";
+    right: -130px;
+}
+
+.step-tab.active::after {
+    top: 33px;
+    right: -100px;
+}
+
+.step-tab.active.second::after {
+    right: -130px;
+}
+
+.step-tab.last::after {
+    content: none;
+}
+
+.action-form {
+    margin-top: 30px;
+    padding: 0px 15px;
+    text-align: right;
+}
+
+.key-store {
+    color: #808080;
+}
+
+.transaction {
+    display: flex;
+    align-items: center;
+}
+
+.fa-external-link {
+    margin-left: 10px;
 }
