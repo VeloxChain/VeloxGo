@@ -85,7 +85,7 @@ class YourAccountComponent extends Component {
         let accountAddress = this.props.getAccountAddress();
         this.props.ethereum.getBalance(accountAddress, this._renderETHBalance);
         this.props.ethereum.getBikeCoinBalance(accountAddress, this._renderBKCBalance);
-        let userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(accountAddress);
+        let userProfileAddress = await this.props.getUserProfileAddress();
         this.setState({userProfileAddress: userProfileAddress, accountAddress: accountAddress});
     }
     render() {
