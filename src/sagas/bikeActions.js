@@ -171,7 +171,7 @@ function* loadNetworkBikeFromNetWork(action){
         return;
     }
     totalTokens = totalTokens - 1;
-    yield call(loadHashFromNetworkToken, ethereum, totalTokens, bikes.loaded);
+    yield fork(loadHashFromNetworkToken, ethereum, totalTokens, bikes.loaded);
     // yield put({type: "APP_LOADING_END"});
 }
 
