@@ -144,35 +144,35 @@ function* uploadModifiedBikeToIPFS(action) {
 // }
 
 function* loadUserBikeFromNetWork(action){
-    yield put({type: "APP_LOADING_START", payload: "Loading your bikes from network....."});
-    yield delay(500);
+    // yield put({type: "APP_LOADING_START", payload: "Loading your bikes from network....."});
+    // yield delay(500);
     const { address, ethereum } = action.payload;
     const bikes = yield select(bikesState);
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
     let totalTokens = yield call(ethereum.ownerShipContract.balanceOf,userProfileAddress);
     totalTokens = totalTokens.toNumber();
     if (totalTokens === bikes.data.length) {
-        yield put({type: "APP_LOADING_END"});
+        // yield put({type: "APP_LOADING_END"});
         return;
     }
     totalTokens = totalTokens - 1;
-    yield call(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes);
-    yield put({type: "APP_LOADING_END"});
+    yield fork(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes);
+    // yield put({type: "APP_LOADING_END"});
 }
 function* loadNetworkBikeFromNetWork(action){
-    yield put({type: "APP_LOADING_START", payload: "Loading bikes from network....."});
-    yield delay(500);
+    // yield put({type: "APP_LOADING_START", payload: "Loading bikes from network....."});
+    // yield delay(500);
     const { ethereum } = action.payload;
     const bikes = yield select(bikesState);
     let totalTokens = yield call(ethereum.ownerShipContract.totalSupply);
     totalTokens = totalTokens.toNumber();
     if (totalTokens === bikes.network.length) {
-        yield put({type: "APP_LOADING_END"});
+        // yield put({type: "APP_LOADING_END"});
         return;
     }
     totalTokens = totalTokens - 1;
-    yield call(loadHashFromNetworkToken, ethereum, totalTokens, bikes.loaded);
-    yield put({type: "APP_LOADING_END"});
+    yield fork(loadHashFromNetworkToken, ethereum, totalTokens, bikes.loaded);
+    // yield put({type: "APP_LOADING_END"});
 }
 
 function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress, bikes) {
