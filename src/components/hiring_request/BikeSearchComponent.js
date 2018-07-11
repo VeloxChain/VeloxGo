@@ -13,23 +13,23 @@ class BikeSearchComponent extends Component {
                     long: 103.819836,
                     lat: 1.352083
                 },
-                SG: {
-                    index: 'SG',
+                Singapore: {
+                    index: 'Singapore',
                     long: 103.819836,
                     lat: 1.352083
                 },
-                US: {
-                    index: 'US',
+                Delaware: {
+                    index: 'Delaware',
                     long: -83.06797,
                     lat: 40.29867
                 },
-                IT: {
-                    index: 'IT',
+                Milan: {
+                    index: 'Milan',
                     long: 9.191383,
                     lat: 45.464211
                 },
-                SM: {
-                    index: 'SM',
+                SF: {
+                    index: 'SF',
                     long: -122.431297,
                     lat: 37.773972
                 },
@@ -58,22 +58,22 @@ class BikeSearchComponent extends Component {
                                 Select Country
                             </option>
                             <option
-                                value={"SG"}
+                                value={"Singapore"}
                             >
                                 Singapore
                             </option>
                             <option
-                                value={"US"}
+                                value={"Delaware"}
                             >
                                 Delaware
                             </option>
                             <option
-                                value={"IT"}
+                                value={"Milan"}
                             >
                                 Milano (Italy)
                             </option>
                             <option
-                                value={"SM"}
+                                value={"SF"}
                             >
                                 San Francisco
                             </option>
