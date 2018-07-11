@@ -50,7 +50,6 @@ class ConfirmTransaction extends Component {
                             errorText={this.state.errors.passphrase}
                             onKeyPress={(e) => this.handleKeyPress(e)}
                             onChange={(e) => this.setState({ passphrase: e.target.value })}
-                            underlineStyle={styles.underlineStyle}
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             underlineFocusStyle={styles.underlineStyle}
                         />

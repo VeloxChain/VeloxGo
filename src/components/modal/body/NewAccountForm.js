@@ -100,7 +100,6 @@ class NewAccount extends Component {
                         errorText={this.state.errorName}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({accountName: e.target.value, errorName: false})}
-                        underlineStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                         underlineFocusStyle={styles.underlineStyle}
                     /><br />
@@ -112,7 +111,6 @@ class NewAccount extends Component {
                         errorText={this.state.errorPass}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({passpharse: e.target.value, errorPass: false})}
-                        underlineStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                         underlineFocusStyle={styles.underlineStyle}
                     /><br />
@@ -124,7 +122,6 @@ class NewAccount extends Component {
                         errorText={this.state.error}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({rePasspharse: e.target.value, error: false})}
-                        underlineStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                         underlineFocusStyle={styles.underlineStyle}
                     />

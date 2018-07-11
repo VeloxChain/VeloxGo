@@ -17,7 +17,6 @@ const Styles = {
     block: {
         textAlign: "center",
         padding: "0px 20px 30px",
-        borderBottom: "1px solid #CACACA"
     },
 
     avatar: {
@@ -71,7 +70,8 @@ const Styles = {
 
     wrappFlex: {
         display: "flex",
-        padding: "10px 20px"
+        padding: "20px",
+        borderTop: "1px solid rgb(239, 239, 239)"
     },
 
     wrappFlexLeft: {
@@ -79,6 +79,10 @@ const Styles = {
         justifyContent: "flex-start",
         alignItems: "center",
         width: "50%"
+    },
+
+    wrapper: {
+        minHeight: "267px"
     },
 
     wrappFlexRight: {
@@ -93,8 +97,35 @@ const Styles = {
     },
 
     form: {
-        paddingBottom: "10px",
-        borderBottom: "2px solid rgb(222, 222, 222)"
+        paddingBottom: "-5px",
+        marginBottom: "30px",
+        borderBottom: "2px solid rgb(239, 239, 239)"
+    },
+
+    iconBike: {
+        height: "26px",
+        marginLeft: "10px"
+    },
+
+    text: {
+        color: "#00F58A",
+        fontSize: "18px"
+    },
+
+    textEthereum: {
+        fontSize: "18px"
+    },
+
+    underlineStyle: {
+        borderColor: "#66F9B8"
+    },
+
+    floatingLabelStyle: {
+        color: "#66F9B8"
+    },
+
+    floatingLabelFocusStyle: {
+        color: "rgba(0, 0, 0, 0.3)"
     }
 };
 

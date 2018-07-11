@@ -137,7 +137,6 @@ class ImportAccount extends Component {
                         value={this.state.accountName}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({ accountName: e.target.value })}
-                        underlineStyle={styles.underlineStyle}
                         floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                         underlineFocusStyle={styles.underlineStyle}
                     />

@@ -27,7 +27,12 @@ class AddOwnerForm extends Component {
                         value={this.state.email}
                         fullWidth
                         onChange={(e) => this.handleChange({email: e.target.value})}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     />
+                    
+                </div>
+                <div className="col-sm-12">
                     <div style={styles.actionAddOwner}>
                         <button style={styles.button}>Submit</button>
                     </div>

@@ -95,7 +95,7 @@ class HiringRequestComponent extends Component {
         if (listBikeFilter.length === 0) {
             renderBike = (
                 <div className="text-center">
-                    <h2 style={styles.fail}>There is no bike</h2>
+                    <img src="images/404.png" style={styles.fail} alt="BikeCoin" />
                 </div>
             );
         }

@@ -100,24 +100,26 @@ class YourAccountInfo extends Component {
                     />
                 </Dialog>
                 <div style={styles.wrappTop}>
-                    <div>
+                    <div style={styles.wrapper}>
                         <Dropzone onDrop={this.onDrop} className="avatarDropProfile" multiple={false} activeClassName="onDrop" accept=".jpeg,.jpg,.png">
                             { this._renderPreview() }
                         </Dropzone>
-                    </div>
-                    <div style={styles.block}>
-                        <h4 style={styles.name}>{userProfile.data.firstname + " " + userProfile.data.lastname}</h4>
-                        <button style={styles.buttonCollect}>
-                            <span>collect 200 </span>
-                            <img src="images/icon.png" alt="Bikecoin" style={styles.icon} />
-                        </button>
+                        <div style={styles.block}>
+                            <h4 style={styles.name}>{userProfile.data.firstname + " " + userProfile.data.lastname}</h4>
+                            <button style={styles.buttonCollect}>
+                                <span>collect 200 </span>
+                                <img src="images/icon.png" alt="Bikecoin" style={styles.icon} />
+                            </button>
+                        </div>
                     </div>
                     <div style={styles.wrappFlex}>
                         <div style={styles.wrappFlexLeft}>
-                            BKC: {this.props.info.bkc}
+                            <span style={styles.text}>{this.props.info.bkc}</span>
+                            <img src="images/Logo.png" alt="BikeCoin" style={styles.iconBike} />
                         </div>
                         <div style={styles.wrappFlexRight}>
-                            ETH: {this.props.info.eth}
+                            <span style={styles.textEthereum}>{this.props.info.eth}</span>
+                            <img src="images/ethereum.png" alt="BikeCoin" style={styles.iconBike} />
                         </div>
                     </div>
                 </div>

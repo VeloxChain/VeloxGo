@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import styles from "./HiringRequestComponentStyle";
-import SelectField from "material-ui/SelectField";
-import MenuItem from "material-ui/MenuItem";
 import BikeFilterComponent from "./BikeFilterComponent";
 
 class BikeSearchComponent extends Component {

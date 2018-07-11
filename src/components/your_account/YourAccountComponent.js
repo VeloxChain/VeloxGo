@@ -78,10 +78,10 @@ class YourAccountComponent extends Component {
         return (
             <div style={styles.wrapp}>
                 <div className="row">
-                    <div className="col-sm-4">
+                    <div className="col-sm-3">
                         <YourAccountInfo {...this.props} info={this.state.info} onChangeAvatar={this.onChangeAvatar} />
                     </div>
-                    <div className="col-sm-8">
+                    <div className="col-sm-9">
                         <YourAccountForm
                             {...this.props}
                             handleChangeState={this.handleChangeState}

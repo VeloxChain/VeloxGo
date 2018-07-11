@@ -64,12 +64,6 @@ const Styles = {
         height: "calc(100vh - 195px)"
     },
 
-    fail: {
-        color: "rgb(158, 158, 158)",
-        letterSpacing: "2px",
-        marginTop: "30px"
-    },
-    
     info: {
         padding: "0px 20px"
     },
@@ -82,6 +76,7 @@ const Styles = {
         position: "absolute",
         bottom: "5px",
         left: "5px",
+        width: "calc(100% - 10px)",
         color: "#fff",
         marginRight: "5px",
         padding: "10px",
@@ -95,6 +90,7 @@ const Styles = {
         WebkitLineClamp: "2",
         WebkitBoxOrient: "vertical",
         fontSize: "16px",
+        minHeight: "41px"
     },
 
     number: {
@@ -127,6 +123,11 @@ const Styles = {
         width: "calc(100% - 90px)",
         display: "flex",
         alignItems: "center"
+    },
+
+    fail: {
+        width: "70%",
+        marginTop: "20px"
     }
 };
   

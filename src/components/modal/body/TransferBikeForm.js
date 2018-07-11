@@ -56,6 +56,8 @@ class ConfirmTransaction extends Component {
                     value={this.state.passphrase}
                     onKeyPress={(e) => this.handleKeyPress(e)}
                     onChange={(e) => this.setState({ passphrase: e.target.value })}
+                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                    underlineFocusStyle={styles.underlineStyle}
                 />
             );
         }
@@ -70,15 +72,16 @@ class ConfirmTransaction extends Component {
                         value={this.state.addressTo}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({ addressTo: e.target.value })}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     />
                     {this._renderPassphrase()}
-                    <div className="flexible-end mg30-0">
-                        <button onClick={this._onDeploy} style={styles.buttonBack}>
-                            TRANSFER
-                        </button>
-                    </div>
                 </div>
-
+                <div className="action-form">
+                    <button onClick={this._onDeploy} style={styles.buttonBack}>
+                        TRANSFER
+                    </button>
+                </div>
             </div>
         );
     }

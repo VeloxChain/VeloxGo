@@ -82,7 +82,8 @@ const Styles = {
 
     text: {
         marginTop: "0",
-        marginBottom: "20px"
+        marginBottom: "20px",
+        fontSize: "16px"
     },
 
     image: {
@@ -103,8 +104,9 @@ const Styles = {
     },
 
     actionAddOwner: {
-        textAlign: "center",
-        marginBottom: "30px"
+        textAlign: "right",
+        marginBottom: "30px",
+        marginRight: "10px"
     },
 
     stepTabs: {
@@ -164,6 +166,44 @@ const Styles = {
 
     floatingLabelFocusStyle: {
         color: "rgba(0, 0, 0, 0.3)"
+    },
+
+    wrappLeft: {
+        border: "1px solid #ababab"
+    },
+
+    bikeShow: {
+        padding: "5px",
+        width: "100%"
+    },
+
+    buttonBook: {
+        background: "#00d679",
+        border: "1px solid #00d679",
+        borderRadius: "2px",
+        padding: "5px 20px",
+        color: "#fff",
+        textTransform: "uppercase",
+        letterSpacing: "1px",
+        marginBottom: "30px"
+    },
+
+    numberPrice: {
+        marginRight: "10px",
+        fontSize: "20px",
+        color: "#00d679"
+    },
+
+    logo: {
+        width: "20px",
+        marginTop: "-5px"
+    },
+
+    dvd: {
+        width: "100%",
+        height: "2px",
+        background: "rgb(236, 236, 236)",
+        marginBottom: "15px"
     }
 }
 

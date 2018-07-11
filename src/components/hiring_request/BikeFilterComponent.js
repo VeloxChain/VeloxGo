@@ -7,9 +7,6 @@ const list = "images/list.png";
 const list_blue = "images/list_blue.png";
 
 class BikeFilterComponent extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     onChangeFilter = (value) => {
         this.props.onHandleSwitchView(value);
@@ -22,11 +19,13 @@ class BikeFilterComponent extends Component {
                     style={styles.iconFilter}
                     src={this.props.isRenderMap ? map_blue : map}
                     onClick={() => this.onChangeFilter(true)}
+                    alt="BikeCoin"
                 />
                 <img
                     style={styles.iconFilterList}
                     src={!this.props.isRenderMap ? list_blue : list}
                     onClick={() => this.onChangeFilter(false)}
+                    alt="BikeCoin"
                 />
             </div>
         );
