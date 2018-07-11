@@ -30,7 +30,8 @@ class RegisterBike extends Component {
                     country: {
                         name: null,
                         code: null,
-                    }
+                    },
+                    cityName: null,
                 },
             },
             stepThree: {

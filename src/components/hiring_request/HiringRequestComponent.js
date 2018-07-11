@@ -64,7 +64,7 @@ class HiringRequestComponent extends Component {
         let listBikeFilter = [];
         let networkBikes = _.orderBy(this.props.bikes.network, ["tokenId"], ["desc"]);
         _.forEach(networkBikes, (value) => {
-            if (value.location.country.code === this.state.mapDefaultLocation.index) {
+            if (value.location.cityName === this.state.mapDefaultLocation.index) {
                 listBikeFilter = [...listBikeFilter, value];
             }
         });

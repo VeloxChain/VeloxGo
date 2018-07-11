@@ -6,6 +6,7 @@ import {
     GoogleMap,
     Marker
 }  from "react-google-maps";
+import _ from 'lodash';
 import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 import BikeHiringInfo from "../bike_hiring_info/BikeHiringInfo";
 import appConfig from "../../config/app.json";
@@ -16,7 +17,15 @@ class MapHiringComponent extends Component {
     constructor(props) {
         super(props);
         this.googleMap = null;
+        this.state = {
+            listMarkerData: []
+        }
+    }
 
+    componentDidMount(){
+        this.setState({
+            listMarkerData: this.props.bikes.network
+        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -27,6 +36,42 @@ class MapHiringComponent extends Component {
                     lat: nextProps.mapDefaultLocation.lat
                 }
             );
+        }
+    }
+
+    getMarkerPoint = (markerData) => {
+
+        let indexOverLap = 0;
+
+        let findOverLapMarker = _.find(this.state.listMarkerData, (value, index) => {
+            indexOverLap= index;
+            return value.location.lat == markerData.location.lat && value.location.long == markerData.location.long && value.tokenId != markerData.tokenId ; 
+        });
+
+        console.log(this.state.listMarkerData);
+
+        if(!_.isEmpty(findOverLapMarker)) {
+
+            let newListMarkerData = this.state.listMarkerData;
+
+            newListMarkerData[indexOverLap].location.long = _.toNumber(findOverLapMarker.location.long) + 0.000001;
+            newListMarkerData[indexOverLap].location.lat = _.toNumber(findOverLapMarker.location.lat) + 0.000001;
+
+            this.setState({
+                listMarkerData: newListMarkerData
+            }, ()=>console.log('this.state.listMarkerData', this.state.listMarkerData));
+
+            
+
+            return {
+                long: _.toNumber(findOverLapMarker.location.long) + 0.000001,
+                lat: _.toNumber(findOverLapMarker.location.lat) + 0.000001,
+            }
+        }
+
+        return {
+            long: markerData.location.long,
+            lat: markerData.location.lat,
         }
     }
 
@@ -50,10 +95,11 @@ class MapHiringComponent extends Component {
                 >
                     {
                         this.props.bikes.network.map((bike, index) => {
+                            let newPoint = this.getMarkerPoint(bike);
                             return (
                                 <Marker
                                     key={index}
-                                    position={{ lat: bike.location.lat, lng: bike.location.long }}
+                                    position={{ lat: newPoint.lat, lng: newPoint.long }}
                                     onClick={() => this.props.handleSelectBike(bike.tokenId)}
                                     icon={MapBikeIcon}
                                 >
