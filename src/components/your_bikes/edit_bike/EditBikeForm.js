@@ -37,7 +37,8 @@ class EditBikeForm extends Component {
                         href={"https://ropsten.etherscan.io/address/" + this.state.userProfileAddress}
                         target="_blank"
                         title="View Profile Address On EtherScan">
-                        {this.state.userProfileAddress}
+                        {this.state.userProfileAddress + " "}
+                        <i className="fa fa-external-link"></i>
                     </a>
                 </h4>
 
@@ -53,7 +54,8 @@ class EditBikeForm extends Component {
                         href={"https://ropsten.etherscan.io/token/" + constants.BIKECOIN_OWNER_SHIP_ADDRESS}
                         target="_blank"
                         title="View ERC721 Token On EtherScan">
-                        {constants.BIKECOIN_OWNER_SHIP_ADDRESS}
+                        {constants.BIKECOIN_OWNER_SHIP_ADDRESS + " "}
+                        <i className="fa fa-external-link"></i>
                     </a>
                 </h4>
 

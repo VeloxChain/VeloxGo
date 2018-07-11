@@ -49,7 +49,7 @@ class YourAccountForm extends Component {
                                 </div>
                             </div>
                         </form>
-                    
+
                         <TextField
                             floatingLabelText="Email"
                             fullWidth
@@ -59,29 +59,29 @@ class YourAccountForm extends Component {
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             underlineFocusStyle={styles.underlineStyle}
                         />
-                        
+
                         <div className="row">
-                                <div className="col-sm-6">
-                                    <TextField
-                                        floatingLabelText="First Name"
-                                        fullWidth
-                                        value={this.props.userInfo.firstname}
-                                        onChange={(e) => this.props.handleChangeState({firstname: e.target.value})}
-                                        onKeyPress={(e) => this.props.handleKeyPress(e)}
-                                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                        underlineFocusStyle={styles.underlineStyle}
-                                    />
-                                </div>
-                                <div className="col-sm-6">
-                                    <TextField
-                                        floatingLabelText="Last Name"
-                                        fullWidth
-                                        value={this.props.userInfo.lastname}
-                                        onChange={(e) => this.props.handleChangeState({lastname: e.target.value})}
-                                        onKeyPress={(e) => this.props.handleKeyPress(e)}
-                                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
-                                        underlineFocusStyle={styles.underlineStyle}
-                                    />
+                            <div className="col-sm-6">
+                                <TextField
+                                    floatingLabelText="First Name"
+                                    fullWidth
+                                    value={this.props.userInfo.firstname}
+                                    onChange={(e) => this.props.handleChangeState({firstname: e.target.value})}
+                                    onKeyPress={(e) => this.props.handleKeyPress(e)}
+                                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                    underlineFocusStyle={styles.underlineStyle}
+                                />
+                            </div>
+                            <div className="col-sm-6">
+                                <TextField
+                                    floatingLabelText="Last Name"
+                                    fullWidth
+                                    value={this.props.userInfo.lastname}
+                                    onChange={(e) => this.props.handleChangeState({lastname: e.target.value})}
+                                    onKeyPress={(e) => this.props.handleKeyPress(e)}
+                                    floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                                    underlineFocusStyle={styles.underlineStyle}
+                                />
                             </div>
                         </div>
                     </div>
