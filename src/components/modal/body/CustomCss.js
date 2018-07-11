@@ -66,7 +66,7 @@ const Styles = {
 
     button: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid #00F58A",
         borderRadius: "5px",
         padding: "7px 20px",
         marginTop: "20px",
@@ -93,8 +93,8 @@ const Styles = {
 
     buttonBack: {
         background: "#fff",
-        border: "1px solid rgb(0, 214, 121)",
-        color: "rgb(0, 214, 121)",
+        border: "1px solid #00F58A",
+        color: "#00F58A",
         borderRadius: "5px",
         padding: "7px 30px",
         marginBottom: "20px",
@@ -152,6 +152,18 @@ const Styles = {
 
     icon: {
         width: "40px"
+    },
+
+    underlineStyle: {
+        borderColor: "#66F9B8"
+    },
+
+    floatingLabelStyle: {
+        color: "#66F9B8"
+    },
+
+    floatingLabelFocusStyle: {
+        color: "rgba(0, 0, 0, 0.3)"
     }
 }
 

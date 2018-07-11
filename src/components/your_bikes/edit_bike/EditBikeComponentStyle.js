@@ -63,7 +63,7 @@ const Styles = {
 
     buttonTransfer: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid #00F58A",
         borderRadius: "5px",
         padding: "7px 20px",
         margin: "20px auto 0",
@@ -87,7 +87,7 @@ const Styles = {
 
     buttonSave: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid #00F58A",
         borderRadius: "5px",
         padding: "7px 30px",
         textTransform: "uppercase",
@@ -99,7 +99,7 @@ const Styles = {
     },
     buttonBack: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid #00F58A",
         borderRadius: "5px",
         padding: "7px 30px",
         textTransform: "uppercase",
@@ -287,7 +287,7 @@ const Styles = {
 
     buttonVerified: {
         background: "#fff",
-        border: "1px solid #00d679",
+        border: "1px solid #00F58A",
         borderRadius: "5px",
         padding: "7px 20px",
         textTransform: "uppercase",
