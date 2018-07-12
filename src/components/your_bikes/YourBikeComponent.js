@@ -5,7 +5,10 @@ import styles from "./YourBikesComponentStyle";
 import EditBikeComponent from "./edit_bike/EditBikeComponent";
 import Toggle from "material-ui/Toggle";
 import { initUserBikes } from "../../actions/bikeActions";
+import { Dialog } from "material-ui";
 import _ from "lodash";
+import TextField from "material-ui/TextField";
+
 class YourBikesComponent extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +23,8 @@ class YourBikesComponent extends Component {
             ],
             isEdit: false,
             rowEdit: {},
-            rowIndex: ""
+            rowIndex: "",
+            showPriceDialog: false,
         };
     }
     _renderViewAction = (data, value, key) => {
@@ -61,8 +65,27 @@ class YourBikesComponent extends Component {
                 trackSwitchedStyle={styles.trackSwitchedStyle}
                 trackStyle={styles.track}
                 thumbStyle={styles.thumb}
+                onToggle={this.handleToggle}
             />
         );
+    }
+
+    handleToggle = (event, value) => {
+        if(value) {
+            this.handleShowSetPriceDialog();
+        }
+    }
+
+    handleShowSetPriceDialog = () => {
+        this.setState({
+            showPriceDialog: true
+        })
+    }
+
+    handleHideSetPriceDialog = () => {
+        this.setState({
+            showPriceDialog: false
+        })
     }
 
     switchState = () => {
@@ -86,6 +109,33 @@ class YourBikesComponent extends Component {
         }
         return (
             <div style={styles.wrapp}>
+                <Dialog
+                    title="Enter price"
+                    modal={false}
+                    open={this.state.showPriceDialog}
+                    autoScrollBodyContent={true}
+                    repositionOnUpdate={true}
+                >
+                    <TextField
+                        floatingLabelText="Price"
+                        fullWidth={true}
+                        type="text"
+                    />
+                    <div className="row pull-right" style={{marginTop: "50px"}}>
+                        <button
+                            onClick={this.handleHideSetPriceDialog}
+                            style={{...styles.button, marginRight: "30px"}}
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            style={styles.button}
+                            onClick={ () => {
+                                this.handleHideSetPriceDialog();
+                            }}
+                        >Apply</button>
+                    </div>
+                </Dialog>
                 <div className="text-right">
                     <button style={styles.button} onClick={() => this.props.setType(MODAL_REGISTER_BIKE)}>New Bike</button>
                 </div>
