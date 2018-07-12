@@ -69,6 +69,11 @@ const bikesReducer = (state = initState, action) => {
             ...state,
             data: newState
         };
+    case BIKES.RESET_YOUR_BIKES:
+        return {
+            ...state,
+            data: [],
+        };
     case ACC_ACTION.LOG_OUT:
         return {
             data: [],

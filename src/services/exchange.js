@@ -160,6 +160,32 @@ export const createNewBike = async (address, profileAddress, ipfsHash ,ethereum,
         });
     });
 };
+export const collectBikeToken = async (address, ethereum, keyStore, password) => {
+    let isMetamask = _.isUndefined(password) || password === "";
+    let zeroAddress = "0x0000000000000000000000000000000000000000";
+    let types = ["address"];
+    let params = [address];
+    let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
+    let txRelay = ethereum.relayTxContract;
+    var privKey = "";
+    if (!isMetamask) {
+        try {
+            privKey = unlock(keyStore, password, true);
+        } catch (e) {
+            return {error: true, msg: "Wrong Passphrase!"};
+        }
+    }
+    return new Promise( (resolve) => {
+        signPayload(address, txRelay, zeroAddress, destinationAddress, "collectBikeToken", types, params,privKey, isMetamask, (res) => {
+            if (res === false) {
+                resolve(res);
+                return;
+            }
+            resolve(callApiReplayTx(res));
+        });
+    });
+};
+
 export const transferBike = async (address, addressFrom, addressTo, tokenID ,ethereum, keyStore, password) => {
     console.log(address, addressFrom, addressTo, tokenID); //eslint-disable-line
     let isMetamask = _.isUndefined(password) || password === "";

@@ -33,3 +33,26 @@ export const getEventLogs = (ethereum) => {
         localStorage.setItem("ownerHistories", ownerHistories);
     });
 };
+
+export const getContractLog = () => {
+    return new Promise((resolve) => {
+        let module = "account";
+        let action = "txlist";
+        let fromBlock = 0;
+        let toBlock = "latest";
+        let address = constants.TX_RELAY_ADDRESS;
+        let apikey = constants.BIKECOIN_APIKEY;
+        return fetch(`https://api-ropsten.etherscan.io/api?module=${module}&action=${action}&fromBlock=${fromBlock}&toBlock=${toBlock}&address=${address}&apikey=${apikey}`, {
+            method: "GET",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+        }).then((response) => {
+            return response.json();
+        }).then((res) => {
+            resolve(res);
+        });
+    });
+
+};

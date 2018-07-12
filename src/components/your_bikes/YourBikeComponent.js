@@ -15,19 +15,30 @@ class YourBikesComponent extends Component {
                 {title: "MANUFACTURER", value: "manufacturer"},
                 {title: "YEAR", value: "year"},
                 {title: "STATUS", value: "status"},
-                {title: "FOR RENT", value: "toggle", name: "forrent"},
-                {title: "ACTION", value: "action"}
+                {title: "FOR RENT", value: "forrent", renderer: this._renderForrent},
+                {title: "ACTION", value: "View", renderer: this._renderViewAction}
             ],
-            actions: [
-                {name: "View", handle: this.editRow}
-            ],
-            toggle: {
-                "forrent":  this._renderToggle
-            },
             isEdit: false,
             rowEdit: {},
             rowIndex: ""
         };
+    }
+    _renderViewAction = (data, value, key) => {
+        return (
+            <a key={key} onClick={() => this.editRow(data, key)}>{value}</a>
+        );
+    }
+    _renderForrent = (data, value) => {
+        return (
+            <Toggle
+                labelPosition="right"
+                defaultToggled={data[value]}
+                thumbSwitchedStyle={styles.thumbSwitchedStyle}
+                trackSwitchedStyle={styles.trackSwitchedStyle}
+                trackStyle={styles.track}
+                thumbStyle={styles.thumb}
+            />
+        );
     }
     componentDidMount() {
         const { accounts } = this.props;
@@ -81,9 +92,6 @@ class YourBikesComponent extends Component {
                 <Datatable
                     params={this.state.params}
                     body={_.orderBy(this.props.bikes.data, ["tokenId"], ["desc"])}
-                    editRow={this.editRow}
-                    actions={this.state.actions}
-                    toggle={this.state.toggle}
                 />
             </div>
         );
