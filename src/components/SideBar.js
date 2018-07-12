@@ -20,7 +20,7 @@ class SideBar extends Component{
                             <span>YOUR ACCOUNT</span>
                         </NavLink>
                         <NavLink to="/logs">
-                            <img src="images/XMLID_2.png" className="mgr-15" alt="Logs" />
+                            <img src="images/logs.png" className="mgr-15" alt="Logs" />
                             <span>LOGS</span>
                         </NavLink>
                     </ul>

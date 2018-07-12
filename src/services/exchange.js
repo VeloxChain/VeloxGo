@@ -163,8 +163,9 @@ export const createNewBike = async (address, profileAddress, ipfsHash ,ethereum,
 export const collectBikeToken = async (address, ethereum, keyStore, password) => {
     let isMetamask = _.isUndefined(password) || password === "";
     let zeroAddress = "0x0000000000000000000000000000000000000000";
-    let types = ["address"];
-    let params = [address];
+    let types = ["address", "address", "uint256"];
+    let amount = 20000000000000000000;
+    let params = [constants.TX_RELAY_ADDRESS,address,amount];
     let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
     let txRelay = ethereum.relayTxContract;
     var privKey = "";
