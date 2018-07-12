@@ -41,6 +41,7 @@ class YourBikesComponent extends Component {
                 trackSwitchedStyle={styles.trackSwitchedStyle}
                 trackStyle={styles.track}
                 thumbStyle={styles.thumb}
+                onToggle={this.handleToggle}
             />
         );
     }
@@ -56,19 +57,6 @@ class YourBikesComponent extends Component {
     //     // onToggle={(e, isInputChecked) => this.changeBikeInfo(isInputChecked, row, index)}
     // } row, index
 
-    _renderToggle = (value) => {
-        return (
-            <Toggle
-                labelPosition="right"
-                defaultToggled={value}
-                thumbSwitchedStyle={styles.thumbSwitchedStyle}
-                trackSwitchedStyle={styles.trackSwitchedStyle}
-                trackStyle={styles.track}
-                thumbStyle={styles.thumb}
-                onToggle={this.handleToggle}
-            />
-        );
-    }
 
     handleToggle = (event, value) => {
         if(value) {
