@@ -48,8 +48,6 @@ class MapHiringComponent extends Component {
             return value.location.lat == markerData.location.lat && value.location.long == markerData.location.long && value.tokenId != markerData.tokenId ; 
         });
 
-        console.log(this.state.listMarkerData);
-
         if(!_.isEmpty(findOverLapMarker)) {
 
             let newListMarkerData = this.state.listMarkerData;
@@ -59,7 +57,7 @@ class MapHiringComponent extends Component {
 
             this.setState({
                 listMarkerData: newListMarkerData
-            }, ()=>console.log('this.state.listMarkerData', this.state.listMarkerData));
+            });
 
             
 
@@ -84,7 +82,6 @@ class MapHiringComponent extends Component {
                     lng: this.props.mapDefaultLocation.long,
                     lat: this.props.mapDefaultLocation.lat
                 }}
-                onClick={() => this.props.handleSelectBike("")}
                 clickableIcons={false}
             >
                 <MarkerClusterer
@@ -102,12 +99,16 @@ class MapHiringComponent extends Component {
                                     position={{ lat: newPoint.lat, lng: newPoint.long }}
                                     onClick={() => this.props.handleSelectBike(bike.tokenId)}
                                     icon={MapBikeIcon}
+                                    
                                 >
                                     {bike.tokenId == this.props.bikeHashSelected && <InfoBox
-                                        onCloseClick={this.props.onToggleOpen}
-                                        options={{ closeBoxURL: "", enableEventPropagation: false }}
+                                        onZindexChanged={()=>alert(1)}
+                                        options={{closeBoxURL: "", enableEventPropagation: true}}
                                     >
-                                        <BikeHiringInfo externalData={bike}/>
+                                        <BikeHiringInfo
+                                            externalData={bike}
+                                            handleChangeRentBike={this.props.handleChangeRentBike}
+                                        />
                                     </InfoBox>
                                     }
                                 </Marker>
