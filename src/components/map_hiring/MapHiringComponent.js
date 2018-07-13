@@ -30,12 +30,13 @@ class MapHiringComponent extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.mapDefaultLocation != this.props.mapDefaultLocation) {
-            this.googleMap.panTo(
+            this.props.handleSelectBike("");
+            setTimeout(()=>{this.googleMap.panTo(
                 {
                     lng: nextProps.mapDefaultLocation.long,
                     lat: nextProps.mapDefaultLocation.lat
                 }
-            );
+            )}, 100);
         }
     }
 
