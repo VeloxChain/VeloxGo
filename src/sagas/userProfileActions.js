@@ -50,29 +50,8 @@ function* uploadProfileToIPFS(action) {
 function* finishUploadNewProfileToIPFS(action) {
     const { payload } = action;
     let tx = yield call(createNewUserProfile, payload.userInfo.accountAddress, payload.hashData, payload.ethereum, payload.keyStore, payload.passphrase);
-    if  (tx.error === true) {
-        toast.error(tx.msg);
-        yield put({type: "APP_LOADING_END"});
-        return;
-    }
-    if (tx === false || _.isUndefined(tx.tx)) {
-        toast.error("Transaction failed!.");
-        yield put({type: "APP_LOADING_END"});
-        return;
-    }
-
-    yield put({type: "APP_LOADING_START", payload: tx.tx});
-    var res = null;
-    while (res === null) {
-        yield delay(2000);
-        yield call(payload.ethereum.rpc.eth.getTransactionReceipt, tx.tx, (error, txData) => {
-            res = txData;
-        });
-        console.log("syncing..."); //eslint-disable-line
-    }
-    if (res.status === "0x0") {
-        yield put({type: "APP_LOADING_END"});
-        toast.error("Transaction failed!.");
+    let txStatus = yield call(getTxStatus, tx, payload.ethereum);
+    if (txStatus === false) {
         return;
     }
     yield put({
@@ -97,28 +76,8 @@ function* finishUploadModifiedProfileToIPFS(action) {
     const { payload } = action;
     let userProfileAddress = yield call(payload.ethereum.networkAdress.getUserProfile, payload.userInfo.accountAddress);
     let tx = yield call(updateUserProfile, payload.userInfo.accountAddress, userProfileAddress, payload.hashData, payload.ethereum, payload.keyStore, payload.passphrase);
-    if  (tx.error === true) {
-        toast.error(tx.msg);
-        yield put({type: "APP_LOADING_END"});
-        return;
-    }
-    if (tx === false || _.isUndefined(tx.tx)) {
-        toast.error("Transaction failed!.");
-        yield put({type: "APP_LOADING_END"});
-        return;
-    }
-    yield put({type: "APP_LOADING_START", payload: tx.tx});
-    var res = null;
-    while (res === null) {
-        yield delay(2000);
-        yield call(payload.ethereum.rpc.eth.getTransactionReceipt, tx.tx, (error, txData) => {
-            res = txData;
-        });
-        console.log("syncing..."); //eslint-disable-line
-    }
-    if (res.status === "0x0") {
-        yield put({type: "APP_LOADING_END"});
-        toast.error("Transaction failed!.");
+    let txStatus = yield call(getTxStatus, tx, payload.ethereum);
+    if (txStatus === false) {
         return;
     }
     yield put({
@@ -153,6 +112,34 @@ function* retrieveUserProfile(action) {
         payload: {userProfile: retreiveUserProfile,hash: ipfsHash}
     });
     yield put({type: "APP_LOADING_END"});
+}
+
+function* getTxStatus(tx, ethereum) {
+    if  (tx.error === true) {
+        toast.error(tx.msg);
+        yield put({type: "APP_LOADING_END"});
+        return false;
+    }
+    if (tx === false || _.isUndefined(tx.tx)) {
+        toast.error("Transaction failed!.");
+        yield put({type: "APP_LOADING_END"});
+        return false;
+    }
+    yield put({type: "APP_LOADING_START", payload: tx.tx});
+    var res = null;
+    while (res === null) {
+        yield delay(2000);
+        yield call(ethereum.rpc.eth.getTransactionReceipt, tx.tx, (error, txData) => {
+            res = txData;
+        });
+        console.log("syncing..."); //eslint-disable-line
+    }
+    if (res.status === "0x0") {
+        yield put({type: "APP_LOADING_END"});
+        toast.error("Transaction failed!.");
+        return false;
+    }
+    return true;
 }
 
 export function* watchUserProfile() {

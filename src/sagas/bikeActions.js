@@ -1,6 +1,6 @@
 import { put, call, takeEvery, takeLatest, fork, select } from "redux-saga/effects";
 import BIKES from "../constants/bikes";
-import { createNewBike, transferBike } from "../services/exchange";
+import { createNewBike, transferBike, rentBike, returnBike, adjustBikePrice } from "../services/exchange";
 import { toast } from "react-toastify";
 import SERVICE_IPFS from "../services/ipfs";
 import _ from "lodash";
@@ -51,30 +51,8 @@ function* finishUploadNewBikeToIPFS(action) {
     const { bikeInfo, hashData, callBack, ethereum, keyStore, passphrase } = action.payload;
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, bikeInfo.originalOwner);
     let tx = yield call(createNewBike, bikeInfo.originalOwner, userProfileAddress, hashData, ethereum, keyStore, passphrase);
-    if  (tx.error === true) {
-        toast.error(tx.msg);
-        yield put({type: "APP_LOADING_END"});
-        return;
-    }
-    if (tx === false || _.isUndefined(tx.tx)) {
-        toast.error("Transaction failed!.");
-        yield put({type: "APP_LOADING_END"});
-        return;
-    }
-    yield put({type: "APP_LOADING_START", payload: tx.tx});
-    var res = null;
-    while (res === null) {
-        yield delay(2000);
-        yield call(ethereum.rpc.eth.getTransactionReceipt, tx.tx, (error, txData) => {
-            res = txData;
-        });
-        console.log("syncing..."); //eslint-disable-line
-    }
-    if (res.status === "0x0") {
-        yield put({type: "APP_LOADING_END"});
-        toast.error("Transaction failed!.");
-        return;
-    }
+    let txStatus = yield call(getTxStatus, tx, ethereum);
+    if (txStatus === false) return;
     const bikes = yield select(bikesState);
     var latestToken = bikes.data.length;
     while (latestToken === bikes.data.length) {
@@ -108,41 +86,6 @@ function* uploadModifiedBikeToIPFS(action) {
         }
     });
 }
-// function* finishUploadModifiedBikeToIPFS(action) {
-//     const { bikeInfo, hashData, index, ethereum, keyStore, passphrase } = action.payload;
-//     let tx = yield call(updateBike, bikeInfo.owner, hashData, ethereum, keyStore, passphrase);
-//     if  (tx.error === true) {
-//         toast.error(tx.msg);
-//         yield put({type: "APP_LOADING_END"});
-//         return;
-//     }
-//     if (tx === false || _.isUndefined(tx.tx)) {
-//         toast.error("Transaction failed!.");
-//         yield put({type: "APP_LOADING_END"});
-//         return;
-//     }
-//     yield put({type: "APP_LOADING_START", payload: tx.tx});
-//     var res = null;
-//     while (res === null) {
-//         yield delay(2000);
-//         yield call(ethereum.rpc.eth.getTransactionReceipt, tx.tx, (error, txData) => {
-//             res = txData;
-//         });
-//         console.log("syncing..."); //eslint-disable-line
-//     }
-//     if (res.status === "0x0") {
-//         yield put({type: "APP_LOADING_END"});
-//         toast.error("Transaction failed!.");
-//         return;
-//     }
-//
-//     yield put({
-//         type: BIKES.UPDATE,
-//         payload: {bikeInfo: bikeInfo, index: index, hashData: hashData}
-//     });
-//     yield put({type: "APP_LOADING_END"});
-//     toast.success("Saved!");
-// }
 
 function* loadUserBikeFromNetWork(action){
     const { address, ethereum } = action.payload;
@@ -213,15 +156,71 @@ function* transferBikeInNetwork(action) {
     const { address, addressTo, tokenId, ethereum, keyStore, passphrase, callBack } = action.payload;
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
     let tx = yield call(transferBike, address, userProfileAddress, addressTo, tokenId, ethereum, keyStore, passphrase);
+    let txStatus = yield call(getTxStatus, tx, ethereum);
+    if (txStatus === false) return;
+
+    yield put({
+        type: BIKES.FINISH_TRANSFER,
+        payload: tokenId
+    });
+    yield call(callBack);
+    yield put({type: "APP_LOADING_END"});
+    toast.success("Success!");
+}
+
+function* rentBikeAction(action) {
+    yield put({type: "APP_LOADING_START"});
+    const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
+    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
+    let tx = yield call(rentBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
+    let txStatus = yield call(getTxStatus, tx, ethereum);
+    if (txStatus === false) return;
+    yield put({
+        type: BIKES.FINISH_RENT_BIKE,
+        payload: tokenId
+    });
+    yield put({type: "APP_LOADING_END"});
+    toast.success("Success!");
+}
+function* returnBikeAction(action) {
+    yield put({type: "APP_LOADING_START"});
+    const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
+    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
+    let tx = yield call(returnBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
+    let txStatus = yield call(getTxStatus, tx, ethereum);
+    if (txStatus === false) return;
+    yield put({
+        type: BIKES.FINISH_RENT_BIKE,
+        payload: tokenId
+    });
+    yield put({type: "APP_LOADING_END"});
+    toast.success("Success!");
+}
+function* adjustBikePriceAction(action) {
+    yield put({type: "APP_LOADING_START"});
+    const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
+    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
+    let tx = yield call(adjustBikePrice, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
+    let txStatus = yield call(getTxStatus, tx, ethereum);
+    if (txStatus === false) return;
+    yield put({
+        type: BIKES.FINISH_RENT_BIKE,
+        payload: tokenId
+    });
+    yield put({type: "APP_LOADING_END"});
+    toast.success("Success!");
+}
+
+function* getTxStatus(tx, ethereum) {
     if  (tx.error === true) {
         toast.error(tx.msg);
         yield put({type: "APP_LOADING_END"});
-        return;
+        return false;
     }
     if (tx === false || _.isUndefined(tx.tx)) {
         toast.error("Transaction failed!.");
         yield put({type: "APP_LOADING_END"});
-        return;
+        return false;
     }
     yield put({type: "APP_LOADING_START", payload: tx.tx});
     var res = null;
@@ -235,17 +234,11 @@ function* transferBikeInNetwork(action) {
     if (res.status === "0x0") {
         yield put({type: "APP_LOADING_END"});
         toast.error("Transaction failed!.");
-        return;
+        return false;
     }
-
-    yield put({
-        type: BIKES.FINISH_TRANSFER,
-        payload: tokenId
-    });
-    yield call(callBack);
-    yield put({type: "APP_LOADING_END"});
-    toast.success("Success!");
+    return true;
 }
+
 export function* watchBikes() {
     yield takeEvery(BIKES.UPLOAD_TO_IPFS, uploadNewBikeToIPFS);
     yield takeEvery(BIKES.FINISH_UPLOAD_TO_IPFS, finishUploadNewBikeToIPFS);
@@ -253,5 +246,44 @@ export function* watchBikes() {
     // yield takeEvery(BIKES.FINISH_UPLOAD_MODIFIED_TO_IPFS, finishUploadModifiedBikeToIPFS);
     yield takeLatest(BIKES.USER_INIT, loadUserBikeFromNetWork);
     yield takeLatest(BIKES.NETWORK_INIT, loadNetworkBikeFromNetWork);
-    yield takeEvery(BIKES.TRANSFER, transferBikeInNetwork);
+    yield takeLatest(BIKES.TRANSFER, transferBikeInNetwork);
+    yield takeEvery(BIKES.RENT_BIKE, rentBikeAction);
+    yield takeEvery(BIKES.RETURN_BIKE, returnBikeAction);
+    yield takeEvery(BIKES.ADJUST_BIKE_PRICE, adjustBikePriceAction);
 }
+
+// function* finishUploadModifiedBikeToIPFS(action) {
+//     const { bikeInfo, hashData, index, ethereum, keyStore, passphrase } = action.payload;
+//     let tx = yield call(updateBike, bikeInfo.owner, hashData, ethereum, keyStore, passphrase);
+//     if  (tx.error === true) {
+//         toast.error(tx.msg);
+//         yield put({type: "APP_LOADING_END"});
+//         return;
+//     }
+//     if (tx === false || _.isUndefined(tx.tx)) {
+//         toast.error("Transaction failed!.");
+//         yield put({type: "APP_LOADING_END"});
+//         return;
+//     }
+//     yield put({type: "APP_LOADING_START", payload: tx.tx});
+//     var res = null;
+//     while (res === null) {
+//         yield delay(2000);
+//         yield call(ethereum.rpc.eth.getTransactionReceipt, tx.tx, (error, txData) => {
+//             res = txData;
+//         });
+//         console.log("syncing..."); //eslint-disable-line
+//     }
+//     if (res.status === "0x0") {
+//         yield put({type: "APP_LOADING_END"});
+//         toast.error("Transaction failed!.");
+//         return;
+//     }
+//
+//     yield put({
+//         type: BIKES.UPDATE,
+//         payload: {bikeInfo: bikeInfo, index: index, hashData: hashData}
+//     });
+//     yield put({type: "APP_LOADING_END"});
+//     toast.success("Saved!");
+// }
