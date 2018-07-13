@@ -220,7 +220,7 @@ class RegisterBike extends Component {
 
                 <div style={contentStyle}>
                     <div>{this.getStepContent(stepIndex)}</div>
-                    <div className="row" style={{marginTop: 12}}>
+                    <div className="row" style={styles.actionRegister}>
                         <div className="col-sm-6">
                             <button
                                 disabled={stepIndex === 0}
