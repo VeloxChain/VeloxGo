@@ -22,7 +22,7 @@ class BikeSpecifications extends React.Component {
     };
 
     _renderComponents = () => {
-        if (this.props.bikeInfo.model === "1") {
+        if (this.props.bikeInfo.model === "Model 1") {
             return <ComponentsModel1 />;
         }
 
@@ -30,7 +30,7 @@ class BikeSpecifications extends React.Component {
     }
 
     _renderGeometry = () => {
-        if (this.props.bikeInfo.model === "1") {
+        if (this.props.bikeInfo.model === "Model 1") {
             return <GeometryModel1 />;
         }
 

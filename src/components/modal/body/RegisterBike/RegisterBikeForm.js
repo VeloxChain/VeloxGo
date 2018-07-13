@@ -20,7 +20,7 @@ class RegisterBike extends Component {
                 manufacturer: "Volata Cycles",
                 owner: this.props.accounts.accounts.address || this.props.accounts.address,
                 snNumber: "",
-                model: "1"
+                model: "Model 1"
             },
             stepTwo: {
                 location: {

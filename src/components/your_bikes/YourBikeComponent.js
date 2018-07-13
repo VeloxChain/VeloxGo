@@ -16,6 +16,7 @@ class YourBikesComponent extends Component {
             params : [
                 {title: "BIKE(jSerial number)", value: "snNumber"},
                 {title: "MANUFACTURER", value: "manufacturer"},
+                {title: "MODEL", value: "model"},
                 {title: "YEAR", value: "year"},
                 {title: "STATUS", value: "status"},
                 {title: "FOR RENT", value: "forrent", renderer: this._renderForrent},
