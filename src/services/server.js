@@ -16,4 +16,7 @@ export default class ServerService {
     callApiReplayTx(txData){
         return this.request("/api/relayTx",txData);
     }
+    collectToken(payload){
+        return this.request("/api/collectToken",payload);
+    }
 }

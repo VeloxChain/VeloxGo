@@ -27,17 +27,29 @@ function* updateAccount(action) {
 
 function* collectToken(action) {
     yield put({type: "APP_LOADING_START"});
-    const { address, ethereum, keyStore, passphrase, callBack } = action.payload;
-    let tx = yield call(collectBikeToken, address, ethereum, keyStore, passphrase);
+    const { address, ethereum, callBack } = action.payload;
+    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
+    let tx = yield call(collectBikeToken, userProfileAddress);
+    let txStatus = yield call(getTxStatus, tx, ethereum);
+    if (txStatus === false) return;
+    yield put({
+        type: ACC_ACTION.FINISH_COLLECT_TOKEN,
+    });
+    yield call(callBack, userProfileAddress);
+    yield put({type: "APP_LOADING_END"});
+    toast.success("Success!");
+}
+
+function* getTxStatus(tx, ethereum) {
     if  (tx.error === true) {
         toast.error(tx.msg);
         yield put({type: "APP_LOADING_END"});
-        return;
+        return false;
     }
     if (tx === false || _.isUndefined(tx.tx)) {
         toast.error("Transaction failed!.");
         yield put({type: "APP_LOADING_END"});
-        return;
+        return false;
     }
     yield put({type: "APP_LOADING_START", payload: tx.tx});
     var res = null;
@@ -51,15 +63,9 @@ function* collectToken(action) {
     if (res.status === "0x0") {
         yield put({type: "APP_LOADING_END"});
         toast.error("Transaction failed!.");
-        return;
+        return false;
     }
-
-    yield put({
-        type: ACC_ACTION.FINISH_COLLECT_TOKEN,
-    });
-    yield call(callBack, address);
-    yield put({type: "APP_LOADING_END"});
-    toast.success("Success!");
+    return true;
 }
 
 export function* watchAccount() {
