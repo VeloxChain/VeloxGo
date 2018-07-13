@@ -51,7 +51,7 @@ class BikeSpecifications extends React.Component {
                 </Tab>
                 <Tab label="geometry" value="2" style={styles.tab}>
                     <div className="text-center" style={{ marginTop: "30px" }}>
-                        <img src="images/geometries-black-1c.jpg" style={{ width: "500px" }} />
+                        <img src="images/geometries-black-1c.jpg" style={styles.geometries} alt="BikeCoin" />
                     </div>
                     {this._renderGeometry()}
                 </Tab>

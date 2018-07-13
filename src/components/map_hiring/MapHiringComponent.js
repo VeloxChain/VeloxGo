@@ -102,8 +102,8 @@ class MapHiringComponent extends Component {
                                     
                                 >
                                     {bike.tokenId == this.props.bikeHashSelected && <InfoBox
-                                        onZindexChanged={()=>alert(1)}
-                                        options={{closeBoxURL: "", enableEventPropagation: true}}
+                                        onCloseClick={()=>this.props.handleSelectBike("")}
+                                        options={{closeBoxURL: "images/close_white.png", enableEventPropagation: true}}
                                     >
                                         <BikeHiringInfo
                                             externalData={bike}
