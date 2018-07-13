@@ -5,7 +5,6 @@ import { Dialog } from "material-ui";
 import _ from "lodash";
 import ImageCroperProfile from "../image_croper/ImageCroperProfile";
 import { collectToken } from "../../actions/accountActions";
-import { MODAL_CONFIRM_TRANSACTION } from "../modal/constants";
 class YourAccountInfo extends Component {
     constructor(props) {
         super(props);
@@ -86,15 +85,9 @@ class YourAccountInfo extends Component {
         let data = {
             address: userProfile.data.accountAddress,
             ethereum: this.props.ethereum,
-            keyStore: this.props.accounts.accounts.key,
             callBack: this.props.getBKCBalance,
-            passphrase: ""
         };
-        if (this.props.metamask) {
-            this.props.dispatch(collectToken(data));
-        } else {
-            this.props.setType(MODAL_CONFIRM_TRANSACTION, {data: data, handle: collectToken});
-        }
+        this.props.dispatch(collectToken(data));
     }
 
     render() {

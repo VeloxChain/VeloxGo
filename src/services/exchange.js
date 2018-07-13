@@ -160,29 +160,19 @@ export const createNewBike = async (address, profileAddress, ipfsHash ,ethereum,
         });
     });
 };
-export const collectBikeToken = async (address, ethereum, keyStore, password) => {
-    let isMetamask = _.isUndefined(password) || password === "";
-    let zeroAddress = "0x0000000000000000000000000000000000000000";
-    let types = ["address", "address", "uint256"];
-    let amount = 20000000000000000000;
-    let params = [constants.TX_RELAY_ADDRESS,address,amount];
-    let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
-    let txRelay = ethereum.relayTxContract;
-    var privKey = "";
-    if (!isMetamask) {
-        try {
-            privKey = unlock(keyStore, password, true);
-        } catch (e) {
-            return {error: true, msg: "Wrong Passphrase!"};
-        }
-    }
+export const collectBikeToken = async (address) => {
     return new Promise( (resolve) => {
-        signPayload(address, txRelay, zeroAddress, destinationAddress, "collectBikeToken", types, params,privKey, isMetamask, (res) => {
-            if (res === false) {
-                resolve(res);
-                return;
-            }
-            resolve(callApiReplayTx(res));
+        fetch("/api/collectToken", {
+            method: "POST",
+            body: JSON.stringify({address: address}),
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+        }).then((response) => {
+            return response.json();
+        }).then((res) => {
+            resolve(res);
         });
     });
 };
