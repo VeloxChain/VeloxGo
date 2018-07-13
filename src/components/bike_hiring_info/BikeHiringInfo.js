@@ -10,6 +10,10 @@ class BikeHiringInfo extends Component {
             loaded: false
         };
     }
+    handleChangeRentBike = () => {
+        console.log(1111111111);
+        this.props.handleChangeRentBike(this.props.externalData);
+    }
 
     render() {
         return (
@@ -38,7 +42,7 @@ class BikeHiringInfo extends Component {
                             <span style={styles.number}>20</span>
                             <img src="images/Logo.png" style={styles.icon} alt="BikeCoin" />
                         </div>
-                        <button style={styles.button}>Book</button>
+                        <button style={styles.button} onClick={()=>alert(1)}>Book</button>
                     </div>
                 </div>
             </div>

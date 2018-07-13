@@ -5,6 +5,7 @@ import BikeSearchComponent from "./BikeSearchComponent";
 import _ from "lodash";
 import MapHiringComponent from "../map_hiring/MapHiringComponent";
 import { initNetworkBikes } from "../../actions/bikeActions";
+import RentBikeComponent from "./rent_bike/RentBikeComponent";
 class HiringRequestComponent extends Component {
     constructor(props) {
         super(props);
@@ -15,13 +16,15 @@ class HiringRequestComponent extends Component {
                 index: "none",
                 long: 103.819836,
                 lat: 1.352083
-            }
+            },
+            isRentBike: false,
+            selectedBike: ""
         };
     }
 
     componentDidMount() {
         setTimeout(()=> {
-            this.props.dispatch(initNetworkBikes({ethereum: this.props.ethereum }))
+            this.props.dispatch(initNetworkBikes({ethereum: this.props.ethereum }));
         }, 1)
     }
 
@@ -32,6 +35,9 @@ class HiringRequestComponent extends Component {
     }
 
     handleSelectBike = (bikeHashSelected) => {
+        if(bikeHashSelected == this.state.bikeHashSelected) {
+            bikeHashSelected = "";
+        }
         this.setState({
             bikeHashSelected: bikeHashSelected
         });
@@ -78,7 +84,7 @@ class HiringRequestComponent extends Component {
         for(let i= 0; i< listBikeFilter.length; i++) {
             let test = [];
             for(let j= 0; j< listBikeFilter[i].length; j++) {
-                test = [...test, (<Bike bike={listBikeFilter[i][j]} key={i+j} {...this.props} />)];
+                test = [...test, (<Bike bike={listBikeFilter[i][j]} handleChangeRentBike={this.handleChangeRentBike} key={i+j} {...this.props} />)];
             }
 
             renderBike = [
@@ -116,6 +122,7 @@ class HiringRequestComponent extends Component {
                     loadingElement={<div style={{ height: "100%" }} />}
                     containerElement={<div style={{ height: "calc(100vh - 195px)" }} />}
                     mapElement={<div style={{ height: "100%" }} />}
+                    handleChangeRentBike={this.handleChangeRentBike}
                 />
             </div>
         );
@@ -128,9 +135,13 @@ class HiringRequestComponent extends Component {
         return this._renderBike();
     }
 
-    render() {
+    _renderRentBike = () => {
+        if (this.state.isRentBike) {
+            return <RentBikeComponent handleChangeRentBike={this.handleChangeRentBike} bikeInfo={this.state.selectedBike}  />
+        }
+
         return (
-            <div style={styles.wrapp}>
+            <div>
                 <BikeSearchComponent
                     onHandleSwitchView={this.onHandleSwitchView}
                     mapDefaultLocation={this.state.mapDefaultLocation}
@@ -139,6 +150,21 @@ class HiringRequestComponent extends Component {
                 />
 
                 {this._renderContent()}
+            </div>
+        );
+    }
+
+    handleChangeRentBike = (bike) => {
+        this.setState({
+            isRentBike: !this.state.isRentBike,
+            selectedBike: bike
+        });
+    }
+
+    render() {
+        return (
+            <div style={styles.wrapp}>
+                {this._renderRentBike()}
             </div>
         );
     }

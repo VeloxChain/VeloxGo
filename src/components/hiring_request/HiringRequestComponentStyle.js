@@ -16,8 +16,8 @@ const Styles = {
     },
 
     button: {
-        background: "#00d679",
-        border: "1px solid #00d679",
+        background: "#00F58A",
+        border: "1px solid #00F58A",
         borderRadius: "2px",
         padding: "3px 10px",
         color: "#fff",

@@ -13,6 +13,10 @@ class BikeComponent extends Component {
         };
     }
 
+    handleChangeRentBike = () => {
+        this.props.handleChangeRentBike(this.props.bike);
+    }
+
     render() {
         return (
             <div className="col-sm-3">
@@ -42,7 +46,7 @@ class BikeComponent extends Component {
                             <img src="images/Logo.png" style={styles.logo} alt="BikeCoin" />
                         </div>
                         <div style={styles.dvdButton}>
-                            <button style={styles.button}>book</button>
+                            <button style={styles.button} onClick={this.handleChangeRentBike}>book</button>
                         </div>
                     </div>
                 </div>
