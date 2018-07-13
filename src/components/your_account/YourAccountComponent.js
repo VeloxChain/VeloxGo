@@ -84,16 +84,23 @@ class YourAccountComponent extends Component {
     _renderAddress = async () => {
         let accountAddress = this.props.getAccountAddress();
         this.props.ethereum.getBalance(accountAddress, this._renderETHBalance);
-        this.props.ethereum.getBikeCoinBalance(accountAddress, this._renderBKCBalance);
+        this.getBKCBalance(accountAddress);
         let userProfileAddress = await this.props.getUserProfileAddress();
         this.setState({userProfileAddress: userProfileAddress, accountAddress: accountAddress});
+    }
+    getBKCBalance = (accountAddress) => {
+        this.props.ethereum.getBikeCoinBalance(accountAddress, this._renderBKCBalance);
     }
     render() {
         return (
             <div style={styles.wrapp}>
                 <div className="row">
                     <div className="col-sm-3">
-                        <YourAccountInfo {...this.props} info={this.state.info} onChangeAvatar={this.onChangeAvatar} />
+                        <YourAccountInfo
+                            {...this.props}
+                            info={this.state.info}
+                            onChangeAvatar={this.onChangeAvatar}
+                            getBKCBalance={this.getBKCBalance}/>
                     </div>
                     <div className="col-sm-9">
                         <YourAccountForm

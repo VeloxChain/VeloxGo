@@ -48,7 +48,7 @@ class EditBikeForm extends Component {
                 <p style={styles.title}>Bike serial</p>
                 <h4 style={styles.text}>{this.props.bikeInfo.snNumber}</h4>
 
-                <p style={styles.title}>ERC721 TOKEN</p>
+                <p style={styles.title}>ERC721 Token</p>
                 <h4 style={styles.text}>
                     <a
                         href={"https://ropsten.etherscan.io/token/" + constants.BIKECOIN_OWNER_SHIP_ADDRESS}
@@ -59,7 +59,7 @@ class EditBikeForm extends Component {
                     </a>
                 </h4>
 
-                <p style={styles.title}>BIKE TOKEN</p>
+                <p style={styles.title}>Bike Token</p>
                 <h4 style={styles.text}>{this.props.bikeInfo.tokenId}</h4>
             </div>
         );
