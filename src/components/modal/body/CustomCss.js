@@ -208,6 +208,10 @@ const Styles = {
 
     selectedMenuItemStyle: {
         color: "#00F58A"
+    },
+
+    actionRegister: {
+        margin: "12px -6px 0px"
     }
 }
 

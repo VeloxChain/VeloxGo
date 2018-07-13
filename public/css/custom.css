@@ -390,6 +390,8 @@ a {
 .title-modal {
     font-size: 20px;
     padding-left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 .mh250 {
     min-height: 250px;
