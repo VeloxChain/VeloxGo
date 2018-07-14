@@ -7,7 +7,7 @@ const bikeToken = require("./bikeToken.json");
 const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/faF0xSQUt0ezsDFYglOe"));
 
 let TXRELAY = web3.eth.contract(TXRELAYABI);
-let TXRELAYAddress = "0x6b1a60310951930b932406599a68ab87d3e60f43";
+let TXRELAYAddress = "0x37eff432ad7710c4b0ab7653db70824c791ac3aa";
 let BIKE_TOKEN_CONTRACT = web3.eth.contract(bikeToken).at("0x4c9aa6ca9cbc1fa4b3b5c68ea32c247d7b060b32");
 const hdWallet = EthHdWallet.fromMnemonic("frost mimic deer annual build develop discover split rose gather ahead gloom");
 hdWallet.generateAddresses(1);
