@@ -1,26 +1,60 @@
 import React, { Component } from "react";
 import styles from "./RentBikeComponentStyle";
-
+import moment from "moment";
 class RentBikeComponent extends Component {
 
-    handleChangeRentBike = () => {
-        this.props.handleChangeRentBike();
+    constructor(props) {
+        super(props);
+        this.state = this.props.bikeInfo;
+        this.state.totalTimeUsed = "00:00:00";
+    }
+
+    finishRentBike = () => {
+        this.props.finishRentBike();
+    }
+
+    calculateTotalTimeUsed = (duration) => {
+        let seconds = duration.seconds;
+        if (seconds < 10) {
+            seconds = "0" + seconds.toString();
+        }
+        let hours = duration.hours + duration.days*24;
+        if (hours < 10) {
+            hours = "0" + hours.toString();
+        }
+        let minutes = duration.minutes;
+        if (minutes < 10) {
+            minutes = minutes.toString();
+            minutes = "0" + minutes;
+        }
+        return hours + ":" + minutes + ":" + seconds;
+    }
+
+    _renderRentalPeriod = () => {
+        const { bikeInfo } = this.props;
+        let startTime = moment(bikeInfo.startTime*1000);
+        let now = moment();
+        let duration = moment.duration(now.diff(startTime))._data;
+        let totalTimeUsed = this.calculateTotalTimeUsed(duration);
+        this.setState({
+            totalTimeUsed: totalTimeUsed
+        });
+    }
+    componentDidMount() {
+        this.interval = setInterval(() => this._renderRentalPeriod(), 1000);
+    }
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     render() {
         return (
             <div style={styles.wrapp}>
                 <div className="row">
-                    <div className="col-sm-12">
-                        <button style={styles.buttonBack} onClick={this.handleChangeRentBike}>
-                            <i className="fa fa-chevron-left" style={styles.iconBack} />
-                            <span> GO BACK</span>
-                        </button>
-                    </div>
                     <div className="col-sm-4">
                         <div style={styles.wrappLeft}>
                             <img
-                                src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.avatar}
+                                src={"https://gateway.ipfs.io/ipfs/" + this.state.bikeInfo.avatar}
                                 style={styles.bikeShow}
                                 alt="Bikecoin"
                             />
@@ -28,43 +62,42 @@ class RentBikeComponent extends Component {
                     </div>
                     <div className="col-sm-8">
                         <p style={styles.title}>Manufacturer</p>
-                        <h5 style={styles.text}>{this.props.bikeInfo.manufacturer}</h5>
+                        <h5 style={styles.text}>{this.state.bikeInfo.manufacturer}</h5>
 
                         <p style={styles.title}>Bike serial</p>
-                        <h5 style={styles.text}>{this.props.bikeInfo.snNumber}</h5>
+                        <h5 style={styles.text}>{this.state.bikeInfo.snNumber}</h5>
 
                         <div style={styles.dvd} />
 
                         <p style={styles.title}>Address</p>
-                        <h5 style={styles.text}>{this.props.bikeInfo.location.name}</h5>
+                        <h5 style={styles.text}>{this.state.bikeInfo.location.name}</h5>
 
                         <p style={styles.title}>Price</p>
                         <h5 style={styles.text}>
                             <span style={styles.numberPrice}>200</span>
                             <img src="images/Logo.png" style={styles.logo} alt="BikeCoin" />
                         </h5>
-                        
+
                         <div style={styles.dvd} />
 
                         <div style={styles.flex}>
                             <div style={styles.block}>
-                                <p style={styles.title}>Time Start</p>
+                                <p style={styles.title}>Start Time</p>
                                 <div style={styles.wrapper}>
-                                    <span style={styles.timeStart}>10:10:00</span>
-                                    <span style={styles.am}>AM</span>
+                                    <span style={styles.timeStart}>{moment(this.props.bikeInfo.startTime*1000).format("LLL")}</span>
                                 </div>
                             </div>
-                            
+
                             <div style={styles.block}>
-                                <p style={styles.title}>Timer</p>
+                                <p style={styles.title}>Rental period</p>
                                 <div style={styles.wrapper}>
-                                    <span style={styles.timer}>10:10:00</span>
+                                    <span style={styles.timer}>{this.state.totalTimeUsed    }</span>
                                 </div>
                             </div>
                         </div>
 
                         <div>
-                            <button style={styles.button} onClick={this.handleChangeRentBike}>Finish</button>
+                            <button style={styles.button} onClick={this.finishRentBike}>Finish</button>
                         </div>
                     </div>
                 </div>

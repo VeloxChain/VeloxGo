@@ -3,7 +3,13 @@ import ACC_ACTION from "../constants/accActions";
 const initState = {
     data: [],
     network: [],
-    loaded: []
+    loaded: [],
+    rendingBike: {
+        isRent: false,
+        bikeInfo: null,
+        startTime: null,
+    },
+    rented: []
 };
 
 const bikesReducer = (state = initState, action) => {
@@ -78,7 +84,30 @@ const bikesReducer = (state = initState, action) => {
         return {
             data: [],
             network: [],
-            loaded: []
+            loaded: [],
+            rendingBike: {
+                isRent: false,
+                bikeInfo: null,
+                startTime: null,
+            }
+        };
+    case BIKES.FINISH_RENT_BIKE:
+        return {
+            ...state,
+            rendingBike: {
+                isRent: true,
+                bikeInfo: action.payload.bikeInfo,
+                startTime: action.payload.startTime,
+            }
+        };
+    case BIKES.FINISH_RETURN_BIKE:
+        return {
+            ...state,
+            rendingBike: {
+                isRent: false,
+                bikeInfo: null,
+                startTime: null,
+            }
         };
     default:
         return state;

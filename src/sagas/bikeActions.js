@@ -4,6 +4,7 @@ import { createNewBike, transferBike, rentBike, returnBike, adjustBikePrice } fr
 import { toast } from "react-toastify";
 import SERVICE_IPFS from "../services/ipfs";
 import _ from "lodash";
+import moment from "moment";
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 export const bikesState = (state) => state.bikes;
 function* uploadNewBikeToIPFS(action) {
@@ -169,29 +170,34 @@ function* transferBikeInNetwork(action) {
 }
 
 function* rentBikeAction(action) {
-    yield put({type: "APP_LOADING_START"});
-    const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
-    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
-    let tx = yield call(rentBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
-    let txStatus = yield call(getTxStatus, tx, ethereum);
-    if (txStatus === false) return;
+    yield put({type: "APP_LOADING_START", payload: "Booking bike......"});
+    yield delay(10000);
+    // const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
+    const { bikeInfo } = action.payload;
+    // let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
+    // let tx = yield call(rentBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
+    // let txStatus = yield call(getTxStatus, tx, ethereum);
+    // if (txStatus === false) return;
     yield put({
         type: BIKES.FINISH_RENT_BIKE,
-        payload: tokenId
+        payload: {
+            bikeInfo: bikeInfo,
+            startTime: moment().unix()
+        }
     });
     yield put({type: "APP_LOADING_END"});
     toast.success("Success!");
 }
-function* returnBikeAction(action) {
+function* returnBikeAction() {
     yield put({type: "APP_LOADING_START"});
-    const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
-    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
-    let tx = yield call(returnBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
-    let txStatus = yield call(getTxStatus, tx, ethereum);
-    if (txStatus === false) return;
+    yield delay(10000);
+    // const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
+    // let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
+    // let tx = yield call(returnBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
+    // let txStatus = yield call(getTxStatus, tx, ethereum);
+    // if (txStatus === false) return;
     yield put({
-        type: BIKES.FINISH_RENT_BIKE,
-        payload: tokenId
+        type: BIKES.FINISH_RETURN_BIKE,
     });
     yield put({type: "APP_LOADING_END"});
     toast.success("Success!");

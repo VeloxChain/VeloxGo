@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./BikeHiringInfoStyle";
-import loadingImage from '../../assets/images/loading.gif'
+import loadingImage from "../../assets/images/loading.gif";
 
 class BikeHiringInfo extends Component {
     constructor(props) {
@@ -18,7 +18,7 @@ class BikeHiringInfo extends Component {
         return (
             <div style={styles.sumaryOfBike}>
                 <img
-                    style={{...styles.bikeImage, ...{display: this.state.loaded? 'block': 'none'}}}
+                    style={{...styles.bikeImage, ...{display: this.state.loaded? "block": "none"}}}
                     src={"https://gateway.ipfs.io/ipfs/" + this.props.externalData.avatar}
                     alt="Bikecoin"
                     onLoad={()=>this.setState({loaded: true })}
@@ -26,7 +26,7 @@ class BikeHiringInfo extends Component {
                 <img
                     src={loadingImage}
                     alt="Bikecoin"
-                    style={{...styles.bikeImage, ...{display: this.state.loaded? 'none': 'block'}}}
+                    style={{...styles.bikeImage, ...{display: this.state.loaded? "none": "block"}}}
                 />
 
                 <div style={styles.bodyContent}>

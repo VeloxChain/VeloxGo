@@ -4,8 +4,9 @@ import Bike from "./BikeComponent";
 import BikeSearchComponent from "./BikeSearchComponent";
 import _ from "lodash";
 import MapHiringComponent from "../map_hiring/MapHiringComponent";
-import { initNetworkBikes } from "../../actions/bikeActions";
+import { initNetworkBikes, rentBike, returnBike } from "../../actions/bikeActions";
 import RentBikeComponent from "./rent_bike/RentBikeComponent";
+import { MODAL_CONFIRM_TRANSACTION } from "../modal/constants";
 class HiringRequestComponent extends Component {
     constructor(props) {
         super(props);
@@ -16,16 +17,14 @@ class HiringRequestComponent extends Component {
                 index: "none",
                 long: 103.819836,
                 lat: 1.352083
-            },
-            isRentBike: false,
-            selectedBike: ""
+            }
         };
     }
 
     componentDidMount() {
         setTimeout(()=> {
             this.props.dispatch(initNetworkBikes({ethereum: this.props.ethereum }));
-        }, 1)
+        }, 1);
     }
 
     handleChangeMapDefaultLocation = (mapDefaultLocation) => {
@@ -136,8 +135,11 @@ class HiringRequestComponent extends Component {
     }
 
     _renderRentBike = () => {
-        if (this.state.isRentBike) {
-            return <RentBikeComponent handleChangeRentBike={this.handleChangeRentBike} bikeInfo={this.state.selectedBike}  />
+        const { rendingBike } = this.props.bikes;
+        if (rendingBike.isRent) {
+            return <RentBikeComponent
+                finishRentBike={this.finishRentBike}
+                bikeInfo={rendingBike} />;
         }
 
         return (
@@ -154,11 +156,30 @@ class HiringRequestComponent extends Component {
         );
     }
 
-    handleChangeRentBike = (bike) => {
-        this.setState({
-            isRentBike: !this.state.isRentBike,
-            selectedBike: bike
-        });
+    handleChangeRentBike = (bikeInfo) => {
+        let data = {
+            address: this.props.getAccountAddress(),
+            ethereum: this.props.ethereum,
+            keyStore: this.props.accounts.accounts.key,
+            bikeInfo: bikeInfo
+        };
+        if (this.props.metamask) {
+            this.props.dispatch(rentBike(data));
+        } else {
+            this.props.setType(MODAL_CONFIRM_TRANSACTION, {data: data, handle: rentBike});
+        }
+    }
+    finishRentBike = () => {
+        let data = {
+            address: this.props.getAccountAddress(),
+            ethereum: this.props.ethereum,
+            keyStore: this.props.accounts.accounts.key,
+        };
+        if (this.props.metamask) {
+            this.props.dispatch(returnBike(data));
+        } else {
+            this.props.setType(MODAL_CONFIRM_TRANSACTION, {data: data, handle: returnBike});
+        }
     }
 
     render() {

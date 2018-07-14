@@ -47,7 +47,7 @@ const Styles = {
     },
 
     block: {
-        width: "200px"
+        width: "270px"
     },
 
     timeStart: {
@@ -100,5 +100,5 @@ const Styles = {
         marginRight: "10px"
     },
 };
-  
+
 export default Styles;
