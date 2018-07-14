@@ -26,7 +26,7 @@ function* uploadNewBikeToIPFS(action) {
         originalOwner: bikeInfo.owner,
         year: 2018,
         location: location,
-        status: "ACTIVE",
+        status:"ACTIVE",
         forRent: false,
         isLocked: false,
         isFlash: false,
@@ -171,13 +171,18 @@ function* transferBikeInNetwork(action) {
 
 function* rentBikeAction(action) {
     yield put({type: "APP_LOADING_START", payload: "Booking bike......"});
-    yield delay(10000);
-    // const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
-    const { bikeInfo } = action.payload;
-    // let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
-    // let tx = yield call(rentBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
-    // let txStatus = yield call(getTxStatus, tx, ethereum);
-    // if (txStatus === false) return;
+    const { address, tokenId, ethereum, keyStore, passphrase, bikeInfo } = action.payload;
+    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
+    let balanceOfBKC = yield call(ethereum.getBKCBalance, userProfileAddress);
+    balanceOfBKC = parseInt(balanceOfBKC);
+    if (balanceOfBKC < 200) {
+        yield put({type: "APP_LOADING_END"});
+        toast.error("You should have at least 200 BKC to book a bike!");
+        return;
+    }
+    let tx = yield call(rentBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
+    let txStatus = yield call(getTxStatus, tx, ethereum);
+    if (txStatus === false) return;
     yield put({
         type: BIKES.FINISH_RENT_BIKE,
         payload: {
@@ -204,15 +209,20 @@ function* returnBikeAction() {
 }
 function* adjustBikePriceAction(action) {
     yield put({type: "APP_LOADING_START"});
-    const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
+    const { address, tokenId, price, ethereum, keyStore, passphrase, callBack, forRent } = action.payload;
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
-    let tx = yield call(adjustBikePrice, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
+    let tx = yield call(adjustBikePrice, address, userProfileAddress, tokenId, price, ethereum, keyStore, passphrase);
     let txStatus = yield call(getTxStatus, tx, ethereum);
     if (txStatus === false) return;
     yield put({
         type: BIKES.FINISH_RENT_BIKE,
-        payload: tokenId
+        payload: {
+            tokenId: tokenId,
+            forRent: forRent,
+            price: price
+        }
     });
+    yield call(callBack);
     yield put({type: "APP_LOADING_END"});
     toast.success("Success!");
 }

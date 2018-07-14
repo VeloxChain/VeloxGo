@@ -61,3 +61,15 @@ export function adjustBikePrice(payload) {
         payload
     };
 }
+export function cancelAdjustBikePrice(payload) {
+    return {
+        type: BIKES.CANCEL_ADJUST_BIKE_PRICE,
+        payload
+    };
+}
+export function changeBikeStatus(payload) {
+    return {
+        type: BIKES.CHANGE_BIKE_FORENT_STATUS,
+        payload
+    };
+}

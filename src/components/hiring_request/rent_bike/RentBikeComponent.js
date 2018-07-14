@@ -89,7 +89,7 @@ class RentBikeComponent extends Component {
                             </div>
 
                             <div style={styles.block}>
-                                <p style={styles.title}>Rental period</p>
+                                <p style={styles.title}>Rental Duration</p>
                                 <div style={styles.wrapper}>
                                     <span style={styles.timer}>{this.state.totalTimeUsed    }</span>
                                 </div>

@@ -76,6 +76,21 @@ export default class EthereumService {
             }
         });
     }
+    getBKCBalance = (address) => {
+        let _this2 = this;
+        return new Promise((resolve) => {
+            _this2.bikeTokenContract.balanceOf(address, (error, balance) => {
+                if (error != null) {
+                    console.log(error); // eslint-disable-line
+                } else {
+                    let weiBalance = balance.toNumber();
+                    let realBalance = _this2.rpc.fromWei(weiBalance);
+                    resolve(realBalance);
+                }
+            });
+        });
+
+    }
 
     getNonce(address, callback) {
         this.rpc.eth.getTransactionCount(address, "pending", (error, nonce) => {

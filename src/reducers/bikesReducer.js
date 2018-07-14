@@ -109,6 +109,13 @@ const bikesReducer = (state = initState, action) => {
                 startTime: null,
             }
         };
+    case BIKES.CHANGE_BIKE_FORENT_STATUS:
+        newState = state.data;
+        newState[action.payload.index].forRent = !newState[action.payload.index].forRent;
+        return {
+            ...state,
+            data: newState
+        };
     default:
         return state;
     }

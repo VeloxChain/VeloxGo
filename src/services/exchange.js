@@ -226,7 +226,7 @@ export const returnBike = async (address, userProfileAddress, tokenId, ethereum,
         });
     });
 };
-export const adjustBikePrice = async (address, userProfileAddress, tokenId, ethereum, keyStore, password) => {
+export const adjustBikePrice = async (address, userProfileAddress, tokenId, price, ethereum, keyStore, password) => {
     let isMetamask = _.isUndefined(password) || password === "";
     let zeroAddress = "0x0000000000000000000000000000000000000000";
     let types = ["address", "address", "uint256"];
