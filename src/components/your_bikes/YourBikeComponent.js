@@ -17,9 +17,8 @@ class YourBikesComponent extends Component {
                 {title: "BIKE(jSerial number)", value: "snNumber"},
                 {title: "MANUFACTURER", value: "manufacturer"},
                 {title: "MODEL", value: "model"},
-                {title: "YEAR", value: "year"},
-                {title: "STATUS", value: "status"},
                 {title: "FOR RENT", value: "forRent", renderer: this._renderForrent},
+                {title: "Price", value: "", renderer: this._renderPrice},
                 {title: "ACTION", value: "View", renderer: this._renderViewAction}
             ],
             isEdit: false,
@@ -31,6 +30,9 @@ class YourBikesComponent extends Component {
             tokenId: "",
             toggled: true
         };
+    }
+    _renderPrice = (data, value, key) => {
+        return "";
     }
     _renderViewAction = (data, value, key) => {
         return (

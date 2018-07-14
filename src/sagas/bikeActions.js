@@ -24,14 +24,8 @@ function* uploadNewBikeToIPFS(action) {
         snNumber: bikeInfo.snNumber ,
         manufacturer: bikeInfo.manufacturer,
         originalOwner: bikeInfo.owner,
-        year: 2018,
         location: location,
-        status:"ACTIVE",
         forRent: false,
-        isLocked: false,
-        isFlash: false,
-        isHonk: false,
-        isLock: false,
         model: bikeInfo.model
     };
     let hashData = yield call(SERVICE_IPFS.putDataToIPFS, bike);
@@ -172,17 +166,17 @@ function* transferBikeInNetwork(action) {
 function* rentBikeAction(action) {
     yield put({type: "APP_LOADING_START", payload: "Booking bike......"});
     const { address, tokenId, ethereum, keyStore, passphrase, bikeInfo } = action.payload;
-    let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
-    let balanceOfBKC = yield call(ethereum.getBKCBalance, userProfileAddress);
-    balanceOfBKC = parseInt(balanceOfBKC);
-    if (balanceOfBKC < 200) {
-        yield put({type: "APP_LOADING_END"});
-        toast.error("You should have at least 200 BKC to book a bike!");
-        return;
-    }
-    let tx = yield call(rentBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
-    let txStatus = yield call(getTxStatus, tx, ethereum);
-    if (txStatus === false) return;
+    // let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
+    // let balanceOfBKC = yield call(ethereum.getBKCBalance, userProfileAddress);
+    // balanceOfBKC = parseInt(balanceOfBKC);
+    // if (balanceOfBKC < 200) {
+    //     yield put({type: "APP_LOADING_END"});
+    //     toast.error("You should have at least 200 BKC to book a bike!");
+    //     return;
+    // }
+    // let tx = yield call(rentBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
+    // let txStatus = yield call(getTxStatus, tx, ethereum);
+    // if (txStatus === false) return;
     yield put({
         type: BIKES.FINISH_RENT_BIKE,
         payload: {

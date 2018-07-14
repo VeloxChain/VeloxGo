@@ -34,6 +34,21 @@ class BikeInfo extends Component {
             </Tab>
         );
     }
+    _renderRidingPerfomance = () => {
+        if (this.props.isRent) {
+            return;
+        }
+
+        return (
+            <Tab
+                label="Riding perfomance"
+                value={3}
+                style={this.state.tabIndex === 3 ? styles.tabActive : styles.tab}
+            >
+                <RidingPerfomance {...this.props} />
+            </Tab>
+        );
+    }
 
     render() {
         return (
@@ -56,16 +71,9 @@ class BikeInfo extends Component {
                 >
                     <BikeSpecifications bikeInfo={this.props.bikeInfo} {...this.props} />
                 </Tab>
-                
-                {this._renderOwnerHistory()}
 
-                <Tab
-                    label="Riding perfomance"
-                    value={3}
-                    style={this.state.tabIndex === 3 ? styles.tabActive : styles.tab}
-                >
-                    <RidingPerfomance {...this.props} />
-                </Tab>
+                {this._renderOwnerHistory()}
+                {this._renderRidingPerfomance()}
             </Tabs>
         );
     }

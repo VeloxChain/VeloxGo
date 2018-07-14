@@ -28,7 +28,10 @@ class EditBikeForm extends Component {
             userProfileAddress: userProfileAddress
         });
     }
-    render() {
+    _renderOwner = () => {
+        if (this.props.isRent) {
+            return;
+        }
         return (
             <div>
                 <p style={styles.title}>Owner</p>
@@ -41,7 +44,33 @@ class EditBikeForm extends Component {
                         <i className="fa fa-external-link"></i>
                     </a>
                 </h4>
+            </div>
+        );
+    }
 
+    _renderBikePrice = () => {
+        if (this.props.isRent) {
+            return (
+                <div>
+                    <p style={styles.title}>Price</p>
+                    <h4 style={styles.text}>
+                        <span>200 / 1h </span>
+                        <img src="images/Logo.png" style={styles.logo} alt="BikeCoin" />
+                    </h4>
+                </div>
+            );
+        }
+        return (
+            <div>
+                <p style={styles.title}>Bike Token</p>
+                <h4 style={styles.text}>{this.props.bikeInfo.tokenId}</h4>
+            </div>
+        );
+    }
+    render() {
+        return (
+            <div>
+                {this._renderOwner()}
                 <p style={styles.title}>Manufacturer</p>
                 <h4 style={styles.text}>{this.props.bikeInfo.manufacturer}</h4>
 
@@ -58,9 +87,7 @@ class EditBikeForm extends Component {
                         <i className="fa fa-external-link"></i>
                     </a>
                 </h4>
-
-                <p style={styles.title}>Bike Token</p>
-                <h4 style={styles.text}>{this.props.bikeInfo.tokenId}</h4>
+                {this._renderBikePrice()}
             </div>
         );
     }

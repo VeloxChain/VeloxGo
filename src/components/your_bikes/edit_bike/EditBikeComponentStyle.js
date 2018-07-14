@@ -294,7 +294,7 @@ const Styles = {
         letterSpacing: "2px",
         display: "block",
         minWidth: "168px"
-    },
+    }
 };
 
 export default Styles;

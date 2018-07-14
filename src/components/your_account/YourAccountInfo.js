@@ -122,14 +122,23 @@ class YourAccountInfo extends Component {
                             </button>
                         </div>
                     </div>
-                    <div style={styles.wrappFlex}>
+                    <div style={styles.wrappCoins}>
                         <div style={styles.wrappFlexLeft}>
+                            <span style={styles.iconLabel}>BKC</span>
+                            <span style={{margin: "auto"}}></span>
                             <span style={styles.text}>{this.props.info.bkc}</span>
-                            <img src="images/Logo.png" alt="BikeCoin" style={styles.iconBike} />
+                            <div style={styles.wrapIconCoin}>
+                                <img src="images/Logo.png" alt="BikeCoin" style={styles.iconBike} />
+                            </div>
+
                         </div>
-                        <div style={styles.wrappFlexRight}>
-                            <span style={styles.textEthereum}>{this.props.info.eth}</span>
-                            <img src="images/ethereum.png" alt="BikeCoin" style={styles.iconBike} />
+                        <div style={styles.wrappFlexLeft}>
+                            <span style={styles.iconLabel}>ETH</span>
+                            <span style={{margin: "auto"}}></span>
+                            <span style={styles.text}>{this.props.info.eth}</span>
+                            <div style={styles.wrapIconCoin}>
+                                <img src="images/ethereum.png" alt="BikeCoin" style={styles.iconBike} />
+                            </div>
                         </div>
                     </div>
                 </div>

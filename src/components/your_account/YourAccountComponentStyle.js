@@ -68,9 +68,8 @@ const Styles = {
         width: "30px"
     },
 
-    wrappFlex: {
-        display: "flex",
-        padding: "20px",
+    wrappCoins: {
+        padding: 10,
         borderTop: "1px solid rgb(239, 239, 239)"
     },
 
@@ -78,18 +77,12 @@ const Styles = {
         display: "flex",
         justifyContent: "flex-start",
         alignItems: "center",
-        width: "50%"
+        width: "100%",
+        padding: 10,
     },
 
     wrapper: {
         minHeight: "267px"
-    },
-
-    wrappFlexRight: {
-        display: "flex",
-        justifyContent: "flex-end",
-        alignItems: "center",
-        width: "50%"
     },
 
     labelText: {
@@ -104,12 +97,19 @@ const Styles = {
 
     iconBike: {
         height: "26px",
-        marginLeft: "10px"
     },
-
+    wrapIconCoin: {
+        marginLeft: 10,
+        width: 26,
+        textAlign: "center"
+    },
     text: {
         color: "#00F58A",
         fontSize: "18px"
+    },
+    iconLabel : {
+        color: "rgb(59, 59, 59)",
+        fontSize: 18
     },
 
     textEthereum: {

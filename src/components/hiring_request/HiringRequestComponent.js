@@ -139,7 +139,8 @@ class HiringRequestComponent extends Component {
         if (rendingBike.isRent) {
             return <RentBikeComponent
                 finishRentBike={this.finishRentBike}
-                bikeInfo={rendingBike} />;
+                bikeInfo={rendingBike}
+                {...this.props} />;
         }
 
         return (
