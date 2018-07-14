@@ -65,7 +65,7 @@ class RentBikeActions extends Component {
                                 />
                             </div>
                         </div>
-                        <button style={styles.buttonVerified} onClick={this.props.finishRentBike}>Return Bike</button>
+                        <button style={styles.buttonVerified} onClick={() => this.props.finishRentBike(this.props.bikeInfo.bikeInfo.tokenId)}>Return Bike</button>
                     </div>
                 </div>
             </div>

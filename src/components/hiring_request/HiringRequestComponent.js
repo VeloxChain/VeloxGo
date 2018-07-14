@@ -170,11 +170,12 @@ class HiringRequestComponent extends Component {
             this.props.setType(MODAL_CONFIRM_TRANSACTION, {data: data, handle: rentBike});
         }
     }
-    finishRentBike = () => {
+    finishRentBike = (tokenId) => {
         let data = {
             address: this.props.getAccountAddress(),
             ethereum: this.props.ethereum,
             keyStore: this.props.accounts.accounts.key,
+            tokenId: tokenId
         };
         if (this.props.metamask) {
             this.props.dispatch(returnBike(data));

@@ -662,7 +662,7 @@ a {
     width: 100%;
     height: 100%;
     background-color: rgba(255, 255, 255, 0.68);
-    z-index: 999;
+    z-index: 99999999;
 }
 .pd-5-50 {
     padding: 5px 50px;

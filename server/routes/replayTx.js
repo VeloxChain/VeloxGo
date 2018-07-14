@@ -7,7 +7,7 @@ const bikeToken = require("./bikeToken.json");
 const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/faF0xSQUt0ezsDFYglOe"));
 
 let TXRELAY = web3.eth.contract(TXRELAYABI);
-let TXRELAYAddress = "0x37eff432ad7710c4b0ab7653db70824c791ac3aa";
+let TXRELAYAddress = "0x20f2f0eb661db8c8e52e3b5bca64bb80c8838afa";
 let BIKE_TOKEN_CONTRACT = web3.eth.contract(bikeToken).at("0x4c9aa6ca9cbc1fa4b3b5c68ea32c247d7b060b32");
 const hdWallet = EthHdWallet.fromMnemonic("frost mimic deer annual build develop discover split rose gather ahead gloom");
 hdWallet.generateAddresses(1);
@@ -31,7 +31,7 @@ module.exports = function (app) {
                 value: 0,
                 nonce: nonce,
                 gasPrice: 100000000000,
-                gasLimit: 1000000,
+                gasLimit: 2000000,
                 data: txRelayData,
                 chainId: 3 /* see https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md */
             };
