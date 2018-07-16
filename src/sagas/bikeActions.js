@@ -60,7 +60,7 @@ function* finishUploadNewBikeToIPFS(action) {
     let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, latestToken);
     tokenIndex = parseInt(tokenIndex.toString());
     let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
-    yield fork(getDataFromBikeHash, hash, tokenIndex, "owner");
+    yield fork(getDataFromBikeHash, hash, tokenIndex, "owner", ethereum);
     yield put({type: "APP_LOADING_END"});
     yield call(callBack);
 }
