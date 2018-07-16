@@ -21,8 +21,8 @@ class BikeComponent extends Component {
         let data = {
             bikeInfo: this.props.bike,
             handle: this.handleChangeRentBike
-        }
-        this.props.setType(MODAL_SUMARY_OF_BIKE, data)
+        };
+        this.props.setType(MODAL_SUMARY_OF_BIKE, data);
     }
 
     render() {
