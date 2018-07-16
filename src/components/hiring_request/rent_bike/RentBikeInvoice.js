@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styles from "./RentBikeComponentStyle";
 import { Dialog } from "material-ui";
-import moment from "moment";
 import { finishReturnBike } from "../../../actions/bikeActions";
 
 class RentBikeInvoice extends Component {
@@ -12,40 +11,17 @@ class RentBikeInvoice extends Component {
             totalTimeUsed: "",
             subTotal: 0,
             totalTime: 0
-        }
+        };
     }
 
     componentDidMount() {
         this._renderProfile();
-        this._renderRentalPeriod();
     }
 
     _renderProfile = async () => {
         let profileAddress = await this.props.getUserProfileAddress();
         this.setState({
             userProfileAddress: profileAddress
-        });
-    }
-    _renderRentalPeriod = () => {
-        const { bikeInfo } = this.props;
-        let startTime = moment(bikeInfo.startTime*1000);
-        let now = moment();
-        let duration = moment.duration(now.diff(startTime));
-        let totalTime = now.unix();
-        let dataDuration = duration._data;
-        let totalTimeUsed = this.props.calculateTotalTimeUsed(dataDuration);
-        this.setState({
-            totalTimeUsed: totalTimeUsed,
-            totalTime: totalTime
-        }, () => this._renderBKCUsed(duration));
-    }
-    _renderBKCUsed = (duration) => {
-        const { bikeInfo } = this.props.bikeInfo;
-        let totalTimeUsed = duration.as("seconds");
-        let subTotal = bikeInfo.price /3600 * totalTimeUsed;
-        subTotal = subTotal.toFixed(2);
-        this.setState({
-            subTotal: subTotal
         });
     }
     _renderAction = () => {
@@ -90,7 +66,7 @@ class RentBikeInvoice extends Component {
     }
     handleSubmit = () => {
         let callBack = this.props.handleChangeConfirm;
-        let totalTime = this.state.totalTime;
+        let totalTime = this.props.invoice.totalTime;
         this.props.finishRentBike(
             this.props.bikeInfo.bikeInfo.tokenId,
             callBack,
@@ -119,7 +95,7 @@ class RentBikeInvoice extends Component {
                         </p>
                         <p style={styles.flex}>
                             <span style={styles.titleInvoice}>Bike Owner:</span>
-                            <span style={styles.textInvoice}>{this.props.bikeInfo.bikeInfo.originalOwner}</span>
+                            <span style={styles.textInvoice}>{this.props.bikeInfo.bikeInfo.owner}</span>
                         </p>
                         <p style={styles.flex}>
                             <span style={styles.titleInvoice}>Renter:</span>
@@ -146,16 +122,16 @@ class RentBikeInvoice extends Component {
                             <tbody>
                                 <tr>
                                     <td>Rent Fee</td>
-                                    <td>{this.state.totalTimeUsed}</td>
+                                    <td>{this.props.invoice.totalTimeUsed}</td>
                                     <td>
                                         {this.props.bikeInfo.bikeInfo.price}
                                         <img src="images/logo.png" style={styles.logoBike} alt="BikeCoin" />
                                     </td>
-                                    <td>{this.state.subTotal.toLocaleString()}</td>
+                                    <td>{this.props.invoice.subTotal}</td>
                                 </tr>
                                 <tr>
                                     <td colSpan="4" className="text-right" style={styles.total}>
-                                        <span>Total: {this.state.subTotal.toLocaleString()}</span>
+                                        <span>Total: {this.props.invoice.subTotal}</span>
                                         <img src="images/logo.png" style={styles.logoBike} alt="BikeCoin" />
                                     </td>
                                 </tr>

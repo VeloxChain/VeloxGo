@@ -23,9 +23,12 @@ class Header extends Component {
                         <div className="left_col scroll-view vh100">
                             <Logo/>
                             {this.props.hidden ? "" : (<SideBar/>)}
-                            <div style={styles.getBikeCoin}>
-                                <button style={styles.buttonGetBikeCoin} onClick={this.collectBikeToken}>Get Free 200 Bikecoin</button>
-                            </div>
+                            {this.props.hidden ? "" : (
+                                <div style={styles.getBikeCoin}>
+                                    <button style={styles.buttonGetBikeCoin} onClick={this.collectBikeToken}>Get Free 200 Bikecoin</button>
+                                </div>
+                            )}
+                            
                         </div>
                     </div>
                 </div>

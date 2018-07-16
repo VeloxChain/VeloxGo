@@ -176,12 +176,10 @@ export const collectBikeToken = async (address) => {
         });
     });
 };
-export const rentBike = async (address, userProfileAddress, tokenId, ethereum, keyStore, password) => {
-    console.log(address, userProfileAddress, tokenId);
+export const rentBike = async (address, userProfileAddress, tokenId, seconds, ethereum, keyStore, password) => {
+    console.log(address, userProfileAddress, tokenId, seconds);
     let isMetamask = _.isUndefined(password) || password === "";
     let zeroAddress = "0x0000000000000000000000000000000000000000";
-    let now = new Date();
-    let seconds = Math.round(now.getTime()/1000);
     let types = ["address","uint256","uint256", "address","address"];
     let params = [address, tokenId, seconds, userProfileAddress, constants.BIKECOIN_OWNER_SHIP_ADDRESS];
     let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
