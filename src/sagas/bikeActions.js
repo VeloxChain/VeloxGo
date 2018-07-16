@@ -88,9 +88,9 @@ function* loadUserBikeFromNetWork(action){
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
     let totalTokens = yield call(ethereum.ownerShipContract.balanceOf,userProfileAddress);
     totalTokens = totalTokens.toNumber();
-    if (totalTokens >= bikes.data.length) {
+    if (totalTokens === bikes.data.length) {
         return;
-    } else {
+    } else if (totalTokens < bikes.data.length) {
         yield put({type: BIKES.RESET_YOUR_BIKES});
     }
     totalTokens = totalTokens - 1;
@@ -203,15 +203,15 @@ function* returnBikeAction(action) {
 }
 function* adjustBikePriceAction(action) {
     yield put({type: "APP_LOADING_START"});
-    const { address, tokenId, price, ethereum, keyStore, passphrase, callBack, forRent } = action.payload;
+    const { address, tokenId, price, ethereum, keyStore, passphrase, callBack, forRent, index } = action.payload;
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
     let tx = yield call(adjustBikePrice, address, userProfileAddress, tokenId, price, ethereum, keyStore, passphrase);
     let txStatus = yield call(getTxStatus, tx, ethereum);
     if (txStatus === false) return;
     yield put({
-        type: BIKES.FINISH_RENT_BIKE,
+        type: BIKES.FINISH_ADJUST_BIKE_PRICE,
         payload: {
-            tokenId: tokenId,
+            index: index,
             forRent: forRent,
             price: price
         }

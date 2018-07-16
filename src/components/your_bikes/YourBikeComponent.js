@@ -18,7 +18,7 @@ class YourBikesComponent extends Component {
                 {title: "MANUFACTURER", value: "manufacturer"},
                 {title: "MODEL", value: "model"},
                 {title: "FOR RENT", value: "forRent", renderer: this._renderForrent},
-                {title: "Price", value: "", renderer: this._renderPrice},
+                {title: "Price", value: "price", renderer: this._renderPrice},
                 {title: "ACTION", value: "View", renderer: this._renderViewAction}
             ],
             isEdit: false,
@@ -31,7 +31,10 @@ class YourBikesComponent extends Component {
             toggled: true
         };
     }
-    _renderPrice = (data, value, key) => {
+    _renderPrice = (data, value) => {
+        if (!_.isUndefined(data[value]) && parseInt(data[value]) > 0) {
+            return data[value];
+        }
         return "";
     }
     _renderViewAction = (data, value, key) => {
@@ -100,7 +103,8 @@ class YourBikesComponent extends Component {
             passphrase: this.state.passphrase,
             callBack: this.handleHideSetPriceDialog,
             price: 0,
-            forRent: false
+            forRent: false,
+            index: this.state.rowIndex
         };
         if (this.props.metamask) {
             this.props.dispatch(adjustBikePrice(data));
@@ -165,7 +169,8 @@ class YourBikesComponent extends Component {
             passphrase: this.state.passphrase,
             callBack: this.handleHideSetPriceDialog,
             price: this.state.price,
-            forRent: true
+            forRent: true,
+            index: this.state.rowIndex
         };
         this.props.dispatch(adjustBikePrice(data));
     }
@@ -214,7 +219,7 @@ class YourBikesComponent extends Component {
                 </div>
                 <Datatable
                     params={this.state.params}
-                    body={_.orderBy(this.props.bikes.data, ["tokenId"], ["desc"])}
+                    body={this.props.bikes.data}
                 />
             </div>
         );

@@ -12,7 +12,7 @@ class RentBikeComponent extends Component {
     }
 
     finishRentBike = () => {
-        this.props.finishRentBike();
+        this.props.finishRentBike(this.state.bikeInfo.tokenId);
     }
 
     calculateTotalTimeUsed = (duration) => {

@@ -80,6 +80,14 @@ const bikesReducer = (state = initState, action) => {
             ...state,
             data: [],
         };
+    case BIKES.FINISH_ADJUST_BIKE_PRICE:
+        newState = state.data;
+        newState[action.payload.index].price = action.payload.price;
+        newState[action.payload.index].forRent = action.payload.forRent;
+        return {
+            ...state,
+            data: newState
+        };
     case ACC_ACTION.LOG_OUT:
         return {
             data: [],
