@@ -40,9 +40,20 @@ class YourBikesComponent extends Component {
         }
         return "";
     }
+    _renderEditPrice = (data, key) => {
+        if (_.isUndefined(data.price) || parseInt(data.price) === 0) {
+            return;
+        }
+        return (
+            <span> | <a onClick={(e) => this.handleToggle(e, true, data.tokenId, key)}>Edit Price</a> </span>
+        );
+    }
     _renderViewAction = (data, value, key) => {
         return (
-            <a key={key} onClick={() => this.editRow(data, key)}>{value}</a>
+            <div>
+                <a onClick={() => this.editRow(data, key)}>{value}</a>
+                {this._renderEditPrice(data, key)}
+            </div>
         );
     }
     _renderForrent = (data, value, key) => {
@@ -65,12 +76,6 @@ class YourBikesComponent extends Component {
             this.props.dispatch(initUserBikes({address: accounts.accounts.address, ethereum: this.props.ethereum }));
         }, 1);
     }
-    // changeBikeInfo = async (isInputChecked, rowEdit,rowIndex) => {
-    //     // let dataChanges = Object.assign(rowEdit, {forRent: isInputChecked});
-    //     // await this.props.dispatch(uploadModifiedBikeToIPFS(dataChanges, rowIndex));
-    //     // onToggle={(e, isInputChecked) => this.changeBikeInfo(isInputChecked, row, index)}
-    // }
-
 
     handleToggle = (event, value, tokenId, rowIndex) => {
         this.setState({
@@ -80,7 +85,7 @@ class YourBikesComponent extends Component {
         if(value) {
             this.handleShowSetPriceDialog();
         } else {
-            this.handleCancelSetPrice();
+            this.handleCancelSetPrice(tokenId, rowIndex);
         }
     }
 
@@ -97,17 +102,17 @@ class YourBikesComponent extends Component {
             passphrase: ""
         });
     }
-    handleCancelSetPrice = () => {
+    handleCancelSetPrice = (tokenId, rowIndex) => {
         let data = {
             address: this.props.getAccountAddress(),
-            tokenId: this.state.tokenId,
+            tokenId: tokenId,
             ethereum: this.props.ethereum,
             keyStore: this.props.accounts.accounts.key,
             passphrase: this.state.passphrase,
             callBack: this.handleHideSetPriceDialog,
             price: 0,
             forRent: false,
-            index: this.state.rowIndex
+            index: rowIndex
         };
         if (this.props.metamask) {
             this.props.dispatch(adjustBikePrice(data));
