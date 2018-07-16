@@ -97,13 +97,13 @@ class root extends React.Component {
         return isMetaMask;
     }
     getUserProfileAddress = async () => {
-        let userProfileAddress = localStorage.getItem("userProfileAddress");
-        if (userProfileAddress !== null) {
-            return userProfileAddress;
-        }
+        // let userProfileAddress = localStorage.getItem("userProfileAddress");
+        // if (userProfileAddress !== null) {
+        //     return userProfileAddress;
+        // }
         let accountAddress = this.getAccountAddress();
-        userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(accountAddress);
-        localStorage.setItem("userProfileAddress", userProfileAddress);
+        let userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(accountAddress);
+        // localStorage.setItem("userProfileAddress", userProfileAddress);
         return userProfileAddress;
     }
     render() {

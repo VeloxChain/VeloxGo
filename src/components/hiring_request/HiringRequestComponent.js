@@ -22,9 +22,15 @@ class HiringRequestComponent extends Component {
     }
 
     componentDidMount() {
-        setTimeout(()=> {
-            this.props.dispatch(initNetworkBikes({ethereum: this.props.ethereum }));
-        }, 1);
+        const { rendingBike } = this.props.bikes;
+        if (!rendingBike.isRent) {
+            setTimeout(()=> {
+                this.props.dispatch(initNetworkBikes({
+                    ethereum: this.props.ethereum,
+                    address: this.props.getAccountAddress()
+                }));
+            }, 1);
+        }
     }
 
     handleChangeMapDefaultLocation = (mapDefaultLocation) => {
@@ -65,7 +71,6 @@ class HiringRequestComponent extends Component {
 
     _renderBike = () => {
         let renderBike = [];
-
         let listBikeFilter = [];
         let networkBikes = _.orderBy(this.props.bikes.network, ["tokenId"], ["desc"]);
         _.forEach(networkBikes, (value) => {

@@ -33,7 +33,7 @@ class YourBikesComponent extends Component {
     }
     _renderPrice = (data, value) => {
         if (!_.isUndefined(data[value]) && parseInt(data[value]) > 0) {
-            return data[value];
+            return parseInt(data[value]).toLocaleString();
         }
         return "";
     }

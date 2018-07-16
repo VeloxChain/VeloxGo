@@ -38,8 +38,8 @@ class BikeHiringInfo extends Component {
                     </div>
                     <div style={styles.action}>
                         <div>
-                            <span style={styles.number}>200/1h</span>
-                            <img src="images/Logo.png" style={styles.icon} alt="BikeCoin" />
+                            <span style={styles.number}>{this.props.externalData.price.toLocaleString()} <img src="images/Logo.png" style={styles.icon} alt="BikeCoin" /> / 1h</span>
+
                         </div>
                         <button style={styles.button} onClick={this.handleChangeRentBike}>Book</button>
                     </div>
