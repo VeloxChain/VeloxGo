@@ -60,7 +60,7 @@ function* finishUploadNewBikeToIPFS(action) {
     let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, latestToken);
     tokenIndex = parseInt(tokenIndex.toString());
     let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
-    yield fork(getDataFromBikeHash, hash, tokenIndex, "owner");
+    yield fork(getDataFromBikeHash, hash, tokenIndex, "owner", ethereum);
     yield put({type: "APP_LOADING_END"});
     yield call(callBack);
 }
@@ -129,7 +129,7 @@ function* loadHashFromNetworkToken(ethereum, totalTokens, userProfileAddress) {
             let price = yield call(getBikePrice, tokenIndex, ethereum, null, null, true);
             if (price > 0) {
                 let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
-                yield fork(getDataFromBikeHash, hash, tokenIndex, "network", ethereum, price);
+                yield fork(getDataFromBikeHash, hash, tokenIndex, "network", ethereum, price, ownerOfToken);
             }
         }
     }
@@ -167,7 +167,7 @@ function* getBikePrice(tokenId, ethereum, bikesReducer, type, isNew) {
     }
 }
 
-function* getDataFromBikeHash(hash, tokenId, dataOf, ethereum, price) {
+function* getDataFromBikeHash(hash, tokenId, dataOf, ethereum, price, ownerOfToken) {
     let bikeData = yield call(SERVICE_IPFS.getDataFromIPFS, hash);
     bikeData = JSON.parse(bikeData);
     bikeData.tokenId = parseInt(tokenId);
@@ -175,6 +175,9 @@ function* getDataFromBikeHash(hash, tokenId, dataOf, ethereum, price) {
         price = yield call(getBikePrice, tokenId, ethereum, null, null, true);
     }
     bikeData.price = price;
+    if (!_.isUndefined(ownerOfToken)) {
+        bikeData.owner = ownerOfToken;
+    }
     if (price > 0) {
         bikeData.forRent = true;
     } else {

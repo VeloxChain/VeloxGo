@@ -45,14 +45,10 @@ class BikeSpecifications extends React.Component {
                 tabItemContainerStyle={styles.tabItemContainerStyle}
                 inkBarStyle={styles.inkBarStyle}
                 style={styles.tabs}>
-            >
                 <Tab label="components" value="1" style={styles.tab}>
                     {this._renderComponents()}
                 </Tab>
                 <Tab label="geometry" value="2" style={styles.tab}>
-                    <div className="text-center" style={{ marginTop: "30px" }}>
-                        <img src="images/geometries-black-1c.jpg" style={styles.geometries} alt="BikeCoin" />
-                    </div>
                     {this._renderGeometry()}
                 </Tab>
             </Tabs>

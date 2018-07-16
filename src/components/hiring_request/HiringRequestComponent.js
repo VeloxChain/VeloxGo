@@ -5,6 +5,7 @@ import BikeSearchComponent from "./BikeSearchComponent";
 import _ from "lodash";
 import MapHiringComponent from "../map_hiring/MapHiringComponent";
 import { initNetworkBikes, rentBike, returnBike } from "../../actions/bikeActions";
+import { appLoadingStart } from "../../actions/appAction";
 import RentBikeComponent from "./rent_bike/RentBikeComponent";
 import { MODAL_CONFIRM_TRANSACTION } from "../modal/constants";
 class HiringRequestComponent extends Component {
@@ -24,6 +25,7 @@ class HiringRequestComponent extends Component {
     componentDidMount() {
         const { rendingBike } = this.props.bikes;
         if (!rendingBike.isRent) {
+            this.props.dispatch(appLoadingStart("Loading bikes from network...."));
             setTimeout(()=> {
                 this.props.dispatch(initNetworkBikes({
                     ethereum: this.props.ethereum,
