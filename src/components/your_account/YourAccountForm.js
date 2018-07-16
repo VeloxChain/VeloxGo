@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from "./YourAccountComponentStyle";
 import TextField from "material-ui/TextField";
-
+import constants from "../../services/constants";
 class YourAccountForm extends Component {
     _viewETHOnEtherScan = () =>{
         const { accounts } = this.props.accounts;
@@ -27,6 +27,17 @@ class YourAccountForm extends Component {
             </a>
         );
     }
+    _viewBKCOnEtherScan = () =>{
+        return (
+            <a
+                href={"https://ropsten.etherscan.io/token/" + constants.BIKECOIN_TOKEN_ADDRESS}
+                title="View Wallet Address On EtherScan"
+                target="_blank" >
+                {constants.BIKECOIN_TOKEN_ADDRESS + " "}
+                <i className="fa fa-external-link"></i>
+            </a>
+        );
+    }
     render() {
         return (
             <div>
@@ -46,6 +57,12 @@ class YourAccountForm extends Component {
                                 <label className="col-sm-3" style={styles.labelText}>Wallet Address:</label>
                                 <div className="col-sm-9">
                                     <p style={styles.address}>{this._viewProfileOnEtherScan()}</p>
+                                </div>
+                            </div>
+                            <div className="form-group row">
+                                <label className="col-sm-3" style={styles.labelText}>BKC Address:</label>
+                                <div className="col-sm-9">
+                                    <p style={styles.address}>{this._viewBKCOnEtherScan()}</p>
                                 </div>
                             </div>
                         </form>
