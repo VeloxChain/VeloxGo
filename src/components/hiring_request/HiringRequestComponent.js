@@ -5,6 +5,7 @@ import BikeSearchComponent from "./BikeSearchComponent";
 import _ from "lodash";
 import MapHiringComponent from "../map_hiring/MapHiringComponent";
 import { initNetworkBikes, rentBike, returnBike } from "../../actions/bikeActions";
+import { appLoadingStart } from "../../actions/appAction";
 import RentBikeComponent from "./rent_bike/RentBikeComponent";
 import { MODAL_CONFIRM_TRANSACTION } from "../modal/constants";
 class HiringRequestComponent extends Component {
@@ -24,6 +25,7 @@ class HiringRequestComponent extends Component {
     componentDidMount() {
         const { rendingBike } = this.props.bikes;
         if (!rendingBike.isRent) {
+            this.props.dispatch(appLoadingStart("Loading bikes from network...."));
             setTimeout(()=> {
                 this.props.dispatch(initNetworkBikes({
                     ethereum: this.props.ethereum,
@@ -175,12 +177,14 @@ class HiringRequestComponent extends Component {
             this.props.setType(MODAL_CONFIRM_TRANSACTION, {data: data, handle: rentBike});
         }
     }
-    finishRentBike = (tokenId) => {
+    finishRentBike = (tokenId, callBack, totalTime) => {
         let data = {
             address: this.props.getAccountAddress(),
             ethereum: this.props.ethereum,
             keyStore: this.props.accounts.accounts.key,
-            tokenId: tokenId
+            tokenId: tokenId,
+            callBack: callBack,
+            totalTime: totalTime
         };
         if (this.props.metamask) {
             this.props.dispatch(returnBike(data));

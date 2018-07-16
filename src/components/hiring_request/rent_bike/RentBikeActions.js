@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import styles from "./RentBikeComponentStyle";
 import moment from "moment";
+import RentBikeInvoice from "./RentBikeInvoice";
 const lockedOff = "images/lockedOff.png";
 const lockedOn = "images/lockedOn.png";
 const flashOff = "images/flashOff.png";
 const flashOn = "images/flashOn.png";
 const honk = "images/honk.png";
 const honkOn = "images/honkGreen.png";
+
 class RentBikeActions extends Component {
     constructor(props) {
         super(props);
@@ -14,7 +16,42 @@ class RentBikeActions extends Component {
             isFlash: false,
             isHonk: false,
             isLock: false,
+            showDialog: false,
+            isConfirm: 1
         };
+    }
+
+    handleChangeShowDialog = () => {
+        this.setState({
+            showDialog: !this.state.showDialog
+        });
+    }
+
+    handleChangeConfirm = () => {
+        this.setState({
+            isConfirm: 0,
+            showDialog : false
+        }, () => {
+            setTimeout(() => {
+                this.handleChangeShowDialog();
+            },200);
+        });
+    }
+    _renderInvoice = () => {
+        if (this.state.showDialog) {
+            return (
+                <RentBikeInvoice
+                    {...this.props}
+                    showDialog={this.state.showDialog}
+                    calculateTotalTimeUsed={this.props.calculateTotalTimeUsed}
+                    handleChangeShowDialog={this.handleChangeShowDialog}
+                    bikeInfo={this.props.bikeInfo}
+                    finishRentBike={this.props.finishRentBike}
+                    isConfirm={this.state.isConfirm}
+                    handleChangeConfirm={this.handleChangeConfirm}
+                />
+            );
+        }
     }
     render() {
         return (
@@ -65,7 +102,13 @@ class RentBikeActions extends Component {
                                 />
                             </div>
                         </div>
-                        <button style={styles.buttonVerified} onClick={() => this.props.finishRentBike(this.props.bikeInfo.bikeInfo.tokenId)}>Return Bike</button>
+                        <button
+                            style={styles.buttonVerified}
+                            onClick={this.handleChangeShowDialog}
+                        >
+                            Return Bike
+                        </button>
+                        {this._renderInvoice()}
                     </div>
                 </div>
             </div>

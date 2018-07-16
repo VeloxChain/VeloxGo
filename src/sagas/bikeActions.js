@@ -225,7 +225,7 @@ function* rentBikeAction(action) {
         return;
     }
     let tx = yield call(rentBike, address, userProfileAddress, bikeInfo.tokenId, ethereum, keyStore, passphrase);
-    let txStatus = yield call(getTxStatus, tx, ethereum);
+    let txStatus = yield call(getTxStatus, tx, ethereum, "Waiting For Approval.....");
     if (txStatus === false) return;
     yield put({
         type: BIKES.FINISH_RENT_BIKE,
@@ -238,16 +238,14 @@ function* rentBikeAction(action) {
     toast.success("Success!");
 }
 function* returnBikeAction(action) {
-    yield put({type: "APP_LOADING_START"});
+    yield put({type: "APP_LOADING_START", payload: "Processing Payment....."});
     yield delay(10000);
-    const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
+    const { address, tokenId, totalTime, ethereum, keyStore, passphrase, callBack } = action.payload;
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
-    let tx = yield call(returnBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
-    let txStatus = yield call(getTxStatus, tx, ethereum);
+    let tx = yield call(returnBike, address, userProfileAddress, tokenId, totalTime, ethereum, keyStore, passphrase);
+    let txStatus = yield call(getTxStatus, tx, ethereum, "Processing Payment.....");
     if (txStatus === false) return;
-    yield put({
-        type: BIKES.FINISH_RETURN_BIKE,
-    });
+    yield call(callBack);
     yield put({type: "APP_LOADING_END"});
     toast.success("Success!");
 }
@@ -271,7 +269,7 @@ function* adjustBikePriceAction(action) {
     toast.success("Success!");
 }
 
-function* getTxStatus(tx, ethereum) {
+function* getTxStatus(tx, ethereum, txTitle) {
     if  (tx.error === true) {
         toast.error(tx.msg);
         yield put({type: "APP_LOADING_END"});
@@ -282,7 +280,7 @@ function* getTxStatus(tx, ethereum) {
         yield put({type: "APP_LOADING_END"});
         return false;
     }
-    yield put({type: "APP_LOADING_START", payload: tx.tx});
+    yield put({type: "APP_LOADING_START", payload: tx.tx, txTitle: txTitle});
     var res = null;
     while (res === null) {
         yield delay(2000);

@@ -305,6 +305,62 @@ const Styles = {
     },
     title: {
         fontWeight: "bold"
+    },
+    flex: {
+        display: "flex",
+        marginBottom: "15px"
+    },
+    titleInvoice: {
+        width: "120px",
+        fontWeight: "bold",
+        letterSpacing: "1px"
+    },
+    textInvoice: {
+        overflow: "hidden",
+        textOverflow: "ellipsis"
+    },
+    bikeInvoice: {
+        border: "1px solid rgb(171, 171, 171)",
+        padding: "5px",
+        width: "100%"
+    },
+    table: {
+        margin: "50px 0px 30px",
+    },
+    buttonInvoice: {
+        background: "#fff",
+        border: "1px solid #00F58A",
+        borderRadius: "5px",
+        padding: "7px 20px",
+        margin: "0px 10px",
+        textTransform: "uppercase",
+        letterSpacing: "2px",
+        minWidth: "120px"
+    },
+    bodyContent: {
+        marginTop: "30px"
+    },
+    titleStyle: {
+        background: "#fff",
+        textAlign: "center",
+        lineHeight: "30px",
+        fontSize: "25px",
+        textTransform: "uppercase",
+        letterSpacing: "2px",
+
+    },
+    logoBike: {
+        width: "30px",
+        marginLeft: "10px"
+    },
+    total: {
+        paddingTop: "30px",
+        fontSize: "20px",
+        fontWeight: "bold"
+    },
+    thanks: {
+        margin: 30,
+        fontStyle: "italic"
     }
 };
 

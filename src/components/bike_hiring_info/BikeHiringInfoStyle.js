@@ -23,14 +23,14 @@ const Styles = {
         border: "1px solid #00d679",
         borderRadius: "2px",
         padding: "7px 20px",
-        marginTop: "5px",
+        marginTop: "13px",
         color: "#fff",
         textTransform: "uppercase",
         letterSpacing: "1px",
     },
 
     text: {
-        whiteSpace: "nowrap", 
+        whiteSpace: "nowrap",
         overflow: "hidden",
         textOverflow: "ellipsis",
         margin: "5px 0px 15px",
@@ -49,13 +49,13 @@ const Styles = {
     },
 
     number: {
-        fontSize: "20px",
+        fontSize: "16px",
         color: "#00d679"
     },
 
     icon: {
         width: "20px",
-        marginTop: "-10px",
+        marginTop: "-5px",
         marginLeft: "5px"
     },
 

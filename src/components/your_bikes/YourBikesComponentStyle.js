@@ -27,6 +27,22 @@ const Styles = {
     },
     thumb: {
         top:5
+    },
+    getBikeCoin: {
+        position: "absolute",
+        bottom: "20",
+        left: "0",
+        padding: "0px 30px",
+        textAlign: "center"
+    },
+    buttonGetBikeCoin: {
+        background: "#00F58A",
+        border: "1px solid #00F58A",
+        color: "#222222",
+        borderRadius: "3px",
+        padding: "7px 20px",
+        textTransform: "uppercase",
+        letterSpacing: "2px"
     }
 };
 

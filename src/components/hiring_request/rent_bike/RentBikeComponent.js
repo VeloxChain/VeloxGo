@@ -11,10 +11,6 @@ class RentBikeComponent extends Component {
         this.state.totalTimeUsed = "00:00:00";
     }
 
-    finishRentBike = () => {
-        this.props.finishRentBike(this.state.bikeInfo.tokenId);
-    }
-
     calculateTotalTimeUsed = (duration) => {
         let seconds = duration.seconds;
         if (seconds < 10) {
@@ -67,7 +63,8 @@ class RentBikeComponent extends Component {
                         <RentBikeActions
                             {...this.props}
                             bikeInfo={this.state}
-                            finishRentBike={this.finishRentBike} />
+                            calculateTotalTimeUsed={this.calculateTotalTimeUsed}
+                            finishRentBike={this.props.finishRentBike} />
                     </div>
                     <div className="col-sm-12">
                         <BikeInfo {...this.props} bikeInfo={bikeInfo} isRent={true} />
