@@ -34,7 +34,7 @@ class RentBikeActions extends Component {
         }, () => {
             setTimeout(() => {
                 this.handleChangeShowDialog();
-            },1000);
+            },200);
         });
     }
     _renderInvoice = () => {

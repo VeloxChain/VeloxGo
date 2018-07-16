@@ -109,7 +109,12 @@ class root extends React.Component {
     render() {
         console.log(this.props);
         return (
-            <RootContainer {...this.props} setType={this.setType}>
+            <RootContainer
+                {...this.props}
+                setType={this.setType}
+                getAccountAddress={this.getAccountAddress}
+                metamask={this.isMetamask()}
+                getUserProfileAddress={this.getUserProfileAddress}>
                 {this._renderHomePage()}
                 <Modal
                     type={this.state.type}

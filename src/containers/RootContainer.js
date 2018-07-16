@@ -43,16 +43,26 @@ class RootContainer extends React.Component {
         }
     }
 
+    _renderTxTitle = (AppReducer)=> {
+        if (AppReducer.txTitle.length > 0) {
+            return (
+                <p style={{fontSize:20, textAlign: "center"}}>{AppReducer.txTitle}</p>
+            );
+        }
+    }
 
     _renderTxHash = (AppReducer) => {
         if (AppReducer.txHash) {
             if (AppReducer.txHash.length === 66) {
                 return (
-                    <a href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash} style={{fontSize:20}} target="_blank">{"Tx: " + AppReducer.txHash}</a>
+                    <span>
+                        {this._renderTxTitle(AppReducer)}
+                        <a href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash} style={{fontSize:20}} target="_blank">{"Tx: " + AppReducer.txHash}</a>
+                    </span>
                 );
             }
             return (
-                <a style={{fontSize:20}} target="_blank">{AppReducer.txHash}</a>
+                <p style={{fontSize:20}} target="_blank">{AppReducer.txHash}</p>
             );
         }
     }
@@ -80,7 +90,7 @@ class RootContainer extends React.Component {
         return (
             <div className="main_container">
                 {this._renderLoading()}
-                <Header hidden={_.isEmpty(this.props.userProfile.data)}/>
+                <Header {...this.props}  hidden={_.isEmpty(this.props.userProfile.data)}/>
                 <ToastContainer />
                 <div className="right-col">
                     <div className="row">

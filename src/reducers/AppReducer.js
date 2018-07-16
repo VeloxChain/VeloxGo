@@ -27,7 +27,8 @@ const initialState = {
         },
         isOpen: false,
     },
-    txHash: ""
+    txHash: "",
+    txTitle: "",
 };
 
 const AppReducer = (state = initialState, action) => {
@@ -69,13 +70,15 @@ const AppReducer = (state = initialState, action) => {
         return {
             ...state,
             isLoading: true,
-            txHash: action.payload
+            txHash: action.payload,
+            txTitle: action.txTitle
         };
     case "APP_LOADING_END":
         return {
             ...state,
             isLoading: false,
-            txHash: ""
+            txHash: "",
+            txTitle: ""
         };
     case "UNLOCK_METAMASK":
         return {

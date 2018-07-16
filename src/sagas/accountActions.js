@@ -35,7 +35,9 @@ function* collectToken(action) {
     yield put({
         type: ACC_ACTION.FINISH_COLLECT_TOKEN,
     });
-    yield call(callBack, userProfileAddress);
+    if (!_.isUndefined(callBack)) {
+        yield call(callBack, userProfileAddress);
+    }
     yield put({type: "APP_LOADING_END"});
     toast.success("Success!");
 }

@@ -186,7 +186,6 @@ class HiringRequestComponent extends Component {
             callBack: callBack,
             totalTime: totalTime
         };
-        console.log(data);
         if (this.props.metamask) {
             this.props.dispatch(returnBike(data));
         } else {

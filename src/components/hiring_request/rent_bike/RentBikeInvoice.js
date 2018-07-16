@@ -66,9 +66,10 @@ class RentBikeInvoice extends Component {
                     </button>
                 </div>
             );
-        } 
+        }
         return (
             <div className="text-center">
+                <h3 style={styles.thanks}>Thank you for your business!</h3>
                 <button
                     onClick={this.finishReturnBike}
                     style={styles.buttonInvoice}
@@ -76,7 +77,7 @@ class RentBikeInvoice extends Component {
                     Ok
                 </button>
             </div>
-        );     
+        );
     }
     finishReturnBike = () => {
         this.props.dispatch(finishReturnBike());

@@ -357,6 +357,10 @@ const Styles = {
         paddingTop: "30px",
         fontSize: "20px",
         fontWeight: "bold"
+    },
+    thanks: {
+        margin: 30,
+        fontStyle: "italic"
     }
 };
 

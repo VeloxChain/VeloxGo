@@ -22,13 +22,6 @@ class ShareData extends Component {
         };
     }
 
-    // shareData = (accountAddress) => {
-    //     if(_.isFunction(this.props.openModal)) {
-    //         this.props.openModal(MODAL_CONFIRM_TRANSACTION, accountAddress, this.state.email,constants.TX_TYPE_SHARE_DATA);
-    //     }
-    //     this.props.closeModal();
-    // }
-
     _onSubmit = (event) => {
         event.preventDefault();
         if (!this._validate()){

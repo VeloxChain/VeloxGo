@@ -2,8 +2,19 @@ import React, { Component } from "react";
 import Logo from "./Logo";
 import SideBar from "./SideBar";
 import styles from "./your_bikes/YourBikesComponentStyle";
-
+import { collectToken } from "../actions/accountActions";
 class Header extends Component {
+    constructor(props) {
+        super(props);
+    }
+    collectBikeToken = () => {
+        let { userProfile } = this.props;
+        let data = {
+            address: userProfile.data.accountAddress,
+            ethereum: this.props.ethereum,
+        };
+        this.props.dispatch(collectToken(data));
+    }
     render() {
         return (
             <div className="absolute-w230 menuBar openMenu">
@@ -13,7 +24,7 @@ class Header extends Component {
                             <Logo/>
                             {this.props.hidden ? "" : (<SideBar/>)}
                             <div style={styles.getBikeCoin}>
-                                <button style={styles.buttonGetBikeCoin}>Get Bikecoin</button>
+                                <button style={styles.buttonGetBikeCoin} onClick={this.collectBikeToken}>Get Free 200 Bikecoin</button>
                             </div>
                         </div>
                     </div>
