@@ -17,11 +17,19 @@ class BikeComponent extends Component {
         this.props.handleChangeRentBike(this.props.bike);
     }
 
+    handleSumaryOfBike = () =>{
+        let data = {
+            bikeInfo: this.props.bike,
+            handle: this.handleChangeRentBike
+        }
+        this.props.setType(MODAL_SUMARY_OF_BIKE, data)
+    }
+
     render() {
         return (
             <div className="col-sm-3">
                 <div style={styles.block}>
-                    <div style={styles.wrapper} onClick={() => this.props.setType(MODAL_SUMARY_OF_BIKE, this.props.bike)}>
+                    <div style={styles.wrapper} onClick={this.handleSumaryOfBike}>
                         <img
                             src={"https://gateway.ipfs.io/ipfs/" + this.props.bike.avatar}
                             alt="Bikecoin"
