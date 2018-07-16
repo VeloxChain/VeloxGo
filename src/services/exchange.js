@@ -234,6 +234,7 @@ export const returnBike = async (address, userProfileAddress, tokenId, ethereum,
     });
 };
 export const adjustBikePrice = async (address, userProfileAddress, tokenId, price, ethereum, keyStore, password) => {
+    console.log(address, userProfileAddress, tokenId, price);
     let isMetamask = _.isUndefined(password) || password === "";
     let setBikeRentalPriceData = encodeFunctionTxData("setBikeRentalPrice", ["uint256","uint256"], [tokenId, price*1000000000000000000]);
     let zeroAddress = "0x0000000000000000000000000000000000000000";
