@@ -8,7 +8,7 @@ class RegisterBikeSuccess extends Component {
                 <div className="w100p text-center">
                     <div className="row">
                         <div className="col-sm-8 col-sm-offset-2">
-                            <h3 className="text-success">You bike register successfully!</h3>
+                            <h3 className="text-success">All set!</h3>
                             <img src="images/success.png" className="success" alt="Bikecoin" />
                         </div>
                     </div>

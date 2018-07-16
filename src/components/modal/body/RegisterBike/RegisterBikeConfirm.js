@@ -27,8 +27,7 @@ class RegisterBikeConfirm extends Component {
                     <div className="row">
                         <div className="col-sm-8 col-sm-offset-2">
                             <div className="invoice">
-                                <h4>By register your bike!</h4>
-                                <h3 className="color-web">You will receive 20BKC</h3>
+                                <h3>Sign transaction!</h3>
                             </div>
                             {this._renderPassphrase()}
                         </div>

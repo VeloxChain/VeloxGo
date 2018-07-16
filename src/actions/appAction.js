@@ -46,3 +46,14 @@ export const resetToast = () => {
         type: RESET_TOAST,
     };
 };
+export const appLoadingStart = (payload) => {
+    return {
+        type: "APP_LOADING_START",
+        payload
+    };
+};
+export const appLoadingEnd = () => {
+    return {
+        type: "APP_LOADING_END",
+    };
+};
