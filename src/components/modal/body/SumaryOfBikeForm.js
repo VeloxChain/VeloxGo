@@ -31,7 +31,7 @@ class SumaryOfBike extends Component {
                     <p style={styles.title}>Price</p>
                     <h5 style={styles.text}>
                         <span style={styles.numberPrice}>200</span>
-                        <img src="images/Logo.png" style={styles.logo} alt="BikeCoin" />
+                        <img src="images/logo.png" style={styles.logo} alt="BikeCoin" />
                     </h5>
                     
                     <div>

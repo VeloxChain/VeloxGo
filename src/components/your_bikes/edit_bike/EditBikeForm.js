@@ -55,7 +55,7 @@ class EditBikeForm extends Component {
                     <p style={styles.title}>Price</p>
                     <h4 style={styles.text}>
                         <span>200 / 1h </span>
-                        <img src="images/Logo.png" style={styles.logo} alt="BikeCoin" />
+                        <img src="images/logo.png" style={styles.logo} alt="BikeCoin" />
                     </h4>
                 </div>
             );

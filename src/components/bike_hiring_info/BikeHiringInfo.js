@@ -39,7 +39,7 @@ class BikeHiringInfo extends Component {
                     <div style={styles.action}>
                         <div>
                             <span style={styles.number}>200/1h</span>
-                            <img src="images/Logo.png" style={styles.icon} alt="BikeCoin" />
+                            <img src="images/logo.png" style={styles.icon} alt="BikeCoin" />
                         </div>
                         <button style={styles.button} onClick={this.handleChangeRentBike}>Book</button>
                     </div>
