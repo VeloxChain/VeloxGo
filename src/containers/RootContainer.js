@@ -44,7 +44,7 @@ class RootContainer extends React.Component {
     }
 
     _renderTxTitle = (AppReducer)=> {
-        if (AppReducer.txTitle.length > 0) {
+        if (AppReducer.txTitle) {
             return (
                 <p style={{fontSize:20, textAlign: "center"}}>{AppReducer.txTitle}</p>
             );
