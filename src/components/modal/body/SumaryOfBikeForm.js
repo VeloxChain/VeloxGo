@@ -3,8 +3,12 @@ import styles from "./CustomCss";
 
 class SumaryOfBike extends Component {
 
+    bookingBike = () => {
+        this.props.externalData.handle();
+        this.props.closeModal();
+    }
     render() {
-        const {bikeInfo, handle} = this.props.externalData;
+        const {bikeInfo} = this.props.externalData;
         return (
             <div style={styles.sumaryOfBike}>
                 <div className="col-sm-4">
@@ -36,7 +40,7 @@ class SumaryOfBike extends Component {
                     </h5>
 
                     <div>
-                        <button style={styles.buttonBook} onClick={() => handle()}>Book</button>
+                        <button style={styles.buttonBook} onClick={this.bookingBike}>Book</button>
                     </div>
                 </div>
             </div>
