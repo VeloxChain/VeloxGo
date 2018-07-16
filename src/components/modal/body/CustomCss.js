@@ -70,6 +70,7 @@ const Styles = {
         borderRadius: "5px",
         padding: "7px 20px",
         marginTop: "20px",
+        color: "#00F58A",
         textTransform: "uppercase",
         letterSpacing: "1px",
     },
@@ -208,6 +209,10 @@ const Styles = {
 
     selectedMenuItemStyle: {
         color: "#00F58A"
+    },
+
+    actionRegister: {
+        margin: "12px -6px 0px"
     }
 }
 

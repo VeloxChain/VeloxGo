@@ -22,7 +22,7 @@ class BikeSpecifications extends React.Component {
     };
 
     _renderComponents = () => {
-        if (this.props.bikeInfo.model === "1") {
+        if (this.props.bikeInfo.model === "Model 1") {
             return <ComponentsModel1 />;
         }
 
@@ -30,7 +30,7 @@ class BikeSpecifications extends React.Component {
     }
 
     _renderGeometry = () => {
-        if (this.props.bikeInfo.model === "1") {
+        if (this.props.bikeInfo.model === "Model 1") {
             return <GeometryModel1 />;
         }
 
@@ -51,7 +51,7 @@ class BikeSpecifications extends React.Component {
                 </Tab>
                 <Tab label="geometry" value="2" style={styles.tab}>
                     <div className="text-center" style={{ marginTop: "30px" }}>
-                        <img src="images/geometries-black-1c.jpg" style={{ width: "500px" }} />
+                        <img src="images/geometries-black-1c.jpg" style={styles.geometries} alt="BikeCoin" />
                     </div>
                     {this._renderGeometry()}
                 </Tab>

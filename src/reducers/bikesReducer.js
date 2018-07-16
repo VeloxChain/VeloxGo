@@ -3,7 +3,13 @@ import ACC_ACTION from "../constants/accActions";
 const initState = {
     data: [],
     network: [],
-    loaded: []
+    loaded: [],
+    rendingBike: {
+        isRent: false,
+        bikeInfo: null,
+        startTime: null,
+    },
+    rented: []
 };
 
 const bikesReducer = (state = initState, action) => {
@@ -24,13 +30,8 @@ const bikesReducer = (state = initState, action) => {
             network: newNetwork
         };
     case BIKES.LOAD_NETWORK_BIKE :
-        newLoadded = state.loaded;
-        if (newLoadded.includes(action.payload.tokenId)) {
-            return state;
-        }
         newNetwork = state.network;
         newNetwork.push(action.payload);
-        newLoadded.push(action.payload.tokenId);
         return {
             ...state,
             network: newNetwork
@@ -69,11 +70,75 @@ const bikesReducer = (state = initState, action) => {
             ...state,
             data: newState
         };
+    case BIKES.RESET_YOUR_BIKES:
+        return {
+            ...state,
+            data: [],
+        };
+    case BIKES.RESET_NETWORK_BIKE:
+        return {
+            ...state,
+            network: [],
+        };
+    case BIKES.FINISH_ADJUST_BIKE_PRICE:
+        newState = state.data;
+        newState[action.payload.index].price = action.payload.price;
+        newState[action.payload.index].forRent = action.payload.forRent;
+        return {
+            ...state,
+            data: newState
+        };
     case ACC_ACTION.LOG_OUT:
         return {
             data: [],
             network: [],
-            loaded: []
+            loaded: [],
+            rendingBike: {
+                isRent: false,
+                bikeInfo: null,
+                startTime: null,
+            }
+        };
+    case BIKES.FINISH_RENT_BIKE:
+        return {
+            ...state,
+            rendingBike: {
+                isRent: true,
+                bikeInfo: action.payload.bikeInfo,
+                startTime: action.payload.startTime,
+            }
+        };
+    case BIKES.FINISH_RETURN_BIKE:
+        return {
+            ...state,
+            rendingBike: {
+                isRent: false,
+                bikeInfo: null,
+                startTime: null,
+            }
+        };
+    case BIKES.GET_NETWORK_BIKE_PRICE:
+        newState = state.network;
+        newState[action.payload.index].price = action.payload.price;
+        newState[action.payload.index].forRent = action.payload.price > 0;
+        return {
+            ...state,
+            network: newState
+        };
+    case BIKES.GET_USER_BIKE_PRICE:
+        newState = state.data;
+        newState[action.payload.index].price = action.payload.price;
+        newState[action.payload.index].forRent = action.payload.price > 0;
+        return {
+            ...state,
+            data: newState
+        };
+    case BIKES.CHANGE_BIKE_FORENT_STATUS:
+        newState = state.data;
+        newState[action.payload.index].forRent = !newState[action.payload.index].forRent;
+        return {
+            ...state,
+            data: newState
         };
     default:
         return state;

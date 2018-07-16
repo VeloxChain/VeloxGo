@@ -8,7 +8,7 @@ class YourAccountForm extends Component {
         return (
             <a
                 href={"https://ropsten.etherscan.io/address/" + accounts.address}
-                title="View ETH Address On EtherScan"
+                title="View Owner Address On EtherScan"
                 target="_blank" >
                 {accounts.address + " "}
                 <i className="fa fa-external-link"></i>
@@ -20,7 +20,7 @@ class YourAccountForm extends Component {
         return (
             <a
                 href={"https://ropsten.etherscan.io/address/" + userProfileAddress}
-                title="View Profile Address On EtherScan"
+                title="View Wallet Address On EtherScan"
                 target="_blank" >
                 {userProfileAddress + " "}
                 <i className="fa fa-external-link"></i>
@@ -37,13 +37,13 @@ class YourAccountForm extends Component {
                     <div className="col-sm-10">
                         <form style={styles.form}>
                             <div className="form-group row">
-                                <label className="col-sm-3" style={styles.labelText}>ETH Address:</label>
+                                <label className="col-sm-3" style={styles.labelText}>Owner Address:</label>
                                 <div className="col-sm-9">
                                     <p style={styles.address}>{this._viewETHOnEtherScan()}</p>
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <label className="col-sm-3" style={styles.labelText}>User Profile Address:</label>
+                                <label className="col-sm-3" style={styles.labelText}>Wallet Address:</label>
                                 <div className="col-sm-9">
                                     <p style={styles.address}>{this._viewProfileOnEtherScan()}</p>
                                 </div>

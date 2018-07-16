@@ -43,3 +43,33 @@ export function initNetworkBikes(payload) {
         payload
     };
 }
+export function rentBike(payload) {
+    return {
+        type: BIKES.RENT_BIKE,
+        payload
+    };
+}
+export function returnBike(payload) {
+    return {
+        type: BIKES.RETURN_BIKE,
+        payload
+    };
+}
+export function adjustBikePrice(payload) {
+    return {
+        type: BIKES.ADJUST_BIKE_PRICE,
+        payload
+    };
+}
+export function cancelAdjustBikePrice(payload) {
+    return {
+        type: BIKES.CANCEL_ADJUST_BIKE_PRICE,
+        payload
+    };
+}
+export function changeBikeStatus(payload) {
+    return {
+        type: BIKES.CHANGE_BIKE_FORENT_STATUS,
+        payload
+    };
+}

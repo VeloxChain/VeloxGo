@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./BikeHiringInfoStyle";
-import loadingImage from '../../assets/images/loading.gif'
+import loadingImage from "../../assets/images/loading.gif";
 
 class BikeHiringInfo extends Component {
     constructor(props) {
@@ -10,12 +10,15 @@ class BikeHiringInfo extends Component {
             loaded: false
         };
     }
+    handleChangeRentBike = () => {
+        this.props.handleChangeRentBike(this.props.externalData);
+    }
 
     render() {
         return (
             <div style={styles.sumaryOfBike}>
                 <img
-                    style={{...styles.bikeImage, ...{display: this.state.loaded? 'block': 'none'}}}
+                    style={{...styles.bikeImage, ...{display: this.state.loaded? "block": "none"}}}
                     src={"https://gateway.ipfs.io/ipfs/" + this.props.externalData.avatar}
                     alt="Bikecoin"
                     onLoad={()=>this.setState({loaded: true })}
@@ -23,7 +26,7 @@ class BikeHiringInfo extends Component {
                 <img
                     src={loadingImage}
                     alt="Bikecoin"
-                    style={{...styles.bikeImage, ...{display: this.state.loaded? 'none': 'block'}}}
+                    style={{...styles.bikeImage, ...{display: this.state.loaded? "none": "block"}}}
                 />
 
                 <div style={styles.bodyContent}>
@@ -35,10 +38,10 @@ class BikeHiringInfo extends Component {
                     </div>
                     <div style={styles.action}>
                         <div>
-                            <span style={styles.number}>20</span>
-                            <img src="images/Logo.png" style={styles.icon} alt="BikeCoin" />
+                            <span style={styles.number}>{this.props.externalData.price.toLocaleString()} <img src="images/logo.png" style={styles.icon} alt="BikeCoin" /> / 1h</span>
+
                         </div>
-                        <button style={styles.button}>Book</button>
+                        <button style={styles.button} onClick={this.handleChangeRentBike}>Book</button>
                     </div>
                 </div>
             </div>

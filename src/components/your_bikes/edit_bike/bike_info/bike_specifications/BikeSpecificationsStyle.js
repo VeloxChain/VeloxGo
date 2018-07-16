@@ -38,6 +38,9 @@ const Styles = {
     borderNone: {
         border: "none",
         borderColor: "transparent",
+    },
+    geometries: {
+        width: "500px"
     }
 };
 

@@ -28,11 +28,9 @@ class ConfirmTransaction extends Component {
     }
 
     _onDeploy = () => {
-        const { type, data, handle } = this.props.externalData;
-        if (type === "updateUserProfile") {
-            data.passphrase = this.state.passphrase;
-            this.props.dispatch(handle(data));
-        }
+        const { data, handle } = this.props.externalData;
+        data.passphrase = this.state.passphrase;
+        this.props.dispatch(handle(data));
         this.props.closeModal();
     }
 
@@ -53,7 +51,7 @@ class ConfirmTransaction extends Component {
                             floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                             underlineFocusStyle={styles.underlineStyle}
                         />
-                        
+
                     </div>
                     <div className="action-form">
                         <button onClick={this._onDeploy} style={styles.buttonBack}>

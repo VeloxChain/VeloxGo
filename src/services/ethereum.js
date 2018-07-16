@@ -24,6 +24,7 @@ export default class EthereumService {
         this.relayTxContract = this.rpc.eth.contract(constants.TX_RELAY_ABI).at(constants.TX_RELAY_ADDRESS);
         this.userProfileContract = this.rpc.eth.contract(constants.BIKECOIN_USER_PROFILE_ABI);
         this.ownerShipContract = this.rpc.eth.contract(constants.BIKECOIN_OWNER_SHIP_PROTOCOL_ABI).at(constants.BIKECOIN_OWNER_SHIP_ADDRESS);
+        this.bikeTokenContract = this.rpc.eth.contract(constants.BIKECOIN_TOKEN_ABI).at(constants.BIKECOIN_TOKEN_ADDRESS);
         this.intervalID = null;
     }
 
@@ -65,7 +66,30 @@ export default class EthereumService {
     }
 
     getBikeCoinBalance(address, callback) {
-        callback(0);
+        this.bikeTokenContract.balanceOf(address, (error, balance) => {
+            if (error != null) {
+                console.log(error); // eslint-disable-line
+            } else {
+                let weiBalance = balance.toNumber();
+                let realBalance = this.rpc.fromWei(weiBalance);
+                callback(realBalance);
+            }
+        });
+    }
+    getBKCBalance = (address) => {
+        let _this2 = this;
+        return new Promise((resolve) => {
+            _this2.bikeTokenContract.balanceOf(address, (error, balance) => {
+                if (error != null) {
+                    console.log(error); // eslint-disable-line
+                } else {
+                    let weiBalance = balance.toNumber();
+                    let realBalance = _this2.rpc.fromWei(weiBalance);
+                    resolve(realBalance);
+                }
+            });
+        });
+
     }
 
     getNonce(address, callback) {

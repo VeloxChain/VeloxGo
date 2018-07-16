@@ -95,3 +95,9 @@ export function logout() {
         type: "RESET"
     };
 }
+export function collectToken(payload) {
+    return {
+        type: ACC_ACTION.COLLECT_TOKEN,
+        payload: payload
+    };
+}

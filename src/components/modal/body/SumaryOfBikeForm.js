@@ -14,7 +14,7 @@ class SumaryOfBike extends Component {
                             alt="Bikecoin"
                         />
                     </div>
-                    
+
                 </div>
                 <div className="col-sm-8">
                     <p style={styles.title}>Manufacturer</p>
@@ -30,10 +30,10 @@ class SumaryOfBike extends Component {
 
                     <p style={styles.title}>Price</p>
                     <h5 style={styles.text}>
-                        <span style={styles.numberPrice}>200</span>
+                        <span style={styles.numberPrice}>{this.props.externalData.price.toLocaleString()}</span>
                         <img src="images/Logo.png" style={styles.logo} alt="BikeCoin" />
                     </h5>
-                    
+
                     <div>
                         <button style={styles.buttonBook}>Book</button>
                     </div>

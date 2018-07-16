@@ -13,6 +13,7 @@ import HiringRequestComponent from "../components/hiring_request/HiringRequestCo
 import YourAccountComponent from "../components/your_account/YourAccountComponent";
 import Web3 from "web3";
 import VerifiedBikeComponent from "../components/verified/VerifiedBikeComponent";
+import Logs from "../components/logs/logs";
 class root extends React.Component {
     constructor(props) {
         super(props);
@@ -54,6 +55,7 @@ class root extends React.Component {
                 <Route exact path="/hiring_request" render={() => <HiringRequestComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
                 <Route exact path="/your_account" render={() => <YourAccountComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
                 <Route exact path="/verified" render={() => <VerifiedBikeComponent {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
+                <Route exact path="/logs" render={() => <Logs {...this.props} setType={this.setType} getAccountAddress={this.getAccountAddress} metamask={this.isMetamask()} getUserProfileAddress={this.getUserProfileAddress} />} />
             </Switch>
         );
     }
@@ -66,7 +68,7 @@ class root extends React.Component {
             }
         }, 1000);
     }
-    componentWillsReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         const { accounts } = nextProps;
         if (accounts.isLogout) {
             this.setType(MODAL_OWNER_LOGIN);
@@ -95,13 +97,13 @@ class root extends React.Component {
         return isMetaMask;
     }
     getUserProfileAddress = async () => {
-        let userProfileAddress = localStorage.getItem("userProfileAddress");
-        if (userProfileAddress !== null) {
-            return userProfileAddress;
-        }
+        // let userProfileAddress = localStorage.getItem("userProfileAddress");
+        // if (userProfileAddress !== null) {
+        //     return userProfileAddress;
+        // }
         let accountAddress = this.getAccountAddress();
-        userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(accountAddress);
-        localStorage.setItem("userProfileAddress", userProfileAddress);
+        let userProfileAddress = await this.props.ethereum.networkAdress.getUserProfile(accountAddress);
+        // localStorage.setItem("userProfileAddress", userProfileAddress);
         return userProfileAddress;
     }
     render() {

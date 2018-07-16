@@ -160,6 +160,106 @@ export const createNewBike = async (address, profileAddress, ipfsHash ,ethereum,
         });
     });
 };
+export const collectBikeToken = async (address) => {
+    return new Promise( (resolve) => {
+        fetch("/api/collectToken", {
+            method: "POST",
+            body: JSON.stringify({address: address}),
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+        }).then((response) => {
+            return response.json();
+        }).then((res) => {
+            resolve(res);
+        });
+    });
+};
+export const rentBike = async (address, userProfileAddress, tokenId, ethereum, keyStore, password) => {
+    console.log(address, userProfileAddress, tokenId);
+    let isMetamask = _.isUndefined(password) || password === "";
+    let zeroAddress = "0x0000000000000000000000000000000000000000";
+    let now = new Date();
+    let seconds = Math.round(now.getTime()/1000);
+    let types = ["address","uint256","uint256", "address","address"];
+    let params = [address, tokenId, seconds, userProfileAddress, constants.BIKECOIN_OWNER_SHIP_ADDRESS];
+    let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
+    let txRelay = ethereum.relayTxContract;
+
+    var privKey = "";
+    if (!isMetamask) {
+        try {
+            privKey = unlock(keyStore, password, true);
+        } catch (e) {
+            return {error: true, msg: "Wrong Passphrase!"};
+        }
+    }
+    return new Promise( (resolve) => {
+        signPayload(address, txRelay, zeroAddress, destinationAddress, "startBikeRental", types, params,privKey, isMetamask, (res) => {
+            if (res === false) {
+                resolve(res);
+                return;
+            }
+            resolve(callApiReplayTx(res));
+        });
+    });
+};
+export const returnBike = async (address, userProfileAddress, tokenId, ethereum, keyStore, password) => {
+    console.log(address, userProfileAddress, tokenId);
+    let isMetamask = _.isUndefined(password) || password === "";
+    let zeroAddress = "0x0000000000000000000000000000000000000000";
+    let now = new Date();
+    let seconds = Math.round(now.getTime()/1000);
+    let types = ["address","uint256","uint256", "address","address","address"];
+    let params = [address, tokenId, seconds, userProfileAddress, constants.BIKECOIN_OWNER_SHIP_ADDRESS, constants.BIKECOIN_TOKEN_ADDRESS];
+    let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
+    let txRelay = ethereum.relayTxContract;
+    var privKey = "";
+    if (!isMetamask) {
+        try {
+            privKey = unlock(keyStore, password, true);
+        } catch (e) {
+            return {error: true, msg: "Wrong Passphrase!"};
+        }
+    }
+    return new Promise( (resolve) => {
+        signPayload(address, txRelay, zeroAddress, destinationAddress, "endBikeRental", types, params,privKey, isMetamask, (res) => {
+            if (res === false) {
+                resolve(res);
+                return;
+            }
+            resolve(callApiReplayTx(res));
+        });
+    });
+};
+export const adjustBikePrice = async (address, userProfileAddress, tokenId, price, ethereum, keyStore, password) => {
+    let isMetamask = _.isUndefined(password) || password === "";
+    let setBikeRentalPriceData = encodeFunctionTxData("setBikeRentalPrice", ["uint256","uint256"], [tokenId, price*1000000000000000000]);
+    let zeroAddress = "0x0000000000000000000000000000000000000000";
+    let types = ["address", "address","address",  "uint256", "bytes"];
+    let params = [address, userProfileAddress, constants.BIKECOIN_OWNER_SHIP_ADDRESS, 0, setBikeRentalPriceData];
+    let destinationAddress = constants.BIKECOIN_NETWORK_ADDRESS;
+    let txRelay = ethereum.relayTxContract;
+    var privKey = "";
+    if (!isMetamask) {
+        try {
+            privKey = unlock(keyStore, password, true);
+        } catch (e) {
+            return {error: true, msg: "Wrong Passphrase!"};
+        }
+    }
+    return new Promise( (resolve) => {
+        signPayload(address, txRelay, zeroAddress, destinationAddress, "forwardTo", types, params,privKey, isMetamask, (res) => {
+            if (res === false) {
+                resolve(res);
+                return;
+            }
+            resolve(callApiReplayTx(res));
+        });
+    });
+};
+
 export const transferBike = async (address, addressFrom, addressTo, tokenID ,ethereum, keyStore, password) => {
     console.log(address, addressFrom, addressTo, tokenID); //eslint-disable-line
     let isMetamask = _.isUndefined(password) || password === "";

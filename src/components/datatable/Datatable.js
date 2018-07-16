@@ -12,31 +12,15 @@ class Datatable extends Component {
         return heading;
     }
 
-    _renderAction = (row, rowIndex) => {
-        var actions = [];
-        _.forEach(this.props.actions, (action, keyAction) => {
-            actions.push(<a key={keyAction} onClick={() => action.handle(row, rowIndex)}>{action.name}</a>);
-        });
-        return actions;
-    }
-    _renderToggle = (row, rowIndex, name) => {
-        let toggle;
-        toggle = this.props.toggle[name];
-        return toggle(row.forRent, row, rowIndex);
-    }
-
-
     _renderField = (data, rowIndex) => {
         var fields = [];
         _.forEach(this.props.params, (value, key) => {
-            let rowData = (data[value.value]);
-            if (value.value === "action") {
-                rowData = (this._renderAction(data, rowIndex));
+            let rowData;
+            if (value.renderer) {
+                rowData = value.renderer(data, value.value, rowIndex);
+            } else {
+                rowData = (data[value.value]);
             }
-            if (value.value === "toggle") {
-                rowData = (this._renderToggle(data, rowIndex, value.name));
-            }
-
             fields.push(<td key={key} style={styles.textTd}>{rowData}</td>);
 
         });

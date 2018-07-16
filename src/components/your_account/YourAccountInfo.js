@@ -4,7 +4,7 @@ import Dropzone from "react-dropzone";
 import { Dialog } from "material-ui";
 import _ from "lodash";
 import ImageCroperProfile from "../image_croper/ImageCroperProfile";
-
+import { collectToken } from "../../actions/accountActions";
 class YourAccountInfo extends Component {
     constructor(props) {
         super(props);
@@ -67,7 +67,7 @@ class YourAccountInfo extends Component {
             //
         }
     }
-    
+
     handleCropImage = (newSrc) => {
         this.setState({
             imageData: new Buffer(newSrc.replace(/^data:image\/(png|gif|jpeg|jpg);base64,/,""), "base64"),
@@ -78,6 +78,16 @@ class YourAccountInfo extends Component {
         data["imageData"] = new Buffer(newSrc.replace(/^data:image\/(png|gif|jpeg|jpg);base64,/,""), "base64");
 
         this.props.onChangeAvatar(data);
+    }
+
+    collectBikeToken = () => {
+        let { userProfile } = this.props;
+        let data = {
+            address: userProfile.data.accountAddress,
+            ethereum: this.props.ethereum,
+            callBack: this.props.getBKCBalance,
+        };
+        this.props.dispatch(collectToken(data));
     }
 
     render() {
@@ -106,20 +116,29 @@ class YourAccountInfo extends Component {
                         </Dropzone>
                         <div style={styles.block}>
                             <h4 style={styles.name}>{userProfile.data.firstname + " " + userProfile.data.lastname}</h4>
-                            <button style={styles.buttonCollect}>
+                            <button style={styles.buttonCollect} onClick={this.collectBikeToken}>
                                 <span>collect 200 </span>
-                                <img src="images/icon.png" alt="Bikecoin" style={styles.icon} />
+                                <img src="images/logo.png" alt="Bikecoin" style={styles.icon} />
                             </button>
                         </div>
                     </div>
-                    <div style={styles.wrappFlex}>
+                    <div style={styles.wrappCoins}>
                         <div style={styles.wrappFlexLeft}>
+                            <span style={styles.iconLabel}>BKC</span>
+                            <span style={{margin: "auto"}}></span>
                             <span style={styles.text}>{this.props.info.bkc}</span>
-                            <img src="images/Logo.png" alt="BikeCoin" style={styles.iconBike} />
+                            <div style={styles.wrapIconCoin}>
+                                <img src="images/logo.png" alt="BikeCoin" style={styles.iconBike} />
+                            </div>
+
                         </div>
-                        <div style={styles.wrappFlexRight}>
-                            <span style={styles.textEthereum}>{this.props.info.eth}</span>
-                            <img src="images/ethereum.png" alt="BikeCoin" style={styles.iconBike} />
+                        <div style={styles.wrappFlexLeft}>
+                            <span style={styles.iconLabel}>ETH</span>
+                            <span style={{margin: "auto"}}></span>
+                            <span style={styles.text}>{this.props.info.eth}</span>
+                            <div style={styles.wrapIconCoin}>
+                                <img src="images/ethereum.png" alt="BikeCoin" style={styles.iconBike} />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -2,12 +2,13 @@ var Web3 = require("web3");
 var Transaction = require("ethereumjs-tx");
 const { EthHdWallet } = require("eth-hd-wallet");
 const TXRELAYABI = require("./TXRELAYABI.json");
+const bikeToken = require("./bikeToken.json");
 
 const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/faF0xSQUt0ezsDFYglOe"));
 
 let TXRELAY = web3.eth.contract(TXRELAYABI);
-let TXRELAYAddress = "0x6b1a60310951930b932406599a68ab87d3e60f43";
-
+let TXRELAYAddress = "0x20f2f0eb661db8c8e52e3b5bca64bb80c8838afa";
+let BIKE_TOKEN_CONTRACT = web3.eth.contract(bikeToken).at("0x4c9aa6ca9cbc1fa4b3b5c68ea32c247d7b060b32");
 const hdWallet = EthHdWallet.fromMnemonic("frost mimic deer annual build develop discover split rose gather ahead gloom");
 hdWallet.generateAddresses(1);
 const { wallet } = hdWallet._children[0];
@@ -30,7 +31,7 @@ module.exports = function (app) {
                 value: 0,
                 nonce: nonce,
                 gasPrice: 100000000000,
-                gasLimit: 1000000,
+                gasLimit: 2000000,
                 data: txRelayData,
                 chainId: 3 /* see https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md */
             };
@@ -47,7 +48,31 @@ module.exports = function (app) {
                 return res.json({ error: e, tx: txHash });
             });
         });
+    });
+    app.post("/api/collectToken", async (req, res) => {
+        let from = signingWalletAddress;
+        let to = req.body.address;
+        let amount = 200000000000000000000;
+        let txData = BIKE_TOKEN_CONTRACT.transfer.getData(to, amount, { from: from });
+        const nonce = web3.eth.getTransactionCount(from);
+        const txParams = {
+            from: from,
+            to: BIKE_TOKEN_CONTRACT.address,
+            value: 0,
+            nonce: nonce,
+            gasPrice: 50000000000,
+            gasLimit: 2100000,
+            data: txData,
+            chainId: 3,
+        };
+        const tx = new Transaction(txParams);
+        tx.sign(wallet.getPrivateKey());
 
-
+        var raw = "0x" + tx.serialize().toString("hex");
+        web3.eth.sendRawTransaction(raw, (e,r) => {
+            let txHash = r;
+            console.log(e, txHash); // eslint-disable-line
+            return res.json({ error: e, tx: txHash });
+        });
     });
 };

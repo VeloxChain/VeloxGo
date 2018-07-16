@@ -153,8 +153,8 @@ class RegisterBikeInformation extends Component {
                                 style={styles.mb20}
                                 fullWidth
                             >
-                                <MenuItem value={"1"} primaryText="Model 1" />
-                                <MenuItem value={"1C"} primaryText="Model 1C" />
+                                <MenuItem value={"Model 1"} primaryText="Model 1" />
+                                <MenuItem value={"Model 1C"} primaryText="Model 1C" />
                             </SelectField>
 
                             <p style={styles.upload}>Upload your invoice</p>

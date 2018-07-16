@@ -26,16 +26,24 @@ class OwnerHistory extends React.Component {
             data: ownerHistory
         });
     }
+    _renderAddExOwner = () => {
+        if (this.props.isRent) {
+            return;
+        }
+        return (
+            <button
+                style={styles.button}
+                onClick={() => this.props.setType(MODAL_ADD_OWNER)}
+            >
+                Add Ex-Owner
+            </button>
+        );
+    }
     render() {
         return (
             <div className="table-bike">
                 <div style={styles.action}>
-                    <button
-                        style={styles.button}
-                        onClick={() => this.props.setType(MODAL_ADD_OWNER)}
-                    >
-                        Add Owner
-                    </button>
+                    {this._renderAddExOwner()}
                 </div>
                 <Datatable
                     params={this.state.heading}
