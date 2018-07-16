@@ -73,3 +73,8 @@ export function changeBikeStatus(payload) {
         payload
     };
 }
+export function finishReturnBike() {
+    return {
+        type: BIKES.FINISH_RETURN_BIKE,
+    };
+}

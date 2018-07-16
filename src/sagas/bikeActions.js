@@ -237,14 +237,12 @@ function* rentBikeAction(action) {
 function* returnBikeAction(action) {
     yield put({type: "APP_LOADING_START"});
     yield delay(10000);
-    const { address, tokenId, ethereum, keyStore, passphrase } = action.payload;
+    const { address, tokenId, totalTime, ethereum, keyStore, passphrase, callBack } = action.payload;
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
-    let tx = yield call(returnBike, address, userProfileAddress, tokenId, ethereum, keyStore, passphrase);
+    let tx = yield call(returnBike, address, userProfileAddress, tokenId, totalTime, ethereum, keyStore, passphrase);
     let txStatus = yield call(getTxStatus, tx, ethereum);
     if (txStatus === false) return;
-    yield put({
-        type: BIKES.FINISH_RETURN_BIKE,
-    });
+    yield call(callBack);
     yield put({type: "APP_LOADING_END"});
     toast.success("Success!");
 }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Logo from "./Logo";
 import SideBar from "./SideBar";
+import styles from "./your_bikes/YourBikesComponentStyle";
 
 class Header extends Component {
     render() {
@@ -11,6 +12,9 @@ class Header extends Component {
                         <div className="left_col scroll-view vh100">
                             <Logo/>
                             {this.props.hidden ? "" : (<SideBar/>)}
+                            <div style={styles.getBikeCoin}>
+                                <button style={styles.buttonGetBikeCoin}>Get Bikecoin</button>
+                            </div>
                         </div>
                     </div>
                 </div>
