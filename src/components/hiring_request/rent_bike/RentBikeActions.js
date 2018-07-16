@@ -21,6 +21,13 @@ class RentBikeActions extends Component {
         };
     }
 
+    handleReturnBike = () => {
+        this.props.renderRental();
+        this.setState({
+            showDialog: !this.state.showDialog
+        });
+    }
+
     handleChangeShowDialog = () => {
         this.setState({
             showDialog: !this.state.showDialog
@@ -48,6 +55,7 @@ class RentBikeActions extends Component {
                     bikeInfo={this.props.bikeInfo}
                     finishRentBike={this.props.finishRentBike}
                     isConfirm={this.state.isConfirm}
+                    invoice={this.props.invoice}
                     handleChangeConfirm={this.handleChangeConfirm}
                 />
             );
@@ -104,7 +112,7 @@ class RentBikeActions extends Component {
                         </div>
                         <button
                             style={styles.buttonVerified}
-                            onClick={this.handleChangeShowDialog}
+                            onClick={this.handleReturnBike}
                         >
                             Return Bike
                         </button>

@@ -9,6 +9,10 @@ class RentBikeComponent extends Component {
         super(props);
         this.state = this.props.bikeInfo;
         this.state.totalTimeUsed = "00:00:00";
+        this.state.invoice = {
+            totalTimeUsed: "",
+            totalTime: "",
+        };
     }
 
     calculateTotalTimeUsed = (duration) => {
@@ -26,6 +30,38 @@ class RentBikeComponent extends Component {
             minutes = "0" + minutes;
         }
         return hours + ":" + minutes + ":" + seconds;
+    }
+
+    _renderRental = () => {
+        const { bikeInfo } = this.props;
+        let startTime = moment(bikeInfo.startTime*1000);
+        let now = moment();
+        let duration = moment.duration(now.diff(startTime));
+        let totalTime = now.unix();
+        let dataDuration = duration._data;
+        let totalTimeUsed = this.calculateTotalTimeUsed(dataDuration);
+        this.setState({
+            invoice: {
+                totalTimeUsed: totalTimeUsed,
+                totalTime: totalTime
+            }
+        }, () => this._renderBKCUsed(duration));
+    }
+    _renderBKCUsed = (duration) => {
+        const { bikeInfo } = this.props.bikeInfo;
+        let totalTimeUsed = duration.as("seconds");
+        let subTotal = bikeInfo.price /3600 * totalTimeUsed;
+        subTotal = subTotal.toFixed(2);
+        subTotal = subTotal.toLocaleString();
+        this.setState((prevState) =>{
+            return {
+                invoice: {
+                    ...prevState.invoice,
+                    subTotal: subTotal
+                }
+            };
+
+        });
     }
 
     _renderRentalPeriod = () => {
@@ -64,6 +100,8 @@ class RentBikeComponent extends Component {
                             {...this.props}
                             bikeInfo={this.state}
                             calculateTotalTimeUsed={this.calculateTotalTimeUsed}
+                            renderRental={this._renderRental}
+                            invoice={this.state.invoice}
                             finishRentBike={this.props.finishRentBike} />
                     </div>
                     <div className="col-sm-12">

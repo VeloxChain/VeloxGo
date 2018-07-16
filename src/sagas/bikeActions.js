@@ -224,14 +224,15 @@ function* rentBikeAction(action) {
         toast.error("You should have at least 200 BKC to book a bike!");
         return;
     }
-    let tx = yield call(rentBike, address, userProfileAddress, bikeInfo.tokenId, ethereum, keyStore, passphrase);
+    let seconds = moment().unix();
+    let tx = yield call(rentBike, address, userProfileAddress, bikeInfo.tokenId, seconds, ethereum, keyStore, passphrase);
     let txStatus = yield call(getTxStatus, tx, ethereum, "Waiting For Approval.....");
     if (txStatus === false) return;
     yield put({
         type: BIKES.FINISH_RENT_BIKE,
         payload: {
             bikeInfo: bikeInfo,
-            startTime: moment().unix()
+            startTime: seconds
         }
     });
     yield put({type: "APP_LOADING_END"});
