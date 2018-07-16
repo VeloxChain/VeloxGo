@@ -43,7 +43,7 @@ class BikeComponent extends Component {
                     <div style={styles.action}>
                         <div style={styles.price}>
                             <span style={styles.number}>{this.props.bike.price.toLocaleString()}</span>
-                            <img src="images/Logo.png" style={styles.logo} alt="BikeCoin" />
+                            <img src="images/logo.png" style={styles.logo} alt="BikeCoin" />
                         </div>
                         <div style={styles.dvdButton}>
                             <button style={styles.button} onClick={this.handleChangeRentBike}>book</button>

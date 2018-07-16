@@ -33,7 +33,10 @@ class YourBikesComponent extends Component {
     }
     _renderPrice = (data, value) => {
         if (!_.isUndefined(data[value]) && parseInt(data[value]) > 0) {
-            return parseInt(data[value]).toLocaleString();
+            let price = parseInt(data[value]).toLocaleString();
+            return (
+                <span><img src="images/logo.png" style={styles.logo} alt="BikeCoin" /> {price} </span>
+            );
         }
         return "";
     }
