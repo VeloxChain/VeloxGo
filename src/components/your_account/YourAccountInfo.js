@@ -118,7 +118,7 @@ class YourAccountInfo extends Component {
                             <h4 style={styles.name}>{userProfile.data.firstname + " " + userProfile.data.lastname}</h4>
                             <button style={styles.buttonCollect} onClick={this.collectBikeToken}>
                                 <span>collect 200 </span>
-                                <img src="images/icon.png" alt="Bikecoin" style={styles.icon} />
+                                <img src="images/logo.png" alt="Bikecoin" style={styles.icon} />
                             </button>
                         </div>
                     </div>
@@ -128,7 +128,7 @@ class YourAccountInfo extends Component {
                             <span style={{margin: "auto"}}></span>
                             <span style={styles.text}>{this.props.info.bkc}</span>
                             <div style={styles.wrapIconCoin}>
-                                <img src="images/Logo.png" alt="BikeCoin" style={styles.iconBike} />
+                                <img src="images/logo.png" alt="BikeCoin" style={styles.iconBike} />
                             </div>
 
                         </div>
