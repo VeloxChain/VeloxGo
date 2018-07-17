@@ -12,6 +12,8 @@ import store from "./store";
 
 import createHistory from 'history/createHashHistory';
 
+import Web3 from "web3";
+
 // import ethereum from './services/ethereum';
 // const createStoreWithMiddleware = applyMiddleware()(createStore)
 
@@ -25,13 +27,21 @@ import createHistory from 'history/createHashHistory';
 
 
 // ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(
-    <Provider store={store}>
-        <MuiThemeProvider>
-            <BrowserRouter history={createHistory()}>
-                <App />
-            </BrowserRouter>
-        </MuiThemeProvider>
-    </Provider>,
-    document.getElementById("root")
-);
+
+if(typeof web3 !== "undefined") {
+    ReactDOM.render(
+        <Provider store={store}>
+            <MuiThemeProvider>
+                <BrowserRouter history={createHistory()}>
+                    <App />
+                </BrowserRouter>
+            </MuiThemeProvider>
+        </Provider>,
+        document.getElementById("root")
+    );
+} else {
+    ReactDOM.render(
+        <h2 className="not-Support-Mobile">Mobile app version in progress. Please switch to desktop for the MVP demo</h2>,
+        document.getElementById("root")
+    );
+}
