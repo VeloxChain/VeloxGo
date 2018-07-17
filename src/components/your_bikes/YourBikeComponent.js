@@ -205,12 +205,14 @@ class YourBikesComponent extends Component {
                         value={this.state.price}
                         onKeyPress={(e) => this.handleKeyPress(e)}
                         onChange={(e) => this.setState({ price: e.target.value })}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     />
                     {this._renderPassphrase()}
-                    <div className="row pull-right" style={{marginTop: "50px"}}>
+                    <div className="row pull-right" style={styles.active}>
                         <button
                             onClick={this.handleHideSetPriceDialog}
-                            style={{...styles.button, marginRight: "30px"}}
+                            style={{...styles.button, ...styles.marginRight30}}
                         >
                             Cancel
                         </button>
