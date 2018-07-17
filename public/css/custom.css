@@ -1020,10 +1020,21 @@ input#file:focus {
     border-radius: 50%;
     padding: 5px;
 }
-
-.not-Support-Mobile {
-    margin-top: 50px;
+.support-mobile {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #3B3B3B;
     text-align: center;
+}
+.not-Support-Mobile {
+    margin-top: 70px;
     padding: 0 15px;
+    color: #fff;
+}
+
+.logo-mobile {
+    width: 250px;
+    margin-top: 50px;
 }
   
