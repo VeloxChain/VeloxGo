@@ -31,54 +31,6 @@ let listSigningWalletAddress = hdWallet._children.map((child) => {
     }
 });
 
-function saveDataToStore(data) {
-    return new Promise((resolve, reject) => {
-        db.insert(data, function (err, newDocs) {
-            if(err) {
-                reject({err});
-            }
-            resolve(newDocs);
-        });
-    });
-}
-
-function getDataFromStore(condition = {}) {
-    return new Promise((resolve, reject) => {
-        db.find(condition, function (err, docs) {
-            if(err) {
-                reject({err});
-            }
-            resolve(docs);
-        });
-    });
-}
-
-function removeDataFromStore(condition) {
-    return new Promise((resolve, reject) => {
-        db.remove(condition, function (err, numRemoved) {
-            if(err) {
-                reject({err});
-            }
-            resolve(numRemoved);
-        });
-    });
-}
-
-function getAvailableWallet() {
-    return new Promise((resolve, reject) => {
-        getDataFromStore().then(function(wallets){
-            _.forEach(listSigningWalletAddress, function(wallet) {
-                if(!_.find(wallets, {address: wallet.address})){
-                    resolve(wallet);
-                }
-            });
-            reject(null);
-        }).catch(function(){
-            reject(null);
-        })
-    });
-}
-
 let binaryTreeServices = new BinaryTreeServices(listSigningWalletAddress);
 console.log('--------------------------------------------------');
 
