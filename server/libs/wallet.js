@@ -3,117 +3,150 @@ var Transaction = require("ethereumjs-tx");
 const {
     EthHdWallet
 } = require("eth-hd-wallet");
-
 var BinaryTreeServices = require("./binaryTreeServices");
+let web3 = null;
 
-const menenomic = require("../constants/menenomic.js")
-
-// const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/faF0xSQUt0ezsDFYglOe"));
-const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-
-const hdWallet = EthHdWallet.fromMnemonic(menenomic);
-hdWallet.generateAddresses(10);
-
-let listSigningWalletAddress = hdWallet._children.map((child) => {
-    return {
-        address: "0x" + child.wallet.getAddress().toString("hex"),
-        privateKey: child.wallet.getPrivateKey()
+class WalletManager {
+    constructor(numberOfWallet, menenomic, providerAddress){
+        this.totalNode = numberOfWallet;
+        this.totalToken = 0;
+        this.txAvgFee = 0;
+        this.tokenForOneNode= 0;
+        this.countTemp = 0;
+        
+        web3 = new Web3(new Web3.providers.HttpProvider(providerAddress));
+        const hdWallet = EthHdWallet.fromMnemonic(menenomic);
+        hdWallet.generateAddresses(numberOfWallet);
+        let listSigningWalletAddress = hdWallet._children.map((child) => {
+            return {
+                address: "0x" + child.wallet.getAddress().toString("hex"),
+                privateKey: child.wallet.getPrivateKey()
+            }
+        });
+        this.binaryTreeServices = new BinaryTreeServices(listSigningWalletAddress);
     }
-});
 
-// for (var i = hdWallet._children.length - 1; i >= 0; i--) {
-//     let a = hdWallet._children[i].wallet.getAddress().toString('hex');
-//     console.log(a);
-//     let balance = web3.eth.getBalance("0x"+a);
-//     console.log(web3.fromWei(balance.toNumber()));
-// }
-// let wallet1 = hdWallet._children[9].wallet;
-// let wallet2 = hdWallet._children[1].wallet;
+    transferTo(to, ethAmount, wallet, callBack) {
+        const nonce = web3.eth.getTransactionCount(wallet.address);
+        const txParams = {
+            from: wallet.address,
+            to: to,
+            value:ethAmount*Math.pow(10,18),
+            nonce: nonce,
+            gasPrice: 20000000000,
+            gasLimit: 2100000,
+            chainId: 5777,
+        };
+        const tx = new Transaction(txParams);
+        tx.sign(wallet.privateKey);
+    
+        var raw = "0x" + tx.serialize().toString("hex");
+        web3.eth.sendRawTransaction(raw, (e, r) => {
+            callBack(e, r);
+        });
+    }
 
-function transferTo(to, ethAmount, wallet, callBack) {
-    let from = wallet.address
-    let balance = web3.eth.getBalance(from);
-    console.log("---------------------------------")
-    console.log("Balance: "+ web3.fromWei(balance.toNumber()));
-    console.log("Value: "+ ethAmount);
-    const nonce = web3.eth.getTransactionCount(from);
-    console.log("from: " + from)
-    console.log("to: " + to)
-    console.log("---------------------------------")
-    const txParams = {
-        from: from,
-        to: to,
-        value: ethAmount,
-        nonce: nonce,
-        gasPrice: 1000000000,
-        gasLimit: 2100000,
-        // data: txData,
-        chainId: 5777,
-    };
-    const tx = new Transaction(txParams);
-    tx.sign(wallet.privateKey);
+    traverseBinaryDataForTransferToken(root) {
+        this.countTemp = 0;
+        this.traverseBinaryDataForTransfer(root);
+    }
 
-    var raw = "0x" + tx.serialize().toString("hex");
-    web3.eth.sendRawTransaction(raw, (e, r) => {
-        callBack(e, r);
-    });
-}
-
-
-// function addressFromWallet(wallet) {
-// 	return "0x"+wallet1.getAddress().toString('hex');
-// }
-
-// transferTo(addressFromWallet(wallet2),0.00001,wallet1);
-
-let binaryTreeServices = new BinaryTreeServices(listSigningWalletAddress);
-
-let tempCount = 1;
-
-function traverseBinaryDataForTransfer(root, val) {
-    if (root.left) {
-        transferTo(root.left.val.address, (val-100000000000000000) / 2, root.val, (error, tx) => {
-            console.log(error, tx);
-            if (tx) {
-                if (root.right) {
-                    transferTo(root.right.val.address, (val-100000000000000000) / 2, root.val, (error, tx) => {
-                        console.log(error, tx);
-                        if (tx) {
-                            traverseBinaryDataForTransfer(root.left, (val-100000000000000000) / 2);
-                            traverseBinaryDataForTransfer(root.right, (val-100000000000000000) / 2);
-                        }                
-                    })
-                } else {
-                    traverseBinaryDataForTransfer(root.left, (val-100000000000000000) / 2);
-                }
-            }                
-        })
-    } else {
-        if (root.right) {
-            transferTo(root.right.val.address, (val-100000000000000000) / 2, root.val, (error, tx) => {
+    traverseBinaryDataForTransfer(root) {
+        if(++this.countTemp == this.binaryTreeServices.getLeafCount(this.binaryTreeServices.root)) {
+            this.traverseBinaryDataForGetBalance(this.binaryTreeServices.root);
+        }
+    
+        if (root.left) {
+            let NumberOfSubNode = this.binaryTreeServices.getLeafCount(root.left);
+            this.transferTo(root.left.val.address, this.tokenForOneNode*NumberOfSubNode + this.txAvgFee*(NumberOfSubNode-1), root.val, (error, tx) => {
                 console.log(error, tx);
                 if (tx) {
-                    traverseBinaryDataForTransfer(root.right, (val-100000000000000000) / 2);
+                    if (root.right) {
+                        NumberOfSubNode = this.binaryTreeServices.getLeafCount(root.right);
+                        this.transferTo(root.right.val.address, this.tokenForOneNode*NumberOfSubNode + this.txAvgFee*(NumberOfSubNode-1), root.val, (error, tx) => {
+                            console.log(error, tx);
+                            if (tx) {
+                                this.traverseBinaryDataForTransfer(root.left);
+                                this.traverseBinaryDataForTransfer(root.right);
+                            }                
+                        })
+                    } else {
+                        this.traverseBinaryDataForTransfer(root.left);
+                    }
                 }                
             })
+        } else {
+            if (root.right) {
+                let NumberOfSubNode = this.binaryTreeServices.getLeafCount(root.right);
+                this.transferTo(root.right.val.address, this.tokenForOneNode*NumberOfSubNode + this.txAvgFee*(NumberOfSubNode-1), root.val, (error, tx) => {
+                    console.log(error, tx);
+                    if (tx) {
+                        this.traverseBinaryDataForTransfer(root.right);
+                    }                
+                })
+            }
+        }        
+    };
+
+    traverseBinaryDataForGetBalance(root) {
+        let balance = web3.eth.getBalance(root.val.address);
+        console.log("Balance: "+ web3.fromWei(balance));
+    
+        if (root.left) {
+            this.traverseBinaryDataForGetBalance(root.left);
+        } 
+        
+        if (root.right) {
+            this.traverseBinaryDataForGetBalance(root.right);
         }
-    }        
-};
+    };
 
-web3.eth.sendTransaction({
-    from: web3.eth.accounts[0],
-    to: binaryTreeServices.root.val.address,
-    value: web3.toWei(11)
-}, function (e, r) {
-    console.log(e,r);
-    let balance = web3.eth.getBalance(binaryTreeServices.root.val.address);
-    console.log("Balance: "+ web3.fromWei(balance));
-    traverseBinaryDataForTransfer(binaryTreeServices.root, web3.toWei(11))
-});
-// console.log(web3.eth.getBalance(binaryTreeServices.root.val.address).toNumber());
+    sendTokenToAllWallet(totalToken){
+        this.totalToken = totalToken;
+        web3.eth.sendTransaction({
+            from: web3.eth.accounts[0],
+            to: this.binaryTreeServices.root.val.address,
+            value: web3.toWei(totalToken)
+        }, (e, r) => {
+            console.log(e,r);
+            let tx = web3.eth.getTransactionReceipt(r);
+            this.txAvgFee = parseFloat(web3.fromWei(tx.gasUsed*20000000000));
+            this.tokenForOneNode = this.totalToken/this.totalNode - this.txAvgFee*(this.totalToken-1)/this.totalToken;
+            this.traverseBinaryDataForTransferToken(this.binaryTreeServices.root)
+        });
+    }
 
-// traverseBinaryDataForTransfer(binaryTreeServices.root);
+    sendTokenToAllWalletOnLocal(totalToken){
+        this.totalToken = totalToken;
+        web3.eth.sendTransaction({
+            from: web3.eth.accounts[0],
+            to: this.binaryTreeServices.root.val.address,
+            value: web3.toWei(totalToken)
+        }, (e, r) => {
+            console.log(e,r);
+            let tx = web3.eth.getTransactionReceipt(r);
+            this.txAvgFee = parseFloat(web3.fromWei(tx.gasUsed*20000000000));
+            this.tokenForOneNode = this.totalToken/this.totalNode - this.txAvgFee*(this.totalToken-1)/this.totalToken;
+            this.traverseBinaryDataForTransferToken(this.binaryTreeServices.root)
+        });
+    }
 
-// let signingWalletAddress = "0x" + wallet.getAddress().toString("hex");
-// console.log("signingWalletAddress " + signingWalletAddress); // eslint-disable-line
-// console.log("privateKey " + wallet.getPrivateKey().toString("hex")); // eslint-disable-line
+    getRootWalletAddress() {
+        return this.binaryTreeServices.root.val.address;
+    }
+
+    sendTokenToAllWallet(totalToken, txAvgFee) {
+        this.totalToken = totalToken;
+        this.txAvgFee = txAvgFee;
+        this.traverseBinaryDataForTransferToken(this.binaryTreeServices.root)
+    }
+}
+
+//Test
+// let walletManager = new WalletManager(10, "frost mimic deer annual build develop discover split rose gather ahead gloom", "https://ropsten.infura.io/faF0xSQUt0ezsDFYglOe");
+// walletManager.sendTokenToAllWallet(9, 0.000021);
+// walletManager.sendTokenToAllWalletOnLocal(10);
+//0x2578314766afa317e921981e05b5337b02ef8d10
+
+module.exports = WalletManager;
+
