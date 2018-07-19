@@ -28,7 +28,7 @@ import Web3 from "web3";
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 
-if(typeof web3 !== "undefined") {
+// if(typeof web3 !== "undefined") {
     ReactDOM.render(
         <Provider store={store}>
             <MuiThemeProvider>
@@ -39,12 +39,12 @@ if(typeof web3 !== "undefined") {
         </Provider>,
         document.getElementById("root")
     );
-} else {
-    ReactDOM.render(
-        <div className="support-mobile">
-            <img src="images/logo_bikecoin.png" className="logo-mobile" alt="Bikecoin" />
-            <h2 className="not-Support-Mobile">Mobile app version in progress. Please switch to desktop for the MVP demo.</h2>
-        </div>,
-        document.getElementById("root")
-    );
-}
+// } else {
+//     ReactDOM.render(
+//         <div className="support-mobile">
+//             <img src="images/logo_bikecoin.png" className="logo-mobile" alt="Bikecoin" />
+//             <h2 className="not-Support-Mobile">Mobile app version in progress. Please switch to desktop for the MVP demo.</h2>
+//         </div>,
+//         document.getElementById("root")
+//     );
+// }

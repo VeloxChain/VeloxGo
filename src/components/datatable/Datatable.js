@@ -53,21 +53,23 @@ class Datatable extends Component {
 
     render() {
         return (
-            <table className="table" style={styles.table}>
-                <thead style={styles.thead}>
-                    <tr>
-                        {this._renderHeader()}
-                    </tr>
-                </thead>
-                <tbody>
-                    {this._renderBody()}
-                </tbody>
-                {/* <tfoot>
-                    <tr>
-                        {this._renderTfoot()}
-                    </tr>
-                </tfoot> */}
-            </table>
+            <div className="table-responsive">
+                <table className="table" style={styles.table}>
+                    <thead style={styles.thead}>
+                        <tr>
+                            {this._renderHeader()}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this._renderBody()}
+                    </tbody>
+                    {/* <tfoot>
+                        <tr>
+                            {this._renderTfoot()}
+                        </tr>
+                    </tfoot> */}
+                </table>
+            </div>
         );
     }
 }

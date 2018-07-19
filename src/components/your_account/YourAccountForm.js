@@ -50,19 +50,19 @@ class YourAccountForm extends Component {
                             <div className="form-group row">
                                 <label className="col-sm-3" style={styles.labelText}>Owner Address:</label>
                                 <div className="col-sm-9">
-                                    <p style={styles.address}>{this._viewETHOnEtherScan()}</p>
+                                    <p style={styles.address} className="test-ellipsis">{this._viewETHOnEtherScan()}</p>
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3" style={styles.labelText}>Wallet Address:</label>
                                 <div className="col-sm-9">
-                                    <p style={styles.address}>{this._viewProfileOnEtherScan()}</p>
+                                    <p style={styles.address} className="test-ellipsis">{this._viewProfileOnEtherScan()}</p>
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3" style={styles.labelText}>BKC Address:</label>
                                 <div className="col-sm-9">
-                                    <p style={styles.address}>{this._viewBKCOnEtherScan()}</p>
+                                    <p style={styles.address} className="test-ellipsis">{this._viewBKCOnEtherScan()}</p>
                                 </div>
                             </div>
                         </form>

@@ -35,28 +35,6 @@ const Styles = {
         padding: "10px 20px 20px"
     },
 
-    wrappRight: {
-        display: "flex",
-        backgroundColor: "#fff",
-        boxShadow: "rgba(255, 255, 255, 0.5) 0px 1px 1px, rgba(0, 0, 0, 0.12) 0px 1px 4px",
-        marginTop: "30px",
-    },
-
-    boxLeft: {
-        width: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRight: "1px solid rgb(195, 197, 196)",
-    },
-
-    boxRight: {
-        width: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
-    },
-
     bike: {
         width: "100%"
     },

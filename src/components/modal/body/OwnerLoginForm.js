@@ -17,13 +17,13 @@ class OwnerLogin extends Component {
                 <div className="flexible-evenly">
                     <button
                         onClick={() => this.props.setType(MODAL_CREATE_ACCOUNT)}
-                        style={styles.buttonBack}
+                        className="button-login"
                     >
                         NEW ACCOUNT
                     </button>
                     <button
                         onClick={() => this.props.setType(MODAL_EXISTING)}
-                        style={styles.buttonBack}
+                        className="button-login"
                     >
                         EXISTING ACCOUNT
                     </button>

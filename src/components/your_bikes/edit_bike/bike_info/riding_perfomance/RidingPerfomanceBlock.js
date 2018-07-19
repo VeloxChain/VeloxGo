@@ -61,7 +61,7 @@ class RidingPerfomanceBlock extends Component {
         return (
             <div className="row">
                 <div className="col-sm-3">
-                    <div style={styles.block}>
+                    <div style={styles.block} className="block-riding">
                         <p>
                             <span style={styles.count}>{data[this.props.type].distance}</span>
                             <span style={styles.unit}> mi</span>
@@ -70,7 +70,7 @@ class RidingPerfomanceBlock extends Component {
                     </div>
                 </div>
                 <div className="col-sm-3">
-                    <div style={styles.block}>
+                    <div style={styles.block} className="block-riding">
                         <p>
                             <span style={styles.count}>{data[this.props.type].time.hour}</span>
                             <span style={styles.unit}> h</span>
@@ -81,7 +81,7 @@ class RidingPerfomanceBlock extends Component {
                     </div>
                 </div>
                 <div className="col-sm-3">
-                    <div style={styles.block}>
+                    <div style={styles.block} className="block-riding">
                         <p>
                             <span style={styles.count}>{data[this.props.type].elev_gain}</span>
                             <span style={styles.unit}> ft</span>

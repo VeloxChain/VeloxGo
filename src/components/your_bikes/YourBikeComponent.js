@@ -197,6 +197,7 @@ class YourBikesComponent extends Component {
                     open={this.state.showPriceDialog}
                     autoScrollBodyContent={true}
                     repositionOnUpdate={true}
+                    className="image-crop"
                 >
                     <TextField
                         floatingLabelText="Price (BKC) Per Hour"
