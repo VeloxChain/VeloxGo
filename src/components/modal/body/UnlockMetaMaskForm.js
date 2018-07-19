@@ -23,7 +23,7 @@ class UnlockMetaMask extends Component {
                 account:web3js.eth.accounts[0]
             });
         } else {
-            alert("No web3? You should consider trying MetaMask!");
+            // alert("No web3? You should consider trying MetaMask!");
         }
     }
     useMetamaskAccount = async () => {
