@@ -12,12 +12,13 @@ let web3 = null;
 
 
 class WalletManager {
-    constructor(numberOfWallet, menenomic, providerAddress){
+    constructor(numberOfWallet, menenomic, providerAddress, chainId){
         this.totalNode = numberOfWallet;
         this.totalToken = 0;
         this.txAvgFee = 0;
         this.tokenForOneNode= 0;
         this.countTemp = 0;
+        this.chainId = chainId;
         
         web3 = new Web3(new Web3.providers.HttpProvider(providerAddress));
         const hdWallet = EthHdWallet.fromMnemonic(menenomic);
@@ -31,23 +32,23 @@ class WalletManager {
         this.binaryTreeServices = new BinaryTreeServices(listSigningWalletAddress);
     }
 
-    transferTo(to, ethAmount, wallet, callBack) {
+    transferTo(to, ethAmount, wallet, callBack, nonceTemp = -1,) {
         const nonce = web3.eth.getTransactionCount(wallet.address);
         const txParams = {
             from: wallet.address,
             to: to,
             value:ethAmount*Math.pow(10,18),
-            nonce: nonce,
+            nonce: nonceTemp == -1? nonce: nonceTemp,
             gasPrice: 20000000000,
             gasLimit: 2100000,
-            chainId: 5777,
+            chainId: this.chainId,
         };
         const tx = new Transaction(txParams);
         tx.sign(wallet.privateKey);
     
         var raw = "0x" + tx.serialize().toString("hex");
         web3.eth.sendRawTransaction(raw, (e, r) => {
-            callBack(e, r);
+            callBack(e, r, nonce);
         });
     }
 
@@ -61,7 +62,7 @@ class WalletManager {
         
             if (root.left) {
                 let NumberOfSubNode = this.binaryTreeServices.getLeafCount(root.left);
-                this.transferTo(root.left.val.address, this.tokenForOneNode*NumberOfSubNode + this.txAvgFee*(NumberOfSubNode-1), root.val, (error, tx) => {
+                this.transferTo(root.left.val.address, this.tokenForOneNode*NumberOfSubNode + this.txAvgFee*(NumberOfSubNode-1), root.val, (error, tx, nonce) => {
                     console.log(error, tx);
                     if (tx) {
                         if (root.right) {
@@ -69,14 +70,14 @@ class WalletManager {
                             this.transferTo(root.right.val.address, this.tokenForOneNode*NumberOfSubNode + this.txAvgFee*(NumberOfSubNode-1), root.val, (error, tx) => {
                                 console.log(error, tx);
                                 if (tx) {
-                                    traverseBinaryDataForTransfer(root.left);
                                     traverseBinaryDataForTransfer(root.right);
+                                    traverseBinaryDataForTransfer(root.left);
                                 }                
-                            })
+                            }, nonce+1)
                         } else {
                             traverseBinaryDataForTransfer(root.left);
                         }
-                    }                
+                    }              
                 })
             } else {
                 if (root.right) {
@@ -129,6 +130,13 @@ class WalletManager {
         });
     }
 
+    sendTokenToAllWalletOnServer(totalToken, txAvgFee){
+        this.totalToken = totalToken;
+        this.txAvgFee = txAvgFee
+        this.tokenForOneNode = this.totalToken/this.totalNode - this.txAvgFee*(this.totalToken-1)/this.totalToken;
+        this.traverseBinaryDataForTransferToken()
+    }
+
     async getAvailableWallet(ethAmount = 0) {
         let listWalletFromStore = await storeService.getDataFromStore();
 
@@ -160,8 +168,12 @@ class WalletManager {
 }
 
 //=================Test=================
-// let walletManager = new WalletManager(5, menenomic, "http://localhost:7545");
-// walletManager.sendTokenToAllWalletOnLocal(10);
+let walletManager = new WalletManager(10, menenomic, "http://localhost:7545", 5777);
+walletManager.sendTokenToAllWalletOnLocal(10);
+
+
+// let walletManager = new WalletManager(10, "frost mimic deer annual build develop discover split rose gather ahead gloom", "https://ropsten.infura.io/faF0xSQUt0ezsDFYglOe", 3);
+// walletManager.sendTokenToAllWalletOnServer(0.5, 0.000021);
 
 // walletManager.getAvailableWallet(3.999665).then((result) => {
 //     console.log('result', result);
