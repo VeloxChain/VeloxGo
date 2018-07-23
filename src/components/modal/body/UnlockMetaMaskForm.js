@@ -51,7 +51,7 @@ class UnlockMetaMask extends Component {
                 <div className="text-center">
                     <h4 className="text-center"> {this.state.account} </h4>
                     <div className="flexible-center">
-                        <button onClick={this.useMetamaskAccount} style={styles.buttonBack}>
+                        <button onClick={this.useMetamaskAccount} style={{...styles.buttonBack, ...styles.mt20}}>
                             USE THIS METAMASK ACCOUNT
                         </button>
                     </div>
