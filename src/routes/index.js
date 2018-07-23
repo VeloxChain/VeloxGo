@@ -83,7 +83,7 @@ class root extends React.Component {
                 web3js = new Web3(window.web3.currentProvider);
                 address = web3js.eth.accounts[0];
             } else {
-                alert("No web3? You should consider trying MetaMask!");
+                console.log("No web3? You should consider trying MetaMask!");
                 return;
             }
         } else {
