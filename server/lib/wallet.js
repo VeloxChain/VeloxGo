@@ -3,10 +3,10 @@ var Transaction = require("ethereumjs-tx");
 var util = require("ethereumjs-util");
 const { EthHdWallet } = require("eth-hd-wallet");
 var _ = require("lodash");
-var fs = require('fs');
-var path = require('path');
-var leftPad = require('left-pad')
-var solsha3 = require('solidity-sha3').default;
+var fs = require("fs");
+var path = require("path");
+var leftPad = require("left-pad");
+var solsha3 = require("solidity-sha3").default;
 
 // var ReplayTXParser = require("./replayTXParser");
 const TXRELAYABI = require("../config/TXRELAYABI.json");
@@ -16,7 +16,7 @@ let web3 = null;
 
 const TRANSACTION_TYPE = {
     transfer: "forwardTo"
-}
+};
 
 class WalletManager {
     constructor(menenomic, providerAddress, chainId, TXRELAYAddress){
@@ -34,13 +34,13 @@ class WalletManager {
         this.signingWallet = {
             address: "0x" + hdWallet._children[0].wallet.getAddress().toString("hex"),
             privateKey: hdWallet._children[0].wallet.getPrivateKey()
-        }
+        };
 
-        console.log(this.signingWallet);
+        console.log(this.signingWallet); //eslint-disable-line
     }
 
     getTransactionCount(address){
-        return new Promise(async (resolve, reject) => {
+        return new Promise(async (resolve) => {
             web3.eth.getTransactionCount(address, "pending", (error, result) => {
                 resolve({ error, result });
             });
@@ -51,7 +51,7 @@ class WalletManager {
         let nonceCounter = 0;
 
         try {
-            nonceCounter = fs.readFileSync(path.join(__dirname, "data_store/nonce_counter.json"), 'utf8');
+            nonceCounter = fs.readFileSync(path.join(__dirname, "data_store/nonce_counter.json"), "utf8");
         } catch(e) {
             nonceCounter = 0;
         }
@@ -63,7 +63,7 @@ class WalletManager {
             let resultGetTransactionCount = await this.getTransactionCount(address);
 
             if(resultGetTransactionCount.error) {
-                return Promise.resolve({error: resultGetTransactionCount.error})
+                return Promise.resolve({error: resultGetTransactionCount.error});
             }
 
             nonceCounter = resultGetTransactionCount.result;
@@ -75,12 +75,12 @@ class WalletManager {
     }
 
     pad(n){
-        let data
+        let data;
         if (n.startsWith("0x")) {
-            data = '0x' + leftPad(n.slice(2), '64', '0')
+            data = "0x" + leftPad(n.slice(2), "64", "0");
             return data;
         } else {
-            data = '0x' + leftPad(n, '64', '0')
+            data = "0x" + leftPad(n, "64", "0");
             return data;
         }
     }
@@ -106,9 +106,9 @@ class WalletManager {
 
     isMetaSignatureValid(decodedMetaTx, nonce, rawMetaSignedTx){
 
-        var pubKey = util.ecrecover(Buffer.from(util.stripHexPrefix(rawMetaSignedTx.hash), 'hex'), decodedMetaTx.v, decodedMetaTx.r, decodedMetaTx.s);
+        var pubKey = util.ecrecover(Buffer.from(util.stripHexPrefix(rawMetaSignedTx.hash), "hex"), decodedMetaTx.v, decodedMetaTx.r, decodedMetaTx.s);
 
-        var address = '0x' + util.pubToAddress(pubKey).toString('hex');
+        var address = "0x" + util.pubToAddress(pubKey).toString("hex");
 
         return address === decodedMetaTx.claimedAddress;
     }
@@ -120,7 +120,7 @@ class WalletManager {
             return;
         }
 
-        fs.writeFileSync(path.join(__dirname, "data_store/nonce_counter.json"), resultGetTransactionCount.result, {encoding: 'utf8'});
+        fs.writeFileSync(path.join(__dirname, "data_store/nonce_counter.json"), resultGetTransactionCount.result, {encoding: "utf8"});
     }
 
     checkValidateNone(decodedMetaTx, rawMetaSignedTx) {
@@ -133,7 +133,7 @@ class WalletManager {
 
         let relayNonce = this.txRelay.getNonce(decodedMetaTx.transactionData.senderAddress);
 
-        let hashInput = '0x1900' + this.TXRELAYAddress.slice(2) + "0000000000000000000000000000000000000000" + this.pad(relayNonce.toNumber().toString('16')).slice(2)
+        let hashInput = "0x1900" + this.TXRELAYAddress.slice(2) + "0000000000000000000000000000000000000000" + this.pad(relayNonce.toNumber().toString("16")).slice(2)
             + rawMetaSignedTx.dest.slice(2) + rawMetaSignedTx.data.slice(2);
         
         let hash = solsha3(hashInput);
@@ -187,7 +187,7 @@ class WalletManager {
             //     return Promise.reject(resultCheckValidateParam);
             // }
 
-            fs.writeFileSync(path.join(__dirname, "data_store/nonce_counter.json"), nonceCounter, {encoding: 'utf8'});
+            fs.writeFileSync(path.join(__dirname, "data_store/nonce_counter.json"), nonceCounter, {encoding: "utf8"});
 
             let txRelayData = this.txRelay.relayMetaTx.getData(rawMetaSignedTx.v, rawMetaSignedTx.r, rawMetaSignedTx.s, rawMetaSignedTx.dest, rawMetaSignedTx.data, 0, { from: signingWallet.address });        
             const tx = new Transaction({
@@ -221,7 +221,7 @@ class WalletManager {
                 });
             });
         } catch(e) {
-            console.log("e, ex", e);
+            console.log("e, ex", e); //eslint-disable-line
             throw "Server internal error";
         }
     }
@@ -241,7 +241,7 @@ class WalletManager {
             //     return Promise.reject(resultCheckValidateParam);
             // }
 
-            fs.writeFileSync(path.join(__dirname, "data_store/nonce_counter.json"), nonceCounter, {encoding: 'utf8'});
+            fs.writeFileSync(path.join(__dirname, "data_store/nonce_counter.json"), nonceCounter, {encoding: "utf8"});
 
             let txRelayData = this.ERC223Contract.transfer.getData(receiverAddress, _.toNumber(process.env.BIKECOIN_TOKEN_COLLECT_VALUE), { from: signingWallet.address });
 
@@ -276,7 +276,7 @@ class WalletManager {
                 });
             });
         } catch(e) {
-            console.log("e, ex", e);
+            console.log("e, ex", e); //eslint-disable-line
             throw "Server internal error";
         }
     }

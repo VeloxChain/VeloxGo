@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 
 const express = require("express");
 const app = express();
@@ -23,5 +23,4 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, function () {
-    console.log("bikecoin_mvp backend listening on port " + port + "!");
 });

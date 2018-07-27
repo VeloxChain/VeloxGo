@@ -3,7 +3,6 @@ import {
     MODAL_METAMASK,
     MODAL_IMPORT_ACCOUNT
 } from "../constants";
-import styles from "./CustomCss";
 
 class Existing extends Component {
     render() {

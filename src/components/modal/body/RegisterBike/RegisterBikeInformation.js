@@ -5,8 +5,8 @@ import Dropzone from "react-dropzone";
 import _ from "lodash";
 import { Dialog } from "material-ui";
 import ImageCroper from "../../../image_croper/ImageCroper";
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
 
 class RegisterBikeInformation extends Component {
     constructor(props) {

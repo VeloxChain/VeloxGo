@@ -82,7 +82,6 @@ function signPayload(signingAddr, txRelay, whitelistOwner, destinationAddress, f
 }
 
 export const createNewUserProfile = async (address, ipfsHash ,ethereum, keyStore, password) => {
-    console.log(address, ipfsHash); //eslint-disable-line
     let isMetamask = _.isUndefined(password) || password === "";
     let zeroAddress = "0x0000000000000000000000000000000000000000";
     let types = ["address", "string"];
@@ -177,7 +176,6 @@ export const collectBikeToken = async (address) => {
     });
 };
 export const rentBike = async (address, userProfileAddress, tokenId, seconds, ethereum, keyStore, password) => {
-    console.log(address, userProfileAddress, tokenId, seconds);
     let isMetamask = _.isUndefined(password) || password === "";
     let zeroAddress = "0x0000000000000000000000000000000000000000";
     let types = ["address","uint256","uint256", "address","address"];
@@ -204,7 +202,6 @@ export const rentBike = async (address, userProfileAddress, tokenId, seconds, et
     });
 };
 export const returnBike = async (address, userProfileAddress, tokenId, totalTime, ethereum, keyStore, password) => {
-    console.log(address, userProfileAddress, tokenId, totalTime);
     let isMetamask = _.isUndefined(password) || password === "";
     let zeroAddress = "0x0000000000000000000000000000000000000000";
     let types = ["address","uint256","uint256", "address","address","address"];
@@ -230,7 +227,6 @@ export const returnBike = async (address, userProfileAddress, tokenId, totalTime
     });
 };
 export const adjustBikePrice = async (address, userProfileAddress, tokenId, price, ethereum, keyStore, password) => {
-    console.log(address, userProfileAddress, tokenId, price);
     let isMetamask = _.isUndefined(password) || password === "";
     let setBikeRentalPriceData = encodeFunctionTxData("setBikeRentalPrice", ["uint256","uint256"], [tokenId, price*1000000000000000000]);
     let zeroAddress = "0x0000000000000000000000000000000000000000";

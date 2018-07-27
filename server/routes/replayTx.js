@@ -1,6 +1,4 @@
-const TXRELAYABI = require("../config/TXRELAYABI.json");
-const bikeToken = require("../config/bikeToken.json");
-var WalletManager = require('../lib/wallet');
+var WalletManager = require("../lib/wallet");
 
 let walletManager = new WalletManager(
     process.env.TXRELAY_MNEMONIC,
@@ -22,13 +20,13 @@ module.exports = function (app) {
                 code: 200
             });
         }).catch((error) => {
-            console.log("error", error);
+            console.log("error", error); //eslint-disable-line
             return res.json({ 
                 e: error ,
                 status: "error",
                 code: 400,
                 message: error
-            })
+            });
         });
     });
     app.post("/api/collectToken", async (req, res) => {
@@ -42,13 +40,13 @@ module.exports = function (app) {
                 code: 200
             });
         }).catch((error) => {
-            console.log("error", error);
+            console.log("error", error); //eslint-disable-line
             return res.json({ 
                 e: error ,
                 status: "error",
                 code: 400,
                 message: error
-            })
+            });
         });
     });
 };

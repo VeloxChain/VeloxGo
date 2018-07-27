@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import styles from "./CustomCss";
-
 import {
     MODAL_CREATE_ACCOUNT,
     MODAL_EXISTING,

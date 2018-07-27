@@ -1,9 +1,9 @@
 const _ = require("lodash");
-const abiDecoder = require('abi-decoder');
+const abiDecoder = require("abi-decoder");
 var util = require("ethereumjs-util");
 
-const MetaNANJCOINManager = require('../../assets/json/MetaNANJCOINManager.json');
-const NanJABI = require('../../assets/json/NanJABI.json');
+const MetaNANJCOINManager = require("../../assets/json/MetaNANJCOINManager.json");
+const NanJABI = require("../../assets/json/NanJABI.json");
 
 abiDecoder.addABI(MetaNANJCOINManager);
 abiDecoder.addABI(NanJABI);
@@ -38,7 +38,7 @@ class ReplayTXParser {
     }
 
     getDataFromRawMetaSignedTxData() {
-        let rawMetaSignedTxDataTransaction = {}
+        let rawMetaSignedTxDataTransaction = {};
 
         if(_.isEmpty(this.replayTXData.data)) {
             return rawMetaSignedTxDataTransaction;
@@ -85,7 +85,7 @@ class ReplayTXParser {
             return "";
         }
 
-        let typeOfReplayTX = _.find(MetaNANJCOINManager, {name: decodedReplayTXData.name})
+        let typeOfReplayTX = _.find(MetaNANJCOINManager, {name: decodedReplayTXData.name});
 
         return _.isEmpty(typeOfReplayTX)? "" : typeOfReplayTX.name;
     }
@@ -94,12 +94,12 @@ class ReplayTXParser {
         let decodedMetaTx = {};
 
         decodedMetaTx.v = _.toNumber(this.replayTXData.v);
-        decodedMetaTx.r = Buffer.from(util.stripHexPrefix(this.replayTXData.r), 'hex');
-        decodedMetaTx.s = Buffer.from(util.stripHexPrefix(this.replayTXData.s), 'hex');
+        decodedMetaTx.r = Buffer.from(util.stripHexPrefix(this.replayTXData.r), "hex");
+        decodedMetaTx.s = Buffer.from(util.stripHexPrefix(this.replayTXData.s), "hex");
         decodedMetaTx.to = util.stripHexPrefix(this.replayTXData.dest);
         decodedMetaTx.data = util.stripHexPrefix(this.replayTXData.data);
-        decodedMetaTx.whitelistOwner = '0000000000000000000000000000000000000000';
-        decodedMetaTx.claimedAddress = '0x' + decodedMetaTx.data.slice(32, 72);
+        decodedMetaTx.whitelistOwner = "0000000000000000000000000000000000000000";
+        decodedMetaTx.claimedAddress = "0x" + decodedMetaTx.data.slice(32, 72);
         decodedMetaTx.transactionData = this.getDataFromRawMetaSignedTxData();
 
         return decodedMetaTx;
