@@ -116,11 +116,18 @@ class WalletManager {
     async revertNonceWhenTxFail(address) {
         let resultGetTransactionCount = await this.getTransactionCount(address);
 
+        if(resultGetTransactionCount.error) {
+            return Promise.resolve({error: resultGetTransactionCount.error});
+        }
+
+        resultGetTransactionCount = _.toNumber(resultGetTransactionCount.result);
+        --resultGetTransactionCount;
+
         if(address.error) {
             return;
         }
 
-        fs.writeFileSync(path.join(__dirname, "data_store/nonce_counter.json"), resultGetTransactionCount.result, {encoding: "utf8"});
+        fs.writeFileSync(path.join(__dirname, "data_store/nonce_counter.json"), resultGetTransactionCount, {encoding: "utf8"});
     }
 
     checkValidateNone(decodedMetaTx, rawMetaSignedTx) {
