@@ -104,6 +104,7 @@ class RegisterBikeInformation extends Component {
                     open={this.state.isOpenCropImage}
                     autoScrollBodyContent={true}
                     repositionOnUpdate={true}
+                    className="image-crop"
                 >
                     <ImageCroper
                         handleCropImage={this.handleCropImage}

@@ -82,6 +82,7 @@ class RentBikeInvoice extends Component {
                 autoScrollBodyContent={true}
                 repositionOnUpdate={true}
                 titleStyle={styles.titleStyle}
+                className="image-crop"
             >
                 <div className="row" style={styles.bodyContent}>
                     <div className="col-sm-8">
@@ -110,33 +111,35 @@ class RentBikeInvoice extends Component {
                         />
                     </div>
                     <div className="col-sm-12">
-                        <table className="table" style={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>Description</th>
-                                    <th>Hours</th>
-                                    <th>Price / 1h</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Rent Fee</td>
-                                    <td>{this.props.invoice.totalTimeUsed}</td>
-                                    <td>
-                                        {this.props.bikeInfo.bikeInfo.price}
-                                        <img src="images/logo.png" style={styles.logoBike} alt="BikeCoin" />
-                                    </td>
-                                    <td>{this.props.invoice.subTotal}</td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="4" className="text-right" style={styles.total}>
-                                        <span>Total: {this.props.invoice.subTotal}</span>
-                                        <img src="images/logo.png" style={styles.logoBike} alt="BikeCoin" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div className="table-responsive">
+                            <table className="table" style={styles.table}>
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Hours</th>
+                                        <th>Price / 1h</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Rent Fee</td>
+                                        <td>{this.props.invoice.totalTimeUsed}</td>
+                                        <td>
+                                            {this.props.bikeInfo.bikeInfo.price}
+                                            <img src="images/logo.png" style={styles.logoBike} alt="BikeCoin" />
+                                        </td>
+                                        <td>{this.props.invoice.subTotal}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="4" className="text-right" style={styles.total}>
+                                            <span>Total: {this.props.invoice.subTotal}</span>
+                                            <img src="images/logo.png" style={styles.logoBike} alt="BikeCoin" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
