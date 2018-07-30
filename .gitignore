@@ -1,2 +1,3 @@
 node_modules/
 package-lock.json
+server/lib/data_store/nonce_counter.json
