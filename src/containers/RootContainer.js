@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import SERVICE_IPFS from "../services/ipfs";
 import { addNewToast } from "../actions/appAction";
+import constants from "../services/constants";
 import {
     MODAL_OWNER_LOGIN,
     MODAL_CREATE_ACCOUNT_BIKECOIN,
@@ -58,7 +59,7 @@ class RootContainer extends React.Component {
                     <div className="loading-tx">
                         {this._renderTxTitle(AppReducer)}
                         <a
-                            href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash}
+                            href={constants.TX_URL + AppReducer.txHash}
                             style={{fontSize:20}}
                             target="_blank"
                         >

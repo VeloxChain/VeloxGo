@@ -7,7 +7,7 @@ class YourAccountForm extends Component {
         const { accounts } = this.props.accounts;
         return (
             <a
-                href={"https://ropsten.etherscan.io/address/" + accounts.address}
+                href={constants.ADDRESS_URL + accounts.address}
                 title="View Owner Address On EtherScan"
                 target="_blank" >
                 {accounts.address + " "}
@@ -19,7 +19,7 @@ class YourAccountForm extends Component {
         const { userProfileAddress } = this.props;
         return (
             <a
-                href={"https://ropsten.etherscan.io/address/" + userProfileAddress}
+                href={constants.ADDRESS_URL + userProfileAddress}
                 title="View Wallet Address On EtherScan"
                 target="_blank" >
                 {userProfileAddress + " "}
@@ -30,7 +30,7 @@ class YourAccountForm extends Component {
     _viewBKCOnEtherScan = () =>{
         return (
             <a
-                href={"https://ropsten.etherscan.io/token/" + constants.BIKECOIN_TOKEN_ADDRESS}
+                href={constants.TOKEN_URL + constants.BIKECOIN_TOKEN_ADDRESS}
                 title="View Wallet Address On EtherScan"
                 target="_blank" >
                 {constants.BIKECOIN_TOKEN_ADDRESS + " "}

@@ -37,7 +37,7 @@ class EditBikeForm extends Component {
                 <p style={styles.title}>Owner</p>
                 <h4 style={styles.text} className="test-ellipsis">
                     <a
-                        href={"https://ropsten.etherscan.io/address/" + this.state.userProfileAddress}
+                        href={constants.ADDRESS_URL + this.state.userProfileAddress}
                         target="_blank"
                         title="View Profile Address On EtherScan">
                         {this.state.userProfileAddress + " "}
@@ -79,7 +79,7 @@ class EditBikeForm extends Component {
                 <p style={styles.title}>ERC721 Token</p>
                 <h4 style={styles.text} className="test-ellipsis">
                     <a
-                        href={"https://ropsten.etherscan.io/token/" + constants.BIKECOIN_OWNER_SHIP_ADDRESS}
+                        href={constants.TOKEN_URL + constants.BIKECOIN_OWNER_SHIP_ADDRESS}
                         target="_blank"
                         title="View ERC721 Token On EtherScan">
                         {constants.BIKECOIN_OWNER_SHIP_ADDRESS + " "}
