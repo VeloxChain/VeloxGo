@@ -3,7 +3,6 @@ import {
     MODAL_METAMASK,
     MODAL_IMPORT_ACCOUNT
 } from "../constants";
-import styles from "./CustomCss";
 
 class Existing extends Component {
     render() {
@@ -17,14 +16,14 @@ class Existing extends Component {
                 <div className="flexible-evenly">
                     <button
                         onClick={() => this.props.setType(MODAL_IMPORT_ACCOUNT)}
-                        style={styles.buttonBack}
+                        className="button-login"
                     >
                         IMPORT ACCOUNT
                     </button>
 
                     <button
                         onClick={() => this.props.setType(MODAL_METAMASK)}
-                        style={styles.buttonBack}
+                        className="button-login"
                     >
                         UNLOCK METAMASK
                     </button>

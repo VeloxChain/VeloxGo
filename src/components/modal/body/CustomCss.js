@@ -214,6 +214,6 @@ const Styles = {
     actionRegister: {
         margin: "12px -6px 0px"
     }
-}
+};
 
 export default Styles;

@@ -43,6 +43,19 @@ const Styles = {
         padding: "7px 20px",
         textTransform: "uppercase",
         letterSpacing: "2px"
+    },
+    floatingLabelFocusStyle: {
+        color: "rgba(0, 0, 0, 0.3)"
+    },
+    underlineStyle: {
+        borderColor: "#66F9B8"
+    },
+    active: {
+        marginTop: "50px",
+        padding: "0px 15px"
+    },
+    marginRight30: {
+        marginRight: "30px"
     }
 };
 

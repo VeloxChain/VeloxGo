@@ -23,7 +23,7 @@ class UnlockMetaMask extends Component {
                 account:web3js.eth.accounts[0]
             });
         } else {
-            alert("No web3? You should consider trying MetaMask!");
+            // alert("No web3? You should consider trying MetaMask!");
         }
     }
     useMetamaskAccount = async () => {
@@ -49,9 +49,9 @@ class UnlockMetaMask extends Component {
         if (this.state.account) {
             return (
                 <div className="text-center">
-                    <h4 className="text-center"> {this.state.account} </h4>
+                    <h4 className="test-net"> {this.state.account} </h4>
                     <div className="flexible-center">
-                        <button onClick={this.useMetamaskAccount} style={styles.buttonBack}>
+                        <button onClick={this.useMetamaskAccount} style={{...styles.buttonBack, ...styles.mt20}}>
                             USE THIS METAMASK ACCOUNT
                         </button>
                     </div>

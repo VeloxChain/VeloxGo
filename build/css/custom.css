@@ -191,9 +191,12 @@ a {
 }
 .close-menu {
     position: absolute;
-    right: 10px;
-    font-size: 25px;
+    top: 15px;
+    right: 15px;
     color: #fff
+}
+.close-menu img {
+    width: 20px;
 }
 .nav.side-menu > li > a {
     width: 100%;
@@ -1020,3 +1023,177 @@ input#file:focus {
     border-radius: 50%;
     padding: 5px;
 }
+.support-mobile {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #3B3B3B;
+    text-align: center;
+}
+.not-Support-Mobile {
+    margin-top: 70px;
+    padding: 0 15px;
+    color: #fff;
+}
+
+.logo-mobile {
+    width: 250px;
+    margin-top: 50px;
+}
+
+.button-login {
+    background: #fff;
+    border: 1px solid #00F58A;
+    color: #00F58A;
+    border-radius: 5px;
+    padding: 7px 30px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.test-net {
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.test-ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.wrapp-loading {
+    width: 100%;
+    text-align: center;
+    margin-top: -150px;
+    padding: 0px 10px;
+}
+
+.image-geometries {
+    width: 500px;
+}
+
+.wrapp-right {
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(255, 255, 255, 0.5) 0px 1px 1px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+    margin-top: 30px;
+}
+
+.box-left {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid rgb(195, 197, 196);
+}
+
+.box-right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-right-return {
+    padding: 20px 0px;
+}
+
+@media screen and (max-width: 767px) {
+    .logo-bikecoin {
+        height: auto;
+        width: 90px;
+    }
+
+    .ReactModalPortal .ReactModal__Overlay .ReactModal__Content {
+        width: 100% !important;
+    }
+
+    .box-left-mobile {
+        margin-top: 20px;
+    }
+
+    .flexible-evenly {
+        display: block;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+
+    .button-login {
+        min-width: 280px;
+    }
+
+    .intro-popup-top {
+        padding-bottom: 20px;
+    }
+
+    .loading-tx {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+    }
+
+    .step-tab::after {
+        width: 30px;
+        right: -45px;
+    }
+
+    .step-tab.active::after {
+        top: 25px;
+        right: -15px;
+    }
+
+    .step-tab.active.second::after {
+        top: 35px;
+        right: -42px;
+    }
+
+    .image-crop > div > div {
+        width: 100% !important;
+    }
+
+    .tabs > div {
+        display: block !important;
+    }
+
+    .tab {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .tabs > div:nth-child(2) {
+        display: none !important;
+    }
+
+    .image-geometries {
+        width: 100%;
+    }
+
+    .block-riding {
+        border-right: 0px !important;
+    }
+
+    .wrapp-right {
+        display: block;
+    }
+
+    .box-left {
+        width: 100%;
+        border: none;
+    }
+
+    .box-right {
+        width: 100%;
+    }
+
+    .box-right-verified {
+        padding: 20px 0px;
+    }
+}
+  

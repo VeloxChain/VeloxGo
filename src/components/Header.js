@@ -25,7 +25,7 @@ class Header extends Component {
                             {this.props.hidden ? "" : (<SideBar/>)}
                             {this.props.hidden ? "" : (
                                 <div style={styles.getBikeCoin}>
-                                    <button style={styles.buttonGetBikeCoin} onClick={this.collectBikeToken}>Get Free 200 Bikecoin</button>
+                                    <button style={styles.buttonGetBikeCoin} onClick={this.collectBikeToken}>Get 200 BKC for Free</button>
                                 </div>
                             )}
                             

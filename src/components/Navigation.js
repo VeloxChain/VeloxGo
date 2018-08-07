@@ -81,15 +81,15 @@ class Navigation extends Component{
         return (
             <div className="col-xs-12 relative bg-header">
                 <nav className="row nav underline-none w100p h70 flexible">
-                    <div className="col-sm-4">
+                    <div className="col-sm-4 col-xs-4">
                         <a className="pointer size20 toggleMenu">
                             <img src="images/Menu-Green.png" alt="Bikecoin" />
                         </a>
                     </div>
-                    <div className="col-sm-4 text-center">
+                    <div className="col-sm-4 col-xs-4 text-center">
                         <img src="images/logo_bikecoin.png" alt="Bikecoin" className="logo-bikecoin" />
                     </div>
-                    <div className="col-sm-4 text-right">
+                    <div className="col-sm-4 col-xs-4 text-right">
                         {
                             this.renderLogged()
                         }

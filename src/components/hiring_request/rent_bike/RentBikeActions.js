@@ -63,15 +63,15 @@ class RentBikeActions extends Component {
     }
     render() {
         return (
-            <div style={styles.wrappRight}>
-                <div style={styles.boxLeft}>
+            <div className="wrapp-right">
+                <div className="box-left">
                     <img
                         src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.bikeInfo.avatar }
                         alt="Bikecoin"
                         style={styles.bike}
                     />
                 </div>
-                <div style={styles.boxRight}>
+                <div className="box-right box-right-return">
                     <div>
                         <div style={styles.center}>
                             <div style={styles.startTime}>

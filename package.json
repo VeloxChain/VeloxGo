@@ -44,12 +44,18 @@
     "redux-reset": "^0.3.0",
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
-    "sequelize-cli": "^3.0.0",
     "solidity-sha3": "^0.4.1",
-    "web3": "^0.19.1"
+    "web3": "^0.19.1",
+    "body-parser": "^1.18.2",
+    "crypto": "^1.0.1",
+    "expressjs": "^1.0.1",
+    "mime-types": "^2.1.18",
+    "node-uuid": "^1.4.8",
+    "eth-hd-wallet": "^0.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/index.js",
+    "start-client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",

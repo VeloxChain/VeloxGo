@@ -1,7 +1,9 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const port = 4000;
+const port = process.env.PORT || 4000;
 const path = require("path");
 
 
@@ -21,5 +23,4 @@ app.get("*", (req, res) => {
 });
 
 app.listen(port, function () {
-    // console.log("Next Id backend listening on port " + port + "!");
 });

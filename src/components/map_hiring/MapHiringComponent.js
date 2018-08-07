@@ -6,7 +6,7 @@ import {
     GoogleMap,
     Marker
 }  from "react-google-maps";
-import _ from 'lodash';
+import _ from "lodash";
 import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 import BikeHiringInfo from "../bike_hiring_info/BikeHiringInfo";
 import appConfig from "../../config/app.json";
@@ -19,7 +19,7 @@ class MapHiringComponent extends Component {
         this.googleMap = null;
         this.state = {
             listMarkerData: []
-        }
+        };
     }
 
     componentDidMount(){
@@ -36,7 +36,7 @@ class MapHiringComponent extends Component {
                     lng: nextProps.mapDefaultLocation.long,
                     lat: nextProps.mapDefaultLocation.lat
                 }
-            )}, 100);
+            );}, 100);
         }
     }
 
@@ -65,13 +65,13 @@ class MapHiringComponent extends Component {
             return {
                 long: _.toNumber(findOverLapMarker.location.long) + 0.000001,
                 lat: _.toNumber(findOverLapMarker.location.lat) + 0.000001,
-            }
+            };
         }
 
         return {
             long: markerData.location.long,
             lat: markerData.location.lat,
-        }
+        };
     }
 
     render(){
@@ -141,11 +141,6 @@ export default compose(
         })
     }),
     withHandlers({
-        onMarkerClustererClick: () => (markerClusterer) => {
-          const clickedMarkers = markerClusterer.getMarkers()
-          console.log(`Current clicked markers length: ${clickedMarkers.length}`)
-          console.log(clickedMarkers)
-        },
     }),
     withScriptjs,
     withGoogleMap,

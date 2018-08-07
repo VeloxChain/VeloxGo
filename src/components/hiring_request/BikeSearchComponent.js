@@ -9,27 +9,27 @@ class BikeSearchComponent extends Component {
         this.state = {
             mapLocation: {
                 none: {
-                    index: 'none',
+                    index: "none",
                     long: 103.819836,
                     lat: 1.352083
                 },
                 Singapore: {
-                    index: 'Singapore',
+                    index: "Singapore",
                     long: 103.819836,
                     lat: 1.352083
                 },
                 Delaware: {
-                    index: 'Delaware',
+                    index: "Delaware",
                     long: -83.06797,
                     lat: 40.29867
                 },
                 Milan: {
-                    index: 'Milan',
+                    index: "Milan",
                     long: 9.191383,
                     lat: 45.464211
                 },
                 SF: {
-                    index: 'SF',
+                    index: "SF",
                     long: -122.431297,
                     lat: 37.773972
                 },

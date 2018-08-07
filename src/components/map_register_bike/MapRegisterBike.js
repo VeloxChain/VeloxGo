@@ -75,11 +75,9 @@ const MapRegisterBike = compose(
                     var cityName = filtered_locality.length ? 
                         filtered_locality[0].short_name: 
                         filtered_admin_lv1.length ? 
-                        filtered_admin_lv1[0].short_name:
-                        countryName
+                            filtered_admin_lv1[0].short_name:
+                            countryName
                     ;
-
-                    console.log(cityName);
 
                     this.props.handleChangeState({
                         location: {

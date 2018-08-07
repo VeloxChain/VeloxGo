@@ -55,10 +55,16 @@ class RootContainer extends React.Component {
         if (AppReducer.txHash) {
             if (AppReducer.txHash.length === 66) {
                 return (
-                    <span>
+                    <div className="loading-tx">
                         {this._renderTxTitle(AppReducer)}
-                        <a href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash} style={{fontSize:20}} target="_blank">{"Tx: " + AppReducer.txHash}</a>
-                    </span>
+                        <a
+                            href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash}
+                            style={{fontSize:20}}
+                            target="_blank"
+                        >
+                            {"Tx: 0x960dffdbabfb4e4df97c536d68020b5d7355f1fc218023a1c30a5e234ba41f51" + AppReducer.txHash}
+                        </a>
+                    </div>
                 );
             }
             return (
@@ -71,7 +77,7 @@ class RootContainer extends React.Component {
         if (AppReducer.isLoading) {
             return (
                 <div className="absolute-fancy-loading flexible">
-                    <div style={{marginTop: -150}}>
+                    <div className="wrapp-loading">
                         <img
                             id="loader"
                             src="images/loading.png"
@@ -86,6 +92,7 @@ class RootContainer extends React.Component {
             );
         }
     }
+
     render() {
         return (
             <div className="main_container">

@@ -9,7 +9,7 @@ class Logo extends Component {
                     <img src="/images/logo-full.png" alt="Bikecoin" />
                 </div>
                 <a className="pointer toggleMenu hidden-md hidden-lg close-menu">
-                    <i className="fa fa-times"></i>
+                    <img src="images/close_white.png" />
                 </a>
             </div>
         );

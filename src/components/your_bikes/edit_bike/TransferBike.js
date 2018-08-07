@@ -22,15 +22,15 @@ class TransferBike extends Component {
     }
     render() {
         return (
-            <div style={styles.wrappRight}>
-                <div style={styles.boxLeft}>
+            <div className="wrapp-right">
+                <div className="box-left">
                     <img
                         src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.avatar }
                         alt="Bikecoin"
                         style={styles.bike}
                     />
                 </div>
-                <div style={styles.boxRight}>
+                <div className="box-right">
                     <div>
                         <button style={styles.buttonTransfer} onClick={this.props.transferBike}>Transfer</button>
                         <button style={styles.buttonDelete} onClick={this.notifyFeatures}>Destroy</button>
