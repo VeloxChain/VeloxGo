@@ -63,7 +63,7 @@ class RootContainer extends React.Component {
                             style={{fontSize:20}}
                             target="_blank"
                         >
-                            {"Tx: 0x960dffdbabfb4e4df97c536d68020b5d7355f1fc218023a1c30a5e234ba41f51" + AppReducer.txHash}
+                            {"Tx: " + AppReducer.txHash}
                         </a>
                     </div>
                 );
