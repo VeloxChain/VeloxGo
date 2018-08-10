@@ -15,7 +15,7 @@ import { getEventLogs } from "./apiCall";
 export default class EthereumService {
     constructor() {
         if (typeof Web3 !== "undefined") {
-            this.rpc = new Web3(new Web3.providers.HttpProvider("http://34.222.6.244:8501"));
+            this.rpc = new Web3(new Web3.providers.HttpProvider("http://testnet.bikecoin.network:8501"));
         } else {
             console.error("No Web3 detected"); // eslint-disable-line
         }
