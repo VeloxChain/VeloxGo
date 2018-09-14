@@ -87,7 +87,7 @@ class RentBikeInvoice extends Component {
                 <div className="row" style={styles.bodyContent}>
                     <div className="col-sm-8">
                         <p style={styles.flex}>
-                            <span style={styles.titleInvoice}>Bike Serial:</span>
+                            <span style={styles.titleInvoice}>Vehicle Reg:</span>
                             <span style={styles.textInvoice}>{this.props.bikeInfo.bikeInfo.snNumber}</span>
                         </p>
                         <p style={styles.flex}>

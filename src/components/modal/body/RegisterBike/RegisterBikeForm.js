@@ -200,7 +200,7 @@ class RegisterBike extends Component {
                 <div style={styles.stepTabs}>
                     <div style={styles.stepTab}>
                         <div>
-                            <h4 className="text-center">Bike Information</h4>
+                            <h4 className="text-center">Vehicle’s Information</h4>
                             { this._renderStepFirst() }
                         </div>
                     </div>

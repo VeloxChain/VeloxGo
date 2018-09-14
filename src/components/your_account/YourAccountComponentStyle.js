@@ -49,7 +49,7 @@ const Styles = {
 
     button: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
         borderRadius: "5px",
         padding: "7px 30px",
         marginTop: "20px",
@@ -58,7 +58,8 @@ const Styles = {
     },
     buttonCollect: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "5px 15px",
         textTransform: "uppercase",

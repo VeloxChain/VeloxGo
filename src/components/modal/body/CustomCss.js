@@ -126,20 +126,20 @@ const Styles = {
         width: "70px",
         height: "70px",
         borderRadius: "50%",
-        border: "1px solid rgb(0, 245, 138)",
+        border: "1px solid #FFCF6B",
         margin: "0 auto",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-        boxShadow: "0px 0px 3px #28f58a"
+        boxShadow: "0px 0px 3px #FFCF6B"
     },
 
     number: {
         width: "40px",
         height: "40px",
         textAlign: "center",
-        background: "rgb(65, 245, 137)",
+        background: "#FFCF6B",
         borderRadius: "50%",
         lineHeight: "40px",
         fontSize: "18px",
@@ -150,7 +150,7 @@ const Styles = {
         width: "14px",
         height: "14px",
         borderRadius: "50%",
-        background: "rgb(0, 245, 138)"
+        background: "#FFCF6B"
     },
 
     icon: {
@@ -208,7 +208,7 @@ const Styles = {
     },
 
     selectedMenuItemStyle: {
-        color: "#00F58A"
+        color: "#12305e"
     },
 
     actionRegister: {

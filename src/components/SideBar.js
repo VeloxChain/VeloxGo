@@ -9,11 +9,11 @@ class SideBar extends Component{
                     <ul className="nav side-menu">
                         <NavLink to="/">
                             <img src="images/XMLID_3.png" className="mgr-15" alt="Bikecoin" />
-                            <span>YOUR BIKES</span>
+                            <span>YOUR VEHICLES</span>
                         </NavLink>
                         <NavLink to="/hiring_request">
                             <img src="images/XMLID_1.png" className="mgr-15" alt="Bikecoin" />
-                            <span>RENT BIKE</span>
+                            <span>VEHICLE FOR RENT</span>
                         </NavLink>
                         <NavLink to="/your_account">
                             <img src="images/XMLID_2.png" className="mgr-15" alt="Bikecoin" />

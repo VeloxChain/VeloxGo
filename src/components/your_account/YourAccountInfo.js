@@ -124,7 +124,7 @@ class YourAccountInfo extends Component {
                     </div>
                     <div style={styles.wrappCoins}>
                         <div style={styles.wrappFlexLeft}>
-                            <span style={styles.iconLabel}>BKC</span>
+                            <span style={styles.iconLabel}>VELOX</span>
                             <span style={{margin: "auto"}}></span>
                             <span style={styles.text}>{Math.round(this.props.info.bkc * 100)/100}</span>
                             <div style={styles.wrapIconCoin}>

@@ -138,7 +138,7 @@ class RegisterBikeInformation extends Component {
                                 underlineFocusStyle={styles.underlineStyle}
                             />
                             <TextField
-                                floatingLabelText="Bike serial"
+                                floatingLabelText="Vehicle Reg"
                                 value={this.props.info.snNumber}
                                 fullWidth
                                 onChange={(e) => this.props.handleChangeState({snNumber: e.target.value})}

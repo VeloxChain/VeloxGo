@@ -33,7 +33,7 @@ class BikeHiringInfo extends Component {
                     <div style={styles.boxContent}>
                         <div style={styles.w100}>
                             <p style={styles.text}><span style={styles.bold}>Manufacturer:</span> { this.props.externalData.manufacturer }</p>
-                            <p style={styles.text}><span style={styles.bold}>Bike serial:</span> { this.props.externalData.snNumber }</p>
+                            <p style={styles.text}><span style={styles.bold}>Vehicle Reg:</span> { this.props.externalData.snNumber }</p>
                         </div>
                     </div>
                     <div style={styles.action}>

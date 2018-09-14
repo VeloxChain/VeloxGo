@@ -20,7 +20,7 @@ class OwnerVerifiedForm extends Component {
                     <p style={styles.title}>Manufacturer</p>
                     <h5 style={styles.text}>{this.props.externalData.manufacturer}</h5>
 
-                    <p style={styles.title}>Bike serial</p>
+                    <p style={styles.title}>Vehicle Reg</p>
                     <h5 style={styles.text}>{this.props.externalData.snNumber}</h5>
 
                     <div style={styles.dvd} />

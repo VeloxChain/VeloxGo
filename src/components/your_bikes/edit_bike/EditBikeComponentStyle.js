@@ -27,7 +27,7 @@ const Styles = {
         background: "rgb(0, 214, 121)"
     },
     iconBack: {
-        color: "#00d679"
+        color: "#12305e"
     },
 
     location: {
@@ -41,7 +41,8 @@ const Styles = {
 
     buttonTransfer: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 20px",
         margin: "20px auto 0",
@@ -65,7 +66,8 @@ const Styles = {
 
     buttonSave: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 30px",
         textTransform: "uppercase",
@@ -77,7 +79,7 @@ const Styles = {
     },
     buttonBack: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
         borderRadius: "5px",
         padding: "7px 30px",
         textTransform: "uppercase",

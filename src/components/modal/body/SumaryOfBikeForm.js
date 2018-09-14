@@ -25,7 +25,7 @@ class SumaryOfBike extends Component {
                     <p style={styles.title} className="box-left-mobile">Manufacturer</p>
                     <h5 style={styles.text}>{bikeInfo.manufacturer}</h5>
 
-                    <p style={styles.title}>Bike serial</p>
+                    <p style={styles.title}>Vehicle Reg</p>
                     <h5 style={styles.text}>{bikeInfo.snNumber}</h5>
 
                     <div style={styles.dvd} />

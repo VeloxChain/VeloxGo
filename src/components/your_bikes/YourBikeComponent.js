@@ -14,7 +14,7 @@ class YourBikesComponent extends Component {
         super(props);
         this.state = {
             params : [
-                {title: "BIKE(jSerial number)", value: "snNumber"},
+                {title: "VEHICLE REG", value: "snNumber"},
                 {title: "MANUFACTURER", value: "manufacturer"},
                 {title: "MODEL", value: "model"},
                 {title: "FOR RENT", value: "forRent", renderer: this._renderForrent},

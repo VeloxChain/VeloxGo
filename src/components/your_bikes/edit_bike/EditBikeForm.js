@@ -73,7 +73,7 @@ class EditBikeForm extends Component {
                 <p style={styles.title}>Manufacturer</p>
                 <h4 style={styles.text}>{this.props.bikeInfo.manufacturer}</h4>
 
-                <p style={styles.title}>Bike serial</p>
+                <p style={styles.title}>Vehicle Reg</p>
                 <h4 style={styles.text}>{this.props.bikeInfo.snNumber}</h4>
 
                 <p style={styles.title}>ERC721 Token</p>
