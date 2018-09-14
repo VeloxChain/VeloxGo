@@ -108,7 +108,7 @@ td {
     background-color: #e9f0f3;
 }
 .left_col {
-  background-color: #1D1D1D;
+  background-color: #172642;
   position: fixed;
   width: 230px;
   top: 0;
@@ -120,14 +120,15 @@ a {
     cursor: pointer;
 }
 .mainBg {
-    background-color: #41f589;
+    /* background-color: #41f589; */
+    background: linear-gradient(to right, #CBC4FF, #FFCF6B 30%, rgba(237,28,36,.7), rgba(255,3,172,.7));
 }
 .absolute-w230{
     width: 230px;
     float: left;
 }
 .bg-header {
-    background-color: #3B3B3B;
+    background-color: #12305e;
 }
 .right-col {
     width: calc(100% - 230px);
@@ -245,7 +246,7 @@ a {
 }
 
 .nav.side-menu > li > a, .nav.child_menu > li > a {
-    color: #28f58a;
+    color: #fff;
     font-weight: 500;
     letter-spacing: 1px;
 }
@@ -258,17 +259,16 @@ a {
 
 .nav.side-menu > li.current-page,
 .nav.side-menu > li.active {
-    border-right: 5px solid #28f58a;
-    text-shadow: 0px 2px 15px #28f58a;
+    background: #FFCF6B;
 }
 
 .nav.side-menu > li.current-page a ,
 .nav.side-menu > li.active a {
-    color: #28f58a;
+    color: #3b3b3b;
 }
 
 .nav li.current-page {
-    background: rgba(255, 255, 255, 0.05);
+    background: #FFCF6B;
 }
 
 .nav li li li.current-page {
@@ -354,7 +354,7 @@ a {
     color: #fff;
 }
 .color-text {
-    color: #273a49;
+    color: #4F4F4F;
 }
 .color-a7a9a9 {
     color: #a7a9a9;
@@ -610,8 +610,8 @@ a {
 }
 .maskButton {
     background: rgb(255, 255, 255);
-    border: 1px solid #00F58A;
-    color: #00F58A;
+    border: 1px solid #12305e;
+    color: #12305e;
     border-radius: 5px;
     padding: 7px 30px;
     margin-bottom: 20px;
@@ -787,16 +787,16 @@ a {
 
 .welcome-user-block {
     margin-left: 15px;
-    color: #00d679;
+    color: #FFCF6B;
 }
 
 .welcome-user-block:hover {
-    color: #00d679;
+    color: #FFCF6B;
     text-decoration: none;
 }
 
 .fa-user {
-    color: #00d679;
+    color: #FFCF6B;
 }
 
 .avatar {
@@ -1043,8 +1043,8 @@ input#file:focus {
 
 .button-login {
     background: #fff;
-    border: 1px solid #00F58A;
-    color: #00F58A;
+    border: 1px solid #12305e;
+    color: #12305e;
     border-radius: 5px;
     padding: 7px 30px;
     margin-bottom: 20px;

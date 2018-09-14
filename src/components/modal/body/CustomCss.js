@@ -95,8 +95,8 @@ const Styles = {
 
     buttonBack: {
         background: "#fff",
-        border: "1px solid #00F58A",
-        color: "#00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 30px",
         marginBottom: "20px",
@@ -158,11 +158,11 @@ const Styles = {
     },
 
     underlineStyle: {
-        borderColor: "#66F9B8"
+        borderColor: "rgba(18, 48, 94, .7)"
     },
 
     floatingLabelStyle: {
-        color: "#66F9B8"
+        color: "rgba(18, 48, 94, .7)"
     },
 
     floatingLabelFocusStyle: {

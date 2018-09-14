@@ -36,8 +36,8 @@ const Styles = {
         textAlign: "center"
     },
     buttonGetBikeCoin: {
-        background: "#00F58A",
-        border: "1px solid #00F58A",
+        background: "#fad06b",
+        border: "1px solid #fad06b",
         color: "#222222",
         borderRadius: "3px",
         padding: "7px 20px",
