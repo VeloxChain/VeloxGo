@@ -48,7 +48,7 @@ const Styles = {
         color: "rgba(0, 0, 0, 0.3)"
     },
     underlineStyle: {
-        borderColor: "#66F9B8"
+        borderColor: "rgba(18, 48, 94, 0.7)"
     },
     active: {
         marginTop: "50px",

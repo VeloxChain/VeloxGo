@@ -58,6 +58,7 @@ class BikeInfo extends Component {
                 value={this.state.tabIndex}
                 onChange={this.handleChange}
                 tabItemContainerStyle={styles.tabItemContainerStyle}
+                inkBarStyle={styles.inkBarStyle}
                 style={styles.tabs}
                 className="tabs"
             >

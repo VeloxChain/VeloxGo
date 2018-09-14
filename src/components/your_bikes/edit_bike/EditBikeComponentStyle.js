@@ -12,7 +12,11 @@ const Styles = {
     },
 
     tabItemContainerStyle: {
-        backgroundColor: "rgba(0, 214, 121, .6)"
+        backgroundColor: "rgba(255, 207, 107, .6)"
+    },
+
+    inkBarStyle: {
+        background: "#12305e" 
     },
 
     tab: {
@@ -24,7 +28,7 @@ const Styles = {
         textTransform: "uppercase",
         color: "#000",
         fontSize: "16px",
-        background: "rgb(0, 214, 121)"
+        background: "#FFCF6B"
     },
     iconBack: {
         color: "#12305e"
@@ -153,7 +157,7 @@ const Styles = {
     },
 
     listItem: {
-        color: "rgb(0, 214, 121)"
+        color: "#12305e"
     },
 
     thumbSwitchedStyle: {

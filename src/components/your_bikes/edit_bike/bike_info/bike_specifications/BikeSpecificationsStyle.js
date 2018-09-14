@@ -4,7 +4,7 @@ const Styles = {
         marginTop: "30px"
     },
     inkBarStyle: {
-        background: "#00d679",
+        background: "#12305e",
     },
     tabs: {
         background: "transparent",
