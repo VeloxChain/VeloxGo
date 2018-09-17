@@ -226,7 +226,7 @@ class YourBikesComponent extends Component {
                     </div>
                 </Dialog>
                 <div className="text-right">
-                    <button style={styles.button} onClick={() => this.props.setType(MODAL_REGISTER_BIKE)}>New Bike</button>
+                    <button style={styles.button} onClick={() => this.props.setType(MODAL_REGISTER_BIKE)}>New Vehicle</button>
                 </div>
                 <Datatable
                     params={this.state.params}

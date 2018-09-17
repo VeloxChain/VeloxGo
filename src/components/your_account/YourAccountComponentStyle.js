@@ -50,6 +50,7 @@ const Styles = {
     button: {
         background: "#fff",
         border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 30px",
         marginTop: "20px",
@@ -105,7 +106,7 @@ const Styles = {
         textAlign: "center"
     },
     text: {
-        color: "#00F58A",
+        color: "#12305e",
         fontSize: "18px"
     },
     iconLabel : {

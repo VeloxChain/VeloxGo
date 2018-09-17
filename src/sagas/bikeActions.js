@@ -97,7 +97,7 @@ function* loadUserBikeFromNetWork(action){
     yield fork(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes);
 }
 function* loadNetworkBikeFromNetWork(action){
-    yield put({type: "APP_LOADING_START", payload: "Loading bikes from network...."});
+    yield put({type: "APP_LOADING_START", payload: "Loading vehicles from network...."});
     const { ethereum, address } = action.payload;
     let totalTokens = yield call(ethereum.ownerShipContract.totalSupply);
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);

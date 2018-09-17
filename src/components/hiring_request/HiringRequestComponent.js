@@ -25,7 +25,7 @@ class HiringRequestComponent extends Component {
     componentDidMount() {
         const { rendingBike } = this.props.bikes;
         if (!rendingBike.isRent) {
-            this.props.dispatch(appLoadingStart("Loading bikes from network...."));
+            this.props.dispatch(appLoadingStart("Loading vehicles from network...."));
             setTimeout(()=> {
                 this.props.dispatch(initNetworkBikes({
                     ethereum: this.props.ethereum,

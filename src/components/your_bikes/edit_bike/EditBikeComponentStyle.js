@@ -84,6 +84,7 @@ const Styles = {
     buttonBack: {
         background: "#fff",
         border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 30px",
         textTransform: "uppercase",
@@ -260,7 +261,7 @@ const Styles = {
     butonLeaderBoardActive: {
         background: "#2a2a2a",
         padding: "5px 40px",
-        color: "rgb(0, 214, 121)",
+        color: "#FFCF6B",
         border: "1px solid #2a2a2a"
     },
 

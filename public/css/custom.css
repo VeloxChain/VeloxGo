@@ -10,6 +10,17 @@
     src: url(../fonts/Lato-Light.ttf);
 }
 
+@font-face {
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon/icomoon.eot');
+    src: url('../fonts/icomoon/icomoon.eot') format('embedded-opentype'),
+    url('../fonts/icomoon/icomoon.ttf') format('truetype'),
+    url('../fonts/icomoon/icomoon.woff') format('woff'),
+    url('../fonts/icomoon/icomoon.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 * {
     font-family: "Lato-Regular";
 }
@@ -262,13 +273,49 @@ a {
     background: #FFCF6B;
 }
 
-.nav.side-menu > li.current-page a ,
+.nav.side-menu > li.current-page a,
 .nav.side-menu > li.active a {
     color: #3b3b3b;
 }
 
 .nav li.current-page {
     background: #FFCF6B;
+}
+
+.icon-bike:before {
+    font-family: 'icomoon';
+    content: "\61";
+}
+
+.icon-money:before {
+    font-family: 'icomoon';
+    content: "\62";
+}
+
+.icon-price-tag:before {
+    font-family: 'icomoon';
+    content: "\63";
+}
+
+.icon-smartphone:before {
+    font-family: 'icomoon';
+    content: "\64";
+}
+
+.nav.side-menu > li.current-page a span::before {
+    color: #12305e;
+}
+
+.nav.side-menu > li a span {
+    height: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.nav.side-menu > li a span::before {
+    font-size: 25px;
+    margin-right: 10px;
+    color: #fff;
 }
 
 .nav li li li.current-page {

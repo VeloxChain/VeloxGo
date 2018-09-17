@@ -118,7 +118,7 @@ class YourAccountInfo extends Component {
                             <h4 style={styles.name}>{userProfile.data.firstname + " " + userProfile.data.lastname}</h4>
                             <button style={styles.buttonCollect} onClick={this.collectBikeToken}>
                                 <span>collect 200 </span>
-                                <img src="images/logo.png" alt="Bikecoin" style={styles.icon} />
+                                <img src="images/Velox-icon.png" alt="VeloxChain" style={styles.icon} />
                             </button>
                         </div>
                     </div>
@@ -128,16 +128,15 @@ class YourAccountInfo extends Component {
                             <span style={{margin: "auto"}}></span>
                             <span style={styles.text}>{Math.round(this.props.info.bkc * 100)/100}</span>
                             <div style={styles.wrapIconCoin}>
-                                <img src="images/logo.png" alt="BikeCoin" style={styles.iconBike} />
+                                <img src="images/Velox-icon.png" alt="VeloxChain" style={styles.iconBike} />
                             </div>
-
                         </div>
                         <div style={styles.wrappFlexLeft}>
                             <span style={styles.iconLabel}>ETH</span>
                             <span style={{margin: "auto"}}></span>
                             <span style={styles.text}>{this.props.info.eth}</span>
                             <div style={styles.wrapIconCoin}>
-                                <img src="images/ethereum.png" alt="BikeCoin" style={styles.iconBike} />
+                                <img src="images/ethereum.png" alt="VeloxChain" style={styles.iconBike} />
                             </div>
                         </div>
                     </div>
