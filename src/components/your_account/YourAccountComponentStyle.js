@@ -119,11 +119,11 @@ const Styles = {
     },
 
     underlineStyle: {
-        borderColor: "#66F9B8"
+        borderColor: "rgba(18, 48, 94, .7)"
     },
 
     floatingLabelStyle: {
-        color: "#66F9B8"
+        color: "rgba(18, 48, 94, .7)"
     },
 
     floatingLabelFocusStyle: {
