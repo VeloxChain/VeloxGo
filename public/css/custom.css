@@ -378,7 +378,7 @@ a {
     height: 100px;
     margin: 30px 0px;
 }
-.logo-bikecoin {
+.logo-vlox {
     height: 40px;
 }
 .logo{
@@ -1152,7 +1152,7 @@ input#file:focus {
 }
 
 @media screen and (max-width: 767px) {
-    .logo-bikecoin {
+    .logo-vlox {
         height: auto;
         width: 90px;
     }
@@ -1243,4 +1243,3 @@ input#file:focus {
         padding: 20px 0px;
     }
 }
-  

@@ -67,7 +67,7 @@ class RentBikeActions extends Component {
                 <div className="box-left">
                     <img
                         src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.bikeInfo.avatar }
-                        alt="Bikecoin"
+                        alt="Velox Go"
                         style={styles.bike}
                     />
                 </div>
@@ -93,20 +93,20 @@ class RentBikeActions extends Component {
                                 src={this.state.isFlash ? flashOn : flashOff}
                                 style={styles.iconStatus}
                                 onClick={() => this.setState({isFlash: !this.state.isFlash})}
-                                alt="Bikecoin"
+                                alt="Velox Go"
                             />
                             <img
                                 src={this.state.isHonk ? honkOn : honk}
                                 style={styles.iconStatus}
                                 onClick={() => this.setState({isHonk: !this.state.isHonk})}
-                                alt="Bikecoin"
+                                alt="Velox Go"
                             />
                             <div style={{ minHeight: "43px" }}>
                                 <img
                                     src={this.state.isLock ? lockedOn : lockedOff}
                                     style={styles.iconStatus}
                                     onClick={() => this.setState({isLock: !this.state.isLock})}
-                                    alt="Bikecoin"
+                                    alt="Velox Go"
                                 />
                             </div>
                         </div>

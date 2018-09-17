@@ -56,6 +56,9 @@ const Styles = {
     },
     marginRight30: {
         marginRight: "30px"
+    },
+    logo:{
+        width:25
     }
 };
 

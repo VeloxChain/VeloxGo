@@ -11,6 +11,9 @@ const styles = {
         marginTop: "0",
         marginBottom: "20px"
     },
+    logo: {
+        width:30
+    }
 };
 class EditBikeForm extends Component {
     constructor(props) {
@@ -54,7 +57,7 @@ class EditBikeForm extends Component {
                 <div>
                     <p style={styles.title}>Price</p>
                     <h4 style={styles.text}>
-                        <span>{this.props.bikeInfo.price.toLocaleString()} <img src="images/logo.png" style={styles.logo} alt="BikeCoin" /> / 1h </span>
+                        <span>{this.props.bikeInfo.price.toLocaleString()} <img src="images/Velox-icon.png" style={styles.logo} alt="VeloxCoin" /> / 1h </span>
                     </h4>
                 </div>
             );

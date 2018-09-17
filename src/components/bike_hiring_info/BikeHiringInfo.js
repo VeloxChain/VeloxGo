@@ -20,12 +20,12 @@ class BikeHiringInfo extends Component {
                 <img
                     style={{...styles.bikeImage, ...{display: this.state.loaded? "block": "none"}}}
                     src={"https://gateway.ipfs.io/ipfs/" + this.props.externalData.avatar}
-                    alt="Bikecoin"
+                    alt="Velox Go"
                     onLoad={()=>this.setState({loaded: true })}
                 />
                 <img
                     src={loadingImage}
-                    alt="Bikecoin"
+                    alt="Velox Go"
                     style={{...styles.bikeImage, ...{display: this.state.loaded? "none": "block"}}}
                 />
 
@@ -38,7 +38,7 @@ class BikeHiringInfo extends Component {
                     </div>
                     <div style={styles.action}>
                         <div>
-                            <span style={styles.number}>{this.props.externalData.price.toLocaleString()} <img src="images/Velox-icon.png" style={styles.icon} alt="BikeCoin" /> / 1h</span>
+                            <span style={styles.number}>{this.props.externalData.price.toLocaleString()} <img src="images/Velox-icon.png" style={styles.icon} alt="Velox Go" /> / 1h</span>
 
                         </div>
                         <button style={styles.button} onClick={this.handleChangeRentBike}>Book</button>

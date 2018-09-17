@@ -271,7 +271,8 @@ const Styles = {
         textTransform: "uppercase",
         letterSpacing: "2px",
         display: "block",
-        minWidth: "168px"
+        minWidth: "168px",
+        margin: "0 auto"
     },
     center: {
         textAlign: "center",

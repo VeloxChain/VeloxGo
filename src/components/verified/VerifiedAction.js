@@ -3,14 +3,14 @@ import styles from "../your_bikes/edit_bike/EditBikeComponentStyle";
 import { MODAL_OWNER_VERIFIED } from "../modal/constants";
 
 class VerifiedAction extends Component {
-    
+
     render() {
         return (
             <div className="wrapp-right">
                 <div className="box-left">
                     <img
                         src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.avatar }
-                        alt="Bikecoin"
+                        alt="Velox Go"
                         style={styles.bike}
                     />
                 </div>

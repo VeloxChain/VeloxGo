@@ -67,7 +67,7 @@ class Navigation extends Component{
                             <i className="fa fa-user" />
                         </a>
                     </IconButton>
-                    
+
                 }
                 style={{marginRight: "-20px"}}
             >
@@ -83,11 +83,11 @@ class Navigation extends Component{
                 <nav className="row nav underline-none w100p h70 flexible">
                     <div className="col-sm-4 col-xs-4">
                         <a className="pointer size20 toggleMenu">
-                            <img src="images/Menu.png" alt="Bikecoin" />
+                            <img src="images/Menu.png" alt="Velox Go" />
                         </a>
                     </div>
                     <div className="col-sm-4 col-xs-4 text-center">
-                        <img src="images/VeloxGo.png" alt="Bikecoin" className="logo-bikecoin" />
+                        <img src="images/VeloxGo.png" alt="Velox Go" className="logo-velox" />
                     </div>
                     <div className="col-sm-4 col-xs-4 text-right">
                         {

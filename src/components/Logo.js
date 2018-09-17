@@ -6,7 +6,7 @@ class Logo extends Component {
         return (
             <div className="flexible">
                 <div className="logo-menu italic underline-none">
-                    <img src="/images/VeloxGo_logo.png" alt="Bikecoin" />
+                    <img src="/images/VeloxGo_logo.png" alt="Velox Go" />
                 </div>
                 <a className="pointer toggleMenu hidden-md hidden-lg close-menu">
                     <img src="images/close_white.png" />

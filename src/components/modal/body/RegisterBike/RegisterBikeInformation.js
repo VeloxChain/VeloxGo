@@ -71,7 +71,7 @@ class RegisterBikeInformation extends Component {
     }
     _renderPreview = () => {
         if (this.props.info.imagePreview) {
-            return <img src={ this.props.info.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="BikeCoin" />;
+            return <img src={ this.props.info.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="Velox Go" />;
         }
         return <i className="fa fa-camera icon-camera"></i>;
     }

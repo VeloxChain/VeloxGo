@@ -19,13 +19,13 @@ class BikeFilterComponent extends Component {
                     style={styles.iconFilter}
                     src={this.props.isRenderMap ? map_blue : map}
                     onClick={() => this.onChangeFilter(true)}
-                    alt="BikeCoin"
+                    alt="Velox Go"
                 />
                 <img
                     style={styles.iconFilterList}
                     src={!this.props.isRenderMap ? list_blue : list}
                     onClick={() => this.onChangeFilter(false)}
-                    alt="BikeCoin"
+                    alt="Velox Go"
                 />
             </div>
         );

@@ -106,7 +106,7 @@ class RentBikeInvoice extends Component {
                     <div className="col-sm-4">
                         <img
                             src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.bikeInfo.avatar }
-                            alt="Bikecoin"
+                            alt="Velox Go"
                             style={styles.bikeInvoice}
                         />
                     </div>
@@ -127,14 +127,14 @@ class RentBikeInvoice extends Component {
                                         <td>{this.props.invoice.totalTimeUsed}</td>
                                         <td>
                                             {this.props.bikeInfo.bikeInfo.price}
-                                            <img src="images/logo.png" style={styles.logoBike} alt="BikeCoin" />
+                                            <img src="images/Velox-icon.png" style={styles.logoBike} alt="Velox Go" />
                                         </td>
                                         <td>{this.props.invoice.subTotal}</td>
                                     </tr>
                                     <tr>
                                         <td colSpan="4" className="text-right" style={styles.total}>
                                             <span>Total: {this.props.invoice.subTotal}</span>
-                                            <img src="images/logo.png" style={styles.logoBike} alt="BikeCoin" />
+                                            <img src="images/Velox-icon.png" style={styles.logoBike} alt="Velox Go" />
                                         </td>
                                     </tr>
                                 </tbody>

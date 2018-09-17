@@ -145,7 +145,7 @@ class CreateAccount extends Component {
 
     _renderPreview = () => {
         if (this.state.imagePreview) {
-            return <img src={ this.state.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="BikeCoin" />;
+            return <img src={ this.state.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="Velox Go" />;
         }
         return <i className="fa fa-camera icon-camera"></i>;
     }
