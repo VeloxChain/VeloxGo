@@ -64,7 +64,7 @@ class EditBikeForm extends Component {
         }
         return (
             <div>
-                <p style={styles.title}>Bike Token</p>
+                <p style={styles.title}>Vehicle Token</p>
                 <h4 style={styles.text}>{this.props.bikeInfo.tokenId}</h4>
             </div>
         );

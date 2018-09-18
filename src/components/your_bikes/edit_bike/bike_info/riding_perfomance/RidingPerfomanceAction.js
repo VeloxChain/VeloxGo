@@ -9,14 +9,14 @@ class RidingPerfomanceAction extends Component {
                     style={styles.buttonActionTrophies}
                     onClick={() => this.props.onClickChangeShow("trophies")}
                 >
-                    <img src="images/trophie.png" alt="Bikecoin" style={styles.iconButton} />
+                    <img src="images/trophie.png" alt="Velox Go" style={styles.iconButton} />
                     Trophies
                 </button>
                 <button
                     style={styles.buttonActionLeaderboard}
                     onClick={() => this.props.onClickChangeShow("leaderboard")}
                 >
-                    <img src="images/leaderboard.png" alt="Bikecoin" style={styles.iconButton} />
+                    <img src="images/leaderboard.png" alt="Velox Go" style={styles.iconButton} />
                     Leaderboard
                 </button>
             </div>

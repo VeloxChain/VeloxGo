@@ -1,6 +1,6 @@
 export const OWNER_LOGIN = "Owner Login";
 export const CREATE_ACCOUNT = "Create An Account";
-export const CREATE_ACCOUNT_BIKECOIN = "Create A Bike Coin Profile";
+export const CREATE_ACCOUNT_BIKECOIN = "Create A Velox Go Profile";
 export const EXISTING = "Using An Existing Account";
 export const METAMASK = "Using An Existing Account";
 export const IMPORT_ACCOUNT = "Import Account";
@@ -10,8 +10,8 @@ export const UPDATE_USER_PROFILE = "Update User Profile";
 export const INSUFFICIENT_FUNDS = "Insufficient funds";
 export const CONFIRM_TRANSACTION = "Confirm Transaction";
 export const REGISTER_BIKE = "Register Vehicle";
-export const SUMARY_OF_BIKE = "Bike Info";
-export const TRANSFER_BIKE = "Transfer Bike";
+export const SUMARY_OF_BIKE = "Vehicle Info";
+export const TRANSFER_BIKE = "Transfer Vehicle";
 export const ADD_OWNER = "Add Owner";
 export const OWNER_VERIFIED = "Owner Verified";
 

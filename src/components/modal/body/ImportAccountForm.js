@@ -111,7 +111,7 @@ class ImportAccount extends Component {
                             <a className="font60 default-cursor">
                                 <img
                                     src="images/upload.png"
-                                    alt="Bikecoin"
+                                    alt="Velox Go"
                                 />
                             </a>
                             {

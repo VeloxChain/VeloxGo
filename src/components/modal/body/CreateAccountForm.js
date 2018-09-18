@@ -20,7 +20,7 @@ class CreateAccount extends Component {
             email: "",
             disabled:false,
             submitted:false,
-            labelButton: "CREATE BIKECOIN ACCOUNT",
+            labelButton: "CREATE VELOX GO ACCOUNT",
             imageData: "",
             isOpenCropImage: false,
             imagePreview: "images/avatar.png"

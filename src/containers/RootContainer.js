@@ -83,7 +83,7 @@ class RootContainer extends React.Component {
                             id="loader"
                             src="images/loading.png"
                             style={{margin: "auto"}}
-                            alt="Bikecoin"
+                            alt="Velox Go"
                         />
                         <br/>
                         {this._renderTxHash(AppReducer)}

@@ -72,7 +72,7 @@ class BikeInfo extends Component {
                 </Tab>
                 <Tab
                     className="tab"
-                    label="Bike specifications"
+                    label="Vehicle specifications"
                     value={1}
                     style={this.state.tabIndex === 1 ? styles.tabActive : styles.tab}
                 >
