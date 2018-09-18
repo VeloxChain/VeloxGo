@@ -25,9 +25,9 @@ const BIKECOIN_NETWORK_ADDRESS = "0x6a1b05e6d219b84184ab76acc373706763e3bcfd";
 const BIKECOIN_OWNER_SHIP_ADDRESS = "0xb18c880fa59645b557985651b3f29ee30913c3c2";
 const BIKECOIN_APIKEY = "SF26B7TY2YRUPHEBAHHPBV1AHD8SN5ETPI";
 const TX_RELAY_ADDRESS = "0x0d9275fb19c42cfe403d7a2b7ae55dac4a15bc60";
-const TX_URL = "https://rpc-testnet.veloxchain.io:3000/txs/";
-const ADDRESS_URL = "https://rpc-testnet.veloxchain.io:3000/address/";
-const TOKEN_URL = "https://rpc-testnet.veloxchain.io:3000/tokens/";
+const TX_URL = "https://scan.veloxchain.io/txs/";
+const ADDRESS_URL = "https://scan.veloxchain.io/address/";
+const TOKEN_URL = "https://scan.veloxchain.io/tokens/";
 ///////////////*******REMOTE HOST********///////////////////////
 const REMOTE_API_HOST = "http://localhost:3000";
 ///////////////*******REMOTE HOST********///////////////////////
