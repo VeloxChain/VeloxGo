@@ -3,6 +3,7 @@ import Datatable from "../../../../datatable/Datatable";
 import styles from "./OwnerHistoryStyle";
 import { MODAL_ADD_OWNER } from "../../../../modal/constants";
 // import constants from "../../../../../services/constants";
+import { toast } from "react-toastify";
 import _ from "lodash";
 class OwnerHistory extends React.Component {
     constructor(props) {
@@ -26,6 +27,9 @@ class OwnerHistory extends React.Component {
             data: ownerHistory
         });
     }
+    notifyFeatures = () => {
+        toast.info("This feature is not supported in MVP");
+    }
     _renderAddExOwner = () => {
         if (this.props.isRent) {
             return;
@@ -33,7 +37,8 @@ class OwnerHistory extends React.Component {
         return (
             <button
                 style={styles.button}
-                onClick={() => this.props.setType(MODAL_ADD_OWNER)}
+                onClick={this.notifyFeatures}
+                // onClick={() => this.props.setType(MODAL_ADD_OWNER)}
             >
                 Add Ex-Owner
             </button>
