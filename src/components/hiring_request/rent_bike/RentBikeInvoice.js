@@ -95,7 +95,7 @@ class RentBikeInvoice extends Component {
                             <span style={styles.textInvoice}>{this.props.bikeInfo.bikeInfo.tokenId}</span>
                         </p>
                         <p style={styles.flex}>
-                            <span style={styles.titleInvoice}>Bike Owner:</span>
+                            <span style={styles.titleInvoice}>Vehicle Owner:</span>
                             <span style={styles.textInvoice}>{this.props.bikeInfo.bikeInfo.owner}</span>
                         </p>
                         <p style={styles.flex}>

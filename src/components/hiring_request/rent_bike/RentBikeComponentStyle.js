@@ -41,7 +41,7 @@ const Styles = {
 
     buttonTransfer: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
         borderRadius: "5px",
         padding: "7px 20px",
         margin: "20px auto 0",
@@ -265,7 +265,8 @@ const Styles = {
 
     buttonVerified: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 20px",
         textTransform: "uppercase",
@@ -289,7 +290,7 @@ const Styles = {
         marginBottom: "15px"
     },
     titleInvoice: {
-        width: "120px",
+        width: "150px",
         fontWeight: "bold",
         letterSpacing: "1px"
     },
@@ -307,7 +308,8 @@ const Styles = {
     },
     buttonInvoice: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 20px",
         margin: "0px 10px",

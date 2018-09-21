@@ -23,7 +23,7 @@ const bikeInfo = {
     },
     manufacturer: "Volata Cycles",
     originalOwner: "0xdda69c417c81909048f5de374057cc83e4f39e67",
-    snNumber: "2019-BKC-123423424",
+    snNumber: "2019-Velox-123423424",
     status: "ACTIVE",
     tokenId: 5,
     year: 2018

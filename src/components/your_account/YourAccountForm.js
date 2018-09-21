@@ -60,7 +60,7 @@ class YourAccountForm extends Component {
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <label className="col-sm-3" style={styles.labelText}>BKC Address:</label>
+                                <label className="col-sm-3" style={styles.labelText}>Velox Address:</label>
                                 <div className="col-sm-9">
                                     <p style={styles.address} className="test-ellipsis">{this._viewBKCOnEtherScan()}</p>
                                 </div>

@@ -214,14 +214,14 @@ function* transferBikeInNetwork(action) {
 }
 
 function* rentBikeAction(action) {
-    yield put({type: "APP_LOADING_START", payload: "Booking bike......"});
+    yield put({type: "APP_LOADING_START", payload: "Booking vehicle......"});
     const { address, ethereum, keyStore, passphrase, bikeInfo } = action.payload;
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
     let balanceOfBKC = yield call(ethereum.getBKCBalance, userProfileAddress);
     balanceOfBKC = parseInt(balanceOfBKC);
     if (balanceOfBKC < 200) {
         yield put({type: "APP_LOADING_END"});
-        toast.error("You should have at least 200 BKC to book a bike!");
+        toast.error("You should have at least 200 Velox to book a vehicle!");
         return;
     }
     let seconds = moment().unix();

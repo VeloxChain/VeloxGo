@@ -200,7 +200,7 @@ class YourBikesComponent extends Component {
                     className="image-crop"
                 >
                     <TextField
-                        floatingLabelText="Price (BKC) Per Hour"
+                        floatingLabelText="Price (Velox) Per Hour"
                         fullWidth={true}
                         type="number"
                         value={this.state.price}
