@@ -155,7 +155,7 @@ const customStyles = {
         "display": "flex",
         "justifyContent": "center",
         "alignItems": "center",
-        "zIndex": 300
+        "zIndex": 1600
     },
     content: {
         "width"       : "700px",

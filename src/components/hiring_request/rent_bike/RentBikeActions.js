@@ -114,7 +114,7 @@ class RentBikeActions extends Component {
                             style={styles.buttonVerified}
                             onClick={this.handleReturnBike}
                         >
-                            Return Bike
+                            Return Vehicle
                         </button>
                         {this._renderInvoice()}
                     </div>
