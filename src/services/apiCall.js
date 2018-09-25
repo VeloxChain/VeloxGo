@@ -36,13 +36,13 @@ export const getEventLogs = (ethereum) => {
 
 export const getContractLog = () => {
     return new Promise((resolve) => {
-        let module = "account";
-        let action = "txlist";
-        let fromBlock = 0;
-        let toBlock = "latest";
+        // let module = "account";
+        // let action = "txlist";
+        // let fromBlock = 0;
+        // let toBlock = "latest";
         let address = constants.TX_RELAY_ADDRESS;
-        let apikey = constants.BIKECOIN_APIKEY;
-        return fetch(`https://api-ropsten.etherscan.io/api?module=${module}&action=${action}&fromBlock=${fromBlock}&toBlock=${toBlock}&address=${address}&apikey=${apikey}`, {
+        // let apikey = constants.BIKECOIN_APIKEY;
+        return fetch(`${constants.SCAN_API}txs?page=1&limit=15&address=${address}`, {
             method: "GET",
             headers: {
                 "Accept": "application/json",

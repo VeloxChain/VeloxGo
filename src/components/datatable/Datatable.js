@@ -3,6 +3,12 @@ import _ from "lodash";
 import styles from "./DatatableStyle";
 
 class Datatable extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            pageActive: 1,
+        };
+    }
 
     _renderHeader = () => {
         var heading = [];
@@ -30,25 +36,63 @@ class Datatable extends Component {
 
     _renderBody = () => {
         var body = [];
-        _.forEach(this.props.body, (data, index) => {
+        let item = _.slice(this.props.body, (this.state.pageActive - 1)*10, (this.state.pageActive)*10);
+        _.forEach(item, (data, index) => {
             body.push(<tr key={index}>{this._renderField(data, index)}</tr>);
         });
         return body;
     }
 
-    _renderTfoot = () => {
-        var tfoot = [];
-        let length = _.size(this.props.params);
+    _renderPaging = () => {
+        let totalPage = Math.ceil(this.props.body.length/10);
+        if (totalPage > 0) {
+            return (
+                <div className="text-right">
+                    <ul className="pagination">
+                        <li><a href="#" onClick={() => this.onChangePage("Previous")}>Previous</a></li>
+                        {this._renderContentPaging()}
+                        <li><a href="#" onClick={() => this.onChangePage("Next")}>Next</a></li>
+                    </ul>
+                </div>
+            );
+        }
+        return;
+    }
 
-        tfoot.push(
-            <td colSpan={length} key="colSpan" className="text-right" style={styles.tdColSpan}>
-                <a style={styles.more}>
-                    Show More
-                </a>
-            </td>
-        );
+    _renderContentPaging = () => {
+        let totalPage = Math.ceil(this.props.body.length/10);
+        let renderPage = [];
+        for (let i = 1; i <= totalPage; i++) {
+            renderPage.push(<li key={i} className={this.state.pageActive == i ? "active" : ""}><a href="#" onClick={() => this.onChangePage(i)}>{i}</a></li>);
+        }
+        return renderPage;
+    }
 
-        return tfoot;
+    onChangePage = (active) => {
+        let totalPage = Math.ceil(this.props.body.length/10);
+
+        if (active === "Previous") {
+            if (this.state.pageActive > 1) {
+                this.setState({
+                    pageActive: this.state.pageActive - 1
+                });
+            }
+            return;
+        }
+
+        if (active === "Next") {
+            if (this.state.pageActive < totalPage) {
+                this.setState({
+                    pageActive: this.state.pageActive + 1
+                });
+            }
+            return;
+        }
+
+        this.setState({
+            pageActive: active
+        });
+        return;
     }
 
     render() {
@@ -63,12 +107,8 @@ class Datatable extends Component {
                     <tbody>
                         {this._renderBody()}
                     </tbody>
-                    {/* <tfoot>
-                        <tr>
-                            {this._renderTfoot()}
-                        </tr>
-                    </tfoot> */}
                 </table>
+                {this._renderPaging()}
             </div>
         );
     }
