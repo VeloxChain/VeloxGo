@@ -45,13 +45,14 @@ class Datatable extends Component {
 
     _renderPaging = () => {
         let totalPage = Math.ceil(this.props.body.length/10);
+        
         if (totalPage > 0) {
             return (
                 <div className="text-right">
                     <ul className="pagination">
-                        <li><a href="#" onClick={() => this.onChangePage("Previous")}>Previous</a></li>
+                        {this._renderPreviousPaging()}
                         {this._renderContentPaging()}
-                        <li><a href="#" onClick={() => this.onChangePage("Next")}>Next</a></li>
+                        {this._renderNextPaging()}
                     </ul>
                 </div>
             );
@@ -59,13 +60,89 @@ class Datatable extends Component {
         return;
     }
 
+    _renderPreviousPaging = () => {
+        if (this.state.pageActive > 1) {
+            return (
+                <li>
+                    <a href="#" onClick={() => this.onChangePage("Previous")}>Previous</a>
+                </li>
+            )
+        }
+
+        return (
+            <li>
+                <a style={styles.none}>Previous</a>
+            </li>
+        )
+    }
+
+    _renderNextPaging = () => {
+        let totalPage = Math.ceil(this.props.body.length/10);
+
+        if (this.state.pageActive < totalPage) {
+            return (
+                <li>
+                    <a href="#" onClick={() => this.onChangePage("Next")}>Next</a>
+                </li>
+            )
+        }
+
+        return (
+            <li>
+                <a style={styles.none}>Next</a>
+            </li>
+        )
+    }
+
+    pagination = (currentPage, nrOfPages) => {
+        var delta = 1,
+            range = [],
+            rangeWithDots = [],
+            l;
+    
+        range.push(1);  
+    
+        if (nrOfPages <= 1){
+         return range;
+        }
+    
+        for (let i = currentPage - delta; i <= currentPage + delta; i++) {
+            if (i < nrOfPages && i > 1) {
+                range.push(i);
+            }
+        }  
+        range.push(nrOfPages);
+    
+        for (let i of range) {
+            if (l) {
+                if (i - l === 2) {
+                    rangeWithDots.push(l + 1);
+                } else if (i - l !== 1) {
+                    rangeWithDots.push('...');
+                }
+            }
+            rangeWithDots.push(i);
+            l = i;
+        }
+    
+        return rangeWithDots;
+    }
+    
     _renderContentPaging = () => {
         let totalPage = Math.ceil(this.props.body.length/10);
-        let renderPage = [];
-        for (let i = 1; i <= totalPage; i++) {
-            renderPage.push(<li key={i} className={this.state.pageActive == i ? "active" : ""}><a href="#" onClick={() => this.onChangePage(i)}>{i}</a></li>);
-        }
-        return renderPage;
+        let listPageNumber = this.pagination(this.state.pageActive, totalPage);
+
+        return listPageNumber.map((pageNumber, index) => {
+            if(!_.isNumber(pageNumber)) {
+                return ( 
+                    <li key={index} className={this.state.pageActive == pageNumber ? "active" : ""}>
+                        <span style={styles.loadMore}>{pageNumber}</span>
+                    </li> 
+                )
+            }
+            return <li key={index} className={this.state.pageActive == pageNumber ? "active" : ""}><a href="#" onClick={() => this.onChangePage(pageNumber)}>{pageNumber}</a></li>
+
+        });
     }
 
     onChangePage = (active) => {
