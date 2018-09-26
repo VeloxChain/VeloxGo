@@ -9,7 +9,7 @@ class Existing extends Component {
         return (
             <div className="mh250 pd10">
                 <div className="intro-popup-top">
-                    <h4 className="text-center">Ehereum network: <b>{this.props.global.nodeName}</b></h4>
+                    <h4 className="text-center">Ethereum network: <b>{this.props.global.nodeName}</b></h4>
                     <h4 className="text-center">You have to login by an ethereum account</h4>
                 </div>
 
