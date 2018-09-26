@@ -1243,3 +1243,23 @@ input#file:focus {
         padding: 20px 0px;
     }
 }
+
+.pagination li a {
+    font-size: 16px;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    color: rgb(33, 37, 41);
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    background: #172642;
+    border-color: #172642;
+    color: #FFCF6B;
+}
