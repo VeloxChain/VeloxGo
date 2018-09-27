@@ -38,6 +38,7 @@ persistStore(store, {blacklist: [
     "createKeyStore",
     "importKeystore",
     "utils",
+    "global"
 ]});
 
 export default store;

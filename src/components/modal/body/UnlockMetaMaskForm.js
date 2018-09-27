@@ -66,7 +66,7 @@ class UnlockMetaMask extends Component {
         return (
             <div className="mh250 pd10">
                 <div className="intro-popup-top">
-                    <h4 className="text-center">Ethereum network: <b>{this.props.global.nodeName}</b></h4>
+                    <h4 className="text-center">{this.props.global.nodeName}: <b>TestNet</b></h4>
                     {this._renderContent()}
                 </div>
             </div>
