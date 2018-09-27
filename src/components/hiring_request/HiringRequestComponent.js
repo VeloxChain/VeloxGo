@@ -107,7 +107,7 @@ class HiringRequestComponent extends Component {
         if (listBikeFilter.length === 0) {
             renderBike = (
                 <div className="text-center">
-                    <img src="images/404.png" style={styles.fail} alt="Velox Go" />
+                    <img src="images/404.png" style={styles.fail} alt="VeloxGo" />
                 </div>
             );
         }

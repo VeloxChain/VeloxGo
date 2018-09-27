@@ -16,7 +16,7 @@ class SumaryOfBike extends Component {
                         <img
                             src={"https://gateway.ipfs.io/ipfs/" + bikeInfo.avatar}
                             style={styles.bikeShow}
-                            alt="Velox Go"
+                            alt="VeloxGo"
                         />
                     </div>
 
@@ -36,7 +36,7 @@ class SumaryOfBike extends Component {
                     <p style={styles.title}>Price</p>
                     <h5 style={styles.text}>
                         <span style={styles.numberPrice}>{bikeInfo.price.toLocaleString()}</span>
-                        <img src="images/Velox-icon.png" style={styles.logo} alt="Velox go" />
+                        <img src="images/Velox-icon.png" style={styles.logo} alt="VeloxGo" />
                     </h5>
 
                     <div>

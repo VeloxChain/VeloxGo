@@ -92,7 +92,7 @@ class GeometryModel1C extends React.Component {
         return (
             <div>
                 <div className="text-center" style={{ marginTop: "30px" }}>
-                    <img src="images/model1c.png" className="image-geometries" alt="Velox Go | Model 1C" />
+                    <img src="images/model1c.png" className="image-geometries" alt="VeloxGo | Model 1C" />
                 </div>
                 <div className="table-responsive">
                     <table className="table table-bike" style={styles.table}>

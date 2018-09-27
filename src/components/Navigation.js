@@ -83,11 +83,11 @@ class Navigation extends Component{
                 <nav className="row nav underline-none w100p h70 flexible">
                     <div className="col-sm-4 col-xs-4">
                         <a className="pointer size20 toggleMenu">
-                            <img src="images/Menu.png" alt="Velox Go" />
+                            <img src="images/Menu.png" alt="VeloxGo" />
                         </a>
                     </div>
                     <div className="col-sm-4 col-xs-4 text-center">
-                        <img src="images/VeloxGo.png" alt="Velox Go" className="logo-velox" />
+                        <img src="images/VeloxGo.png" alt="VeloxGo" className="logo-velox" />
                     </div>
                     <div className="col-sm-4 col-xs-4 text-right">
                         {

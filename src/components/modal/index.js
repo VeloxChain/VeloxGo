@@ -134,7 +134,7 @@ class ModalCustom extends Component {
                                 className="pull-right color-text pd10 size20 closeModal"
                                 onClick={this.props.closeModal}
                             >
-                                <img src="images/close.png" alt="Velox Go" style={customStyles.close} />
+                                <img src="images/close.png" alt="VeloxGo" style={customStyles.close} />
                             </a>
                         </div>
                         {this._renderBodyModal()}

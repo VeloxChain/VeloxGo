@@ -16,7 +16,7 @@ class YourAccountInfo extends Component {
 
     _renderPreview = () => {
         if (this.state.imagePreview) {
-            return <img src={this.state.imagePreview} style={{width:"100%", height: "100%", objectFit : "cover"}} alt="Velox Go Profile" />;
+            return <img src={this.state.imagePreview} style={{width:"100%", height: "100%", objectFit : "cover"}} alt="VeloxGo Profile" />;
         }
         return <i className="fa fa-camera icon-camera"></i>;
     }
@@ -118,7 +118,7 @@ class YourAccountInfo extends Component {
                             <h4 style={styles.name}>{userProfile.data.firstname + " " + userProfile.data.lastname}</h4>
                             <button style={styles.buttonCollect} onClick={this.collectBikeToken}>
                                 <span>collect 200 </span>
-                                <img src="images/Velox-icon.png" alt="Velox Go" style={styles.icon} />
+                                <img src="images/Velox-icon.png" alt="VeloxGo" style={styles.icon} />
                             </button>
                         </div>
                     </div>
@@ -128,7 +128,7 @@ class YourAccountInfo extends Component {
                             <span style={{margin: "auto"}}></span>
                             <span style={styles.text}>{Math.round(this.props.info.bkc * 100)/100}</span>
                             <div style={styles.wrapIconCoin}>
-                                <img src="images/Velox-icon.png" alt="Velox Go" style={styles.iconBike} />
+                                <img src="images/Velox-icon.png" alt="VeloxGo" style={styles.iconBike} />
                             </div>
                         </div>
                         <div style={styles.wrappFlexLeft}>
@@ -136,7 +136,7 @@ class YourAccountInfo extends Component {
                             <span style={{margin: "auto"}}></span>
                             <span style={styles.text}>{this.props.info.eth}</span>
                             <div style={styles.wrapIconCoin}>
-                                <img src="images/ethereum.png" alt="Velox Go" style={styles.iconBike} />
+                                <img src="images/ethereum.png" alt="VeloxGo" style={styles.iconBike} />
                             </div>
                         </div>
                     </div>

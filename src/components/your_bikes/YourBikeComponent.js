@@ -35,7 +35,7 @@ class YourBikesComponent extends Component {
         if (!_.isUndefined(data[value]) && parseInt(data[value]) > 0) {
             let price = parseInt(data[value]).toLocaleString();
             return (
-                <span><img src="images/Velox-icon.png" style={styles.logo} alt="Velox Go" /> {price} </span>
+                <span><img src="images/Velox-icon.png" style={styles.logo} alt="VeloxGo" /> {price} </span>
             );
         }
         return "";

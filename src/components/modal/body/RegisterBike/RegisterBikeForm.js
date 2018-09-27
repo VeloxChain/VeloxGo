@@ -161,7 +161,7 @@ class RegisterBike extends Component {
                     <div style={styles.count}>
                         {
                             this.state.stepIndex > number ?
-                                <img src="images/check.png" style={styles.icon} alt="Velox Go" />
+                                <img src="images/check.png" style={styles.icon} alt="VeloxGo" />
                                 :
                                 <span style={styles.number}>{number + 1}</span>
                         }
@@ -183,7 +183,7 @@ class RegisterBike extends Component {
                 <div style={styles.count}>
                     {
                         this.state.stepIndex > 0 ?
-                            <img src="images/check.png" style={styles.icon} alt="Velox Go" />
+                            <img src="images/check.png" style={styles.icon} alt="VeloxGo" />
                             :
                             <span style={styles.number}>1</span>
                     }

@@ -1,6 +1,6 @@
 export const OWNER_LOGIN = "Owner Login";
 export const CREATE_ACCOUNT = "Create An Account";
-export const CREATE_ACCOUNT_BIKECOIN = "Create A Velox Go Profile";
+export const CREATE_ACCOUNT_BIKECOIN = "Create A VeloxGo Profile";
 export const EXISTING = "Using An Existing Account";
 export const METAMASK = "Using An Existing Account";
 export const IMPORT_ACCOUNT = "Import Account";

@@ -60,7 +60,7 @@ class RidingPerfomanceTrophies extends Component {
             <div className="row" style={styles.rowButton}>
                 <div className="col-sm-4">
                     <div style={styles.block}>
-                        <img src="images/distanceAchievement.png" style={styles.iconTrophie} alt="Velox Go" />
+                        <img src="images/distanceAchievement.png" style={styles.iconTrophie} alt="VeloxGo" />
                         <p>
                             <span style={styles.countLeaderBoard}>99</span>
                             <span style={styles.unit}> mi</span>
@@ -70,7 +70,7 @@ class RidingPerfomanceTrophies extends Component {
                 </div>
                 <div className="col-sm-4">
                     <div style={styles.block}>
-                        <img src="images/elevationAchievement.png" style={styles.iconTrophie} alt="Velox Go" />
+                        <img src="images/elevationAchievement.png" style={styles.iconTrophie} alt="VeloxGo" />
                         <p>
                             <span style={styles.countLeaderBoard}>99</span>
                             <span style={styles.unit}> mi</span>
@@ -80,7 +80,7 @@ class RidingPerfomanceTrophies extends Component {
                 </div>
                 <div className="col-sm-4">
                     <div style={styles.block}>
-                        <img src="images/energyAchievement.png" style={styles.iconTrophie} alt="Velox Go" />
+                        <img src="images/energyAchievement.png" style={styles.iconTrophie} alt="VeloxGo" />
                         <p>
                             <span style={styles.countLeaderBoard}>99</span>
                             <span style={styles.unit}> mi</span>

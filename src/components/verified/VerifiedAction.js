@@ -10,7 +10,7 @@ class VerifiedAction extends Component {
                 <div className="box-left">
                     <img
                         src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.avatar }
-                        alt="Velox Go"
+                        alt="VeloxGo"
                         style={styles.bike}
                     />
                 </div>
