@@ -82,7 +82,6 @@ class RentBikeInvoice extends Component {
                 autoScrollBodyContent={true}
                 repositionOnUpdate={true}
                 titleStyle={styles.titleStyle}
-                className="image-crop"
             >
                 <div className="row" style={styles.bodyContent}>
                     <div className="col-sm-8">

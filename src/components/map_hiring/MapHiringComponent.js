@@ -126,7 +126,7 @@ export default compose(
     withProps({
         googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${appConfig.google_map_api_key}&v=3.exp&libraries=geometry,drawing,places`,
         loadingElement: <div style={{ height: "100%" }} />,
-        containerElement: <div style={{ height: "calc(100vh - 195px)" }} />,
+        containerElement: <div style={{ height: "calc(100vh - 224px)" }} />,
         mapElement: <div style={{ height: "100%" }} />,
         center: { lat: 25.03, lng: 121.6 },
     }),

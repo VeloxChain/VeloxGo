@@ -61,7 +61,7 @@ const Styles = {
     iframe: {
         border: "none",
         width: "100%",
-        height: "calc(100vh - 195px)"
+        height: "calc(100vh - 224px)"
     },
 
     info: {

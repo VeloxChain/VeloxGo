@@ -28,7 +28,7 @@ const TX_RELAY_ADDRESS = "0x0d9275fb19c42cfe403d7a2b7ae55dac4a15bc60";
 const TX_URL = "https://scan.veloxchain.io/txs/";
 const SCAN_API = "https://scan.veloxchain.io/api/";
 const ADDRESS_URL = "https://scan.veloxchain.io/address/";
-const TOKEN_URL = "https://scan.veloxchain.io/address/";
+const TOKEN_URL = "https://scan.veloxchain.io/tokens/";
 ///////////////*******REMOTE HOST********///////////////////////
 const REMOTE_API_HOST = "http://localhost:3000";
 ///////////////*******REMOTE HOST********///////////////////////

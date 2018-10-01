@@ -1263,3 +1263,7 @@ input#file:focus {
     border-color: #172642;
     color: #FFCF6B;
 }
+
+.image-crop {
+    z-index: 1700 !important;
+}
