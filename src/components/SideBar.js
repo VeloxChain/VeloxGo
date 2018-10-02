@@ -11,7 +11,7 @@ class SideBar extends Component{
                             <span className="icon-bike">YOUR VEHICLES</span>
                         </NavLink>
                         <NavLink to="/hiring_request">
-                            <span className="icon-money">VEHICLE FOR RENT</span>
+                            <span className="icon-money">FIND VEHICLE</span>
                         </NavLink>
                         <NavLink to="/your_account">
                             <span className="icon-price-tag">YOUR ACCOUNT</span>
