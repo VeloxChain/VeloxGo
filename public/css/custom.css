@@ -1267,3 +1267,7 @@ input#file:focus {
 .image-crop {
     z-index: 1700 !important;
 }
+
+.pac-container {
+    z-index: 1650 !important;
+}
