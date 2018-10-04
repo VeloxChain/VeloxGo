@@ -43,7 +43,7 @@ class RegisterBike extends Component {
     validate = () => {
         const {stepIndex, stepOne, stepTwo, stepThree} = this.state;
         if (stepIndex === 0) {
-            if (stepOne.imageData === "" || stepOne.invoiceData === "" || stepOne.snNumber === "" || stepOne.manufacturer === "") {
+            if (stepOne.imageData === "" || stepOne.invoiceData === "" || stepOne.snNumber.trim() === "" || stepOne.manufacturer.trim() === "") {
                 return false;
             }
         }

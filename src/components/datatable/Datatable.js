@@ -45,7 +45,7 @@ class Datatable extends Component {
 
     _renderPaging = () => {
         let totalPage = Math.ceil(this.props.body.length/10);
-        
+
         if (totalPage > 0) {
             return (
                 <div className="text-right">
@@ -64,16 +64,16 @@ class Datatable extends Component {
         if (this.state.pageActive > 1) {
             return (
                 <li>
-                    <a href="#" onClick={() => this.onChangePage("Previous")}>Previous</a>
+                    <button onClick={() => this.onChangePage("Previous")}>Previous</button>
                 </li>
-            )
+            );
         }
 
         return (
             <li>
                 <a style={styles.none}>Previous</a>
             </li>
-        )
+        );
     }
 
     _renderNextPaging = () => {
@@ -82,16 +82,16 @@ class Datatable extends Component {
         if (this.state.pageActive < totalPage) {
             return (
                 <li>
-                    <a href="#" onClick={() => this.onChangePage("Next")}>Next</a>
+                    <button onClick={() => this.onChangePage("Next")}>Next</button>
                 </li>
-            )
+            );
         }
 
         return (
             <li>
                 <a style={styles.none}>Next</a>
             </li>
-        )
+        );
     }
 
     pagination = (currentPage, nrOfPages) => {
@@ -99,48 +99,48 @@ class Datatable extends Component {
             range = [],
             rangeWithDots = [],
             l;
-    
-        range.push(1);  
-    
+
+        range.push(1);
+
         if (nrOfPages <= 1){
-         return range;
+            return range;
         }
-    
+
         for (let i = currentPage - delta; i <= currentPage + delta; i++) {
             if (i < nrOfPages && i > 1) {
                 range.push(i);
             }
-        }  
+        }
         range.push(nrOfPages);
-    
+
         for (let i of range) {
             if (l) {
                 if (i - l === 2) {
                     rangeWithDots.push(l + 1);
                 } else if (i - l !== 1) {
-                    rangeWithDots.push('...');
+                    rangeWithDots.push("...");
                 }
             }
             rangeWithDots.push(i);
             l = i;
         }
-    
+
         return rangeWithDots;
     }
-    
+
     _renderContentPaging = () => {
         let totalPage = Math.ceil(this.props.body.length/10);
         let listPageNumber = this.pagination(this.state.pageActive, totalPage);
 
         return listPageNumber.map((pageNumber, index) => {
             if(!_.isNumber(pageNumber)) {
-                return ( 
-                    <li key={index} className={this.state.pageActive == pageNumber ? "active" : ""}>
+                return (
+                    <li key={index} className={this.state.pageActive === pageNumber ? "active" : ""}>
                         <span style={styles.loadMore}>{pageNumber}</span>
-                    </li> 
-                )
+                    </li>
+                );
             }
-            return <li key={index} className={this.state.pageActive == pageNumber ? "active" : ""}><a href="#" onClick={() => this.onChangePage(pageNumber)}>{pageNumber}</a></li>
+            return <li key={index} className={this.state.pageActive === pageNumber ? "active" : ""}><a onClick={() => this.onChangePage(pageNumber)}>{pageNumber}</a></li>;
 
         });
     }

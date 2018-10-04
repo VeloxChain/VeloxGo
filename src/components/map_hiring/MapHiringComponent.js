@@ -29,7 +29,7 @@ class MapHiringComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.mapDefaultLocation != this.props.mapDefaultLocation) {
+        if(nextProps.mapDefaultLocation !== this.props.mapDefaultLocation) {
             this.props.handleSelectBike("");
             setTimeout(()=>{this.googleMap.panTo(
                 {
@@ -46,7 +46,7 @@ class MapHiringComponent extends Component {
 
         let findOverLapMarker = _.find(this.state.listMarkerData, (value, index) => {
             indexOverLap= index;
-            return value.location.lat == markerData.location.lat && value.location.long == markerData.location.long && value.tokenId != markerData.tokenId ; 
+            return value.location.lat === markerData.location.lat && value.location.long === markerData.location.long && value.tokenId !== markerData.tokenId ;
         });
 
         if(!_.isEmpty(findOverLapMarker)) {
@@ -60,7 +60,7 @@ class MapHiringComponent extends Component {
                 listMarkerData: newListMarkerData
             });
 
-            
+
 
             return {
                 long: _.toNumber(findOverLapMarker.location.long) + 0.000001,
@@ -100,9 +100,9 @@ class MapHiringComponent extends Component {
                                     position={{ lat: newPoint.lat, lng: newPoint.long }}
                                     onClick={() => this.props.handleSelectBike(bike.tokenId)}
                                     icon={MapBikeIcon}
-                                    
+
                                 >
-                                    {bike.tokenId == this.props.bikeHashSelected && <InfoBox
+                                    {bike.tokenId === this.props.bikeHashSelected && <InfoBox
                                         onCloseClick={()=>this.props.handleSelectBike("")}
                                         options={{closeBoxURL: "images/close_white.png", enableEventPropagation: true}}
                                     >

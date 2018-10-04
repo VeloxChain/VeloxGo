@@ -10,7 +10,7 @@ var IPFS = require("ipfs-api");
 // });
 
 var ipfs = IPFS({
-    host: "ipfs.bikecoin.network",
+    host: "ipfs.veloxchain.io",
     port: 5002,
     protocol: "https"
 });

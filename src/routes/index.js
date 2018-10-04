@@ -106,7 +106,6 @@ class root extends React.Component {
         return userProfileAddress;
     }
     render() {
-        console.log(this.props);
         return (
             <RootContainer
                 {...this.props}

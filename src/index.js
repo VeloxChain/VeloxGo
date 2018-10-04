@@ -2,19 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./routes";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { Router } from "react-router-dom";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import store from "./store";
-import createHistory from "history/createHashHistory";
+import history from "./history";
 
 ReactDOM.render(
     <Provider store={store}>
         <MuiThemeProvider>
-            <BrowserRouter history={createHistory()}>
+            <Router history={history}>
                 <App />
-            </BrowserRouter>
+            </Router>
         </MuiThemeProvider>
     </Provider>,
     document.getElementById("root")
 );
-

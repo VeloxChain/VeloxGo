@@ -1,8 +1,8 @@
 import React from "react";
 import Datatable from "../../../../datatable/Datatable";
 import styles from "./OwnerHistoryStyle";
-import { MODAL_ADD_OWNER } from "../../../../modal/constants";
-// import constants from "../../../../../services/constants";
+// import { MODAL_ADD_OWNER } from "../../../../modal/constants";
+// onClick={() => this.props.setType(MODAL_ADD_OWNER)}
 import { toast } from "react-toastify";
 import _ from "lodash";
 class OwnerHistory extends React.Component {
@@ -38,7 +38,6 @@ class OwnerHistory extends React.Component {
             <button
                 style={styles.button}
                 onClick={this.notifyFeatures}
-                // onClick={() => this.props.setType(MODAL_ADD_OWNER)}
             >
                 Add Ex-Owner
             </button>

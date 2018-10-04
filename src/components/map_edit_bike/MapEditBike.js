@@ -57,8 +57,8 @@ const MapEditBike = compose(
 
                     var filtered_array = places[0].address_components.filter(function(address_component){
                         return address_component.types.includes("country");
-                    }); 
-          
+                    });
+
                     var countryName = filtered_array.length ? filtered_array[0].long_name: "";
                     var countryCode = filtered_array.length ? filtered_array[0].short_name: "";
 
@@ -120,7 +120,7 @@ const MapEditBike = compose(
             />
         </SearchBox>
         {
-            props.markers.length != 0 ?
+            props.markers.length !== 0 ?
                 props.markers.map((marker, index) =>
                     <Marker key={index} position={marker.position} />
                 ) :

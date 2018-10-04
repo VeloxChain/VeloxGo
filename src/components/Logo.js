@@ -9,7 +9,7 @@ class Logo extends Component {
                     <img src="/images/VeloxGo_logo.png" alt="VeloxGo" />
                 </div>
                 <a className="pointer toggleMenu hidden-md hidden-lg close-menu">
-                    <img src="images/close_white.png" />
+                    <img src="images/close_white.png" alt="closeMenu" />
                 </a>
             </div>
         );

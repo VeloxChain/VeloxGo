@@ -30,11 +30,11 @@ class NewAccount extends Component {
         }
     }
     validation = () => {
-        if (this.state.accountName === "") {
+        if (this.state.accountName.trim() === "") {
             this.setState({errorName: "Please fill out the field"});
             return false;
         }
-        if (this.state.passpharse === "") {
+        if (this.state.passpharse.trim() === "") {
             this.setState({errorPass: "Please fill out the field"});
             return false;
         }

@@ -31,7 +31,7 @@ class YourAccountForm extends Component {
         return (
             <a
                 href={constants.TOKEN_URL + constants.BIKECOIN_TOKEN_ADDRESS}
-                title="View Wallet Address On EtherScan"
+                title="View Velox Token Address On EtherScan"
                 target="_blank" >
                 {constants.BIKECOIN_TOKEN_ADDRESS + " "}
                 <i className="fa fa-external-link"></i>

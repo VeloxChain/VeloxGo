@@ -42,7 +42,7 @@ class HiringRequestComponent extends Component {
     }
 
     handleSelectBike = (bikeHashSelected) => {
-        if(bikeHashSelected == this.state.bikeHashSelected) {
+        if(bikeHashSelected === this.state.bikeHashSelected) {
             bikeHashSelected = "";
         }
         this.setState({

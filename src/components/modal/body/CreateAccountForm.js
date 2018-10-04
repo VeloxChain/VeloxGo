@@ -38,13 +38,13 @@ class CreateAccount extends Component {
         if (!isValidEmail) {
             return "Invalid Email";
         }
-        if (this.state.firstname === "") {
+        if (this.state.firstname.trim() === "") {
             return "Invalid First Name";
         }
-        if (this.state.lastname === "") {
+        if (this.state.lastname.trim() === "") {
             return "Invalid Last Name";
         }
-        if (this.state.passpharse === "" && this.isMetamask() === false) {
+        if (this.state.passpharse.trim() === "" && this.isMetamask() === false) {
             return "Invalid Passpharse";
         }
         return "";
@@ -55,7 +55,7 @@ class CreateAccount extends Component {
             return;
         }
         let validDataMessenger = await this.validate();
-        if (validDataMessenger != "") {
+        if (validDataMessenger !== "") {
             toast.error(validDataMessenger);
             return;
         }

@@ -4,9 +4,6 @@ import SideBar from "./SideBar";
 import styles from "./your_bikes/YourBikesComponentStyle";
 import { collectToken } from "../actions/accountActions";
 class Header extends Component {
-    constructor(props) {
-        super(props);
-    }
     collectBikeToken = () => {
         let { userProfile } = this.props;
         let data = {
