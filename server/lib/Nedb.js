@@ -1,27 +1,52 @@
 const Datastore = require("nedb");
-const fs = require("fs");
-let dbNetworkVehicles = new Datastore("./data_store/networkVehicles.db");
+
+let dbNetworkVehicles = new Datastore({filename: "./data_store/networkVehicles.db"});
+dbNetworkVehicles.loadDatabase(function (err) {
+    if(err) {
+        throw(err);
+    }
+});
 
 class NeDb {
+    constructor() {
+        this.dbNetworkVehicles = dbNetworkVehicles;
+    }
 
-    store = (json) => {
-        fs.truncate("./data_store/networkVehicles.db", 0);
-        dbNetworkVehicles.insert(json, (err, newVehicles) => {
-            if (err) {
-                console.log(err); // eslint-disable-line
-            } else {
-                return newVehicles;
-            }
+    insert(json) {
+        return new Promise( (resolve, reject) => {
+            dbNetworkVehicles.insert(json, (err, data) => {
+                if (err) {
+                    return reject({err: err});
+                }
+                resolve(data);
+            });
         });
     }
-    find = (query) => {
-        dbNetworkVehicles.find(query, (err, vehicles) =>{
-            if (err) {
-                console.log(err); // eslint-disable-line
-            } else {
-                return vehicles;
-            }
+
+    find(query) {
+        return new Promise( (resolve, reject) => {
+            dbNetworkVehicles.find(query, (err, data) =>{
+                if (err) {
+                    return reject({err: err});
+                }
+
+                resolve(data);
+            });
+        });
+    }
+
+    remove(data) {
+        return new Promise( (resolve, reject) => {
+            dbNetworkVehicles.remove(data, { multi: true }, (err, numRemoved) =>{
+                if (err) {
+                    return reject({err: err});
+                }
+
+                resolve(numRemoved);
+            });
         });
     }
 }
-export default NeDb;
+
+module.exports = new NeDb();
+// export default new NeDb();
