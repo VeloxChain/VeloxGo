@@ -54,7 +54,7 @@ function signPayload(signingAddr, txRelay, whitelistOwner, destinationAddress, f
     let hexHashInput = new Buffer(utils.stripHexPrefix(hash), "hex");
     if (isMetamask) {
         window.web3.eth.sign(signingAddr, hash,(e,r)=> {
-            if (e === undefined) {
+            if (e === null) {
                 sig = utils.fromRpcSig(r);
                 retVal.r = "0x" + sig.r.toString("hex");
                 retVal.s = "0x" + sig.s.toString("hex");
