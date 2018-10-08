@@ -1,6 +1,6 @@
 const Datastore = require("nedb");
-
-let dbNetworkVehicles = new Datastore({filename: "./data_store/networkVehicles.db", autoload: true});
+const path = require("path");
+let dbNetworkVehicles = new Datastore({filename: path.join("./data_store/networkVehicles.db"), autoload: true});
 
 class NeDb {
     constructor() {
