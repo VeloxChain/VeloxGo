@@ -1,6 +1,7 @@
-var Web3 = require("web3");
-var dbInstance = require("./lib/Nedb");
-require('dotenv').config();
+const Web3 = require("web3");
+const dbInstance = require("./lib/Nedb");
+const IPFS = require("./lib/ipfs");
+require("dotenv").config();
 
 const BIKECOIN_OWNER_SHIP_PROTOCOL_ABI = require("../src/services/bikeCoinOwnerShipProtocol.json");
 
@@ -13,27 +14,40 @@ let web3 = new Web3(new Web3.providers.HttpProvider(process.env.HTTPP_ROVIDER));
 let bikecoinOwnerShipProtocolContract = web3.eth.contract(BIKECOIN_OWNER_SHIP_PROTOCOL_ABI);
 bikecoinOwnerShipProtocolContract = bikecoinOwnerShipProtocolContract.at(process.env.BIKECOIN_OWNER_SHIP_ADDRESS);
 
-let totalTokens = bikecoinOwnerShipProtocolContract.totalSupply();
-totalTokens = totalTokens.toNumber();
+const vehicleCrawler = async () => {
 
+    let totalTokens = bikecoinOwnerShipProtocolContract.totalSupply();
+    totalTokens = totalTokens.toNumber();
 
-let listOwnerOfToken = [];
+    let listVehicle = [];
 
-let listHashOfToken = [];
+    for (var key=0; key < totalTokens; key++) {
+        let tokenIndex = bikecoinOwnerShipProtocolContract.tokenByIndex(key);
+        tokenIndex = tokenIndex.toNumber();
 
-for (var key=0; key < totalTokens; key++) {
-    let tokenIndex = bikecoinOwnerShipProtocolContract.tokenByIndex(key);
-    tokenIndex = tokenIndex.toNumber();
-
-    let ownerOfToken = bikecoinOwnerShipProtocolContract.ownerOf(tokenIndex);
-
-    listOwnerOfToken.push(ownerOfToken);
-
-    let hash = bikecoinOwnerShipProtocolContract.tokenURI(tokenIndex);
-    listHashOfToken.push(hash);
-}
-
-
-dbInstance.insert({listOwnerOfToken: listOwnerOfToken, listHashOfToken: listHashOfToken}).then(result => {
-    console.log(result);
-});
+        // get owner of token
+        let ownerOfToken = bikecoinOwnerShipProtocolContract.ownerOf(tokenIndex);
+        // get token hash
+        let hash = bikecoinOwnerShipProtocolContract.tokenURI(tokenIndex);
+        // get price of vehicle
+        let vehiclePrice = bikecoinOwnerShipProtocolContract.getBikeRentalPrice(tokenIndex);
+        vehiclePrice = vehiclePrice.toNumber();
+        vehiclePrice = parseInt(web3.fromWei(vehiclePrice), 10);
+        //get data from IPFS
+        let vehicleData = await IPFS.getDataFromIPFS(hash);
+        // parse to json
+        vehicleData = JSON.parse(vehicleData);
+        // binding onwer of token and tokenId
+        vehicleData.owner = ownerOfToken;
+        vehicleData.tokenId = tokenIndex;
+        vehicleData._id = tokenIndex;
+        vehicleData.forRent = vehiclePrice > 0 ? true : false;
+        vehicleData.price = vehiclePrice;
+        // push to list
+        listVehicle.push(vehicleData);
+    }
+    dbInstance.remove({});
+    const result = await dbInstance.insert(listVehicle);
+    console.log(result); //eslint-disable-line
+};
+vehicleCrawler();

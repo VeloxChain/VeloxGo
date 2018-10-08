@@ -1,11 +1,6 @@
 const Datastore = require("nedb");
 
-let dbNetworkVehicles = new Datastore({filename: "./data_store/networkVehicles.db"});
-dbNetworkVehicles.loadDatabase(function (err) {
-    if(err) {
-        throw(err);
-    }
-});
+let dbNetworkVehicles = new Datastore({filename: "./data_store/networkVehicles.db", autoload: true});
 
 class NeDb {
     constructor() {
@@ -43,6 +38,16 @@ class NeDb {
                 }
 
                 resolve(numRemoved);
+            });
+        });
+    }
+    update(tokenId, values) {
+        return new Promise( (resolve, reject) => {
+            dbNetworkVehicles.update({ tokenId: tokenId }, { $set: values }, {}, (err, numReplaced) =>{
+                if (err) {
+                    return reject({err: err});
+                }
+                resolve(numReplaced);
             });
         });
     }
