@@ -29,6 +29,17 @@ class NeDb {
             });
         });
     }
+    findOne(query) {
+        return new Promise( (resolve, reject) => {
+            dbNetworkVehicles.findOne(query, (err, data) =>{
+                if (err) {
+                    return reject({err: err});
+                }
+                resolve(data);
+            });
+        });
+    }
+
 
     remove(data) {
         return new Promise( (resolve, reject) => {

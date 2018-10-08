@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import SERVICE_IPFS from "../services/ipfs";
 import _ from "lodash";
 import moment from "moment";
+
+import { get, post } from "../utils/fetch";
+
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 export const bikesState = (state) => state.bikes;
 function* uploadNewBikeToIPFS(action) {
@@ -57,10 +60,15 @@ function* finishUploadNewBikeToIPFS(action) {
         latestToken = latestToken.toNumber();
     }
     latestToken = latestToken - 1;
-    let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, latestToken);
-    tokenIndex = parseInt(tokenIndex.toString(), 10);
-    let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
-    yield fork(getDataFromBikeHash, hash, tokenIndex, "owner", ethereum);
+    const url = "/api/newVehicle";
+    let newVehicleData = yield call(post, url, {
+        latestToken: latestToken,
+        ownerAddress: userProfileAddress
+    });
+    yield put({
+        type: BIKES.CREATE,
+        payload: newVehicleData.data
+    });
     yield put({type: "APP_LOADING_END"});
     yield call(callBack);
 }
@@ -84,116 +92,28 @@ function* uploadModifiedBikeToIPFS(action) {
 
 function* loadUserBikeFromNetWork(action){
     const { address, ethereum } = action.payload;
-    const bikes = yield select(bikesState);
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
-    let totalTokens = yield call(ethereum.ownerShipContract.balanceOf,userProfileAddress);
-    totalTokens = totalTokens.toNumber();
-    if (totalTokens === bikes.data.length) {
-        return;
-    } else if (totalTokens < bikes.data.length) {
-        yield put({type: BIKES.RESET_YOUR_BIKES});
-    }
-    totalTokens = totalTokens - 1;
-    yield fork(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes);
+    const url = `/api/getYourVehicle?ownerAddress=${userProfileAddress}`;
+    let userVehicles = yield call(get, url);
+    const { data } = userVehicles;
+    yield put({
+        type: BIKES.LOAD_OWNER_BIKES,
+        payload: data
+    });
 }
 function* loadNetworkBikeFromNetWork(action){
     yield put({type: "APP_LOADING_START", payload: "Loading vehicles from network...."});
     const { ethereum, address } = action.payload;
-    let totalTokens = yield call(ethereum.ownerShipContract.totalSupply);
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
-    totalTokens = totalTokens.toNumber();
-    totalTokens = totalTokens - 1;
-    yield put({type: BIKES.RESET_NETWORK_BIKE});
-    yield call(loadHashFromNetworkToken, ethereum, totalTokens, userProfileAddress);
-    yield put({type: "APP_LOADING_END"});
-}
-
-function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress, bikes) {
-    for (var key=0; key <= totalTokens; key++) {
-        let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, key);
-        tokenIndex = tokenIndex.toNumber();
-        if (_.isUndefined(_.find(bikes.data, (bike) => bike.tokenId === tokenIndex))) {
-            let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
-            yield fork(getDataFromBikeHash, hash, tokenIndex, "owner", ethereum);
-        } else {
-            yield fork(getBikePrice, tokenIndex, ethereum, bikes, "user");
-        }
-    }
-}
-function* loadHashFromNetworkToken(ethereum, totalTokens, userProfileAddress) {
-    for (var key=0; key <= totalTokens; key++) {
-        let tokenIndex = yield call(ethereum.ownerShipContract.tokenByIndex, key);
-        tokenIndex = tokenIndex.toNumber();
-        let ownerOfToken = yield call(ethereum.ownerShipContract.ownerOf, tokenIndex);
-        if (userProfileAddress !== ownerOfToken){
-            let price = yield call(getBikePrice, tokenIndex, ethereum, null, null, true);
-            if (price > 0) {
-                let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
-                yield fork(getDataFromBikeHash, hash, tokenIndex, "network", ethereum, price, ownerOfToken);
-            }
-        }
-    }
-}
-
-function* getBikePrice(tokenId, ethereum, bikesReducer, type, isNew) {
-    let price = yield call(ethereum.ownerShipContract.getBikeRentalPrice, tokenId);
-    price = price.toNumber();
-    price = parseInt(ethereum.rpc.fromWei(price), 10);
-    if (isNew) {
-        return price;
-    }
-    let index;
-    if (type === "network") {
-        index = _.findIndex(bikesReducer.network, (bike) => bike.tokenId === tokenId);
-    } else {
-        index = _.findIndex(bikesReducer.data, (bike) => bike.tokenId === tokenId);
-    }
-    if (type === "network") {
-        yield put({
-            type: BIKES.GET_NETWORK_BIKE_PRICE,
-            payload: {
-                index: index,
-                price: price
-            }
-        });
-    } else {
-        yield put({
-            type: BIKES.GET_USER_BIKE_PRICE,
-            payload: {
-                index: index,
-                price: price
-            }
-        });
-    }
-}
-
-function* getDataFromBikeHash(hash, tokenId, dataOf, ethereum, price, ownerOfToken) {
-    let bikeData = yield call(SERVICE_IPFS.getDataFromIPFS, hash);
-    bikeData = JSON.parse(bikeData);
-    bikeData.tokenId = parseInt(tokenId, 10);
-    if (_.isUndefined(price)) {
-        price = yield call(getBikePrice, tokenId, ethereum, null, null, true);
-    }
-    bikeData.price = price;
-    if (!_.isUndefined(ownerOfToken)) {
-        bikeData.owner = ownerOfToken;
-    }
-    if (price > 0) {
-        bikeData.forRent = true;
-    } else {
-        bikeData.forRent = false;
-    }
-    if (dataOf === "network") {
-        yield put({
-            type: BIKES.LOAD_NETWORK_BIKE,
-            payload: bikeData
-        });
-        return;
-    }
+    yield fork(getRentingBike, userProfileAddress);
+    const url = `/api/getNetworkVehicle?ownerAddress=${userProfileAddress}`;
+    let networkVehicles = yield call(get, url);
+    const { data } = networkVehicles;
     yield put({
-        type: BIKES.LOAD_OWNER_BIKES,
-        payload: bikeData
+        type: BIKES.LOAD_NETWORK_BIKE,
+        payload: data
     });
+    yield put({type: "APP_LOADING_END"});
 }
 
 function* transferBikeInNetwork(action) {
@@ -203,7 +123,11 @@ function* transferBikeInNetwork(action) {
     let tx = yield call(transferBike, address, userProfileAddress, addressTo, tokenId, ethereum, keyStore, passphrase);
     let txStatus = yield call(getTxStatus, tx, ethereum);
     if (txStatus === false) return;
-
+    const url = "/api/transferVehicle";
+    yield call(post, url, {
+        tokenId: tokenId,
+        toOwnerAddress: addressTo
+    });
     yield put({
         type: BIKES.FINISH_TRANSFER,
         payload: tokenId
@@ -228,6 +152,13 @@ function* rentBikeAction(action) {
     let tx = yield call(rentBike, address, userProfileAddress, bikeInfo.tokenId, seconds, ethereum, keyStore, passphrase);
     let txStatus = yield call(getTxStatus, tx, ethereum, "Waiting For Approval.....");
     if (txStatus === false) return;
+
+    const url = "/api/rentingVehicle";
+    yield call(post, url, {
+        tokenId: bikeInfo.tokenId,
+        renter: userProfileAddress
+    });
+
     yield put({
         type: BIKES.FINISH_RENT_BIKE,
         payload: {
@@ -238,6 +169,23 @@ function* rentBikeAction(action) {
     yield put({type: "APP_LOADING_END"});
     toast.success("Success!");
 }
+function* getRentingBike(userProfileAddress) {
+    const url = `/api/getRentingVehicle?renter=${userProfileAddress}`;
+    let response = yield call(get, url);
+    const { data } = response;
+    if (data) {
+        const { bikeInfo, startTime } = data;
+        yield put({
+            type: BIKES.FINISH_RENT_BIKE,
+            payload: {
+                bikeInfo: bikeInfo,
+                startTime: startTime
+            }
+        });
+    } else {
+        yield put({ type: BIKES.FINISH_RETURN_BIKE });
+    }
+}
 function* returnBikeAction(action) {
     yield put({type: "APP_LOADING_START", payload: "Processing Payment....."});
     yield delay(10000);
@@ -246,6 +194,10 @@ function* returnBikeAction(action) {
     let tx = yield call(returnBike, address, userProfileAddress, tokenId, totalTime, ethereum, keyStore, passphrase);
     let txStatus = yield call(getTxStatus, tx, ethereum, "Processing Payment.....");
     if (txStatus === false) return;
+    const url = "/api/returnVehicle";
+    yield call(post, url, {
+        tokenId: tokenId
+    });
     yield call(callBack);
     yield put({type: "APP_LOADING_END"});
     toast.success("Success!");
@@ -257,6 +209,13 @@ function* adjustBikePriceAction(action) {
     let tx = yield call(adjustBikePrice, address, userProfileAddress, tokenId, price, ethereum, keyStore, passphrase);
     let txStatus = yield call(getTxStatus, tx, ethereum);
     if (txStatus === false) return;
+
+    const url = "/api/updatePrice";
+    yield call(post, url, {
+        tokenId: tokenId,
+        price: price
+    });
+
     yield put({
         type: BIKES.FINISH_ADJUST_BIKE_PRICE,
         payload: {

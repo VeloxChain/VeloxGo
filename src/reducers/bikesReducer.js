@@ -13,44 +13,29 @@ const initState = {
 };
 
 const bikesReducer = (state = initState, action) => {
-    var newState, bikeInfo, newNetwork, newLoadded;
+    let newState, bikeInfo;
     switch (action.type) {
-    case BIKES.LOAD_OWNER_BIKES :
-        newLoadded = state.loaded;
-        newState = state.data;
-        newNetwork = state.network;
-        if (newLoadded.includes(action.payload.tokenId) === false) {
-            newLoadded.push(action.payload.tokenId);
-            newNetwork.push(action.payload);
-        }
-        newState.push(action.payload);
+    case BIKES.LOAD_OWNER_BIKES:
         return {
             ...state,
-            data: newState,
-            network: newNetwork
+            data: action.payload,
         };
-    case BIKES.LOAD_NETWORK_BIKE :
-        newNetwork = state.network;
-        newNetwork.push(action.payload);
+    case BIKES.LOAD_NETWORK_BIKE:
         return {
             ...state,
-            network: newNetwork
+            network: action.payload
         };
     case BIKES.CREATE:
         newState = state.data;
-        newNetwork = state.network;
-        bikeInfo = action.payload.bikeInfo;
+        bikeInfo = action.payload;
         newState.push(bikeInfo);
-        newNetwork.push(bikeInfo);
         return {
             ...state,
             data: newState,
-            network: newNetwork
         };
     case BIKES.UPDATE:
         newState = state.data;
         bikeInfo = action.payload.bikeInfo;
-        bikeInfo["hash"] = action.payload.hashData;
         newState[action.payload.index] = bikeInfo;
         return {
             ...state,

@@ -23,16 +23,13 @@ class HiringRequestComponent extends Component {
     }
 
     componentDidMount() {
-        const { rendingBike } = this.props.bikes;
-        if (!rendingBike.isRent) {
-            this.props.dispatch(appLoadingStart("Loading vehicles from network...."));
-            setTimeout(()=> {
-                this.props.dispatch(initNetworkBikes({
-                    ethereum: this.props.ethereum,
-                    address: this.props.getAccountAddress()
-                }));
-            }, 1);
-        }
+        this.props.dispatch(appLoadingStart("Loading vehicles from network...."));
+        setTimeout(()=> {
+            this.props.dispatch(initNetworkBikes({
+                ethereum: this.props.ethereum,
+                address: this.props.getAccountAddress()
+            }));
+        }, 1);
     }
 
     handleChangeMapDefaultLocation = (mapDefaultLocation) => {
