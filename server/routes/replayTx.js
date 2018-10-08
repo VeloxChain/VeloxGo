@@ -1,4 +1,5 @@
 var WalletManager = require("../lib/wallet");
+var dbInstance = require("../lib/Nedb");
 
 let walletManager = new WalletManager(
     process.env.TXRELAY_MNEMONIC,
@@ -47,6 +48,15 @@ module.exports = function (app) {
                 code: 400,
                 message: error
             });
+        });
+    });
+
+    app.post("/api/getBikeHash", async (req, res) => {
+        let bikeData = dbInstance.find({});
+        return res.json({
+            status: "success",
+            data: bikeData,
+            code: 200
         });
     });
 };

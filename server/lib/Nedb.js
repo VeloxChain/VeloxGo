@@ -23,9 +23,20 @@ class NeDb {
         });
     }
 
+    update(query, json) {
+        return new Promise( (resolve, reject) => {
+            dbNetworkVehicles.update(query, json, { upsert: true }, (err, data) => {
+                if (err) {
+                    return reject({err: err});
+                }
+                resolve(data);
+            });
+        });
+    }
+
     find(query) {
         return new Promise( (resolve, reject) => {
-            dbNetworkVehicles.find(query, (err, data) =>{
+            dbNetworkVehicles.findOne(query, (err, data) =>{
                 if (err) {
                     return reject({err: err});
                 }
