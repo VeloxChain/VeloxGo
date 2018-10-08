@@ -41,7 +41,7 @@ const vehicleCrawler = async () => {
         vehicleData.owner = ownerOfToken;
         vehicleData.tokenId = tokenIndex;
         vehicleData._id = tokenIndex;
-        vehicleData.forRent = vehiclePrice > 0 ? true : false;
+        vehicleData.forRent = vehiclePrice > 0;
         vehicleData.price = vehiclePrice;
         // push to list
         listVehicle.push(vehicleData);
