@@ -47,7 +47,7 @@ class NeDb {
                 if (err) {
                     return reject({err: err});
                 }
-
+                dbNetworkVehicles.persistence.compactDatafile();
                 resolve(numRemoved);
             });
         });
@@ -58,6 +58,18 @@ class NeDb {
                 if (err) {
                     return reject({err: err});
                 }
+                dbNetworkVehicles.persistence.compactDatafile();
+                resolve(numReplaced);
+            });
+        });
+    }
+    replaceRow(tokenId, row) {
+        return new Promise( (resolve, reject) => {
+            dbNetworkVehicles.update({ tokenId: tokenId }, row, { upsert:true }, (err, numReplaced) =>{
+                if (err) {
+                    return reject({err: err});
+                }
+                dbNetworkVehicles.persistence.compactDatafile();
                 resolve(numReplaced);
             });
         });

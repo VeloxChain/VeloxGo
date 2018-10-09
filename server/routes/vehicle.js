@@ -87,7 +87,7 @@ module.exports = function (app) {
     app.post("/api/transferVehicle", async (req, res) => {
         const { tokenId, toOwnerAddress } = req.body;
         await dbInstance.update(tokenId, {
-            owner: toOwnerAddress,
+            owner: toOwnerAddress
         });
         return res.json({
             status: 200
@@ -99,10 +99,6 @@ module.exports = function (app) {
         let tokenIndex = bikecoinOwnerShipProtocolContract.tokenOfOwnerByIndex(ownerAddress, latestToken);
         tokenIndex = tokenIndex.toNumber();
         let hash = bikecoinOwnerShipProtocolContract.tokenURI(tokenIndex);
-        // get price of vehicle
-        let vehiclePrice = bikecoinOwnerShipProtocolContract.getBikeRentalPrice(tokenIndex);
-        vehiclePrice = vehiclePrice.toNumber();
-        vehiclePrice = parseInt(web3.fromWei(vehiclePrice), 10);
         //get data from IPFS
         let vehicleData = await IPFS.getDataFromIPFS(hash);
         // parse to json
@@ -111,10 +107,10 @@ module.exports = function (app) {
         vehicleData.owner = ownerAddress;
         vehicleData.tokenId = tokenIndex;
         vehicleData._id = tokenIndex;
-        vehicleData.forRent = vehiclePrice > 0;
-        vehicleData.price = vehiclePrice;
+        vehicleData.forRent = false;
+        vehicleData.price = 0; // initial price value of vehicle
         vehicleData.renting = false;
-        vehicleData.renter =
+        vehicleData.renter = whitelistAddress;
         await dbInstance.insert(vehicleData);
         return res.json({
             status: 200,

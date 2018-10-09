@@ -7,23 +7,29 @@ const NOT_FOUND = 404;
 const INTERNAL_SERVER_ERROR = 500;
 
 const token = localStorage.getItem("access_token");
-const parameters = {
-    headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-    }
-};
 
 export const post = (url, params) => {
-    parameters.method = "POST";
-    parameters.body = JSON.stringify(params);
+    const parameters = {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(params)
+    };
     if (!_.isUndefined(token)) {
         parameters.headers.Authorization = `Bearer ${token}`;
     }
     return callApi(url, parameters);
 };
 export const get = (url) => {
-    parameters.method = "GET";
+    const parameters = {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+    };
     if (!_.isUndefined(token)) {
         parameters.headers.Authorization = `Bearer ${token}`;
     }
