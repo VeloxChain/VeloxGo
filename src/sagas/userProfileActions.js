@@ -36,7 +36,8 @@ function* uploadProfileToIPFS(action) {
     if (userInfo.isCreateNew) {
         yield put({
             type: USER_PROFILE.FINISH_UPLOAD_NEW_PROFILE,
-            payload: {userInfo: userInfo,hashData: hashData, ethereum: ethereum, keyStore: keyStore, passphrase: passphrase}
+            payload: {userInfo: userInfo,hashData: hashData, ethereum: ethereum, keyStore: keyStore, passphrase: passphrase},
+            callBack: action.callBack
         });
     } else {
         yield put({
@@ -48,7 +49,7 @@ function* uploadProfileToIPFS(action) {
 }
 
 function* finishUploadNewProfileToIPFS(action) {
-    const { payload } = action;
+    const { payload, callBack } = action;
     let tx = yield call(createNewUserProfile, payload.userInfo.accountAddress, payload.hashData, payload.ethereum, payload.keyStore, payload.passphrase);
     let txStatus = yield call(getTxStatus, tx, payload.ethereum);
     if (txStatus === false) {
@@ -70,6 +71,7 @@ function* finishUploadNewProfileToIPFS(action) {
         type: USER_PROFILE.CREATE,
         payload: {userProfile: payload.userInfo,hash: payload.hashData}
     });
+    yield call(callBack);
     yield put({type: "APP_LOADING_END"});
 }
 function* finishUploadModifiedProfileToIPFS(action) {

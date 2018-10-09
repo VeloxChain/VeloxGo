@@ -7,6 +7,7 @@ import { emptyForm } from "../../../actions/createKeyStoreActions";
 import { verifyPassphrase, anyErrors } from "../../../utils/validators";
 import { createAccount } from "../../../actions/accountActions";
 import styles from "./CustomCss";
+import { toast } from "react-toastify";
 
 class NewAccount extends Component {
     constructor(props) {
@@ -21,7 +22,8 @@ class NewAccount extends Component {
             errorName: false,
             errorPass: false,
             loading: false,
-            step:1
+            step:1,
+            isDownload: false
         };
     }
     handleKeyPress = (target) => {
@@ -74,7 +76,11 @@ class NewAccount extends Component {
         }
     }
     nextStep = () => {
-        this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
+        if (this.state.isDownload) {
+            this.props.setType(MODAL_CREATE_ACCOUNT_BIKECOIN);
+        } else {
+            toast.error("Please backup your wallet!");
+        }
     }
 
     downloadKeyStore = () => {
@@ -87,6 +93,9 @@ class NewAccount extends Component {
         document.body.appendChild(element);
         element.click();
         document.body.removeChild(element);
+        this.setState({
+            isDownload: true
+        });
     }
 
     _renderBody = () => {

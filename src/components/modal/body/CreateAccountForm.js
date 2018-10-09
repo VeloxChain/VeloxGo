@@ -72,8 +72,7 @@ class CreateAccount extends Component {
             keyStore: this.props.accounts.accounts.key,
             passphrase: state.passpharse
         };
-        await this.props.dispatch(createUserProfileToIPFS(userInfo));
-        this.props.closeModal();
+        await this.props.dispatch(createUserProfileToIPFS(userInfo, this.props.closeModal));
     }
 
     getContractAddress = (userProfileAddress) => {
