@@ -67,7 +67,7 @@ class ConfirmTransaction extends Component {
             <div className="pd10 relative">
                 <div className="form-modal">
                     <TextField
-                        floatingLabelText="Profile Address"
+                        floatingLabelText="Wallet Address"
                         fullWidth={true}
                         value={this.state.addressTo}
                         onKeyPress={(e) => this.handleKeyPress(e)}

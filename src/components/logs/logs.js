@@ -51,7 +51,7 @@ class Logs extends Component {
             stateLogs.push({
                 hash: log.hash,
                 txreceipt_status: this._renderTxStatus(log.status),
-                timeStamp: moment(new Date(log.timestamp)).format("LLLL"),
+                timeStamp: moment(new Date(log.timestamp || log.createdAt)).format("LLLL"),
             });
         });
         this.setState({
