@@ -64,7 +64,7 @@ class Datatable extends Component {
         if (this.state.pageActive > 1) {
             return (
                 <li>
-                    <button onClick={() => this.onChangePage("Previous")}>Previous</button>
+                    <a onClick={() => this.onChangePage("Previous")}>Previous</a>
                 </li>
             );
         }
@@ -82,7 +82,7 @@ class Datatable extends Component {
         if (this.state.pageActive < totalPage) {
             return (
                 <li>
-                    <button onClick={() => this.onChangePage("Next")}>Next</button>
+                    <a onClick={() => this.onChangePage("Next")}>Next</a>
                 </li>
             );
         }
