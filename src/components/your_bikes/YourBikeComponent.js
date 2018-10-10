@@ -18,7 +18,7 @@ class YourBikesComponent extends Component {
                 {title: "MANUFACTURER", value: "manufacturer"},
                 {title: "MODEL", value: "model"},
                 {title: "FOR RENT", value: "forRent", renderer: this._renderForrent},
-                {title: "Price", value: "price", renderer: this._renderPrice},
+                {title: "PRICE", value: "price", renderer: this._renderPrice},
                 {title: "ACTION", value: "View", renderer: this._renderViewAction}
             ],
             isEdit: false,
