@@ -179,8 +179,8 @@ const Styles = {
     },
 
     buttonBook: {
-        background: "#00d679",
-        border: "1px solid #00d679",
+        background: "#12305e",
+        border: "1px solid #12305e",
         borderRadius: "2px",
         padding: "5px 20px",
         color: "#fff",
@@ -192,7 +192,7 @@ const Styles = {
     numberPrice: {
         marginRight: "10px",
         fontSize: "20px",
-        color: "#00d679"
+        color: "#12305e"
     },
 
     logo: {

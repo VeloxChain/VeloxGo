@@ -147,6 +147,8 @@ class YourBikesComponent extends Component {
                 value={this.state.passphrase}
                 onKeyPress={(e) => this.handleKeyPress(e)}
                 onChange={(e) => this.setState({ passphrase: e.target.value })}
+                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                underlineFocusStyle={styles.underlineStyle}
             />
         );
     }
