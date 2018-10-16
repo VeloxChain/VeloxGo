@@ -126,7 +126,8 @@ function* transferBikeInNetwork(action) {
     const url = "/api/transferVehicle";
     yield call(post, url, {
         tokenId: tokenId,
-        toOwnerAddress: addressTo
+        toOwnerAddress: addressTo,
+        ownerAddress: userProfileAddress
     });
     yield put({
         type: BIKES.FINISH_TRANSFER,
@@ -196,7 +197,8 @@ function* returnBikeAction(action) {
     if (txStatus === false) return;
     const url = "/api/returnVehicle";
     yield call(post, url, {
-        tokenId: tokenId
+        tokenId: tokenId,
+        renter: userProfileAddress
     });
     yield call(callBack);
     yield put({type: "APP_LOADING_END"});
@@ -213,7 +215,8 @@ function* adjustBikePriceAction(action) {
     const url = "/api/updatePrice";
     yield call(post, url, {
         tokenId: tokenId,
-        price: price
+        price: price,
+        ownerAddress: userProfileAddress,
     });
 
     yield put({

@@ -36,7 +36,12 @@ const vehicleCrawler = async () => {
         if (isNew) {
             await dbInstance.insert(vehicleData);
         } else {
-            await dbInstance.replaceRow(tokenIndex, vehicleData);
+            await dbInstance.update(tokenIndex, {
+                owner: ownerOfToken,
+                forRent: vehiclePrice > 0,
+                price: vehiclePrice,
+                renter: renter,
+            });
         }
     }
 };

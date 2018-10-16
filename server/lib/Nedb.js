@@ -63,17 +63,6 @@ class NeDb {
             });
         });
     }
-    replaceRow(tokenId, row) {
-        return new Promise( (resolve, reject) => {
-            dbNetworkVehicles.update({ tokenId: tokenId }, row, { upsert:true }, (err, numReplaced) =>{
-                if (err) {
-                    return reject({err: err});
-                }
-                dbNetworkVehicles.persistence.compactDatafile();
-                resolve(numReplaced);
-            });
-        });
-    }
 }
 
 module.exports = new NeDb();

@@ -54,7 +54,19 @@ module.exports = function (app) {
     });
 
     app.post("/api/updatePrice", async (req, res) => {
-        const { tokenId, price } = req.body;
+        const { tokenId, price, ownerAddress } = req.body;
+        let networkVehicle = await dbInstance.find({
+            owner: ownerAddress,
+            renter: whitelistAddress,
+            tokenId: tokenId
+        });
+
+        if (networkVehicle === null) {
+            return res.json({
+                status: 400,
+                error: "Not Found",
+            });
+        }
         await dbInstance.update(tokenId, {
             price: price,
             forRent: price > 0
@@ -66,6 +78,19 @@ module.exports = function (app) {
 
     app.post("/api/rentingVehicle", async (req, res) => {
         const { tokenId, renter } = req.body;
+
+        let networkVehicle = await dbInstance.find({
+            renter: whitelistAddress,
+            forRent: true,
+            tokenId: tokenId
+        });
+
+        if (networkVehicle === null) {
+            return res.json({
+                status: 400,
+                error: "Not Found",
+            });
+        }
         await dbInstance.update(tokenId, {
             renter: renter
         });
@@ -75,7 +100,21 @@ module.exports = function (app) {
     });
 
     app.post("/api/returnVehicle", async (req, res) => {
-        const { tokenId } = req.body;
+        const { tokenId, renter } = req.body;
+
+        let networkVehicle = await dbInstance.find({
+            renter: renter,
+            forRent: true,
+            tokenId: tokenId
+        });
+
+        if (networkVehicle === null) {
+            return res.json({
+                status: 400,
+                error: "Not Found",
+            });
+        }
+
         await dbInstance.update(tokenId, {
             renter: whitelistAddress
         });
@@ -85,7 +124,17 @@ module.exports = function (app) {
     });
 
     app.post("/api/transferVehicle", async (req, res) => {
-        const { tokenId, toOwnerAddress } = req.body;
+        const { tokenId, toOwnerAddress, ownerAddress } = req.body;
+        let networkVehicle = await dbInstance.find({
+            owner: ownerAddress,
+            tokenId: tokenId
+        });
+        if (networkVehicle === null) {
+            return res.json({
+                status: 400,
+                error: "Not Found",
+            });
+        }
         await dbInstance.update(tokenId, {
             owner: toOwnerAddress
         });
@@ -98,6 +147,16 @@ module.exports = function (app) {
         const { latestToken, ownerAddress } = req.body;
         let tokenIndex = bikecoinOwnerShipProtocolContract.tokenOfOwnerByIndex(ownerAddress, latestToken);
         tokenIndex = tokenIndex.toNumber();
+        // check if exists
+        let isExist = await dbInstance.find({
+            tokenId: tokenIndex
+        });
+        if (isExist !== null) {
+            return res.json({
+                status: 400,
+                error: "Vehice is Exist"
+            });
+        }
         let hash = bikecoinOwnerShipProtocolContract.tokenURI(tokenIndex);
         //get data from IPFS
         let vehicleData = await IPFS.getDataFromIPFS(hash);
