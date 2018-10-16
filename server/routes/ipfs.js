@@ -10,8 +10,6 @@ module.exports = function (app) {
             data: IPFSData
         });
     });
-};
-module.exports = function (app) {
     app.post("/api/putDataToIPFS", async (req, res) => {
         const { data } = req.body;
         // put data to IPFS
@@ -21,8 +19,6 @@ module.exports = function (app) {
             hash: IPFSHash
         });
     });
-};
-module.exports = function (app) {
     app.post("/api/putFileToIPFS", async (req, res) => {
         const { fileData } = req.body;
         // put file data to IPFS
