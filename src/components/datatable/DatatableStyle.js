@@ -25,6 +25,14 @@ const Styles = {
     textTd: {
         color: "rgb(93, 93, 93)",
         borderBottom: "1px solid #f3f3f3"
+    },
+
+    loadMore: {
+        height: "36px"
+    },
+
+    none: {
+        cursor: "not-allowed"
     }
 };
 

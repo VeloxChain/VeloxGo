@@ -16,8 +16,8 @@ const Styles = {
     },
 
     button: {
-        background: "#00F58A",
-        border: "1px solid #00F58A",
+        background: "#12305e",
+        border: "1px solid #12305e",
         borderRadius: "2px",
         padding: "3px 10px",
         color: "#fff",
@@ -61,7 +61,7 @@ const Styles = {
     iframe: {
         border: "none",
         width: "100%",
-        height: "calc(100vh - 195px)"
+        height: "calc(100vh - 224px)"
     },
 
     info: {
@@ -95,7 +95,7 @@ const Styles = {
     number: {
         marginRight: "10px",
         fontSize: "20px",
-        color: "#00d679"
+        color: "#12305e"
     },
 
     logo: {

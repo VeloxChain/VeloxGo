@@ -74,16 +74,18 @@ class ComponentsModel1 extends React.Component {
     
     render() {
         return (
-            <table className="table table-bike" style={styles.table}>
-                <thead>
-                    <tr>
-                        {this._renderHeader()}
-                    </tr>
-                </thead>
-                <tbody>
-                    {this._renderBody()}
-                </tbody>
-            </table>
+            <div className="table-responsive">
+                <table className="table table-bike" style={styles.table}>
+                    <thead>
+                        <tr>
+                            {this._renderHeader()}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this._renderBody()}
+                    </tbody>
+                </table>
+            </div>
         );
     }
 }

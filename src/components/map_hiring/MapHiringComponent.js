@@ -6,7 +6,7 @@ import {
     GoogleMap,
     Marker
 }  from "react-google-maps";
-import _ from 'lodash';
+import _ from "lodash";
 import { InfoBox } from "react-google-maps/lib/components/addons/InfoBox";
 import BikeHiringInfo from "../bike_hiring_info/BikeHiringInfo";
 import appConfig from "../../config/app.json";
@@ -19,7 +19,7 @@ class MapHiringComponent extends Component {
         this.googleMap = null;
         this.state = {
             listMarkerData: []
-        }
+        };
     }
 
     componentDidMount(){
@@ -29,14 +29,14 @@ class MapHiringComponent extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.mapDefaultLocation != this.props.mapDefaultLocation) {
+        if(nextProps.mapDefaultLocation !== this.props.mapDefaultLocation) {
             this.props.handleSelectBike("");
             setTimeout(()=>{this.googleMap.panTo(
                 {
                     lng: nextProps.mapDefaultLocation.long,
                     lat: nextProps.mapDefaultLocation.lat
                 }
-            )}, 100);
+            );}, 100);
         }
     }
 
@@ -46,7 +46,7 @@ class MapHiringComponent extends Component {
 
         let findOverLapMarker = _.find(this.state.listMarkerData, (value, index) => {
             indexOverLap= index;
-            return value.location.lat == markerData.location.lat && value.location.long == markerData.location.long && value.tokenId != markerData.tokenId ; 
+            return value.location.lat === markerData.location.lat && value.location.long === markerData.location.long && value.tokenId !== markerData.tokenId ;
         });
 
         if(!_.isEmpty(findOverLapMarker)) {
@@ -60,18 +60,18 @@ class MapHiringComponent extends Component {
                 listMarkerData: newListMarkerData
             });
 
-            
+
 
             return {
                 long: _.toNumber(findOverLapMarker.location.long) + 0.000001,
                 lat: _.toNumber(findOverLapMarker.location.lat) + 0.000001,
-            }
+            };
         }
 
         return {
             long: markerData.location.long,
             lat: markerData.location.lat,
-        }
+        };
     }
 
     render(){
@@ -100,9 +100,9 @@ class MapHiringComponent extends Component {
                                     position={{ lat: newPoint.lat, lng: newPoint.long }}
                                     onClick={() => this.props.handleSelectBike(bike.tokenId)}
                                     icon={MapBikeIcon}
-                                    
+
                                 >
-                                    {bike.tokenId == this.props.bikeHashSelected && <InfoBox
+                                    {bike.tokenId === this.props.bikeHashSelected && <InfoBox
                                         onCloseClick={()=>this.props.handleSelectBike("")}
                                         options={{closeBoxURL: "images/close_white.png", enableEventPropagation: true}}
                                     >
@@ -126,7 +126,7 @@ export default compose(
     withProps({
         googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${appConfig.google_map_api_key}&v=3.exp&libraries=geometry,drawing,places`,
         loadingElement: <div style={{ height: "100%" }} />,
-        containerElement: <div style={{ height: "calc(100vh - 195px)" }} />,
+        containerElement: <div style={{ height: "calc(100vh - 224px)" }} />,
         mapElement: <div style={{ height: "100%" }} />,
         center: { lat: 25.03, lng: 121.6 },
     }),
@@ -141,11 +141,6 @@ export default compose(
         })
     }),
     withHandlers({
-        onMarkerClustererClick: () => (markerClusterer) => {
-          const clickedMarkers = markerClusterer.getMarkers()
-          console.log(`Current clicked markers length: ${clickedMarkers.length}`)
-          console.log(clickedMarkers)
-        },
     }),
     withScriptjs,
     withGoogleMap,

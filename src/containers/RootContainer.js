@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Navigation from "../components/Navigation";
 import SERVICE_IPFS from "../services/ipfs";
 import { addNewToast } from "../actions/appAction";
+import constants from "../services/constants";
 import {
     MODAL_OWNER_LOGIN,
     MODAL_CREATE_ACCOUNT_BIKECOIN,
@@ -55,10 +56,16 @@ class RootContainer extends React.Component {
         if (AppReducer.txHash) {
             if (AppReducer.txHash.length === 66) {
                 return (
-                    <span>
+                    <div className="loading-tx">
                         {this._renderTxTitle(AppReducer)}
-                        <a href={"https://ropsten.etherscan.io/tx/" + AppReducer.txHash} style={{fontSize:20}} target="_blank">{"Tx: " + AppReducer.txHash}</a>
-                    </span>
+                        <a
+                            href={constants.TX_URL + AppReducer.txHash}
+                            style={{fontSize:20}}
+                            target="_blank"
+                        >
+                            {"Tx: " + AppReducer.txHash}
+                        </a>
+                    </div>
                 );
             }
             return (
@@ -71,12 +78,12 @@ class RootContainer extends React.Component {
         if (AppReducer.isLoading) {
             return (
                 <div className="absolute-fancy-loading flexible">
-                    <div style={{marginTop: -150}}>
+                    <div className="wrapp-loading">
                         <img
                             id="loader"
                             src="images/loading.png"
                             style={{margin: "auto"}}
-                            alt="Bikecoin"
+                            alt="VeloxGo"
                         />
                         <br/>
                         {this._renderTxHash(AppReducer)}
@@ -86,6 +93,7 @@ class RootContainer extends React.Component {
             );
         }
     }
+
     render() {
         return (
             <div className="main_container">

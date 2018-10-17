@@ -19,8 +19,8 @@ const Styles = {
     },
 
     button: {
-        background: "#00d679",
-        border: "1px solid #00d679",
+        background: "#12305e",
+        border: "1px solid #12305e",
         borderRadius: "2px",
         padding: "7px 20px",
         marginTop: "13px",
@@ -50,7 +50,7 @@ const Styles = {
 
     number: {
         fontSize: "16px",
-        color: "#00d679"
+        color: "#12305e"
     },
 
     icon: {

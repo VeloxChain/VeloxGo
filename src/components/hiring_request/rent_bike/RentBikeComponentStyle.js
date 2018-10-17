@@ -35,36 +35,13 @@ const Styles = {
         padding: "10px 20px 20px"
     },
 
-    wrappRight: {
-        display: "flex",
-        backgroundColor: "#fff",
-        boxShadow: "rgba(255, 255, 255, 0.5) 0px 1px 1px, rgba(0, 0, 0, 0.12) 0px 1px 4px",
-        marginTop: "30px",
-    },
-
-    boxLeft: {
-        width: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRight: "1px solid rgb(195, 197, 196)",
-    },
-
-    boxRight: {
-        width: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: "10px 0px"
-    },
-
     bike: {
         width: "100%"
     },
 
     buttonTransfer: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
         borderRadius: "5px",
         padding: "7px 20px",
         margin: "20px auto 0",
@@ -288,13 +265,15 @@ const Styles = {
 
     buttonVerified: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 20px",
         textTransform: "uppercase",
         letterSpacing: "2px",
         display: "block",
-        minWidth: "168px"
+        minWidth: "168px",
+        margin: "0 auto"
     },
     center: {
         textAlign: "center",
@@ -311,7 +290,7 @@ const Styles = {
         marginBottom: "15px"
     },
     titleInvoice: {
-        width: "120px",
+        width: "150px",
         fontWeight: "bold",
         letterSpacing: "1px"
     },
@@ -329,7 +308,8 @@ const Styles = {
     },
     buttonInvoice: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 20px",
         margin: "0px 10px",
@@ -359,7 +339,7 @@ const Styles = {
         fontWeight: "bold"
     },
     thanks: {
-        margin: 30,
+        margin: "30px 0px",
         fontStyle: "italic"
     }
 };

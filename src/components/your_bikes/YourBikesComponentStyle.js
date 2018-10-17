@@ -5,8 +5,8 @@ const Styles = {
 
     button: {
         background: "#fff",
-        border: "1px solid #00F58A",
-        color: "#00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 30px",
         marginBottom: "20px",
@@ -36,8 +36,8 @@ const Styles = {
         textAlign: "center"
     },
     buttonGetBikeCoin: {
-        background: "#00F58A",
-        border: "1px solid #00F58A",
+        background: "#fad06b",
+        border: "1px solid #fad06b",
         color: "#222222",
         borderRadius: "3px",
         padding: "7px 20px",
@@ -48,7 +48,7 @@ const Styles = {
         color: "rgba(0, 0, 0, 0.3)"
     },
     underlineStyle: {
-        borderColor: "#66F9B8"
+        borderColor: "rgba(18, 48, 94, 0.7)"
     },
     active: {
         marginTop: "50px",
@@ -56,6 +56,9 @@ const Styles = {
     },
     marginRight30: {
         marginRight: "30px"
+    },
+    logo:{
+        width:25
     }
 };
 

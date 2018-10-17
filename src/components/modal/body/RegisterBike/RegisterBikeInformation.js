@@ -5,8 +5,8 @@ import Dropzone from "react-dropzone";
 import _ from "lodash";
 import { Dialog } from "material-ui";
 import ImageCroper from "../../../image_croper/ImageCroper";
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
 
 class RegisterBikeInformation extends Component {
     constructor(props) {
@@ -71,7 +71,7 @@ class RegisterBikeInformation extends Component {
     }
     _renderPreview = () => {
         if (this.props.info.imagePreview) {
-            return <img src={ this.props.info.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="BikeCoin" />;
+            return <img src={ this.props.info.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="VeloxGo" />;
         }
         return <i className="fa fa-camera icon-camera"></i>;
     }
@@ -104,6 +104,7 @@ class RegisterBikeInformation extends Component {
                     open={this.state.isOpenCropImage}
                     autoScrollBodyContent={true}
                     repositionOnUpdate={true}
+                    className="image-crop"
                 >
                     <ImageCroper
                         handleCropImage={this.handleCropImage}
@@ -137,7 +138,7 @@ class RegisterBikeInformation extends Component {
                                 underlineFocusStyle={styles.underlineStyle}
                             />
                             <TextField
-                                floatingLabelText="Bike serial"
+                                floatingLabelText="Vehicle Reg"
                                 value={this.props.info.snNumber}
                                 fullWidth
                                 onChange={(e) => this.props.handleChangeState({snNumber: e.target.value})}

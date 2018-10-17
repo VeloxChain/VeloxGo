@@ -20,7 +20,7 @@ class CreateAccount extends Component {
             email: "",
             disabled:false,
             submitted:false,
-            labelButton: "CREATE BIKECOIN ACCOUNT",
+            labelButton: "CREATE VELOXGO ACCOUNT",
             imageData: "",
             isOpenCropImage: false,
             imagePreview: "images/avatar.png"
@@ -38,13 +38,13 @@ class CreateAccount extends Component {
         if (!isValidEmail) {
             return "Invalid Email";
         }
-        if (this.state.firstname === "") {
+        if (this.state.firstname.trim() === "") {
             return "Invalid First Name";
         }
-        if (this.state.lastname === "") {
+        if (this.state.lastname.trim() === "") {
             return "Invalid Last Name";
         }
-        if (this.state.passpharse === "" && this.isMetamask() === false) {
+        if (this.state.passpharse.trim() === "" && this.isMetamask() === false) {
             return "Invalid Passpharse";
         }
         return "";
@@ -55,7 +55,7 @@ class CreateAccount extends Component {
             return;
         }
         let validDataMessenger = await this.validate();
-        if (validDataMessenger != "") {
+        if (validDataMessenger !== "") {
             toast.error(validDataMessenger);
             return;
         }
@@ -72,8 +72,7 @@ class CreateAccount extends Component {
             keyStore: this.props.accounts.accounts.key,
             passphrase: state.passpharse
         };
-        await this.props.dispatch(createUserProfileToIPFS(userInfo));
-        this.props.closeModal();
+        await this.props.dispatch(createUserProfileToIPFS(userInfo, this.props.closeModal));
     }
 
     getContractAddress = (userProfileAddress) => {
@@ -109,6 +108,8 @@ class CreateAccount extends Component {
                 errorText={ this.state.errors ? this.state.errors.passpharse : null }
                 onKeyPress={(e) => this.handleKeyPress(e)}
                 onChange={(e) => this.setState({passpharse: e.target.value})}
+                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                underlineFocusStyle={styles.underlineStyle}
             />
         );
     }
@@ -145,7 +146,7 @@ class CreateAccount extends Component {
 
     _renderPreview = () => {
         if (this.state.imagePreview) {
-            return <img src={ this.state.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="BikeCoin" />;
+            return <img src={ this.state.imagePreview } style={{width:"100%", height: "100%", objectFit : "cover"}} alt="VeloxGo" />;
         }
         return <i className="fa fa-camera icon-camera"></i>;
     }

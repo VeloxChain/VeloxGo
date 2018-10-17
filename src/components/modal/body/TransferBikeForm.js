@@ -64,10 +64,10 @@ class ConfirmTransaction extends Component {
     }
     render() {
         return (
-            <div className="mh250 pd10 relative">
+            <div className="pd10 relative">
                 <div className="form-modal">
                     <TextField
-                        floatingLabelText="Profile Address"
+                        floatingLabelText="Wallet Address"
                         fullWidth={true}
                         value={this.state.addressTo}
                         onKeyPress={(e) => this.handleKeyPress(e)}

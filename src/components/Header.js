@@ -4,9 +4,6 @@ import SideBar from "./SideBar";
 import styles from "./your_bikes/YourBikesComponentStyle";
 import { collectToken } from "../actions/accountActions";
 class Header extends Component {
-    constructor(props) {
-        super(props);
-    }
     collectBikeToken = () => {
         let { userProfile } = this.props;
         let data = {
@@ -25,10 +22,10 @@ class Header extends Component {
                             {this.props.hidden ? "" : (<SideBar/>)}
                             {this.props.hidden ? "" : (
                                 <div style={styles.getBikeCoin}>
-                                    <button style={styles.buttonGetBikeCoin} onClick={this.collectBikeToken}>Get Free 200 Bikecoin</button>
+                                    <button style={styles.buttonGetBikeCoin} onClick={this.collectBikeToken}>Get 200 Velox for Free</button>
                                 </div>
                             )}
-                            
+
                         </div>
                     </div>
                 </div>

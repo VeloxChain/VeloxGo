@@ -25,7 +25,7 @@ class HiringRequestComponent extends Component {
     componentDidMount() {
         const { rendingBike } = this.props.bikes;
         if (!rendingBike.isRent) {
-            this.props.dispatch(appLoadingStart("Loading bikes from network...."));
+            this.props.dispatch(appLoadingStart("Loading vehicles from network...."));
             setTimeout(()=> {
                 this.props.dispatch(initNetworkBikes({
                     ethereum: this.props.ethereum,
@@ -42,7 +42,7 @@ class HiringRequestComponent extends Component {
     }
 
     handleSelectBike = (bikeHashSelected) => {
-        if(bikeHashSelected == this.state.bikeHashSelected) {
+        if(bikeHashSelected === this.state.bikeHashSelected) {
             bikeHashSelected = "";
         }
         this.setState({
@@ -107,7 +107,7 @@ class HiringRequestComponent extends Component {
         if (listBikeFilter.length === 0) {
             renderBike = (
                 <div className="text-center">
-                    <img src="images/404.png" style={styles.fail} alt="BikeCoin" />
+                    <img src="images/404.png" style={styles.fail} alt="VeloxGo" />
                 </div>
             );
         }
@@ -126,7 +126,7 @@ class HiringRequestComponent extends Component {
                     isMarkerShown
                     googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1FyS1yEgh8Vo0nSrkks_CZevhzowYzps&v=3.exp&libraries=geometry,drawing,places"
                     loadingElement={<div style={{ height: "100%" }} />}
-                    containerElement={<div style={{ height: "calc(100vh - 195px)" }} />}
+                    containerElement={<div style={{ height: "calc(100vh - 224px)" }} />}
                     mapElement={<div style={{ height: "100%" }} />}
                     handleChangeRentBike={this.handleChangeRentBike}
                 />

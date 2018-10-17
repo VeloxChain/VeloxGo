@@ -12,7 +12,11 @@ const Styles = {
     },
 
     tabItemContainerStyle: {
-        backgroundColor: "rgba(0, 214, 121, .6)"
+        backgroundColor: "rgba(255, 207, 107, .6)"
+    },
+
+    inkBarStyle: {
+        background: "#12305e" 
     },
 
     tab: {
@@ -24,37 +28,15 @@ const Styles = {
         textTransform: "uppercase",
         color: "#000",
         fontSize: "16px",
-        background: "rgb(0, 214, 121)"
+        background: "#FFCF6B"
     },
     iconBack: {
-        color: "#00d679"
+        color: "#12305e"
     },
 
     location: {
         background: "#fff",
         padding: "10px 20px 20px"
-    },
-
-    wrappRight: {
-        display: "flex",
-        backgroundColor: "#fff",
-        boxShadow: "rgba(255, 255, 255, 0.5) 0px 1px 1px, rgba(0, 0, 0, 0.12) 0px 1px 4px",
-        marginTop: "30px",
-    },
-
-    boxLeft: {
-        width: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRight: "1px solid rgb(195, 197, 196)",
-    },
-
-    boxRight: {
-        width: "50%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center"
     },
 
     bike: {
@@ -63,7 +45,8 @@ const Styles = {
 
     buttonTransfer: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 20px",
         margin: "20px auto 0",
@@ -87,7 +70,8 @@ const Styles = {
 
     buttonSave: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 30px",
         textTransform: "uppercase",
@@ -99,7 +83,8 @@ const Styles = {
     },
     buttonBack: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 30px",
         textTransform: "uppercase",
@@ -173,7 +158,7 @@ const Styles = {
     },
 
     listItem: {
-        color: "rgb(0, 214, 121)"
+        color: "#12305e"
     },
 
     thumbSwitchedStyle: {
@@ -276,7 +261,7 @@ const Styles = {
     butonLeaderBoardActive: {
         background: "#2a2a2a",
         padding: "5px 40px",
-        color: "rgb(0, 214, 121)",
+        color: "#FFCF6B",
         border: "1px solid #2a2a2a"
     },
 

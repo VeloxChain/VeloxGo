@@ -4,6 +4,7 @@ import { getContractLog } from "../../services/apiCall";
 import _ from "lodash";
 import moment from "moment";
 import styles from "./logStyles";
+import constants from "../../services/constants";
 class Logs extends Component {
     constructor(props) {
         super(props);
@@ -21,12 +22,12 @@ class Logs extends Component {
     }
     getLogs = async () => {
         let logs = await getContractLog();
-        this._renderLogsData(logs.result);
+        this._renderLogsData(logs.items);
     }
     _renderHash = (data, value) => {
         return (
             <a
-                href={"https://ropsten.etherscan.io/tx/" + data[value] }
+                href={constants.TX_URL + data[value] }
                 target="_blank"
                 title="View Tx hash on EtherScan">
                 {data[value]}
@@ -34,27 +35,27 @@ class Logs extends Component {
         );
     }
     _renderTxStatus = (status) => {
-        if (status === "1") {
+        if (status === true) {
             return "Success";
         }
-        if (status === "0") {
+        if (status === false) {
             return "Fail";
         }
         return status;
     }
     _renderLogsData = (logs) => {
-        logs = _.reverse(logs);
-        logs = _.slice(logs, 0,10);
+        // logs = _.reverse(logs);
+        // logs = _.slice(logs, 0,10);
         let stateLogs = [];
         _.forEach(logs, (log) => {
             stateLogs.push({
                 hash: log.hash,
-                txreceipt_status: this._renderTxStatus(log.txreceipt_status),
-                timeStamp: moment(new Date(parseInt(log.timeStamp)*1000)).format("LLLL"),
+                txreceipt_status: this._renderTxStatus(log.status),
+                timeStamp: moment(new Date(log.timestamp || log.createdAt)).format("LLLL"),
             });
         });
         this.setState({
-            data: stateLogs
+            data: stateLogs,
         });
     }
     render() {

@@ -92,21 +92,23 @@ class GeometryModel1 extends React.Component {
         return (
             <div>
                 <div className="text-center" style={{ marginTop: "30px" }}>
-                    <img src="images/model1.png" style={styles.geometries} alt="BikeCoin" />
+                    <img src="images/model1.png" className="image-geometries" alt="VeloxGo | Model 1" />
                 </div>
-                <table className="table table-bike" style={styles.table}>
-                    <thead>
-                        <tr style={styles.borderNone}>
-                            <th style={styles.thGeometry}>Dimension</th>
-                            <th colSpan="4" style={styles.thGeometry}>Size</th>
-                            <th style={styles.thGeometryReference}>Reference In The Picture</th>
-                        </tr>
-                        {this._renderThead()}
-                    </thead>
-                    <tbody>
-                        {this._renderBody()}
-                    </tbody>
-                </table>
+                <div className="table-responsive">
+                    <table className="table table-bike" style={styles.table}>
+                        <thead>
+                            <tr style={styles.borderNone}>
+                                <th style={styles.thGeometry}>Dimension</th>
+                                <th colSpan="4" style={styles.thGeometry}>Size</th>
+                                <th style={styles.thGeometryReference}>Reference In The Picture</th>
+                            </tr>
+                            {this._renderThead()}
+                        </thead>
+                        <tbody>
+                            {this._renderBody()}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }

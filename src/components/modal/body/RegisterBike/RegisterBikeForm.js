@@ -43,7 +43,7 @@ class RegisterBike extends Component {
     validate = () => {
         const {stepIndex, stepOne, stepTwo, stepThree} = this.state;
         if (stepIndex === 0) {
-            if (stepOne.imageData === "" || stepOne.invoiceData === "" || stepOne.snNumber === "" || stepOne.manufacturer === "") {
+            if (stepOne.imageData === "" || stepOne.invoiceData === "" || stepOne.snNumber.trim() === "" || stepOne.manufacturer.trim() === "") {
                 return false;
             }
         }
@@ -161,9 +161,9 @@ class RegisterBike extends Component {
                     <div style={styles.count}>
                         {
                             this.state.stepIndex > number ?
-                            <img src="images/check.png" style={styles.icon} alt="BikeCoin" />
-                            : 
-                            <span style={styles.number}>{number + 1}</span>
+                                <img src="images/check.png" style={styles.icon} alt="VeloxGo" />
+                                :
+                                <span style={styles.number}>{number + 1}</span>
                         }
                     </div>
                 </div>
@@ -183,9 +183,9 @@ class RegisterBike extends Component {
                 <div style={styles.count}>
                     {
                         this.state.stepIndex > 0 ?
-                        <img src="images/check.png" style={styles.icon} alt="BikeCoin" />
-                        : 
-                        <span style={styles.number}>1</span>
+                            <img src="images/check.png" style={styles.icon} alt="VeloxGo" />
+                            :
+                            <span style={styles.number}>1</span>
                     }
                 </div>
             </div>
@@ -200,19 +200,19 @@ class RegisterBike extends Component {
                 <div style={styles.stepTabs}>
                     <div style={styles.stepTab}>
                         <div>
-                            <h4>Bike Information</h4>
+                            <h4 className="text-center">Vehicle’s Information</h4>
                             { this._renderStepFirst() }
                         </div>
                     </div>
                     <div style={styles.stepTab}>
                         <div>
-                            <h4>Location</h4>
+                            <h4 className="text-center">Location</h4>
                             { this._renderStep(1) }
                         </div>
                     </div>
                     <div style={styles.stepTab}>
                         <div>
-                            <h4>Confirm</h4>
+                            <h4 className="text-center">Confirm</h4>
                             { this._renderStep(2) }
                         </div>
                     </div>
@@ -221,7 +221,7 @@ class RegisterBike extends Component {
                 <div style={contentStyle}>
                     <div>{this.getStepContent(stepIndex)}</div>
                     <div className="row" style={styles.actionRegister}>
-                        <div className="col-sm-6">
+                        <div className="col-sm-6 col-xs-6">
                             <button
                                 disabled={stepIndex === 0}
                                 onClick={this.handlePrev}
@@ -230,7 +230,7 @@ class RegisterBike extends Component {
                                 Back
                             </button>
                         </div>
-                        <div className="col-sm-6 text-right">
+                        <div className="col-sm-6 col-xs-6 text-right">
                             <button
                                 onClick={this.handleNext}
                                 style={styles.buttonBack}

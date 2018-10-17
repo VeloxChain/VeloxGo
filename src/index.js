@@ -1,39 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
-//import App from './App';
 import App from "./routes";
 import { Provider } from "react-redux";
-// import {createStore, applyMiddleware, compose} from 'redux';
-// import thunk from 'redux-thunk';
-import { BrowserRouter } from "react-router-dom";
-// import rootReducer from './reducers'
+import { Router } from "react-router-dom";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import store from "./store";
-
-import createHistory from 'history/createHashHistory';
-
-import Web3 from "web3";
-
-// import ethereum from './services/ethereum';
-// const createStoreWithMiddleware = applyMiddleware()(createStore)
-
-// const store = createStore(
-//     rootReducer,
-//     compose(
-//         applyMiddleware(thunk),
-//         window.devToolsExtension ? window.devToolsExtension() : f => f,
-//     ),
-// );
-
-
-// ReactDOM.render(<App />, document.getElementById('root'));
+import history from "./history";
 
 ReactDOM.render(
     <Provider store={store}>
         <MuiThemeProvider>
-            <BrowserRouter history={createHistory()}>
+            <Router history={history}>
                 <App />
-            </BrowserRouter>
+            </Router>
         </MuiThemeProvider>
     </Provider>,
     document.getElementById("root")

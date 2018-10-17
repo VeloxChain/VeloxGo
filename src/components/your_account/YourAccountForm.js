@@ -7,7 +7,7 @@ class YourAccountForm extends Component {
         const { accounts } = this.props.accounts;
         return (
             <a
-                href={"https://ropsten.etherscan.io/address/" + accounts.address}
+                href={constants.ADDRESS_URL + accounts.address}
                 title="View Owner Address On EtherScan"
                 target="_blank" >
                 {accounts.address + " "}
@@ -19,7 +19,7 @@ class YourAccountForm extends Component {
         const { userProfileAddress } = this.props;
         return (
             <a
-                href={"https://ropsten.etherscan.io/address/" + userProfileAddress}
+                href={constants.ADDRESS_URL + userProfileAddress}
                 title="View Wallet Address On EtherScan"
                 target="_blank" >
                 {userProfileAddress + " "}
@@ -30,8 +30,8 @@ class YourAccountForm extends Component {
     _viewBKCOnEtherScan = () =>{
         return (
             <a
-                href={"https://ropsten.etherscan.io/token/" + constants.BIKECOIN_TOKEN_ADDRESS}
-                title="View Wallet Address On EtherScan"
+                href={constants.TOKEN_URL + constants.BIKECOIN_TOKEN_ADDRESS}
+                title="View Velox Token Address On EtherScan"
                 target="_blank" >
                 {constants.BIKECOIN_TOKEN_ADDRESS + " "}
                 <i className="fa fa-external-link"></i>
@@ -50,19 +50,19 @@ class YourAccountForm extends Component {
                             <div className="form-group row">
                                 <label className="col-sm-3" style={styles.labelText}>Owner Address:</label>
                                 <div className="col-sm-9">
-                                    <p style={styles.address}>{this._viewETHOnEtherScan()}</p>
+                                    <p style={styles.address} className="test-ellipsis">{this._viewETHOnEtherScan()}</p>
                                 </div>
                             </div>
                             <div className="form-group row">
                                 <label className="col-sm-3" style={styles.labelText}>Wallet Address:</label>
                                 <div className="col-sm-9">
-                                    <p style={styles.address}>{this._viewProfileOnEtherScan()}</p>
+                                    <p style={styles.address} className="test-ellipsis">{this._viewProfileOnEtherScan()}</p>
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <label className="col-sm-3" style={styles.labelText}>BKC Address:</label>
+                                <label className="col-sm-3" style={styles.labelText}>Velox Address:</label>
                                 <div className="col-sm-9">
-                                    <p style={styles.address}>{this._viewBKCOnEtherScan()}</p>
+                                    <p style={styles.address} className="test-ellipsis">{this._viewBKCOnEtherScan()}</p>
                                 </div>
                             </div>
                         </form>

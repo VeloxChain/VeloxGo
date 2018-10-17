@@ -10,7 +10,7 @@ const TX_RELAY_ABI = [{"constant":true,"inputs":[{"name":"","type":"address"},{"
 
 const BIKECOIN_TOKEN_ABI = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"}],"name":"approve","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"}],"name":"balanceOf","outputs":[{"name":"balance","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"acceptOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transfer","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"spender","type":"address"},{"name":"tokens","type":"uint256"},{"name":"data","type":"bytes"}],"name":"approveAndCall","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"newOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"tokenAddress","type":"address"},{"name":"tokens","type":"uint256"}],"name":"transferAnyERC20Token","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"tokenOwner","type":"address"},{"name":"spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":true,"name":"_to","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"tokenOwner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"tokens","type":"uint256"}],"name":"Approval","type":"event"}];
 
-const BIKECOIN_TOKEN_ADDRESS = "0x4c9aa6ca9cbc1fa4b3b5c68ea32c247d7b060b32";
+const BIKECOIN_TOKEN_ADDRESS = "0xebc5d5e331538f8eec13c34d3218604752dc72dc";
 
 // constants
 const EPSILON = 1000;
@@ -18,14 +18,17 @@ const RATE_EPSILON = 0.002;
 const ETHER_ADDRESS = "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee";
 
 //prod
-const NETWORK_ADDRESS = "0xdfd73fc3e1bc0319a981817f5c59e87fdbea8147";
+const NETWORK_ADDRESS = "0x6a1b05e6d219b84184ab76acc373706763e3bcfd";
 
 const EMPTY_ADDRESS = "0x0000000000000000000000000000000000000000";
-const BIKECOIN_NETWORK_ADDRESS = "0xdfd73fc3e1bc0319a981817f5c59e87fdbea8147";
-const BIKECOIN_OWNER_SHIP_ADDRESS = "0x86fc70b4c658ee14d00f417d13a5ae19063e52cc";
+const BIKECOIN_NETWORK_ADDRESS = "0x6a1b05e6d219b84184ab76acc373706763e3bcfd";
+const BIKECOIN_OWNER_SHIP_ADDRESS = "0xb18c880fa59645b557985651b3f29ee30913c3c2";
 const BIKECOIN_APIKEY = "SF26B7TY2YRUPHEBAHHPBV1AHD8SN5ETPI";
-const TX_RELAY_ADDRESS = "0x20f2f0eb661db8c8e52e3b5bca64bb80c8838afa";
-
+const TX_RELAY_ADDRESS = "0x0d9275fb19c42cfe403d7a2b7ae55dac4a15bc60";
+const TX_URL = "https://scan.veloxchain.io/txs/";
+const SCAN_API = "https://scan.veloxchain.io/api/";
+const ADDRESS_URL = "https://scan.veloxchain.io/address/";
+const TOKEN_URL = "https://scan.veloxchain.io/tokens/";
 ///////////////*******REMOTE HOST********///////////////////////
 const REMOTE_API_HOST = "http://localhost:3000";
 ///////////////*******REMOTE HOST********///////////////////////
@@ -36,5 +39,5 @@ export default {
     RATE_EPSILON,EMPTY_ADDRESS,REMOTE_API_HOST,
     BIKECOIN_OWNER_SHIP_PROTOCOL_ABI,
     TX_RELAY_ADDRESS,BIKECOIN_NETWORK_ADDRESS,BIKECOIN_OWNER_SHIP_ADDRESS,TX_RELAY_ABI, BIKECOIN_APIKEY,
-    BIKECOIN_TOKEN_ABI, BIKECOIN_TOKEN_ADDRESS
+    BIKECOIN_TOKEN_ABI, BIKECOIN_TOKEN_ADDRESS, TX_URL, ADDRESS_URL, TOKEN_URL, SCAN_API
 };

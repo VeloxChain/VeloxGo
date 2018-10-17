@@ -58,7 +58,7 @@ function* finishUploadNewBikeToIPFS(action) {
     }
     latestToken = latestToken - 1;
     let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, latestToken);
-    tokenIndex = parseInt(tokenIndex.toString());
+    tokenIndex = parseInt(tokenIndex.toString(), 10);
     let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
     yield fork(getDataFromBikeHash, hash, tokenIndex, "owner", ethereum);
     yield put({type: "APP_LOADING_END"});
@@ -97,7 +97,7 @@ function* loadUserBikeFromNetWork(action){
     yield fork(loadHashFromUserToken, ethereum, totalTokens, userProfileAddress, bikes);
 }
 function* loadNetworkBikeFromNetWork(action){
-    yield put({type: "APP_LOADING_START", payload: "Loading bikes from network...."});
+    yield put({type: "APP_LOADING_START", payload: "Loading vehicles from network...."});
     const { ethereum, address } = action.payload;
     let totalTokens = yield call(ethereum.ownerShipContract.totalSupply);
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
@@ -112,7 +112,7 @@ function* loadHashFromUserToken(ethereum, totalTokens, userProfileAddress, bikes
     for (var key=0; key <= totalTokens; key++) {
         let tokenIndex = yield call(ethereum.ownerShipContract.tokenOfOwnerByIndex, userProfileAddress, key);
         tokenIndex = tokenIndex.toNumber();
-        if (_.isUndefined(_.find(bikes.data, (bike) => bike.tokenId == tokenIndex))) {
+        if (_.isUndefined(_.find(bikes.data, (bike) => bike.tokenId === tokenIndex))) {
             let hash = yield call(ethereum.ownerShipContract.tokenURI, tokenIndex);
             yield fork(getDataFromBikeHash, hash, tokenIndex, "owner", ethereum);
         } else {
@@ -138,7 +138,7 @@ function* loadHashFromNetworkToken(ethereum, totalTokens, userProfileAddress) {
 function* getBikePrice(tokenId, ethereum, bikesReducer, type, isNew) {
     let price = yield call(ethereum.ownerShipContract.getBikeRentalPrice, tokenId);
     price = price.toNumber();
-    price = parseInt(ethereum.rpc.fromWei(price));
+    price = parseInt(ethereum.rpc.fromWei(price), 10);
     if (isNew) {
         return price;
     }
@@ -170,7 +170,7 @@ function* getBikePrice(tokenId, ethereum, bikesReducer, type, isNew) {
 function* getDataFromBikeHash(hash, tokenId, dataOf, ethereum, price, ownerOfToken) {
     let bikeData = yield call(SERVICE_IPFS.getDataFromIPFS, hash);
     bikeData = JSON.parse(bikeData);
-    bikeData.tokenId = parseInt(tokenId);
+    bikeData.tokenId = parseInt(tokenId, 10);
     if (_.isUndefined(price)) {
         price = yield call(getBikePrice, tokenId, ethereum, null, null, true);
     }
@@ -214,14 +214,14 @@ function* transferBikeInNetwork(action) {
 }
 
 function* rentBikeAction(action) {
-    yield put({type: "APP_LOADING_START", payload: "Booking bike......"});
+    yield put({type: "APP_LOADING_START", payload: "Booking vehicle......"});
     const { address, ethereum, keyStore, passphrase, bikeInfo } = action.payload;
     let userProfileAddress = yield call(ethereum.networkAdress.getUserProfile, address);
     let balanceOfBKC = yield call(ethereum.getBKCBalance, userProfileAddress);
-    balanceOfBKC = parseInt(balanceOfBKC);
+    balanceOfBKC = parseInt(balanceOfBKC, 10);
     if (balanceOfBKC < 200) {
         yield put({type: "APP_LOADING_END"});
-        toast.error("You should have at least 200 BKC to book a bike!");
+        toast.error("You should have at least 200 Velox to book a vehicle!");
         return;
     }
     let seconds = moment().unix();

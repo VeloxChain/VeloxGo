@@ -1,6 +1,3 @@
 node_modules/
-server/node_modules/
 package-lock.json
-yarn.lock
-server/yarn.lock
-server/upload/files/**
+server/lib/data_store/nonce_counter.json

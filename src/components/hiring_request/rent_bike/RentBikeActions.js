@@ -63,15 +63,15 @@ class RentBikeActions extends Component {
     }
     render() {
         return (
-            <div style={styles.wrappRight}>
-                <div style={styles.boxLeft}>
+            <div className="wrapp-right">
+                <div className="box-left">
                     <img
                         src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.bikeInfo.avatar }
-                        alt="Bikecoin"
+                        alt="VeloxGo"
                         style={styles.bike}
                     />
                 </div>
-                <div style={styles.boxRight}>
+                <div className="box-right box-right-return">
                     <div>
                         <div style={styles.center}>
                             <div style={styles.startTime}>
@@ -93,20 +93,20 @@ class RentBikeActions extends Component {
                                 src={this.state.isFlash ? flashOn : flashOff}
                                 style={styles.iconStatus}
                                 onClick={() => this.setState({isFlash: !this.state.isFlash})}
-                                alt="Bikecoin"
+                                alt="VeloxGo"
                             />
                             <img
                                 src={this.state.isHonk ? honkOn : honk}
                                 style={styles.iconStatus}
                                 onClick={() => this.setState({isHonk: !this.state.isHonk})}
-                                alt="Bikecoin"
+                                alt="VeloxGo"
                             />
                             <div style={{ minHeight: "43px" }}>
                                 <img
                                     src={this.state.isLock ? lockedOn : lockedOff}
                                     style={styles.iconStatus}
                                     onClick={() => this.setState({isLock: !this.state.isLock})}
-                                    alt="Bikecoin"
+                                    alt="VeloxGo"
                                 />
                             </div>
                         </div>
@@ -114,7 +114,7 @@ class RentBikeActions extends Component {
                             style={styles.buttonVerified}
                             onClick={this.handleReturnBike}
                         >
-                            Return Bike
+                            Return Vehicle
                         </button>
                         {this._renderInvoice()}
                     </div>

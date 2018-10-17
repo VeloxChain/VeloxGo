@@ -27,10 +27,11 @@ export function uploadUserProfileToIPFS(userProfile) {
     };
 }
 
-export function createUserProfileToIPFS(userProfile) {
+export function createUserProfileToIPFS(userProfile, callBack) {
     return {
         type: USER_PROFILE.UPLOAD_PROFILE_TO_IPFS,
-        payload: userProfile
+        payload: userProfile,
+        callBack: callBack
     };
 }
 

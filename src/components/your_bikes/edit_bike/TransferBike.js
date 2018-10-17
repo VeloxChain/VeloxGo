@@ -22,15 +22,15 @@ class TransferBike extends Component {
     }
     render() {
         return (
-            <div style={styles.wrappRight}>
-                <div style={styles.boxLeft}>
+            <div className="wrapp-right">
+                <div className="box-left">
                     <img
                         src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.avatar }
-                        alt="Bikecoin"
+                        alt="VeloxGo"
                         style={styles.bike}
                     />
                 </div>
-                <div style={styles.boxRight}>
+                <div className="box-right">
                     <div>
                         <button style={styles.buttonTransfer} onClick={this.props.transferBike}>Transfer</button>
                         <button style={styles.buttonDelete} onClick={this.notifyFeatures}>Destroy</button>
@@ -41,20 +41,20 @@ class TransferBike extends Component {
                                 src={this.state.isFlash ? flashOn : flashOff}
                                 style={styles.iconStatus}
                                 onClick={() => this.setState({isFlash: !this.state.isFlash})}
-                                alt="Bikecoin"
+                                alt="VeloxGo"
                             />
                             <img
                                 src={this.state.isHonk ? honkOn : honk}
                                 style={styles.iconStatus}
                                 onClick={() => this.setState({isHonk: !this.state.isHonk})}
-                                alt="Bikecoin"
+                                alt="VeloxGo"
                             />
                             <div style={{ minHeight: "43px" }}>
                                 <img
                                     src={this.state.isLock ? lockedOn : lockedOff}
                                     style={styles.iconStatus}
                                     onClick={() => this.setState({isLock: !this.state.isLock})}
-                                    alt="Bikecoin"
+                                    alt="VeloxGo"
                                 />
                             </div>
                         </div>

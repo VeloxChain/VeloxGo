@@ -65,7 +65,7 @@ const bikesReducer = (state = initState, action) => {
         };
     case BIKES.FINISH_TRANSFER:
         newState = state.data;
-        newState = newState.filter((bike) =>  bike.tokenId != action.payload);
+        newState = newState.filter((bike) =>  bike.tokenId !== action.payload);
         return {
             ...state,
             data: newState

@@ -7,11 +7,13 @@ import RentBikeActions from "./RentBikeActions";
 class RentBikeComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = this.props.bikeInfo;
-        this.state.totalTimeUsed = "00:00:00";
-        this.state.invoice = {
-            totalTimeUsed: "",
-            totalTime: "",
+        this.state = {
+            ...this.props.bikeInfo,
+            totalTimeUsed: "00:00:00",
+            invoice: {
+                totalTimeUsed: "",
+                totalTime: "",
+            }
         };
     }
 

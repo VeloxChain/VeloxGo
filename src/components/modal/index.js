@@ -134,7 +134,7 @@ class ModalCustom extends Component {
                                 className="pull-right color-text pd10 size20 closeModal"
                                 onClick={this.props.closeModal}
                             >
-                                <img src="images/close.png" alt="Bikecoin" style={customStyles.close} />
+                                <img src="images/close.png" alt="VeloxGo" style={customStyles.close} />
                             </a>
                         </div>
                         {this._renderBodyModal()}
@@ -155,7 +155,7 @@ const customStyles = {
         "display": "flex",
         "justifyContent": "center",
         "alignItems": "center",
-        "zIndex": 300
+        "zIndex": 1600
     },
     content: {
         "width"       : "700px",

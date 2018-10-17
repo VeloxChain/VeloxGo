@@ -16,7 +16,7 @@ class YourAccountInfo extends Component {
 
     _renderPreview = () => {
         if (this.state.imagePreview) {
-            return <img src={this.state.imagePreview} style={{width:"100%", height: "100%", objectFit : "cover"}} alt="BikeCoin" />;
+            return <img src={this.state.imagePreview} style={{width:"100%", height: "100%", objectFit : "cover"}} alt="VeloxGo Profile" />;
         }
         return <i className="fa fa-camera icon-camera"></i>;
     }
@@ -118,26 +118,25 @@ class YourAccountInfo extends Component {
                             <h4 style={styles.name}>{userProfile.data.firstname + " " + userProfile.data.lastname}</h4>
                             <button style={styles.buttonCollect} onClick={this.collectBikeToken}>
                                 <span>collect 200 </span>
-                                <img src="images/logo.png" alt="Bikecoin" style={styles.icon} />
+                                <img src="images/Velox-icon.png" alt="VeloxGo" style={styles.icon} />
                             </button>
                         </div>
                     </div>
                     <div style={styles.wrappCoins}>
                         <div style={styles.wrappFlexLeft}>
-                            <span style={styles.iconLabel}>BKC</span>
+                            <span style={styles.iconLabel}>VELOX</span>
                             <span style={{margin: "auto"}}></span>
                             <span style={styles.text}>{Math.round(this.props.info.bkc * 100)/100}</span>
                             <div style={styles.wrapIconCoin}>
-                                <img src="images/logo.png" alt="BikeCoin" style={styles.iconBike} />
+                                <img src="images/Velox-icon.png" alt="VeloxGo" style={styles.iconBike} />
                             </div>
-
                         </div>
                         <div style={styles.wrappFlexLeft}>
                             <span style={styles.iconLabel}>ETH</span>
                             <span style={{margin: "auto"}}></span>
                             <span style={styles.text}>{this.props.info.eth}</span>
                             <div style={styles.wrapIconCoin}>
-                                <img src="images/ethereum.png" alt="BikeCoin" style={styles.iconBike} />
+                                <img src="images/ethereum.png" alt="VeloxGo" style={styles.iconBike} />
                             </div>
                         </div>
                     </div>

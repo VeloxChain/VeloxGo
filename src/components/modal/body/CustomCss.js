@@ -66,11 +66,11 @@ const Styles = {
 
     button: {
         background: "#fff",
-        border: "1px solid #00F58A",
+        border: "1px solid #12305e",
         borderRadius: "5px",
         padding: "7px 20px",
         marginTop: "20px",
-        color: "#00F58A",
+        color: "#12305e",
         textTransform: "uppercase",
         letterSpacing: "1px",
     },
@@ -95,8 +95,8 @@ const Styles = {
 
     buttonBack: {
         background: "#fff",
-        border: "1px solid #00F58A",
-        color: "#00F58A",
+        border: "1px solid #12305e",
+        color: "#12305e",
         borderRadius: "5px",
         padding: "7px 30px",
         marginBottom: "20px",
@@ -126,20 +126,20 @@ const Styles = {
         width: "70px",
         height: "70px",
         borderRadius: "50%",
-        border: "1px solid rgb(0, 245, 138)",
+        border: "1px solid #FFCF6B",
         margin: "0 auto",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-        boxShadow: "0px 0px 3px #28f58a"
+        boxShadow: "0px 0px 3px #FFCF6B"
     },
 
     number: {
         width: "40px",
         height: "40px",
         textAlign: "center",
-        background: "rgb(65, 245, 137)",
+        background: "#FFCF6B",
         borderRadius: "50%",
         lineHeight: "40px",
         fontSize: "18px",
@@ -150,7 +150,7 @@ const Styles = {
         width: "14px",
         height: "14px",
         borderRadius: "50%",
-        background: "rgb(0, 245, 138)"
+        background: "#FFCF6B"
     },
 
     icon: {
@@ -158,11 +158,11 @@ const Styles = {
     },
 
     underlineStyle: {
-        borderColor: "#66F9B8"
+        borderColor: "rgba(18, 48, 94, .7)"
     },
 
     floatingLabelStyle: {
-        color: "#66F9B8"
+        color: "rgba(18, 48, 94, .7)"
     },
 
     floatingLabelFocusStyle: {
@@ -179,8 +179,8 @@ const Styles = {
     },
 
     buttonBook: {
-        background: "#00d679",
-        border: "1px solid #00d679",
+        background: "#12305e",
+        border: "1px solid #12305e",
         borderRadius: "2px",
         padding: "5px 20px",
         color: "#fff",
@@ -192,7 +192,7 @@ const Styles = {
     numberPrice: {
         marginRight: "10px",
         fontSize: "20px",
-        color: "#00d679"
+        color: "#12305e"
     },
 
     logo: {
@@ -208,12 +208,12 @@ const Styles = {
     },
 
     selectedMenuItemStyle: {
-        color: "#00F58A"
+        color: "#12305e"
     },
 
     actionRegister: {
         margin: "12px -6px 0px"
     }
-}
+};
 
 export default Styles;

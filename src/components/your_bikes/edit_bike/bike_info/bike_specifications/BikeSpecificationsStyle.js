@@ -4,7 +4,7 @@ const Styles = {
         marginTop: "30px"
     },
     inkBarStyle: {
-        background: "#00d679",
+        background: "#12305e",
     },
     tabs: {
         background: "transparent",
@@ -38,9 +38,6 @@ const Styles = {
     borderNone: {
         border: "none",
         borderColor: "transparent",
-    },
-    geometries: {
-        width: "500px"
     }
 };
 

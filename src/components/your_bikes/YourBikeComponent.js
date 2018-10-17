@@ -14,11 +14,11 @@ class YourBikesComponent extends Component {
         super(props);
         this.state = {
             params : [
-                {title: "BIKE(jSerial number)", value: "snNumber"},
+                {title: "VEHICLE REG", value: "snNumber"},
                 {title: "MANUFACTURER", value: "manufacturer"},
                 {title: "MODEL", value: "model"},
                 {title: "FOR RENT", value: "forRent", renderer: this._renderForrent},
-                {title: "Price", value: "price", renderer: this._renderPrice},
+                {title: "PRICE", value: "price", renderer: this._renderPrice},
                 {title: "ACTION", value: "View", renderer: this._renderViewAction}
             ],
             isEdit: false,
@@ -32,16 +32,16 @@ class YourBikesComponent extends Component {
         };
     }
     _renderPrice = (data, value) => {
-        if (!_.isUndefined(data[value]) && parseInt(data[value]) > 0) {
-            let price = parseInt(data[value]).toLocaleString();
+        if (!_.isUndefined(data[value]) && parseInt(data[value], 10) > 0) {
+            let price = parseInt(data[value], 10).toLocaleString();
             return (
-                <span><img src="images/logo.png" style={styles.logo} alt="BikeCoin" /> {price} </span>
+                <span><img src="images/Velox-icon.png" style={styles.logo} alt="VeloxGo" /> {price} </span>
             );
         }
         return "";
     }
     _renderEditPrice = (data, key) => {
-        if (_.isUndefined(data.price) || parseInt(data.price) === 0) {
+        if (_.isUndefined(data.price) || parseInt(data.price, 10) === 0) {
             return;
         }
         return (
@@ -147,6 +147,8 @@ class YourBikesComponent extends Component {
                 value={this.state.passphrase}
                 onKeyPress={(e) => this.handleKeyPress(e)}
                 onChange={(e) => this.setState({ passphrase: e.target.value })}
+                floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                underlineFocusStyle={styles.underlineStyle}
             />
         );
     }
@@ -156,7 +158,7 @@ class YourBikesComponent extends Component {
         }
     }
     validate = () => {
-        if (this.state.price === "" || parseInt(this.state.price) < 0) {
+        if (this.state.price === "" || parseInt(this.state.price, 10) < 0) {
             return "Invalid Price";
         }
         if (this.state.passphrase === "" && !this.props.metamask) {
@@ -197,9 +199,10 @@ class YourBikesComponent extends Component {
                     open={this.state.showPriceDialog}
                     autoScrollBodyContent={true}
                     repositionOnUpdate={true}
+                    className="image-crop"
                 >
                     <TextField
-                        floatingLabelText="Price (BKC) Per Hour"
+                        floatingLabelText="Price (Velox) Per Hour"
                         fullWidth={true}
                         type="number"
                         value={this.state.price}
@@ -225,7 +228,7 @@ class YourBikesComponent extends Component {
                     </div>
                 </Dialog>
                 <div className="text-right">
-                    <button style={styles.button} onClick={() => this.props.setType(MODAL_REGISTER_BIKE)}>New Bike</button>
+                    <button style={styles.button} onClick={() => this.props.setType(MODAL_REGISTER_BIKE)}>New Vehicle</button>
                 </div>
                 <Datatable
                     params={this.state.params}

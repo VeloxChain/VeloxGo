@@ -13,7 +13,7 @@ const { SearchBox } = require("react-google-maps/lib/components/places/SearchBox
 
 const MapRegisterBike = compose(
     withProps({
-        googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${appConfig.google_map_api_key}&v=3.exp&libraries=geometry,drawing,places`,
+        googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${appConfig.google_map_api_key}&v=3.31&libraries=geometry,drawing,places`,
         loadingElement: <div style={{ height: "100%" }} />,
         containerElement: <div style={{ height: "400px" }} />,
         mapElement: <div style={{ height: "100%" }} />,
@@ -75,11 +75,9 @@ const MapRegisterBike = compose(
                     var cityName = filtered_locality.length ? 
                         filtered_locality[0].short_name: 
                         filtered_admin_lv1.length ? 
-                        filtered_admin_lv1[0].short_name:
-                        countryName
+                            filtered_admin_lv1[0].short_name:
+                            countryName
                     ;
-
-                    console.log(cityName);
 
                     this.props.handleChangeState({
                         location: {

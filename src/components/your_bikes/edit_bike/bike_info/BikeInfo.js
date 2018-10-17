@@ -26,6 +26,7 @@ class BikeInfo extends Component {
 
         return (
             <Tab
+                className="tab"
                 label="Owner history"
                 value={2}
                 style={this.state.tabIndex === 2 ? styles.tabActive : styles.tab}
@@ -41,6 +42,7 @@ class BikeInfo extends Component {
 
         return (
             <Tab
+                className="tab"
                 label="Riding perfomance"
                 value={3}
                 style={this.state.tabIndex === 3 ? styles.tabActive : styles.tab}
@@ -56,8 +58,12 @@ class BikeInfo extends Component {
                 value={this.state.tabIndex}
                 onChange={this.handleChange}
                 tabItemContainerStyle={styles.tabItemContainerStyle}
-                style={styles.tabs}>
+                inkBarStyle={styles.inkBarStyle}
+                style={styles.tabs}
+                className="tabs"
+            >
                 <Tab
+                    className="tab"
                     label="Location"
                     value={0}
                     style={this.state.tabIndex === 0 ? styles.tabActive : styles.tab}
@@ -65,7 +71,8 @@ class BikeInfo extends Component {
                     <BikeLocations {...this.props} />
                 </Tab>
                 <Tab
-                    label="Bike specifications"
+                    className="tab"
+                    label="Vehicle specifications"
                     value={1}
                     style={this.state.tabIndex === 1 ? styles.tabActive : styles.tab}
                 >

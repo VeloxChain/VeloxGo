@@ -86,7 +86,7 @@ class RentBikeInvoice extends Component {
                 <div className="row" style={styles.bodyContent}>
                     <div className="col-sm-8">
                         <p style={styles.flex}>
-                            <span style={styles.titleInvoice}>Bike Serial:</span>
+                            <span style={styles.titleInvoice}>Vehicle Reg:</span>
                             <span style={styles.textInvoice}>{this.props.bikeInfo.bikeInfo.snNumber}</span>
                         </p>
                         <p style={styles.flex}>
@@ -94,7 +94,7 @@ class RentBikeInvoice extends Component {
                             <span style={styles.textInvoice}>{this.props.bikeInfo.bikeInfo.tokenId}</span>
                         </p>
                         <p style={styles.flex}>
-                            <span style={styles.titleInvoice}>Bike Owner:</span>
+                            <span style={styles.titleInvoice}>Vehicle Owner:</span>
                             <span style={styles.textInvoice}>{this.props.bikeInfo.bikeInfo.owner}</span>
                         </p>
                         <p style={styles.flex}>
@@ -105,38 +105,40 @@ class RentBikeInvoice extends Component {
                     <div className="col-sm-4">
                         <img
                             src={"https://gateway.ipfs.io/ipfs/" + this.props.bikeInfo.bikeInfo.avatar }
-                            alt="Bikecoin"
+                            alt="VeloxGo"
                             style={styles.bikeInvoice}
                         />
                     </div>
                     <div className="col-sm-12">
-                        <table className="table" style={styles.table}>
-                            <thead>
-                                <tr>
-                                    <th>Description</th>
-                                    <th>Hours</th>
-                                    <th>Price / 1h</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Rent Fee</td>
-                                    <td>{this.props.invoice.totalTimeUsed}</td>
-                                    <td>
-                                        {this.props.bikeInfo.bikeInfo.price}
-                                        <img src="images/logo.png" style={styles.logoBike} alt="BikeCoin" />
-                                    </td>
-                                    <td>{this.props.invoice.subTotal}</td>
-                                </tr>
-                                <tr>
-                                    <td colSpan="4" className="text-right" style={styles.total}>
-                                        <span>Total: {this.props.invoice.subTotal}</span>
-                                        <img src="images/logo.png" style={styles.logoBike} alt="BikeCoin" />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div className="table-responsive">
+                            <table className="table" style={styles.table}>
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Hours</th>
+                                        <th>Price / 1h</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Rent Fee</td>
+                                        <td>{this.props.invoice.totalTimeUsed}</td>
+                                        <td>
+                                            {this.props.bikeInfo.bikeInfo.price}
+                                            <img src="images/Velox-icon.png" style={styles.logoBike} alt="VeloxGo" />
+                                        </td>
+                                        <td>{this.props.invoice.subTotal}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan="4" className="text-right" style={styles.total}>
+                                            <span>Total: {this.props.invoice.subTotal}</span>
+                                            <img src="images/Velox-icon.png" style={styles.logoBike} alt="VeloxGo" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 

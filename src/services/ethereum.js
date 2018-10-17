@@ -15,7 +15,7 @@ import { getEventLogs } from "./apiCall";
 export default class EthereumService {
     constructor() {
         if (typeof Web3 !== "undefined") {
-            this.rpc = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/faF0xSQUt0ezsDFYglOe"));
+            this.rpc = new Web3(new Web3.providers.HttpProvider("https://rpc-testnet.veloxchain.io"));
         } else {
             console.error("No Web3 detected"); // eslint-disable-line
         }

@@ -11,16 +11,16 @@ class OwnerVerifiedForm extends Component {
                         <img
                             src={"https://gateway.ipfs.io/ipfs/" + this.props.externalData.avatar}
                             style={styles.bikeShow}
-                            alt="Bikecoin"
+                            alt="VeloxGo"
                         />
                     </div>
-                    
+
                 </div>
                 <div className="col-sm-8">
                     <p style={styles.title}>Manufacturer</p>
                     <h5 style={styles.text}>{this.props.externalData.manufacturer}</h5>
 
-                    <p style={styles.title}>Bike serial</p>
+                    <p style={styles.title}>Vehicle Reg</p>
                     <h5 style={styles.text}>{this.props.externalData.snNumber}</h5>
 
                     <div style={styles.dvd} />
@@ -31,9 +31,9 @@ class OwnerVerifiedForm extends Component {
                     <p style={styles.title}>Price</p>
                     <h5 style={styles.text}>
                         <span style={styles.numberPrice}>200</span>
-                        <img src="images/Logo.png" style={styles.logo} alt="BikeCoin" />
+                        <img src="images/Logo.png" style={styles.logo} alt="VeloxGo" />
                     </h5>
-                    
+
                     <div>
                         <button style={styles.buttonBook}>Verified</button>
                     </div>
